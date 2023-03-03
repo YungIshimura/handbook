@@ -60,7 +60,7 @@
               </div>
               <div class="frame-frame5">
                 <span class="frame-text10">
-                  <a href='#'>Выбрать другой регион</a>
+                  <a href='{% url 'geo_handbook:select_city' %}'><span>Выбрать другой регион</span></a>
                 </span>
               </div>
             </div>
@@ -117,7 +117,9 @@
                 </span>
               </div>
               <div class="frame-frame51">
-                <span class="frame-text41">Внести данные</span>
+                <div class="frame-text41">
+                    <a href="{% url 'geo_handbook:sign_up_company' %}"><span>Внести данные</span></a>
+                </div>
               </div>
             </div>
           </div>
