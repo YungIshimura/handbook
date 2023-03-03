@@ -7,3 +7,7 @@ def view_index(request):
 
 def view_sign_up_user(request):
     return render(request, 'sign_up_user.html')
+
+
+def view_sign_up_company(request):
+    return render(request, 'sign_up_company.html')
