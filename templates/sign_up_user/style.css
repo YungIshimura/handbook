@@ -445,3 +445,7 @@
   height: 0px;
   position: absolute;
 }
+.frame-group4 ::placeholder {
+  color: red;
+  font-size: 20px;
+}
