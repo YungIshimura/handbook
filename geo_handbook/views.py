@@ -31,3 +31,7 @@ def view_basic_data(request):
 
 def view_enter_details_company(request):
     return render(request, 'enter_details_company.html')
+
+
+def view_settings_profile(request):
+    return render(request, 'settings_profile.html')
