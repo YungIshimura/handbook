@@ -93,6 +93,11 @@
           href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
           data-tag="font"/>
     <link rel="stylesheet" href="{% static 'css/select_city.css' %}"/>
+
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" data-tag="font"/>
+    <link rel="stylesheet" href={% static 'css/select.css' %}>
 </head>
 <body>
 <div>
@@ -105,6 +110,14 @@
                     <input type="text" class="frame-group4" placeholder="Город или регион">
                     <img src="{% static 'assets/select_city/rectangle101053-w0h-200h.png' %}"
                          alt="Rectangle101053" class="frame-rectangle10"/>
+                    <button type="submit" class="frame-text">ВЫБРАТЬ</button>
+                </div>
+            <div class="frame-group5"><span class="frame-text4"><span>Москва</span></span>
+                <span class="frame-text6"><span>Московская область</span></span>
+            </div>
+            <form> 
+                <div class="frame-group4">
+                    <img src={% static 'assets/select_city/rectangle101053-w0h-200h.png' %} alt="Rectangle101053" class="frame-rectangle10"/>
                     <button type="submit" class="frame-text">ВЫБРАТЬ</button>
                 </div>
             </form>
