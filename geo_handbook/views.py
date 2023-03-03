@@ -11,3 +11,7 @@ def view_sign_up_user(request):
 
 def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
+
+
+def view_select_city(request):
+    return render(request, 'select_city.html')
