@@ -15,3 +15,7 @@ def view_select(request):
 
 def view_selected_region(request):
     return render(request, 'selected_region.html')
+
+
+def view_card(request):
+    return render(request, 'card.html')
