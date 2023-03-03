@@ -27,3 +27,7 @@ def view_application(request):
 
 def view_basic_data(request):
     return render(request, 'basic_data.html')
+
+
+def view_enter_details_company(request):
+    return render(request, 'enter_details_company.html')
