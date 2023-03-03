@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="english">
 <head>
-    <title>exported project</title>
+    <title>Поиск лицензированных организаций в области проектирования</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="UTF-8">
     <meta property="twitter:card" content="summary_large_image"/>
@@ -90,7 +91,7 @@
         }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" data-tag="font"/>
-    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="{% static 'css/search.css' %}"/>
 </head>
 <body>
 <div>
@@ -99,7 +100,7 @@
         <div class="frame-frame">
             <header>
                 <div class="frame-frame46">
-                    <img src="public/playground_assets/rectangle36i145-o2m-200h.png" alt="Rectangle36I145"
+                    <img src="{% static 'assets/search/rectangle36i145-o2m-200h.png' %}" alt="Rectangle36I145"
                          class="frame-rectangle36"/>
                     <div class="frame-frame6">
                         <div class="frame-text012">
@@ -111,24 +112,24 @@
                     </div>
                     <div class="frame-frame55">
                         <a href="#">
-                            <img src="public/playground_assets/line12i145-0anr.svg" alt="Line12I145"
+                            <img src="{% static 'assets/search/line12i145-0anr.svg' %}" alt="Line12I145"
                                  class="frame-line12"/>
-                            <img src="public/playground_assets/line13i145-5rwi.svg" alt="Line13I145"
+                            <img src="{% static 'assets/search/line13i145-5rwi.svg' %}" alt="Line13I145"
                                  class="frame-line13"/>
-                            <img src="public/playground_assets/line14i145-c0z.svg" alt="Line14I145"
+                            <img src="{% static 'assets/search/line14i145-c0z.svg' %}" alt="Line14I145"
                                  class="frame-line14"/>
                         </a>
                     </div>
                 </div>
             </header>
             <main>
-                <img src="public/playground_assets/rectangle111427-aa8b-500h.png" alt="Rectangle111427"
+                <img src="{% static 'assets/search/rectangle111427-aa8b-500h.png' %}" alt="Rectangle111427"
                      class="frame-rectangle11"/>
-                <img src="public/playground_assets/rectangle381428-oycp-200h.png" alt="Rectangle381428"
+                <img src="{% static 'assets/search/rectangle381428-oycp-200h.png' %}" alt="Rectangle381428"
                      class="frame-rectangle38"/>
-                <img src="public/playground_assets/rectangle391429-3w98-600h.png" alt="Rectangle391429"
+                <img src="{% static 'assets/search/rectangle391429-3w98-600h.png' %}" alt="Rectangle391429"
                      class="frame-rectangle39"/>
-                <img src="public/playground_assets/rectangle401430-uj-700h.png" alt="Rectangle401430"
+                <img src="{% static 'assets/search/rectangle401430-uj-700h.png' %}" alt="Rectangle401430"
                      class="frame-rectangle40"/>
                 <div class="frame-text">
                     <span>
@@ -136,13 +137,14 @@
                     </span>
                 </div>
                 <div class="frame-group3">
-                    <img src="public/playground_assets/rectangle101434-it2u-200h.png" alt="Rectangle101434"
+                    <img src="{% static 'assets/search/rectangle101434-it2u-200h.png' %}" alt="Rectangle101434"
                          class="frame-rectangle10"/>
                     <form>
+
                         <div class="frame-group2">
                             <input type="text" class="frame-text002"
-                                   placeholder="Начните вводить ИНН, ОГРН, название орагнизации иили ФИО">
-                            <img src="public/playground_assets/vector1437-iqjl.svg" alt="Vector1437"
+                                   placeholder="Начните вводить ИНН, ОГРН, название организации или ФИО">
+                            <img src="{% static 'assets/search/vector1437-iqjl.svg' %}" alt="Vector1437"
                                  class="frame-vector"/>
                         </div>
                         <button type="submit" class="frame-text004"><span>НАЙТИ</span></button>
@@ -153,9 +155,9 @@
                     <div class="frame-frame7">
                         <div class="frame-group6">
                             <div class="frame-group">
-                                <img src="public/playground_assets/vector1444-etar.svg" alt="Vector1444"
+                                <img src="{% static 'assets/search/vector1444-etar.svg' %}" alt="Vector1444"
                                      class="frame-vector1"/>
-                                <img src="public/playground_assets/vector1445-47hc.svg" alt="Vector1445"
+                                <img src="{% static 'assets/search/vector1445-47hc.svg' %}" alt="Vector1445"
                                      class="frame-vector2"/>
                             </div>
                         </div>
@@ -166,7 +168,7 @@
                     <div class="frame-frame41">
                         <div class="frame-frame5">
                             <div class="frame-text010">
-                                <a href="#">Выбрать другой регион</a>
+                                <a href="{% url 'geo_handbook:select_city' %}">Выбрать другой регион</a>
                             </div>
                         </div>
                     </div>
@@ -191,7 +193,7 @@
                     <span>Лучшие компании региона</span>
                 </div>
 
-                <img src="public/playground_assets/rectangle371419-mlc-1100w.png" alt="Rectangle371419"
+                <img src="{% static 'assets/search/rectangle371419-mlc-1100w.png' %}" alt="Rectangle371419"
                      class="frame-rectangle37"/>
                 <div class="frame-group49">
                     <div class="frame-text018">
@@ -214,11 +216,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group20">
-                        <img src="public/playground_assets/star11464-6cg.svg" alt="Star11464" class="frame-star1"/>
-                        <img src="public/playground_assets/star21465-b7xw.svg" alt="Star21465" class="frame-star2"/>
-                        <img src="public/playground_assets/star31466-03cj.svg" alt="Star31466" class="frame-star3"/>
-                        <img src="public/playground_assets/star41467-vbzs.svg" alt="Star41467" class="frame-star4"/>
-                        <img src="public/playground_assets/star51468-80i.svg" alt="Star51468" class="frame-star5"/>
+                        <img src="{% static 'assets/search/star11464-6cg.svg' %}" alt="Star11464" class="frame-star1"/>
+                        <img src="{% static 'assets/search/star21465-b7xw.svg' %}" alt="Star21465" class="frame-star2"/>
+                        <img src="{% static 'assets/search/star31466-03cj.svg' %}" alt="Star31466" class="frame-star3"/>
+                        <img src="{% static 'assets/search/star41467-vbzs.svg' %}" alt="Star41467" class="frame-star4"/>
+                        <img src="{% static 'assets/search/star51468-80i.svg' %}" alt="Star51468" class="frame-star5"/>
                     </div>
                 </div>
                 <div class="frame-group50">
@@ -240,11 +242,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2001">
-                        <img src="public/playground_assets/star11478-zv4.svg" alt="Star11478" class="frame-star101"/>
-                        <img src="public/playground_assets/star21479-bgws.svg" alt="Star21479" class="frame-star201"/>
-                        <img src="public/playground_assets/star31480-bwwl.svg" alt="Star31480" class="frame-star301"/>
-                        <img src="public/playground_assets/star41481-t1n5.svg" alt="Star41481" class="frame-star401"/>
-                        <img src="public/playground_assets/star51482-nvbs.svg" alt="Star51482" class="frame-star501"/>
+                        <img src="{% static 'assets/search/star11478-zv4.svg' %}" alt="Star11478" class="frame-star101"/>
+                        <img src="{% static 'assets/search/star21479-bgws.svg' %}" alt="Star21479" class="frame-star201"/>
+                        <img src="{% static 'assets/search/star31480-bwwl.svg' %}" alt="Star31480" class="frame-star301"/>
+                        <img src="{% static 'assets/search/star41481-t1n5.svg' %}" alt="Star41481" class="frame-star401"/>
+                        <img src="{% static 'assets/search/star51482-nvbs.svg' %}" alt="Star51482" class="frame-star501"/>
                     </div>
                 </div>
                 <div class="frame-group54">
@@ -265,11 +267,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2002">
-                        <img src="public/playground_assets/star11492-iyx9.svg" alt="Star11492" class="frame-star102"/>
-                        <img src="public/playground_assets/star21493-lf3.svg" alt="Star21493" class="frame-star202"/>
-                        <img src="public/playground_assets/star31494-yi4g.svg" alt="Star31494" class="frame-star302"/>
-                        <img src="public/playground_assets/star41495-v8b.svg" alt="Star41495" class="frame-star402"/>
-                        <img src="public/playground_assets/star51496-fnde.svg" alt="Star51496" class="frame-star502"/>
+                        <img src="{% static 'assets/search/star11492-iyx9.svg' %}" alt="Star11492" class="frame-star102"/>
+                        <img src="{% static 'assets/search/star21493-lf3.svg' %}" alt="Star21493" class="frame-star202"/>
+                        <img src="{% static 'assets/search/star31494-yi4g.svg' %}" alt="Star31494" class="frame-star302"/>
+                        <img src="{% static 'assets/search/star41495-v8b.svg' %}" alt="Star41495" class="frame-star402"/>
+                        <img src="{% static 'assets/search/star51496-fnde.svg' %}" alt="Star51496" class="frame-star502"/>
                     </div>
                 </div>
                 <div class="frame-group57">
@@ -291,11 +293,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2003">
-                        <img src="public/playground_assets/star11410-mk44.svg" alt="Star11410" class="frame-star103"/>
-                        <img src="public/playground_assets/star21410-rss.svg" alt="Star21410" class="frame-star203"/>
-                        <img src="public/playground_assets/star31410-uhua.svg" alt="Star31410" class="frame-star303"/>
-                        <img src="public/playground_assets/star41410-3u3b.svg" alt="Star41410" class="frame-star403"/>
-                        <img src="public/playground_assets/star51411-oxsu.svg" alt="Star51411" class="frame-star503"/>
+                        <img src="{% static 'assets/search/star11410-mk44.svg' %}" alt="Star11410" class="frame-star103"/>
+                        <img src="{% static 'assets/search/star21410-rss.svg' %}" alt="Star21410" class="frame-star203"/>
+                        <img src="{% static 'assets/search/star31410-uhua.svg' %}" alt="Star31410" class="frame-star303"/>
+                        <img src="{% static 'assets/search/star41410-3u3b.svg' %}" alt="Star41410" class="frame-star403"/>
+                        <img src="{% static 'assets/search/star51411-oxsu.svg' %}" alt="Star51411" class="frame-star503"/>
                     </div>
                 </div>
                 <div class="frame-group51">
@@ -318,11 +320,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2004">
-                        <img src="public/playground_assets/star11412-rutn.svg" alt="Star11412" class="frame-star104"/>
-                        <img src="public/playground_assets/star21412-qg8r.svg" alt="Star21412" class="frame-star204"/>
-                        <img src="public/playground_assets/star31412-v2o.svg" alt="Star31412" class="frame-star304"/>
-                        <img src="public/playground_assets/star41412-e70p.svg" alt="Star41412" class="frame-star404"/>
-                        <img src="public/playground_assets/star51412-6y75.svg" alt="Star51412" class="frame-star504"/>
+                        <img src="{% static 'assets/search/star11412-rutn.svg' %}" alt="Star11412" class="frame-star104"/>
+                        <img src="{% static 'assets/search/star21412-qg8r.svg' %}" alt="Star21412" class="frame-star204"/>
+                        <img src="{% static 'assets/search/star31412-v2o.svg' %}" alt="Star31412" class="frame-star304"/>
+                        <img src="{% static 'assets/search/star41412-e70p.svg' %}" alt="Star41412" class="frame-star404"/>
+                        <img src="{% static 'assets/search/star51412-6y75.svg' %}" alt="Star51412" class="frame-star504"/>
                     </div>
                 </div>
                 <div class="frame-group55">
@@ -346,11 +348,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2005">
-                        <img src="public/playground_assets/star11413-rsh.svg" alt="Star11413" class="frame-star105"/>
-                        <img src="public/playground_assets/star21413-ndy.svg" alt="Star21413" class="frame-star205"/>
-                        <img src="public/playground_assets/star31413-cjio.svg" alt="Star31413" class="frame-star305"/>
-                        <img src="public/playground_assets/star41413-e9xe.svg" alt="Star41413" class="frame-star405"/>
-                        <img src="public/playground_assets/star51413-acp.svg" alt="Star51413" class="frame-star505"/>
+                        <img src="{% static 'assets/search/star11413-rsh.svg' %}" alt="Star11413" class="frame-star105"/>
+                        <img src="{% static 'assets/search/star21413-ndy.svg' %}" alt="Star21413" class="frame-star205"/>
+                        <img src="{% static 'assets/search/star31413-cjio.svg' %}" alt="Star31413" class="frame-star305"/>
+                        <img src="{% static 'assets/search/star41413-e9xe.svg' %}" alt="Star41413" class="frame-star405"/>
+                        <img src="{% static 'assets/search/star51413-acp.svg' %}" alt="Star51413" class="frame-star505"/>
                     </div>
                 </div>
                 <div class="frame-group58">
@@ -374,11 +376,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2006">
-                        <img src="public/playground_assets/star11414-7dxc.svg" alt="Star11414" class="frame-star106"/>
-                        <img src="public/playground_assets/star21414-taom.svg" alt="Star21414" class="frame-star206"/>
-                        <img src="public/playground_assets/star31415-m4kc.svg" alt="Star31415" class="frame-star306"/>
-                        <img src="public/playground_assets/star41415-8xf.svg" alt="Star41415" class="frame-star406"/>
-                        <img src="public/playground_assets/star51415-oocs.svg" alt="Star51415" class="frame-star506"/>
+                        <img src="{% static 'assets/search/star11414-7dxc.svg' %}" alt="Star11414" class="frame-star106"/>
+                        <img src="{% static 'assets/search/star21414-taom.svg' %}" alt="Star21414" class="frame-star206"/>
+                        <img src="{% static 'assets/search/star31415-m4kc.svg' %}" alt="Star31415" class="frame-star306"/>
+                        <img src="{% static 'assets/search/star41415-8xf.svg' %}" alt="Star41415" class="frame-star406"/>
+                        <img src="{% static 'assets/search/star51415-oocs.svg' %}" alt="Star51415" class="frame-star506"/>
                     </div>
                 </div>
                 <div class="frame-group52">
@@ -402,11 +404,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2007">
-                        <img src="public/playground_assets/star11416-z7.svg" alt="Star11416" class="frame-star107"/>
-                        <img src="public/playground_assets/star21416-6dya.svg" alt="Star21416" class="frame-star207"/>
-                        <img src="public/playground_assets/star31416-mpze.svg" alt="Star31416" class="frame-star307"/>
-                        <img src="public/playground_assets/star41416-1dpp.svg" alt="Star41416" class="frame-star407"/>
-                        <img src="public/playground_assets/star51416-jcod.svg" alt="Star51416" class="frame-star507"/>
+                        <img src="{% static 'assets/search/star11416-z7.svg' %}" alt="Star11416" class="frame-star107"/>
+                        <img src="{% static 'assets/search/star21416-6dya.svg' %}" alt="Star21416" class="frame-star207"/>
+                        <img src="{% static 'assets/search/star31416-mpze.svg' %}" alt="Star31416" class="frame-star307"/>
+                        <img src="{% static 'assets/search/star41416-1dpp.svg' %}" alt="Star41416" class="frame-star407"/>
+                        <img src="{% static 'assets/search/star51416-jcod.svg' %}" alt="Star51416" class="frame-star507"/>
                     </div>
                 </div>
                 <div class="frame-group56">
@@ -428,11 +430,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2008">
-                        <img src="public/playground_assets/star11417-de7p.svg" alt="Star11417" class="frame-star108"/>
-                        <img src="public/playground_assets/star21417-kruk.svg" alt="Star21417" class="frame-star208"/>
-                        <img src="public/playground_assets/star31417-m8wi.svg" alt="Star31417" class="frame-star308"/>
-                        <img src="public/playground_assets/star41417-u79a.svg" alt="Star41417" class="frame-star408"/>
-                        <img src="public/playground_assets/star51418-gpfq.svg" alt="Star51418" class="frame-star508"/>
+                        <img src="{% static 'assets/search/star11417-de7p.svg' %}" alt="Star11417" class="frame-star108"/>
+                        <img src="{% static 'assets/search/star21417-kruk.svg' %}" alt="Star21417" class="frame-star208"/>
+                        <img src="{% static 'assets/search/star31417-m8wi.svg' %}" alt="Star31417" class="frame-star308"/>
+                        <img src="{% static 'assets/search/star41417-u79a.svg' %}" alt="Star41417" class="frame-star408"/>
+                        <img src="{% static 'assets/search/star51418-gpfq.svg' %}" alt="Star51418" class="frame-star508"/>
                     </div>
                 </div>
                 <div class="frame-group53">
@@ -455,11 +457,11 @@
                         <p>11111, г. Москва, Красная Площадь, д.1</p>
                     </div>
                     <div class="frame-group2009">
-                        <img src="public/playground_assets/star11419-9olk.svg" alt="Star11419" class="frame-star109"/>
-                        <img src="public/playground_assets/star21419-awk.svg" alt="Star21419" class="frame-star209"/>
-                        <img src="public/playground_assets/star31419-qh6.svg" alt="Star31419" class="frame-star309"/>
-                        <img src="public/playground_assets/star41419-995.svg" alt="Star41419" class="frame-star409"/>
-                        <img src="public/playground_assets/star51419-zo6j.svg" alt="Star51419" class="frame-star509"/>
+                        <img src="{% static 'assets/search/star11419-9olk.svg' %}" alt="Star11419" class="frame-star109"/>
+                        <img src="{% static 'assets/search/star21419-awk.svg' %}" alt="Star21419" class="frame-star209"/>
+                        <img src="{% static 'assets/search/star31419-qh6.svg' %}" alt="Star31419" class="frame-star309"/>
+                        <img src="{% static 'assets/search/star41419-995.svg' %}" alt="Star41419" class="frame-star409"/>
+                        <img src="{% static 'assets/search/star51419-zo6j.svg' %}" alt="Star51419" class="frame-star509"/>
                     </div>
                 </div>
             </main>
