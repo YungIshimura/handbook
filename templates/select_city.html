@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="english">
 <head>
-    <title>exported project</title>
+    <title>Выберите свой регион</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="utf-8"/>
     <meta property="twitter:card" content="summary_large_image"/>
@@ -90,35 +91,26 @@
         }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" data-tag="font"/>
-    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href={% static 'css/select.css' %}>
 </head>
 <body>
 <div>
     <div class="frame-container">
         <div class="frame-frame">
-            <!--<img src="public/playground_assets/rectangle131050-5x47-200h.png" alt="Rectangle131050"
-                 class="frame-rectangle13"/>
-            <div class="frame-group4"><img src="public/playground_assets/rectangle101053-w0h-200h.png"
-                                           alt="Rectangle101053" class="frame-rectangle10"/>
                 <span class="frame-text"><span>ВЫБРАТЬ</span></span>
             </div>
             <div class="frame-group2">
-                <span class="frame-text2"><span>Город или регион</span></span>
-                <img src="public/playground_assets/vector1057-5his.svg" alt="Vector1057" class="frame-vector"/>
+                <span class="frame-text2">Город или регион</span>
+                <img src={% static 'assets/select_city/vector1057-5his.svg' %} alt="Vector1057" class="frame-vector"/>
             </div>
-            <img src="public/playground_assets/rectangle141058-0prh-200h.png" alt="Rectangle141058"
+            <img src={% static 'assets/select_city/rectangle141058-0prh-200h.png'%} alt="Rectangle141058"
                  class="frame-rectangle14"/>
             <div class="frame-group5"><span class="frame-text4"><span>Москва</span></span>
                 <span class="frame-text6"><span>Московская область</span></span>
-            </div>-->
-            <form>
-
-                <input type="text" class="frame-text2" id="city" name="city" placeholder="Город или регион">
-
-                <img src="public/playground_assets/vector1057-5his.svg" alt="Vector1057" class="frame-vector"/>
-
-                <div class="frame-group4"><img src="public/playground_assets/rectangle101053-w0h-200h.png"
-                                               alt="Rectangle101053" class="frame-rectangle10"/>
+            </div>
+            <form> 
+                <div class="frame-group4">
+                    <img src={% static 'assets/select_city/rectangle101053-w0h-200h.png' %} alt="Rectangle101053" class="frame-rectangle10"/>
                     <button type="submit" class="frame-text">ВЫБРАТЬ</button>
                 </div>
 
