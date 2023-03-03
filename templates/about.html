@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <title>О сервисе</title>
@@ -92,7 +93,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
           data-tag="font"/>
-    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href={% static 'css/about.css' %}>
 </head>
 <body>
 <div>
@@ -100,34 +101,20 @@
         <div class="frame-frame">
             <header>
                 <div class="frame-frame46">
-                    <img src="public/playground_assets/rectangle36i969-nst-200h.png" alt="Rectangle36I969"
-                         class="frame-rectangle36"/>
                     <div class="frame-frame61">
                         <div class="frame-text41">
                             <a href="#">Вход для организаций</a>
                         </div>
                     </div>
                     <div class="frame-text43">
-                        <img src="your-image-source" alt="ЛОГО">
+                        <span>ЛОГО</span>
                     </div>
-
-                    <div class="frame-frame55">
-                        <a href="#">
-                            <img src="public/playground_assets/line12i969-lsz.svg" alt="Line12I969"
-                                 class="frame-line12"/>
-                            <img src="public/playground_assets/line13i969-e4v79.svg" alt="Line13I969"
-                                 class="frame-line13"/>
-                            <img src="public/playground_assets/line14i969-e7y.svg" alt="Line14I969"
-                                 class="frame-line14"/>
-                        </a>
-                    </div>
-
                 </div>
             </header>
             <main>
                 <div class="frame-group48">
                     <div class="frame-text45">
-                        <a href="#">На главную</a>
+                        <a href="{% url 'geo_handbook:index' %}">На главную</a>
                     </div>
                     <img src="public/playground_assets/arrow12972-knnm.svg" alt="Arrow12972" class="frame-arrow12"/>
                 </div>
@@ -183,7 +170,7 @@
             <footer>
                 <div class="frame-frame47">
                     <div class="frame-group28">
-                        <img src="your-image-source" class="frame-text31" alt="ЛОГО">
+                        <span class="frame-text31">ЛОГО</span>
                     </div>
                     <div class="frame-frame44">
                         <div class="frame-frame441">
