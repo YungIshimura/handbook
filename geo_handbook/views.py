@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 def view_index(request):
-    return render (request, 'index.html')
+    return render(request, 'index.html')
 
 
 def view_about(request):
@@ -19,3 +19,7 @@ def view_selected_region(request):
 
 def view_card(request):
     return render(request, 'card.html')
+
+
+def view_application(request):
+    return render(request, 'application.html')
