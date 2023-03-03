@@ -18,3 +18,6 @@ def view_select_city(request):
 
 def view_search(request):
     return render(request, 'search.html')
+
+def view_card_layer(request):
+    return render(request, 'card_layer.html')
