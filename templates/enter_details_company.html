@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Внести данные</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <meta property="twitter:card" content="summary_large_image"/>
+
+    <style data-tag="reset-style-sheet">
+        html {
+            line-height: 1.15;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+        }
+
+        p, li, ul, pre, div, h1, h2, h3, h4, h5, h6, figure, blockquote, figcaption {
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            background-color: transparent;
+        }
+
+        button, input, optgroup, select, textarea {
+            font-family: inherit;
+            font-size: 100%;
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        button, select {
+            text-transform: none;
+        }
+
+        button, [type="button"], [type="reset"], [type="submit"] {
+            -webkit-appearance: button;
+        }
+
+        button::-moz-focus-inner, [type="button"]::-moz-focus-inner,
+        [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+            border-style: none;
+            padding: 0;
+        }
+
+        button:-moz-focus, [type="button"]:-moz-focus, [type="reset"]:-moz-focus, [type="submit"]:-moz-focus {
+            outline: 1px dotted ButtonText;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        input {
+            padding: 2px 4px;
+        }
+
+        img {
+            display: block;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+    </style>
+    <style data-tag="default-style-sheet">
+        html {
+            font-family: 'Inter';
+            font-size: 16px;
+        }
+
+        body {
+            font-weight: 400;
+            font-style: normal;
+            text-decoration: none;
+            text-transform: none;
+            letter-spacing: normal;
+            line-height: 1.15;
+            color: var(--dl-color-gray-black);
+            background-color: var(--dl-color-gray-white);
+
+        }
+    </style>
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+            data-tag="font"
+    />
+    <link rel="stylesheet" href={% static 'css/enter_details_company.css' %}>
+</head>
+<body>
+<div>
+    <div>
+        <div class="frame-frame">
+            <div class="frame-frame29">
+                <span class="frame-text"><span>Основные данные</span></span>
+                <span class="frame-text02">
+          <span>Редактировать данные организации</span>
+        </span>
+                <span class="frame-text04"><span>Настройки профиля</span></span>
+            </div>
+            <div class="frame-group16">
+        <span class="frame-text06">
+          <span>Виды работ, выполняемые организацией</span>
+        </span>
+                <img
+                        alt="Polygon13817"
+                        src={% static 'assets/enter_details_company/polygon13817-eqbw.svg' %}
+                                class="frame-polygon1"
+                />
+            </div>
+            <div class="frame-group45">
+                <span class="frame-text08"><span>Регион выполняемых работ</span></span>
+                <img
+                        alt="Polygon17749"
+                        src={% static 'assets/enter_details_company/polygon17749-f8r.svg' %}
+                                class="frame-polygon11"
+                />
+            </div>
+            <div class="frame-frame27">
+                <div class="frame-group26">
+                    <span class="frame-text10"><span>Строительство</span></span>
+                    <div class="frame-group25">
+                        <img
+                                alt="Line83817"
+                                src={% static 'assets/enter_details_company/line83817-cgxa.svg' %}
+                                        class="frame-line8"
+                        />
+                        <img
+                                alt="Line93817"
+                                src={% static 'assets/enter_details_company/line93817-c16.svg' %}
+                                        class="frame-line9"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="frame-frame47">
+                <div class="frame-group261">
+                    <span class="frame-text12"><span>Москва</span></span>
+                    <div class="frame-group251">
+                        <img
+                                alt="Line87749"
+                                src={% static 'assets/enter_details_company/line87749-54a.svg' %}
+                                        class="frame-line81"
+                        />
+                        <img
+                                alt="Line97749"
+                                src={% static 'assets/enter_details_company/line97749-7zen.svg' %}
+                                        class="frame-line91"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="frame-frame48">
+                <div class="frame-group262">
+                    <span class="frame-text14"><span>МО</span></span>
+                    <div class="frame-group252">
+                        <img
+                                alt="Line87751"
+                                src={% static 'assets/enter_details_company/line87751-9zu.svg' %}
+                                        class="frame-line82"
+                        />
+                        <img
+                                alt="Line97751"
+                                src={% static 'assets/enter_details_company/line97751-vev.svg' %}
+                                        class="frame-line92"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="frame-frame481">
+                <div class="frame-frame482">
+                    <span class="frame-text16"><span>Наименование оранизации</span></span>
+                    <div class="frame-frame35">
+                        <span class="frame-text18"><span>ООО “Ромашка”</span></span>
+                    </div>
+                </div>
+                <div class="frame-frame55">
+                    <span class="frame-text20"><span>ИНН</span></span>
+                    <div class="frame-frame3501">
+                        <span class="frame-text22"><span>525895655</span></span>
+                    </div>
+                </div>
+                <div class="frame-frame56">
+                    <span class="frame-text24"><span>ОГРН/ОГРНИП</span></span>
+                    <div class="frame-frame3502">
+                        <span class="frame-text26"><span>2624151254854561</span></span>
+                    </div>
+                </div>
+                <div class="frame-frame53">
+                    <span class="frame-text28"><span>Юридический адрес</span></span>
+                    <div class="frame-frame3503">
+            <span class="frame-text30">
+              <span>111111, г. Москва, Красная Площадь д. 1</span>
+            </span>
+                    </div>
+                </div>
+                <div class="frame-frame54">
+          <span class="frame-text32">
+            <span>ФИО и должность руководителя</span>
+          </span>
+                    <div class="frame-frame3504">
+            <span class="frame-text34">
+              <span>Иванов Петр Прокопьевич</span>
+            </span>
+                    </div>
+                </div>
+                <div class="frame-frame51">
+                    <span class="frame-text36"><span>Телефон</span></span>
+                    <div class="frame-frame3505">
+                        <span class="frame-text38"><span>+7 955 556 55 88</span></span>
+                    </div>
+                </div>
+                <div class="frame-frame52">
+                    <span class="frame-text40"><span>Email</span></span>
+                    <div class="frame-frame3506">
+                        <span class="frame-text42"><span>romashka@yandex.ru</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="frame-frame551">
+                <div class="frame-frame541">
+                    <span class="frame-text44"><span>Телефоны:</span></span>
+                    <div class="frame-frame3507"></div>
+                </div>
+                <div class="frame-frame552">
+                    <span class="frame-text46"><span>Email:</span></span>
+                    <div class="frame-frame3508"></div>
+                </div>
+                <div class="frame-frame561">
+                    <span class="frame-text48"><span>Сайт:</span></span>
+                    <div class="frame-frame3509"></div>
+                </div>
+            </div>
+            <div class="frame-frame562">
+                <div class="frame-frame542">
+                    <span class="frame-text50"><span>Адреса филиалов:</span></span>
+                    <div class="frame-frame3510"></div>
+                </div>
+                <div class="frame-frame553">
+          <span class="frame-text52">
+            <span>ФИО и должность сотрудников</span>
+          </span>
+                    <div class="frame-frame3511"></div>
+                </div>
+            </div>
+            <div class="frame-frame49">
+                <div class="frame-frame531">
+          <span class="frame-text54">
+            <span>Регистрационный номер в реестре СРО</span>
+          </span>
+                    <div class="frame-frame3512">
+                        <span class="frame-text56"><span>565265288269</span></span>
+                    </div>
+                </div>
+                <div class="frame-frame511">
+          <span class="frame-text58">
+            <span>Дата и номер решения о приеме в члены СРО</span>
+          </span>
+                    <div class="frame-frame3513">
+                        <span class="frame-text60"><span>№ 255 от 28.03.2021</span></span>
+                    </div>
+                </div>
+                <div class="frame-frame521">
+                    <span class="frame-text62"><span>Название и номер СРО</span></span>
+                    <div class="frame-frame3514">
+                        <span class="frame-text64"><span>565658582</span></span>
+                    </div>
+                </div>
+                <div class="frame-frame543">
+          <span class="frame-text66">
+            <span>Дата прекращения членства</span>
+          </span>
+                    <div class="frame-frame3515"><span class="frame-text68">-</span></div>
+                </div>
+            </div>
+            <div class="frame-frame30">
+                <div class="frame-group263">
+                    <span class="frame-text69"><span>Лицензирование</span></span>
+                    <div class="frame-group253">
+                        <img
+                                alt="Line83817"
+                                src={% static 'assets/enter_details_company/line83817-g7r.svg' %}
+                                        class="frame-line83"
+                        />
+                        <img
+                                alt="Line93817"
+                                src={% static 'assets/enter_details_company/line93817-8o1.svg' %}
+                                        class="frame-line93"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="frame-group47">
+                <img
+                        alt="Line81148"
+                        src={% static 'assets/enter_details_company/line81148-u1e.svg' %}
+                                class="frame-line84"
+                />
+                <img
+                        alt="Line91148"
+                        src={% static 'assets/enter_details_company/line91148-2gal.svg' %}
+                                class="frame-line94"
+                />
+            </div>
+            <div class="frame-group48">
+                <img
+                        alt="Line81148"
+                        src={% static 'assets/enter_details_company/line81148-zbhc.svg' %}
+                                class="frame-line85"
+                />
+                <img
+                        alt="Line91148"
+                        src={% static 'assets/enter_details_company/line91148-hull.svg' %}
+                                class="frame-line95"
+                />
+            </div>
+            <div class="frame-group49">
+                <img
+                        alt="Line81148"
+                        src={% static 'assets/enter_details_company/line81148-danf.svg' %}
+                                class="frame-line86"
+                />
+                <img
+                        alt="Line91148"
+                        src={% static 'assets/enter_details_company/line91148-soc.svg' %}
+                                class="frame-line96"
+                />
+            </div>
+            <div class="frame-group50">
+                <img
+                        alt="Line81148"
+                        src={% static 'assets/enter_details_company/line81148-syno.svg' %}
+                                class="frame-line87"
+                />
+                <img
+                        alt="Line91148"
+                        src={% static 'assets/enter_details_company/line91148-af9.svg' %}
+                                class="frame-line97"
+                />
+            </div>
+            <div class="frame-group51">
+                <img
+                        alt="Line81148"
+                        src={% static 'assets/enter_details_company/line81148-4v6a.svg' %}
+                                class="frame-line88"
+                />
+                <img
+                        alt="Line91148"
+                        src={% static 'assets/enter_details_company/line91148-a73hla.svg' %}
+                                class="frame-line98"
+                />
+            </div>
+            <div class="frame-frame46">
+                <img
+                        alt="Rectangle36I574"
+                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/2e1f8746-a58f-45e7-920e-2fe113a9d8b8?org_if_sml=11024"
+                        class="frame-rectangle36"
+                />
+                <div class="frame-frame6">
+                    <span class="frame-text71"><span>Вход для организаций</span></span>
+                </div>
+                <span class="frame-text73"><span>ЛОГО</span></span>
+                <div class="frame-frame554">
+                    <img
+                            alt="Line12I574"
+                            src={% static 'assets/enter_details_company/line12i574-zts.svg' %}
+                                    class="frame-line12"
+                    />
+                    <img
+                            alt="Line13I574"
+                            src={% static 'assets/enter_details_company/line13i574-sq7p.svg' %}
+                                    class="frame-line13"
+                    />
+                    <img
+                            alt="Line14I574"
+                            src={% static 'assets/enter_details_company/line14i574-20c.svgline14i574-20c.svg' %}
+
+                                    class="frame-line14"
+                    />
+                </div>
+            </div>
+            <div class="frame-frame5">
+                <span class="frame-text75"><span>СОХРАНИТЬ</span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

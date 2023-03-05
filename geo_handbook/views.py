@@ -27,7 +27,7 @@ def view_card_layer(request):
 
 def view_card(request):
     return render(request, 'card.html')
-    
+
 def view_about(request):
     return render(request, 'about.html')
 
@@ -42,4 +42,21 @@ def view_selected_region(request):
 
 def view_card(request):
     return render(request, 'card.html')
+
+
+def view_application(request):
+    return render(request, 'application.html')
+
+
+def view_basic_data(request):
+    return render(request, 'basic_data.html')
+
+
+def view_enter_details_company(request):
+    return render(request, 'enter_details_company.html')
+
+
+def view_settings_profile(request):
+    return render(request, 'settings_profile.html')
+
 
