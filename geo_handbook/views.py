@@ -28,6 +28,7 @@ def view_card_layer(request):
 def view_card(request):
     return render(request, 'card.html')
 
+
 def view_about(request):
     return render(request, 'about.html')
 
@@ -58,5 +59,3 @@ def view_enter_details_company(request):
 
 def view_settings_profile(request):
     return render(request, 'settings_profile.html')
-
-
