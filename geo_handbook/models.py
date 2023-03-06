@@ -91,13 +91,13 @@ class Company(models.Model):
         'Рейтинг компании',
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
-    inn = models.PositiveIntegerField(  # TODO написать валидатор для ИНН компании
+    inn = models.PositiveBigIntegerField(  # TODO написать валидатор для ИНН компании
         'ИНН',
-        validators=[MaxValueValidator(9999999999)]
+        validators=[MaxValueValidator(999999999999)]
     )
-    ogrn = models.PositiveIntegerField(  # TODO написать валидатор для ОГРН компании
+    ogrn = models.PositiveBigIntegerField(  # TODO написать валидатор для ОГРН компании
         'ОГРН/ОГРНИП',
-        validators=[MaxValueValidator(9999999999999)]
+        validators=[MaxValueValidator(999999999999999)]
     )
     sro = models.ForeignKey(
         SRO,
@@ -142,7 +142,7 @@ class Company(models.Model):
 
 
 class Branches(models.Model):
-    postcode = models.PositiveIntegerField(  # TODO написать валидатор для почтового индекса
+    postcode = models.PositiveBigIntegerField(  # TODO написать валидатор для почтового индекса
         'Почтовый индекс',
         validators=[MaxValueValidator(999999)]
     )
