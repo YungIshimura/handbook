@@ -20,4 +20,5 @@ urlpatterns = [
     path('application/', view_application, name='application'),
     path('enter_details_company/', view_enter_details_company, name='enter_details_company'),
     path('settings_profile/', view_settings_profile, name='settings_profile'),
+    path('company/edit/<int:pk>/', company_update, name='edit_company'),
 ]
