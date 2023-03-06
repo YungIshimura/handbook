@@ -14,7 +14,7 @@ class TypeWork(models.Model):
 
     class Meta:
         verbose_name = 'Тип работы'
-        verbose_name_plural = 'Тип работ'
+        verbose_name_plural = 'Типы работ'
 
 
 class SRO(models.Model):
@@ -91,13 +91,13 @@ class Company(models.Model):
         'Рейтинг компании',
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
-    inn = models.PositiveIntegerField(  # TODO написать валидатор для ИНН компании
+    inn = models.PositiveBigIntegerField(  # TODO написать валидатор для ИНН компании
         'ИНН',
-        validators=[MaxValueValidator(9999999999)]
+        validators=[MaxValueValidator(999999999999)]
     )
-    ogrn = models.PositiveIntegerField(  # TODO написать валидатор для ОГРН компании
+    ogrn = models.PositiveBigIntegerField(  # TODO написать валидатор для ОГРН компании
         'ОГРН/ОГРНИП',
-        validators=[MaxValueValidator(9999999999999)]
+        validators=[MaxValueValidator(999999999999999)]
     )
     sro = models.ForeignKey(
         SRO,
@@ -142,7 +142,7 @@ class Company(models.Model):
 
 
 class Branches(models.Model):
-    postcode = models.PositiveIntegerField(  # TODO написать валидатор для почтового индекса
+    postcode = models.PositiveBigIntegerField(  # TODO написать валидатор для почтового индекса
         'Почтовый индекс',
         validators=[MaxValueValidator(999999)]
     )
@@ -191,8 +191,8 @@ class CompanySpecialization(models.Model):
         return f'{self.type_work} - {self.company}'
 
     class Meta:
-        verbose_name = 'Тип работы'
-        verbose_name_plural = 'Типы работ'
+        verbose_name = 'Специализация компании'
+        verbose_name_plural = 'Специализации компаний'
 
 
 class Director(models.Model):
