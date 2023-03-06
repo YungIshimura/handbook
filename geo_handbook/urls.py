@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (view_about, view_select, view_selected_region, view_application,
-                    view_basic_data, view_enter_details_company, view_settings_profile, view_index, view_sign_up_user,
+                    view_enter_details_company, view_settings_profile, view_index, view_sign_up_user,
                     view_sign_up_company, view_select_city, view_search, view_card_layer, view_card)
 
 app_name = 'geo_handbook'
@@ -18,7 +18,6 @@ urlpatterns = [
     path('selected_region/', view_selected_region, name='region'),
     path('card/', view_card, name='card'),
     path('application/', view_application, name='application'),
-    path('basic_data/', view_basic_data, name='basic_data'),
     path('enter_details_company/', view_enter_details_company, name='enter_details_company'),
     path('settings_profile/', view_settings_profile, name='settings_profile'),
 ]

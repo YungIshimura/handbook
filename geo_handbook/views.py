@@ -49,8 +49,8 @@ def view_application(request):
     return render(request, 'application.html')
 
 
-def view_basic_data(request):
-    return render(request, 'basic_data.html')
+def view_profile(request):
+    return render(request, 'profile.html')
 
 
 def view_enter_details_company(request):
