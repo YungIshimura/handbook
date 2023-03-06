@@ -99,7 +99,7 @@
             href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
             data-tag="font"
     />
-    <link rel="stylesheet" href={% static 'css/settings_profile.css' %}>
+    <link rel="stylesheet" href=/static/css/settings_profile.css>
 </head>
 <body>
 <div>
@@ -112,21 +112,25 @@
         </span>
                 <span class="frame2-text04"><a href='settings_profile.html'><span>Настройки профиля</span></a></span>
             </div>
-            <div class="frame2-group7">
-                <div class="frame2-group5">
-                    <span class="frame2-text06"><span>ВЫБРАТЬ</span></span>
+
+
+            <form action="#" method="post">
+                <div class="frame2-group7">
+                    <div class="frame2-group5">
+                        <input type="email" placeholder="Email" class="frame2-text12"/><br/>
+                    </div>
                 </div>
-                <span class="frame2-text08"><span>Email</span></span>
-            </div>
-            <div class="frame2-group11">
-                <div class="frame2-group51">
-                    <span class="frame2-text10"><span>ВЫБРАТЬ</span></span>
+                <div class="frame2-group11">
+                    <div class="frame2-group51">
+                        <input type="password" placeholder="Пароль" class="frame2-text12"/><br/>
+                    </div>
                 </div>
-                <span class="frame2-text12"><span>Пароль</span></span>
-            </div>
-            <div class="frame2-frame5">
+                            <div class="frame2-frame5">
                 <span class="frame2-text14"><a href='#'><span>СОХРАНИТЬ</span></a></span>
             </div>
+            </form>
+
+
             <div class="frame2-frame46">
                 <img
                         alt="Rectangle36I574"
