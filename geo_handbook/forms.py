@@ -1,13 +1,19 @@
 from django import forms
 from django.forms.models import inlineformset_factory
 from .models import Company, TypeWork, CompanySpecialization
+from django.core.exceptions import ValidationError
+
+def validate_legal_address_postcode(value):
+    if not value.isdigit() or len(value) != 6:
+        raise ValidationError('Почтовый индекс должен содержать 6 цифр')
 
 
 class CompanyUpdateForm(forms.ModelForm):
     # Добавляем поля для редактирования связанных моделей
     legal_address_postcode = forms.CharField(
         label='Почтовый индекс',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        validators=[validate_legal_address_postcode]
     )
     legal_address_city = forms.CharField(
         label='Город',
@@ -27,7 +33,7 @@ class CompanyUpdateForm(forms.ModelForm):
     )
     sro_date = forms.DateField(
         label='Дата приёма в члены СРО',
-        widget=forms.DateInput(attrs={'class': 'form-control'})
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
     )
     sro_number = forms.CharField(
         label='Номер решения о приёме в члены СРО',
@@ -58,8 +64,8 @@ class CompanyUpdateForm(forms.ModelForm):
             'email': forms.EmailInput(
                 attrs={'class': 'form-control', 'placeholder': 'romashka@yandex.ru'}),
             'sro': forms.HiddenInput(),
-            'license_date': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Дата прекращения членства”'}),
+            'license_date': forms.DateInput(
+                attrs={'type': 'date', 'class': 'form-control', 'placeholder': 'Дата прекращения членства”'}),
             'url': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Сайт компании”'}),
         }
