@@ -14,7 +14,7 @@ class TypeWork(models.Model):
 
     class Meta:
         verbose_name = 'Тип работы'
-        verbose_name_plural = 'Тип работ'
+        verbose_name_plural = 'Типы работ'
 
 
 class SRO(models.Model):
@@ -191,8 +191,8 @@ class CompanySpecialization(models.Model):
         return f'{self.type_work} - {self.company}'
 
     class Meta:
-        verbose_name = 'Тип работы'
-        verbose_name_plural = 'Типы работ'
+        verbose_name = 'Специализация компании'
+        verbose_name_plural = 'Специализации компаний'
 
 
 class Director(models.Model):
