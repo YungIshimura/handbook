@@ -1,160 +1,61 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="english">
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Настройки профиля</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta charset="utf-8"/>
-    <meta property="twitter:card" content="summary_large_image"/>
-    <style data-tag="reset-style-sheet">
-        html {
-            line-height: 1.15;
-        }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href='/static/css/settings_profile.css'>
 
-        body {
-            margin: 0;
-        }
-
-        * {
-            box-sizing: border-box;
-            border-width: 0;
-            border-style: solid;
-        }
-
-        p, li, ul, pre, div, h1, h2, h3, h4, h5, h6, figure, blockquote, figcaption {
-            margin: 0;
-            padding: 0;
-        }
-
-        button {
-            background-color: transparent;
-        }
-
-        button, input, optgroup, select, textarea {
-            font-family: inherit;
-            font-size: 100%;
-            line-height: 1.15;
-            margin: 0;
-        }
-
-        button, select {
-            text-transform: none;
-        }
-
-        button, [type="button"], [type="reset"], [type="submit"] {
-            -webkit-appearance: button;
-        }
-
-        button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
-            border-style: none;
-            padding: 0;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
-        input {
-            padding: 2px 4px;
-        }
-
-        img {
-            display: block;
-        }
-
-        html {
-            scroll-behavior: smooth
-        }
-    </style>
-    <style data-tag="default-style-sheet">
-        html {
-            font-family: Inter;
-            font-size: 16px;
-        }
-
-        body {
-            font-weight: 400;
-            font-style: normal;
-            text-decoration: none;
-            text-transform: none;
-            letter-spacing: normal;
-            line-height: 1.15;
-            color: var(--dl-color-gray-black);
-            background-color: var(--dl-color-gray-white);
-
-        }
-    </style>
-    <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-            data-tag="font"
-    />
-    <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-            data-tag="font"
-    />
-    <link rel="stylesheet" href=/static/css/settings_profile.css>
 </head>
 <body>
-<div>
-    <div>
-        <div class="frame2-frame">
-            <div class="frame2-frame29">
-                <span class="frame2-text"><a href='basic_data.html'><span>Основные данные</span></a></span>
-                <span class="frame2-text02">
-          <a href='settings_profile.html'><span>Редактировать данные организации</span></a>
-        </span>
-                <span class="frame2-text04"><a href='settings_profile.html'><span>Настройки профиля</span></a></span>
-            </div>
-
-
-            <form action="#" method="post">
-                <div class="frame2-group7">
-                    <div class="frame2-group5">
-                        <input type="email" placeholder="Email" class="frame2-text12"/><br/>
-                    </div>
+<section>
+    <header>
+        <div class="navbar">
+            <div class="navbar__container">
+                <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
+                    <span>ЛОГО</span>
+                </a>
+                <div class="login-container">
+                    <a href="#"><span class="login">Вход для организаций</span></a>
                 </div>
-                <div class="frame2-group11">
-                    <div class="frame2-group5">
-                        <input type="password" placeholder="Пароль" class="frame2-text12"/><br/>
-                    </div>
-                </div>
-                <span class="frame2-text14"><a href='#' class="frame2-frame5"><span>СОХРАНИТЬ</span></a></span>
-            </form>
-
-
-            <div class="frame2-frame46">
-                <img
-                        alt="Rectangle36I574"
-                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/8dcfcff0-5a53-4a3a-a17c-d8ef453b40cd?org_if_sml=11024"
-                        class="frame2-rectangle36"
-                />
-                <div class="frame2-frame6">
-                    <span class="frame2-text16"><a href='#'><span>Вход для организаций</span></a></span>
-                </div>
-                <span class="frame2-text18"><span>ЛОГО</span></span>
-                <div class="frame2-frame55">
-                    <img
-                            alt="Line12I574"
-                            src={% static 'assets/settings_profile/line12i574-iv3.svg' %}
-                                    class="frame2-line12"
-                    />
-                    <img
-                            alt="Line13I574"
-                            src={% static 'assets/settings_profile/line13i574-7d8.svg' %}
-                                    class="frame2-line13"
-                    />
-                    <img
-                            alt="Line14I574"
-                            src={% static 'assets/settings_profile/line14i574-6vl.svg' %}
-                                    class="frame2-line14"
-                    />
-                </div>
+                <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon custom-toggler"></span>
+                </button>
             </div>
         </div>
+    </header>
+</section>
+<section>
+    <div class="card-menu">
+        <div class="menu">
+            <a href='basic_data.html'>Основные данные</a>
+        </div>
+        <div class="menu">
+            <a href='settings_profile.html'><span>Редактировать данные организации</span></a>
+        </div>
+        <div class="menu">
+            <span><a href='settings_profile.html'><span>Настройки профиля</span></a></span>
+        </div>
     </div>
-</div>
+</section>
+<section class="login-input">
+    <form>
+        <div class="mb-3">
+            <input type="email" class="form-control-lg border rounded-0" id="exampleFormControlInput1"
+                   placeholder="Email">
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control-lg border rounded-0" id="exampleFormControlTextarea1"
+                   placeholder="Пароль"></input>
+        </div>
+        <button type="submit" class="btn">СОХРАНИТЬ</button>
+    </form>
+</section>
+
 </body>
 </html>
