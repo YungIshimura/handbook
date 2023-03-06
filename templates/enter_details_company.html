@@ -97,7 +97,7 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
             data-tag="font"
     />
-    <link rel="stylesheet" href={% static 'css/enter_details_company.css' %}>
+    <link rel="stylesheet" href='/static/css/enter_details_company.css'>
 </head>
 <body>
 <div>
@@ -110,24 +110,20 @@
         </span>
                 <span class="frame-text04"><a href='settings_profile.html'><span>Настройки профиля</span></a></span>
             </div>
-            <div class="frame-group16">
-        <span class="frame-text06">
-          <span>Виды работ, выполняемые организацией</span>
-        </span>
-                <img
-                        alt="Polygon13817"
-                        src={% static 'assets/enter_details_company/polygon13817-eqbw.svg' %}
-                                class="frame-polygon1"
-                />
-            </div>
-            <div class="frame-group45">
-                <span class="frame-text08"><span>Регион выполняемых работ</span></span>
-                <img
-                        alt="Polygon17749"
-                        src={% static 'assets/enter_details_company/polygon17749-f8r.svg' %}
-                                class="frame-polygon11"
-                />
-            </div>
+
+
+            <select name="user_profile_color_1" class="frame-group16">>
+                <option selected class="frame-text06">Виды работ, выполняемые организацией</option>
+                <option value="1">Строительство</option>
+                <option value="2">Лицензирование</option>
+            </select>
+
+            <select name="user_profile_color_1" class="frame-group45">>
+                <option selected class="frame-text06">Регион выполняемых работ</option>
+                <option value="1">Москва</option>
+                <option value="2">МО</option>
+            </select>
+
             <div class="frame-frame27">
                 <div class="frame-group26">
                     <span class="frame-text10"><span>Строительство</span></span>
@@ -179,112 +175,51 @@
                     </div>
                 </div>
             </div>
-            <div class="frame-frame481">
-                <div class="frame-frame482">
-                    <span class="frame-text16"><span>Наименование оранизации</span></span>
-                    <div class="frame-frame35">
-                        <span class="frame-text18"><span>ООО “Ромашка”</span></span>
+
+                <form action="#" method="post" class="frame-frame482">
+                     <div class="frame-frame481">
+                    <label for="fname" class="frame-text16">Наименование оранизации</label>
+                    <input type="text" name="FirstName" id="fname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">ИНН</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">ОГРН/ОГРНИП</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">ИНН</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">Юридический адрес</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">ФИО и должность руководителя</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">Телефон</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">Email</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">Название и номер СРО</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <label for="lname" class="frame-text16">Дата прекращения членства</label>
+                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                    <h1>Добавить данные</h1>
+                        <div class="frame-frame3505">
+                            <label for="lname" class="frame-text16">Телефоны:</label>
+                            <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
+                            <label for="lname" class="frame-text16">Email:</label>
+                            <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
+                            <label for="lname" class="frame-text16">Сайт:</label>
+                            <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
+                            <label for="lname" class="frame-text16">Адреса филиалов:</label>
+                            <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
+                            <label for="lname" class="frame-text16">ФИО и должность сотрудников</label>
+                            <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
+                        </div>
                     </div>
-                </div>
-                <div class="frame-frame55">
-                    <span class="frame-text20"><span>ИНН</span></span>
-                    <div class="frame-frame3501">
-                        <span class="frame-text22"><span>525895655</span></span>
-                    </div>
-                </div>
-                <div class="frame-frame56">
-                    <span class="frame-text24"><span>ОГРН/ОГРНИП</span></span>
-                    <div class="frame-frame3502">
-                        <span class="frame-text26"><span>2624151254854561</span></span>
-                    </div>
-                </div>
-                <div class="frame-frame53">
-                    <span class="frame-text28"><span>Юридический адрес</span></span>
-                    <div class="frame-frame3503">
-            <span class="frame-text30">
-              <span>111111, г. Москва, Красная Площадь д. 1</span>
-            </span>
-                    </div>
-                </div>
-                <div class="frame-frame54">
-          <span class="frame-text32">
-            <span>ФИО и должность руководителя</span>
-          </span>
-                    <div class="frame-frame3504">
-            <span class="frame-text34">
-              <span>Иванов Петр Прокопьевич</span>
-            </span>
-                    </div>
-                </div>
-                <div class="frame-frame51">
-                    <span class="frame-text36"><span>Телефон</span></span>
-                    <div class="frame-frame3505">
-                        <span class="frame-text38"><span>+7 955 556 55 88</span></span>
-                    </div>
-                </div>
-                <div class="frame-frame52">
-                    <span class="frame-text40"><span>Email</span></span>
-                    <div class="frame-frame3506">
-                        <span class="frame-text42"><span>romashka@yandex.ru</span></span>
-                    </div>
-                </div>
-            </div>
-            <div class="frame-frame551">
-                <div class="frame-frame541">
-                    <span class="frame-text44"><span>Телефоны:</span></span>
-                    <div class="frame-frame3507"></div>
-                </div>
-                <div class="frame-frame552">
-                    <span class="frame-text46"><span>Email:</span></span>
-                    <div class="frame-frame3508"></div>
-                </div>
-                <div class="frame-frame561">
-                    <span class="frame-text48"><span>Сайт:</span></span>
-                    <div class="frame-frame3509"></div>
-                </div>
-            </div>
-            <div class="frame-frame562">
-                <div class="frame-frame542">
-                    <span class="frame-text50"><span>Адреса филиалов:</span></span>
-                    <div class="frame-frame3510"></div>
-                </div>
-                <div class="frame-frame553">
-          <span class="frame-text52">
-            <span>ФИО и должность сотрудников</span>
-          </span>
-                    <div class="frame-frame3511"></div>
-                </div>
-            </div>
-            <div class="frame-frame49">
-                <div class="frame-frame531">
-          <span class="frame-text54">
-            <span>Регистрационный номер в реестре СРО</span>
-          </span>
-                    <div class="frame-frame3512">
-                        <span class="frame-text56"><span>565265288269</span></span>
-                    </div>
-                </div>
-                <div class="frame-frame511">
-          <span class="frame-text58">
-            <span>Дата и номер решения о приеме в члены СРО</span>
-          </span>
-                    <div class="frame-frame3513">
-                        <span class="frame-text60"><span>№ 255 от 28.03.2021</span></span>
-                    </div>
-                </div>
-                <div class="frame-frame521">
-                    <span class="frame-text62"><span>Название и номер СРО</span></span>
-                    <div class="frame-frame3514">
-                        <span class="frame-text64"><span>565658582</span></span>
-                    </div>
-                </div>
-                <div class="frame-frame543">
-          <span class="frame-text66">
-            <span>Дата прекращения членства</span>
-          </span>
-                    <div class="frame-frame3515"><span class="frame-text68">-</span></div>
-                </div>
-            </div>
+                </form>
+
+
+
             <div class="frame-frame30">
                 <div class="frame-group263">
                     <span class="frame-text69"><span>Лицензирование</span></span>
@@ -368,35 +303,17 @@
                         src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/2e1f8746-a58f-45e7-920e-2fe113a9d8b8?org_if_sml=11024"
                         class="frame-rectangle36"
                 />
+
+
                 <div class="frame-frame6">
                     <span class="frame-text71"><a href='#'><span>Вход для организаций</span></a></span>
                 </div>
                 <span class="frame-text73"><span>ЛОГО</span></span>
-                <div class="frame-frame554">
-                    <img
-                            alt="Line12I574"
-                            src={% static 'assets/enter_details_company/line12i574-zts.svg' %}
-                                    class="frame-line12"
-                    />
-                    <img
-                            alt="Line13I574"
-                            src={% static 'assets/enter_details_company/line13i574-sq7p.svg' %}
-                                    class="frame-line13"
-                    />
-                    <img
-                            alt="Line14I574"
-                            src={% static 'assets/enter_details_company/line14i574-20c.svgline14i574-20c.svg' %}
 
-                                    class="frame-line14"
-                    />
-                </div>
-            </div>
-            <div class="frame-frame5">
-                <span class="frame-text75"><a href='#'><span>Сохранить</span></a></span>
+
             </div>
         </div>
     </div>
-</div>
 
 
 </body>
