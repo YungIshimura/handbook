@@ -41,10 +41,6 @@ def view_selected_region(request):
     return render(request, 'selected_region.html')
 
 
-def view_card(request):
-    return render(request, 'card.html')
-
-
 def view_application(request):
     return render(request, 'application.html')
 
