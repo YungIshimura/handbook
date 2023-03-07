@@ -1,91 +1,192 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-  <head>
-    <title>Регион - (название региона)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <meta property="twitter:card" content="summary_large_image" />
-    <style data-tag="reset-style-sheet">
-      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
-    </style>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" data-tag="font">
-    <link rel="stylesheet" href={% static 'css/select.css' %}>
-  </head>
-  <body>
-    <div class="frame-container">
-      <div class="frame-frame">
-        <img src={% static 'assets/selected_region/rectangle112541-0yj-500h.png' %} alt="Rectangle112541" class="frame-rectangle11">
-        <img src={% static 'assets/selected_region/rectangle382541-ypjs-200h.png' %} alt="Rectangle382541" class="frame-rectangle38">
-        <img src={% static 'assets/selected_region/rectangle392541-xi8a-600h.png' %} alt="Rectangle392541" class="frame-rectangle39">
-        <img src={% static 'assets/selected_region/rectangle402541-ata6-700h.png' %} alt="Rectangle402541" class="frame-rectangle40"/>
-        <span class="frame-text">
-            Поиск лицензированных организаций в области проектирования
-        </span>
-        <div class="frame-group3">
-          <img src={% static 'assets/selected_region/rectangle102542-js5b-200h.png' %} alt="Rectangle102542" class="frame-rectangle10">
-          <div class="frame-group2">
-            <span class="frame-text002"> Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя</span>
-            <img src={% static 'assets/selected_region/vector2542-2wo.svg' %} alt="Vector2542" class="frame-vector"/>
-          </div>
-          <span class="frame-text004">НАЙТИ</span>
-        </div>
-        <span class="frame-text006">НАЙТИ</span>
-        <div class="frame-frame4">
-          <div class="frame-frame7">
-            <div class="frame-group6">
-              <div class="frame-group">
-                <img src={% static 'assets/selected_region/vector2543-3dc9.svg' %} alt="Vector2543" class="frame-vector1">
-                <img src={% static 'assets/selected_region/vector2543-ormi.svg' %} alt="Vector2543" class="frame-vector2">
-              </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточки организаций</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href={% static 'css/selected_region.css' %}>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar__container">
+                <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
+                <span>ЛОГО</span>
+                </a>
+                <div class="login-container">
+                    <a href="#"><span class="login">Вход для организаций</span></a>
+                </div>
+                <button class="navbar-toggler toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon custom-toggler"></span>
+                </button>
             </div>
-            <span class="frame-text008"Москва</span>
-          </div>
-          <div class="frame-frame41">
-            <div class="frame-frame5">
-              <span class="frame-text010">Выбрать другой регион</span>
+        </div>
+    </header>
+        <div class="region-area">
+            <div class="region-area__text">
+                <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
+                <div class="region-area__selected-region">
+                    <span class="region" style="margin-right: 15px;"><img src="https://img.icons8.com/ios/20/null/place-marker--v1.png"/ style="margin-right: 5px;">Москва</span>
+                    <a href="#"><span class="another-region">Выбрать другой регион</span></a>
+                </div>
+                <div class="search-area">
+                    <form class="search-form">
+                        <input class='search' type="search" id="site-search" name="search" placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
+                        <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span></button>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="frame-frame46">
-          <im src={% static 'assets/selected_region/rectangle36i254-pnpc-200h.png' %}% alt="Rectangle36I254" class="frame-rectangle36">
-          <div class="frame-frame6">
-            <span class="frame-text012"> Вход для организаций </span>
-          </div>
-          <span class="frame-text014">ЛОГО</span>
-          <div class="frame-frame55">
-            <img src={% static 'assets/selected_region/line12i254-zevi.svg'%} alt="Line12I254" class="frame-line12">
-            <img src={% static 'assets/selected_region/line13i254-hk3.svg'%} alt="Line13I254" class="frame-line13">
-            <img src={% static 'assets/selected_region/line14i254-hmwg.svg'%} alt="Line14I254" class="frame-line14">
-          </div>
-        </div>
-        <div class="frame-frame61">
-          <span class="frame-text016">Создать заявку</span>
-        </div>
-        <div class="frame-frame47">
-          <div class="frame-frame26"></div>
-        </div>
-        <div class="frame-group49">
-          <span class="frame-text018">“Ромашка”</span>
-          <div class="frame-group44">
-            <div class="frame-group46">
-              <span class="frame-text020">Виды работ:</span>
-              <span class="frame-text022">
-                Лицензирование, строительство, монтаж
-              </span>
+
+        <div class="request">
+            <div class="request__data">
+                <div class="request__data--text">
+                    <span >Ищите услуги проверенных компаний? Создайте задание и в 1 клик отправьте его лучшим компаниям региона. Получайте заявки и выбирайте лучшее предложение.</span>
+                </div>
+                <button class="request__data--button">Создать заявку</button>
             </div>
-          </div>
-          <span class="frame-text024">Юридический адрес:</span>
-          <span class="frame-text026"> 11111, г. Москва, Красная Площадь, д.1 </span>
-          <div class="frame-group20">
-            <img src={% static 'assets/selected_region/black-star.svg' %} alt="Star12545" class="frame-star1">
-            <img src={% static 'assets/selected_region/black-star.svg' %} alt="Star22545" class="frame-star2">
-            <img src={% static 'assets/selected_region/black-star.svg' %} alt="Star32545" class="frame-star3">
-            <img src={% static 'assets/selected_region/white-star.svg' %} alt="Star42545" class="frame-star4">
-            <img src={% static 'assets/selected_region/white-star.svg' %} alt="Star52545" class="frame-star5">
-          </div>
         </div>
-      </div>
-    </div>
-  </body>
+
+        <div class="companys">
+            <span class="companys--title">Лучшие компании региона</span>
+            <br>
+            <br>
+            <div class="container overflow-hidden">
+                <div class="row gx-5">
+                <div class="col">
+                <div class="p-3 company-container">
+                    <div class="company">
+                            <h4>Ромашка</h4>
+                            <div class="rating">
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                            </div>
+                    </div>
+                    <div class="company__data">
+                            <span class="company__address">
+                                <span class='company__data-text'>Юридический адрес: </span>11111, г.Москва, Красная Площадь, д.1</span>
+                                <span class='company__data-text'>Виды работ: </span>Лицензирование, строительство, монтаж   </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3 company-container">
+                    <div class="company">
+                            <h4>Ромашка</h4>
+                            <div class="rating">
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                            </div>
+                    </div>
+                    <div class="company__data">
+                            <span class="company__address">
+                                <span class='company__data-text'>Юридический адрес: </span>11111, г.Москва, Красная Площадь, д.1</span>
+                                <span class='company__data-text'>Виды работ: </span>Лицензирование, строительство, монтаж   </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3 company-container">
+                    <div class="company">
+                            <h4>Ромашка</h4>
+                            <div class="rating">
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                            </div>
+                    </div>
+                    <div class="company__data">
+                            <span class="company__address">
+                                <span class='company__data-text'>Юридический адрес: </span>11111, г.Москва, Красная Площадь, д.1</span>
+                                <span class='company__data-text'>Виды работ: </span>Лицензирование, строительство, монтаж   </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3 company-container">
+                    <div class="company">
+                            <h4>Ромашка</h4>
+                            <div class="rating">
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                            </div>
+                    </div>
+                    <div class="company__data">
+                            <span class="company__address">
+                                <span class='company__data-text'>Юридический адрес: </span>11111, г.Москва, Красная Площадь, д.1</span>
+                                <span class='company__data-text'>Виды работ: </span>Лицензирование, строительство, монтаж   </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3 company-container">
+                    <div class="company">
+                            <h4>Ромашка</h4>
+                            <div class="rating">
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                            </div>
+                    </div>
+                    <div class="company__data">
+                            <span class="company__address">
+                                <span class='company__data-text'>Юридический адрес: </span>11111, г.Москва, Красная Площадь, д.1</span>
+                                <span class='company__data-text'>Виды работ: </span>Лицензирование, строительство, монтаж   </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3 company-container">
+                    <div class="company">
+                            <h4>Ромашка</h4>
+                            <div class="rating">
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/black-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                                <img src={% static 'assets/stars/white-star.svg' %}>
+                            </div>
+                    </div>
+                    <div class="company__data">
+                            <span class="company__address">
+                                <span class='company__data-text'>Юридический адрес: </span>11111, г.Москва, Красная Площадь, д.1</span>
+                                <span class='company__data-text'>Виды работ: </span>Лицензирование, строительство, монтаж   </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    <footer class="footer">
+        <span class="navbar-brand d-flex align-items-center navbar__logo" style="margin-left: 60px;">ЛОГО</span>
+        <div class="text">
+            <span style="color: #219653;">О сервисе</span>
+            <span>Как мы определяем актуальность</span>
+            <span>Источники данных</span>
+            <span style="color: #219653;">Для организаций</span>
+        </div>
+    </footer>
+</body>
 </html>
