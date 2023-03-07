@@ -221,3 +221,9 @@
     display:flex;
     gap:45px;
 }
+
+input {
+    background-image: url(https://img.icons8.com/ios/30/null/search--v1.png);   
+    background-repeat: no-repeat;
+    background-position: 12px; 
+}
