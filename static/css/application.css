@@ -4,6 +4,10 @@ body {
     max-width: 1200px;
 }
 
+.data {
+    margin-left: 180px;
+}
+
 .navbar__logo {
     font-style: normal;
     font-weight: 500;
@@ -69,7 +73,7 @@ h1 {
     margin-left: 700px;
 }
 
-.btn {
+.btn-send-ap {
     color: white;
     width: 425px;
     height: auto;
@@ -82,10 +86,10 @@ h1 {
     border-color: transparent;
     justify-content: center;
     background-color: #333333FF;
-    margin-bottom: 50px;
+    margin-top: 95px;
 }
 
-.data-input {
+.job-types {
     color: #828282FF;
     font-size: 14px;
     align-self: auto;
@@ -99,16 +103,12 @@ h1 {
 .form-view {
     margin-left: 250px;
     padding-top: 100px;
+    margin-bottom: 100px;
 }
 
-.aaaa {
+.data-input {
     width: 400px;
     height: 50px;
-    margin-bottom: 10px;
-}
-
-.data-title {
-    margin-top: 30px;
     margin-bottom: 10px;
 }
 
@@ -119,15 +119,49 @@ h1 {
 
 .textarea-input {
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .textarea-input-text {
-    width: 400px;
+    width: 500px;
     height: 100px;
+    padding-top: 20px;
+}
+
+.common-row input[type="file"] {
+    display: none;
+}
+
+.common-row input[type="file"] + label {
+    display: block;
+    padding: 5px 10px;
+    width: 300px;
+    height: 45px;
+    margin-top: 13px;
+    font-size: 25px;
+
+}
+
+.dimensions {
+    width: 150px;
+    height: 50px;
     margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.delimiter {
+    padding-left: 125px;
 }
 
 
+h3 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #000000;
 
-
-
+}
+.house {
+    width: 144px;
+    height: 50px;
+}

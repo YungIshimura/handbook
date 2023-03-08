@@ -33,65 +33,108 @@
 <section class="title-h1">
     <h1>Создайте заявку</h1>
 </section>
-<section>
+<section class="data">
     <form class="form-view">
         <div class="row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card  border border-white">
+                <div class="card border border-white">
                     <div class="card-body">
                         <div class="data-input-number">
-                            <input type="text" class="aaaa" name="FirstName" id="fname"
+                            <input type="text" class="data-input border" name="FirstName" id="fname"
                                    placeholder="Кадастровый номер"/><br/>
                         </div>
                         <div>
-                            <h3 class="data-title">Адрес объекта</h3>
+                            <h3>Адрес объекта</h3>
                         </div>
-                        <div class="data-input">
-                            <select name="user_profile_color_1" class="aaaa">
+                        <div>
+                            <select name="user_profile_color_1" class="data-input">
                                 <option selected>Регион</option>
                                 <option value="1">Строительство</option>
                                 <option value="2">Лицензирование</option>
                             </select><br>
-                            <select name="user_profile_color_1" class="aaaa">
+                            <select name="user_profile_color_1" class="data-input">
                                 <option selected>Область/район/округ</option>
                                 <option value="1">Строительство</option>
                                 <option value="2">Лицензирование</option>
                             </select><br>
-                            <input type="text" class="aaaa" name="FirstName" id="fname" placeholder="Населенный пункт"/><br/>
-                            <input type="text" class="aaaa" name="FirstName" id="fname" placeholder="Улица"/><br/>
+                            <input type="text" class="data-input border" name="FirstName" id="fname"
+                                   placeholder="Населенный пункт"/><br/>
+                            <input type="text" class="data-input border" name="FirstName" id="fname"
+                                   placeholder="Улица"/><br/>
 
 
-                            <div class="row">
-                                <div class="col-sm-3 mb-sm-2">
-                                    <div class="card border border-white">
-                                        <input type="text" class="card-body" name="FirstName" placeholder="Дом"/><br/>
-                                    </div>
+                            <div class="input-group">
+                                    <input type="text" class="border mr-2 house" name="FirstName"
+                                           placeholder="Дом"/>
+                                    <input type="text" class="border house" name="FirstName"
+                                           placeholder="Корпус/строение"/>
                                 </div>
-                                <div class="col-sm-2">
-                                    <div class="card border border-white">
-                                        <input type="text" class="card-body" name="FirstName"
-                                               placeholder="Корпус/строение"/><br/>
-                                    </div>
-                                </div>
+
+                            <div>
+                                <button type="submit" class="btn-send-ap">ОТПРАВИТЬ ЗАЯВКУ</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 delimiter">
+                <h3>Площадь участка</h3>
+
                 <div class="card border border-white">
                     <div class="card-body">
-                        <h3 class="data-title">Площадь участка</h3>
-                        <div class="data-input">
-                            <input class="aaaa" type="text" name="FirstName" id="fname"
-                                   placeholder="Площадь участка"/><br/>
-                            <h2 class="data-title">Габариты здания</h2>
 
+                        <div class="input-group border mb-3">
+                            <input type="text" class="form-control data-inputdimensions"
+                                   aria-label="Text input with dropdown button" placeholder="Ширина">
+                            <button class="btn btn-outline-secondary dropdown-toggle border rounded-0" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">м<sup>2</sup>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Га</a></li>
+                            </ul>
+                        </div>
+                        <div class="job-types">
+                            <h3>Габариты здания</h3>
 
-                            <input type="text" name="FirstName" id="fname" placeholder="Длина"/><br/>
-                            <input type="text" name="FirstName" id="fname" placeholder="Высота"/><br/>
-                            <input type="text" name="FirstName" id="fname" placeholder="Ширина"/><br/>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+
+                                <div class="input-group border mb-3 dimensions">
+                                    <input type="text" class="form-control"
+                                           aria-label="Text input with dropdown button" placeholder="Длина">
+                                    <button class="btn btn-outline-secondary dropdown-toggle border rounded-0"
+                                            type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">м
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#">км</a></li>
+                                    </ul>
+                                </div>
+                                <div class="input-group border mb-3 dimensions">
+                                    <input type="text" class="form-control"
+                                           aria-label="Text input with dropdown button" placeholder="Высота">
+                                    <button class="btn btn-outline-secondary dropdown-toggle border rounded-0"
+                                            type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">м
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#">этаж</a></li>
+
+                                    </ul>
+                                </div>
+                                <div class="input-group border mb-3 dimensions">
+                                    <input type="text" class="form-control"
+                                           aria-label="Text input with dropdown button" placeholder="Ширина">
+                                    <button class="btn btn-outline-secondary dropdown-toggle border rounded-0"
+                                            type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">м
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#">км</a></li>
+                                        <li><a class="dropdown-item" href="#"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
                             <h3 class="data-title">Виды работ</h3>
                             <div class="form-check form-check-inline">
@@ -121,18 +164,27 @@
                                 <label class="form-check-label" for="inlineCheckbox2">Виды работ</label>
                             </div>
                             <div class="textarea-input">
-                                <textarea class="textarea-input-text"
+                                <textarea class="textarea-input-text border"
                                           placeholder="Опишите задачу или оставьте комментарий"></textarea>
+
                             </div>
-                            <input type="file" name="ktonanovenkogoru" placeholder="Прикрепить файлы">
+                            <div class="common-row border">
+                                <input type="file" id="file">
+                                <label class="common-label" for="file">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                         class="bi bi-arrow-down-short" viewBox="0 0 16 12">
+                                        <path fill-rule="evenodd"
+                                              d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5
+                                              0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                                    </svg>
+                                    Прикрепить файлы
+                                </label>
+                            </div>
 
                         </div>
-
                     </div>
                 </div>
-            </div>
-            <button type="submit" class="btn">ОТПРАВИТЬ ЗАЯВКУ</button>
-        </div>
+
     </form>
 
 
