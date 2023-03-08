@@ -74,25 +74,17 @@
     margin: 25px 1087px 160px 53px;
     align-items: baseline
 }
+.region-area__selected-region {
+    margin-top: 40px;
+}
 
-.select-region__text--button {
-    background-color: black;
-    border-radius: 60px ;
+.another-region {
+    word-spacing: -1.5px;
+    text-decoration: none;
     color: #219653;
-    font-family: 'Inter';
-    font-style: normal;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
 }
-
-.select-region__text--button:active {
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
 .search-area {
-    margin: -143px 93px 933px 49px;
+    margin: 34px 93px 933px -7px;
     display: flex;
 }
 .search {
@@ -113,10 +105,11 @@
     right: 1px;
     height: 78px;
     border: 1px solid;
+    text-transform: uppercase;
     background-color: black;
 }
+
 .search-button--text {
-    text-transform: uppercase;
     color: #219653;
     font-family: 'Inter';
     font-style: normal;
@@ -126,112 +119,82 @@
     font-size: 18px;
     line-height: 22px;
 }
-.cards {
-    width: 1320px;
-    height: 415px;
+
+.request {
+    position: absolute;
+    width: 1050px;
+    height: 130px;
+    border: 1px solid black;
+    margin: 525px 420px;
+}
+
+
+.request__data {
     display: flex;
-    margin-left: 300px;
-    margin-top: 500px;
-    gap: 30px;
 }
-
-.card__about {
-    border: 1px solid black;
-    width: 645px;
-    height: 439px;
-}
-
-.card__confirm-data {
-    border: 1px solid black;
-    width: 645px;
-    height: 439px;
-}
-
-.card__about--title {
-    width: 246px;
-    height: 48px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 25px;
-    line-height: 48px;
-    margin: 39px 36px;
-    color: #333333;
-}
-
-.card__about--text {
-    width: 586px;
-    height: 299px;
-    font-family: 'Inter', sans-serif;
+.request__data--text {
+    width: 668px;
+    height: 81px;
+    justify-content: center;
+    justify-content: center;
+    padding: 24px 26px;
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 23px;
-    margin: 31px 24px 39px 35px;
+    font-size: 18px;
+    line-height: 27px;
 }
 
-.card__confirm-data--title {
-    width: 586px;
-    height: 48px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 25px;
-    line-height: 48px;
-    margin: 39px 24px;
-    color: #333333;
-}
-
-.card__confirm-data--text {
-    width: 586px;
-    height: 299px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 23px;
-    margin: 31px 24px 39px 35px;
-}
-
-.card__confirm-button {
+.request__data--button {
     width: 240px;
-    height: 56px;
-    cursor: pointer;
-    border: 1px solid;
-    background-color: black;
+    height: 65px;
+    margin: 32px 60px;
+    background-color: transparent;
     color: #219653;
-    margin-top: 25px;
+    cursor: pointer;
 }
 
-.card__confirm-button:active {
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+.companys {
+    position: absolute;
+    margin: 800px 430px;
+}
+.companys--title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    color: #4F4F4F;
+    margin-left: 15px;
+}
+.company-container {
+    position: relative;
+    width: 480px;
+    height: 150px;
+    border: 1px solid #d2d1d1;
+}
+.company{
+    display: flex;
+    justify-content: space-around;
+}
+
+.company__data-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 40px;
+    color: #828282;
 }
 
 .footer {
-    margin-left: 250px;
     display: flex;
+    position: absolute;
+    margin-top: 1400px;
     width: 1440px;
     height: 173px;
-    position: absolute;
+    margin-left: 250px;
     background-color: rgba(242, 242, 242, 1);
-    margin-top: 100px;
     justify-content: space-around;
     align-items: center;
-}
-
-.text {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 19px;
-    line-height: 48px;
-    display:flex;
-    gap:45px;
-}
-
-input {
-    background-image: url(https://img.icons8.com/ios/30/null/search--v1.png);   
-    background-repeat: no-repeat;
-    background-position: 12px; 
 }
