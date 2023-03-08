@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основные данные</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href={% static 'css/profile.css'%}>
+</head>
+<body>
+<section>
+    <header>
+        <div class="navbar">
+            <div class="navbar__container">
+                <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
+                    <span>ЛОГО</span>
+                </a>
+                <div class="login-container">
+                    <a href="#"><span class="login">Вход для организаций</span></a>
+                </div>
+                <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon custom-toggler"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+</section>
+<section class="data">
+    <div class="btn-group head-menu" role="group">
+    <span><span class="mr-3"><a href='#' class="text-menu"><span>Основные данные</span></a></span>
+    <span><span class="mr-3"><a href='#' class="text-menu"><span>Редактировать данные организации</span></a></span>
+    <span><span class="mr-3"><a href='#' class="text-menu"><span>Настройки профиля</span></a></span>
+    </div>
+</section>
+
+<div class="row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="cards border border-white">
+            <div class="card-body">
+                <h3>Тариф</h3>
+                <p class="card-text3">Действует до: <span class="date">01.09.2022</span></p>
+                <div>
+                    <button type="submit" class="btn-send-ap">Продлить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="cards border border-white">
+            <div class="card-body column">
+                <h3>Рейтинг <span class="rate">4.5</span></h3>
+                <p class="card-text3">До понижения рейтинга осталось: <span class="date ml-4">23 дня</span></p>
+                <p class="card-text4">Как увеличить рейтинг?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-group mb-5" role="group" aria-label="Basic example">
+    <div class="card bb" style="width: 18rem;">
+        <div class="card-body">
+            <div class="card-header card-title">
+                <h3>Выписка СРО</h3>
+            </div>
+            <p class="card-text">Загружена: <span class="date">22.08.2022</span></p>
+            <p class="card-text2">Действует до: <span class="date">22.08.2022</span></p>
+            <div class="common-row">
+                <input type="file" id="file">
+                <label class="common-label" for="file">
+                    <span class="fg">  <img src="/static/assets/profile/vector9512-9f0s.svg"></span>
+                </label>
+            </div>
+            <p class="downloads">Загрузить</p>
+            <div>
+                <p class="ratings">+0,5 к рейтингу</p>
+            </div>
+        </div>
+    </div>
+    <div class="card bb border" style="width: 18rem;">
+        <div class="card-body">
+            <div class="card-header card-title">
+
+                <h3>Уведомления НРС</h3>
+            </div>
+            <p class="card-text">Загружена: <span class="date">22.08.2022</span></p>
+            <p class="card-text2">Действует до: <span class="date">22.08.2022</span></p>
+            <div class="common-row">
+                <input type="file" id="file">
+                <label class="common-label" for="file">
+                    <img src="/static/assets/profile/vector9512-9f0s.svg">
+
+                </label>
+            </div>
+            <p class="downloads">Загрузить</p>
+            <div>
+                <p class="ratings">+0,5 к рейтингу за добавление 2-х уведомлений НРС</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="card border" style="width: 18rem;">
+        <div class="card-body">
+            <div class="card-header card-title">
+                <h3>ИНН</h3>
+            </div>
+            <p class="card-text">Загружена: <span class="date">22.08.2022</span></p>
+            <p class="card-text2">Действует до: <span class="date">22.08.2022</span></p>
+            <div class="common-row">
+                <input type="file" id="file">
+                <label class="common-label" for="file">
+                    <img src="/static/assets/profile/vector9512-9f0s.svg">
+                </label>
+            </div>
+            <p class="downloads">Загрузить</p>
+
+            <div>
+                <p class="ratings">+1 к рейтингу</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
