@@ -1,442 +1,142 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
-    <title>Заявка</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="UTF-8">
-    <meta property="twitter:card" content="summary_large_image"/>
-    <style data-tag="reset-style-sheet">
-        html {
-            line-height: 1.15;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        * {
-            box-sizing: border-box;
-            border-width: 0;
-            border-style: solid;
-        }
-
-        p, li, ul, pre, div, h1, h2, h3, h4, h5, h6, figure, blockquote, figcaption {
-            margin: 0;
-            padding: 0;
-        }
-
-        button {
-            background-color: transparent;
-        }
-
-        button, input, optgroup, select, textarea {
-            font-family: inherit;
-            font-size: 100%;
-            line-height: 1.15;
-            margin: 0;
-        }
-
-        button, select {
-            text-transform: none;
-        }
-
-        button, [type="button"], [type="reset"], [type="submit"] {
-            -webkit-appearance: button;
-        }
-
-        button::-moz-focus-inner, [type="button"]::-moz-focus-inner,
-        [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
-            border-style: none;
-            padding: 0;
-        }
-
-        {#button:-moz-focus, [type="button"]:-moz-focus, [type="reset"]:-moz-focus, [type="submit"]:-moz-focus {#}
-        {#    outline: 1px dotted ButtonText;#}
-
-        a {
-            color: inherit;
-            text-decoration: none;
-
-        }
-
-        input {
-            padding: 2px 4px;
-        }
-
-        img {
-            display: block;
-        }
-
-        html {
-            scroll-behavior: smooth
-        }
-    </style>
-    <style data-tag="default-style-sheet">
-        html {
-            font-family: 'Inter';
-            font-size: 16px;
-        }
-
-        body {
-            font-weight: 400;
-            font-style: normal;
-            text-decoration: none;
-            text-transform: none;
-            letter-spacing: normal;
-            line-height: 1.15;
-            color: var(--dl-color-gray-black);
-            background-color: var(--dl-color-gray-white);
-
-        }
-    </style>
-    <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-            data-tag="font"
-    />
-<link rel="stylesheet" href='/static/css/application.css'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href='/static/css/application.css'>
 
 </head>
 <body>
-<div>
-    <div>
-        <div class="frame-frame">
-            <div class="frame-frame46">
-                <img
-                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/90d3f7c2-ee68-4e21-95f0-03da1de847c9?org_if_sml=11024"
-                        alt="Rectangle36I120"
-                        class="frame-rectangle36"
-                />
-                <div class="frame-frame6">
-                    <span class="frame-text"><span><a href='#'><span>Вход для организаций</span></a></span></span>
+<section>
+    <header>
+        <div class="navbar">
+            <div class="navbar__container">
+                <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
+                    <span>ЛОГО</span>
+                </a>
+                <div class="login-container">
+                    <a href="#"><span class="login">Вход для организаций</span></a>
                 </div>
-                <span class="frame-text02"><span>ЛОГО</span></span>
-                <div class="frame-frame55">
-                    <img
-                            src={% static 'assets/application/line12i120-3jych.svg' %}
-                                    alt="Line12I120"
-                            class="frame-line12"
-                    />
-                    <img
-                            src={% static 'assets/application/line13i120-l5en.svg' %}
-                                    alt="Line13I120"
-                            class="frame-line13"
-                    />
-                    <img
-                            src={% static 'assets/application/line14i120-zy27.svg' %}
-                                    alt="Line14I120"
-                            class="frame-line14"
-                    />
-                </div>
-            </div>
-            <span class="frame-text04"><span>Создайте заявку</span></span>
-            <img
-                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/1c475cb0-5b06-47ad-8e68-048d7c453e5f?org_if_sml=1123"
-                    alt="Rectangle91201"
-                    class="frame-rectangle9"
-            />
-            <span class="frame-text06"><span>Кадастровый номер</span></span>
-            <span class="frame-text08"><span>Адрес объекта</span></span>
-            <span class="frame-text10"><span>Габариты здания</span></span>
-            <span class="frame-text12"><span>Площадь участка</span></span>
-            <div class="frame-frame47">
-                <div class="frame-group26">
-                    <span class="frame-text14"><span>26285933658585895</span></span>
-                    <div class="frame-group25">
-                        <img
-                                src={% static 'assets/application/line81201-seo5.svg' %}
-                                        alt="Line81201"
-                                class="frame-line8"
-                        />
-                        <img
-                                src={% static 'assets/application/line91201-bhwf.svg' %}
-                                        alt="Line91201"
-                                class="frame-line9"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div class="frame-group251">
-                <img
-                        src={% static 'assets/application/line81201-tqmn.svg' %}
-                                alt="Line81201"
-                        class="frame-line81"
-                />
-                <img
-                        src={% static 'assets/application/line91201-5jb8.svg' %}
-                                alt="Line91201"
-                        class="frame-line91"
-                />
-            </div>
-            <div class="frame-group102">
-                <img
-                        src={% static 'assets/application/line81442-7kq.svg' %}
-                                alt="Line81442"
-                        class="frame-line82"
-                />
-                <img
-                        src={% static 'assets/application/line91442-4iyr.svg' %}
-                                alt="Line91442"
-                        class="frame-line92"
-                />
-            </div>
-            <div class="frame-group61">
-                <span class="frame-text16"><span>Регион</span></span>
-                <img
-                        src={% static 'assets/application/polygon11201-3vi0h.svg' %}
-                                alt="Polygon11201"
-                        class="frame-polygon1"
-                />
-            </div>
-            <img
-                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/c52dcb31-8b3b-413c-b6f3-d3d76c197df9?org_if_sml=1123"
-                    alt="Rectangle91201"
-                    class="frame-rectangle91"
-            />
-            <span class="frame-text18"><span>Область/район/округ</span></span>
-            <img
-                    src={% static 'assets/application/polygon11201-99ga.svg' %}
-                            alt="Polygon11201"
-                    class="frame-polygon11"
-            />
-            <div class="frame-group69">
-                <img
-                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/dc4b9770-fa87-4b6e-ba7d-8cc65cc7fadf?org_if_sml=1123"
-                        alt="Rectangle91201"
-                        class="frame-rectangle92"
-                />
-                <img
-                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/62d1cd81-3eaf-42f1-bf7f-b7974a3677b7?org_if_sml=1123"
-                        alt="Rectangle121201"
-                        class="frame-rectangle12"
-                />
-                <img
-                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/3c9fad50-b3b6-4236-898d-826dfa8b97a9?org_if_sml=1123"
-                        alt="Rectangle101201"
-                        class="frame-rectangle10"
-                />
-                <img
-                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/756ef6af-eb2c-4991-818d-00851a80be61?org_if_sml=1123"
-                        alt="Rectangle111201"
-                        class="frame-rectangle11"
-                />
-                <span class="frame-text20"><span>Улица</span></span>
-                <span class="frame-text22"><span>Населенный пункт</span></span>
-                <span class="frame-text24"><span>Дом</span></span>
-                <span class="frame-text26"><span>Корпус/строение</span></span>
-            </div>
-            <img
-                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/1352f762-a6a7-4867-8f4b-63c837f865c1?org_if_sml=1123"
-                    alt="Rectangle121201"
-                    class="frame-rectangle121"
-            />
-            <span class="frame-text28"><span>Площадь участка</span></span>
-            <div class="frame-group75">
-                <img
-                        src={% static 'assets/application/polygon21211-gsfn.svg' %}
-                                alt="Polygon21211"
-                        class="frame-polygon2"
-                />
-                <span class="frame-text30"><span>м²</span></span>
-            </div>
-            <div class="frame-frame5">
-                <span class="frame-text32"><a href='#'><span>ОТПРАВИТЬ ЗАЯВКУ</span></a></span>
-            </div>
-            <img
-                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/ef206cff-03b4-4db2-a1bb-2984d7c1bd11?org_if_sml=1171"
-                    alt="Rectangle431211"
-                    class="frame-rectangle43"
-            />
-            <span class="frame-text34"><span>Га</span></span>
-            <div class="frame-group104">
-                <div class="frame-group103">
-                    <img
-                            src={% static 'assets/application/line81442-sz4.svg' %}
-                                    alt="Line81442"
-                            class="frame-line83"
-                    />
-                    <img
-                            src={% static 'assets/application/line91442-qaqh.svg' %}
-                                    alt="Line91442"
-                            class="frame-line93"
-                    />
-                </div>
-                <div class="frame-group99">
-                    <div class="frame-group85">
-                        <img
-                                src={% static 'assets/application/polygon21211-zl6a.svg' %}
-                                        alt="Polygon21211"
-                                class="frame-polygon21"
-                        />
-                        <span class="frame-text36">м</span>
-                    </div>
-                    <span class="frame-text37"><span>Длина</span></span>
-                    <div class="frame-group81"></div>
-                    <img
-                            src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/f11f0dec-2e10-432c-a61c-61edb93de9e9?org_if_sml=1203"
-                            alt="Rectangle461211"
-                            class="frame-rectangle46"
-                    />
-                    <span class="frame-text39"><span>Км</span></span>
-                </div>
-                <div class="frame-group100">
-                    <div class="frame-group851">
-                        <img
-                                src={% static 'assets/application/polygon21442-dn2.svg' %}
-                                        alt="Polygon21442"
-                                class="frame-polygon22"
-                        />
-                        <span class="frame-text41">м</span>
-                    </div>
-                    <span class="frame-text42"><span>Высота</span></span>
-                    <div class="frame-group811"></div>
-                    <img
-                            src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/e233ff3c-c144-485e-a371-37216d68eb77?org_if_sml=1203"
-                            alt="Rectangle461442"
-                            class="frame-rectangle461"
-                    />
-                    <span class="frame-text44"><span>Этаж</span></span>
-                </div>
-                <div class="frame-group101">
-                    <div class="frame-group852">
-                        <img
-                                src={% static 'assets/application/polygon21442-9x8e.svg' %}
-                                        alt="Polygon21442"
-                                class="frame-polygon23"
-                        />
-                        <span class="frame-text46">м</span>
-                    </div>
-                    <span class="frame-text47"><span>Ширина</span></span>
-                    <div class="frame-group812"></div>
-                    <img
-                            src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/77680405-2dec-4ed7-bd3c-c2767f83902e?org_if_sml=1203"
-                            alt="Rectangle461442"
-                            class="frame-rectangle462"
-                    />
-                    <span class="frame-text49"><span>км</span></span>
-                </div>
-            </div>
-            <div class="frame-group93">
-                <div class="frame-group88">
-                    <div class="frame-group74">
-                        <span class="frame-text51"><span>Виды работ</span></span>
-                        <div class="frame-frame72">
-                            <div class="frame-frame721">
-                                <img
-                                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/51e97f17-59c2-48e3-a73f-57e65fc011d6?org_if_sml=1123"
-                                        alt="Rectangle421201"
-                                        class="frame-rectangle42"
-                                />
-                                <span class="frame-text53"><span>Вид работы</span></span>
-                            </div>
-                            <div class="frame-frame73">
-                                <img
-                                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/4a888ea8-a4d4-4e9b-9799-1ca346778d0d?org_if_sml=1123"
-                                        alt="Rectangle421201"
-                                        class="frame-rectangle421"
-                                />
-                                <span class="frame-text55"><span>Вид работы</span></span>
-                            </div>
-                            <div class="frame-frame74">
-                                <img
-                                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/4c1aa354-048d-4ad3-aa8f-2c04cf5bac85?org_if_sml=1123"
-                                        alt="Rectangle421201"
-                                        class="frame-rectangle422"
-                                />
-                                <span class="frame-text57"><span>Вид работы</span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-frame75">
-                        <div class="frame-group72">
-                            <img
-                                    src={% static 'assets/application/vector21201-jx0h.svg' %}
-                                            alt="Vector21201"
-                                    class="frame-vector2"
-                            />
-                        </div>
-                        <span class="frame-text59"><span>Вид работы</span></span>
-                    </div>
-                    <div class="frame-frame76">
-                        <img
-                                src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/8272b78c-8b61-42f0-86d1-3ee10b5d3edf?org_if_sml=1123"
-                                alt="Rectangle421201"
-                                class="frame-rectangle423"
-                        />
-                        <span class="frame-text61"><span>Вид работы</span></span>
-                    </div>
-                    <div class="frame-frame77">
-                        <img
-                                src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/9c6d60b2-4c23-4128-aea9-7d67713a2853?org_if_sml=1123"
-                                alt="Rectangle421201"
-                                class="frame-rectangle424"
-                        />
-                        <span class="frame-text63"><span>Вид работы</span></span>
-                    </div>
-                </div>
-                <span class="frame-text65">
-          <span>Опишите задачу или оставьте комментарий</span>
-        </span>
-                <img
-                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/2f395338-d1ee-4841-a289-9724f093b4d2?org_if_sml=1123"
-                        alt="Rectangle411201"
-                        class="frame-rectangle41"
-                />
-                <div class="frame-frame61">
-                    <div class="frame-group73">
-                        <img
-                                src={% static 'assets/application/fluentarrowupload16regular1201-0ufg.svg' %}
-                                        alt="fluentarrowupload16regular1201"
-                                class="frame-fluentarrowupload16regular"
-                        />
-                        <span class="frame-text67"><span>Прикрепите файлы</span></span>
-                    </div>
-                </div>
-                <div class="frame-group63">
-                    <span class="frame-text69"><span>ТЗ № 1 от 05.....</span></span>
-                    <img
-                            src={% static 'assets/application/vector1201-dxpa.svg' %}
-                                    alt="Vector1201"
-                            class="frame-vector"
-                    />
-                    <div class="frame-group62">
-                        <img
-                                src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/80240617-d842-4661-a91c-08b02b370469?org_if_sml=1312"
-                                alt="Ellipse91201"
-                                class="frame-ellipse9"
-                        />
-                        <img
-                                src={% static 'assets/application/vector11201-322.svg' %}
-                                        alt="Vector11201"
-                        />
-                    </div>
-                </div>
-                <div class="frame-group64">
-                    <span class="frame-text71"><span>ТЗ № 1 от 05.....</span></span>
-                    <img
-                            src={% static 'assets/application/vector1201-pq4r.svg' %}
-                                    alt="Vector1201"
-                            class="frame-vector1"
-                    />
-                    <div class="frame-group621">
-                        <img
-                                src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/0dfce534-4899-48fa-989a-d289b1d4c89c?org_if_sml=1312"
-                                alt="Ellipse91201"
-                                class="frame-ellipse91"
-                        />
-                        <img
-                                src={% static 'assets/application/vector11201-pcj9.svg' %}
-                                        alt="Vector11201"
-                                class="frame-vector11"
-                        />
-                    </div>
-                </div>
+                <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon custom-toggler"></span>
+                </button>
             </div>
         </div>
-    </div>
-</div>
+    </header>
+</section>
+<section class="title-h1">
+    <h1>Создайте заявку</h1>
+</section>
+<section>
+    <form class="form-view">
+        <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card  border border-white">
+                    <div class="card-body">
+                        <div class="data-input-number">
+                            <input type="text" class="aaaa" name="FirstName" id="fname"
+                                   placeholder="Кадастровый номер"/><br/>
+                        </div>
+                        <div>
+                            <h3 class="data-title">Адрес объекта</h3>
+                        </div>
+                        <div class="data-input">
+                            <select name="user_profile_color_1" class="aaaa">
+                                <option selected>Регион</option>
+                                <option value="1">Строительство</option>
+                                <option value="2">Лицензирование</option>
+                            </select><br>
+                            <select name="user_profile_color_1" class="aaaa">
+                                <option selected>Область/район/округ</option>
+                                <option value="1">Строительство</option>
+                                <option value="2">Лицензирование</option>
+                            </select><br>
+                            <input type="text" class="aaaa" name="FirstName" id="fname" placeholder="Населенный пункт"/><br/>
+                            <input type="text" class="aaaa" name="FirstName" id="fname" placeholder="Улица"/><br/>
 
+
+                            <div class="row">
+                                <div class="col-sm-3 mb-sm-2">
+                                    <div class="card border border-white">
+                                        <input type="text" class="card-body" name="FirstName" placeholder="Дом"/><br/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="card border border-white">
+                                        <input type="text" class="card-body" name="FirstName"
+                                               placeholder="Корпус/строение"/><br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card border border-white">
+                    <div class="card-body">
+                        <h3 class="data-title">Площадь участка</h3>
+                        <div class="data-input">
+                            <input class="aaaa" type="text" name="FirstName" id="fname"
+                                   placeholder="Площадь участка"/><br/>
+                            <h2 class="data-title">Габариты здания</h2>
+
+
+                            <input type="text" name="FirstName" id="fname" placeholder="Длина"/><br/>
+                            <input type="text" name="FirstName" id="fname" placeholder="Высота"/><br/>
+                            <input type="text" name="FirstName" id="fname" placeholder="Ширина"/><br/>
+
+                            <h3 class="data-title">Виды работ</h3>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Виды работ</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                <label class="form-check-label" for="inlineCheckbox2">Виды работ</label>
+                            </div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Виды работ</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                <label class="form-check-label" for="inlineCheckbox2">Виды работ</label>
+                            </div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Виды работ</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                <label class="form-check-label" for="inlineCheckbox2">Виды работ</label>
+                            </div>
+                            <div class="textarea-input">
+                                <textarea class="textarea-input-text"
+                                          placeholder="Опишите задачу или оставьте комментарий"></textarea>
+                            </div>
+                            <input type="file" name="ktonanovenkogoru" placeholder="Прикрепить файлы">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn">ОТПРАВИТЬ ЗАЯВКУ</button>
+        </div>
+    </form>
+
+
+</section>
 
 </body>
 </html>
