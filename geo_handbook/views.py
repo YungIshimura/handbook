@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from geo_handbook.forms import CompanyUpdateForm, BranchCreateForm, DirectorCreateForm
-from geo_handbook.models import Company, Branches
+from geo_handbook.models import Company, Branches, Employee
 
 
 def view_index(request):
@@ -57,6 +57,7 @@ def view_settings_profile(request):
 
 def company_update(request, pk):
     company = get_object_or_404(Company, pk=pk)
+    employee = Employee.objects.filter(company=company).exclude(branches__isnull=False)
     if request.method == 'POST':
         form = CompanyUpdateForm(request.POST, instance=company)
         if form.is_valid():
@@ -64,7 +65,12 @@ def company_update(request, pk):
             return redirect('geo_handbook:edit_company', pk=company.pk)
     else:
         form = CompanyUpdateForm(instance=company)
-    return render(request, 'company_update.html', {'form': form, 'company': company})
+    context = {
+        'form': form,
+        'company': company,
+        'employee': employee
+    }
+    return render(request, 'company_update.html', context)
 
 
 def update_branch(request, pk):
@@ -129,3 +135,14 @@ def add_branch(request, pk):
     }
 
     return render(request, 'branches/add_branch.html', context)
+
+
+# Удаление сотрудника компании
+def delete_employee(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+
+    if request.method == 'POST':
+        employee.delete()
+        return redirect('geo_handbook:edit_company', pk=employee.company.pk)
+
+    return render(request, 'employee/delete_employee.html', {'employee': employee})

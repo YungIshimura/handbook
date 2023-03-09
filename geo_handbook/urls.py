@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (view_about, view_select, view_selected_region, view_application,
                     view_enter_details_company, view_settings_profile, view_index, view_sign_up_user,
                     view_sign_up_company, view_select_city, view_search, view_card_layer, company_update,
-                    update_branch, delete_branch, add_branch)
+                    update_branch, delete_branch, add_branch, delete_employee)
 
 app_name = 'geo_handbook'
 
@@ -26,4 +26,6 @@ urlpatterns = [
     path('branches/edit/<int:pk>/', update_branch, name='edit_branches'),
     path('branches/delete/<int:pk>/', delete_branch, name='delete_branches'),
     path('company/edit/<int:pk>/add_branch/', add_branch, name='add_branches'),
+
+    path('employee/delete/<int:pk>/', delete_employee, name='delete_employee')
 ]

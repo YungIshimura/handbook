@@ -9,7 +9,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Сохранить</button>
+    <button type="submit">Сохранить</button><hr>
 </form>
 <h4>Филиалы</h4>
 <ul>
@@ -23,6 +23,19 @@
         </li>
     {% endfor %}
 </ul>
-<a href="{% url 'geo_handbook:add_branches' company.pk %}">Добавить</a>
+<a href="{% url 'geo_handbook:add_branches' company.pk %}">Добавить филиал</a><hr>
+<h4>Сотрудники компании</h4>
+<ul>
+    {% for employee in employee %}
+        <li>
+            <div>
+                {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
+                <a href="">Редактировать</a>
+                <a href="{% url 'geo_handbook:delete_employee' employee.pk %}">Удалить</a>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'geo_handbook:add_branches' company.pk %}">Добавить сотрудника</a>
 </body>
 </html>
