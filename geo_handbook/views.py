@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from geo_handbook.forms import CompanyUpdateForm
-from geo_handbook.models import Company
+from geo_handbook.forms import CompanyUpdateForm, BranchesUpdateForm, BranchCreateForm
+from geo_handbook.models import Company, Branches
 
 
 def view_index(request):
@@ -60,9 +60,48 @@ def company_update(request, pk):
     if request.method == 'POST':
         form = CompanyUpdateForm(request.POST, instance=company)
         if form.is_valid():
-            print(form.cleaned_data)
             form.save()
             return redirect('geo_handbook:edit_company', pk=company.pk)
     else:
         form = CompanyUpdateForm(instance=company)
-    return render(request, 'company_update.html', {'form': form})
+    return render(request, 'company_update.html', {'form': form, 'company': company})
+
+
+def update_branch(request, pk):
+    branches = get_object_or_404(Branches, pk=pk)
+    if request.method == 'POST':
+        form = BranchesUpdateForm(request.POST, instance=branches)
+        if form.is_valid():
+            form.save()
+            return redirect('geo_handbook:edit_company', pk=branches.company.pk)
+    else:
+        form = BranchesUpdateForm(instance=branches)
+    return render(request, 'branches/update_branch.html', {'form': form, 'branches': branches})
+
+
+# Удаление филиала и связанного с ним директора
+def delete_branch(request, pk):
+    branch = get_object_or_404(Branches, pk=pk)
+    if request.method == 'POST':
+        # Удалить директоров филиала
+        branch.director.all().delete()
+        # Удалить филиал
+        branch.delete()
+        return redirect('geo_handbook:edit_company', pk=branch.company.pk)
+    context = {'branch': branch}
+    return render(request, 'branches/delete_branch.html', context)
+
+
+# Добавление филиала компании
+def add_branch(request, pk):
+    company = get_object_or_404(Company, pk=pk)
+    if request.method == 'POST':
+        form = BranchCreateForm(request.POST)
+        if form.is_valid():
+            branch = form.save(commit=False)
+            branch.company = company
+            branch.save()
+            return redirect('geo_handbook:edit_company', pk=pk)
+    else:
+        form = BranchCreateForm(initial={'company': pk})
+    return render(request, 'branches/add_branch.html', {'form': form, 'company': company})
