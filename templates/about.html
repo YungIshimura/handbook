@@ -2,202 +2,83 @@
 {% load static %}
 <html lang="en">
 <head>
-    <title>О сервисе</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="UTF-8">
-    <meta property="twitter:card" content="summary_large_image"/>
-
-    <style data-tag="reset-style-sheet">
-        html {
-            line-height: 1.15;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        * {
-            box-sizing: border-box;
-            border-width: 0;
-            border-style: solid;
-        }
-
-        p, li, ul, pre, div, h1, h2, h3, h4, h5, h6, figure, blockquote, figcaption {
-            margin: 0;
-            padding: 0;
-        }
-
-        button {
-            background-color: transparent;
-        }
-
-        button, input, optgroup, select, textarea {
-            font-family: inherit;
-            font-size: 100%;
-            line-height: 1.15;
-            margin: 0;
-        }
-
-        button, select {
-            text-transform: none;
-        }
-
-        button, [type="button"], [type="reset"], [type="submit"] {
-            -webkit-appearance: button;
-        }
-
-        button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
-            border-style: none;
-            padding: 0;
-        }
-
-        button:-moz-focus, [type="button"]:-moz-focus, [type="reset"]:-moz-focus, [type="submit"]:-moz-focus {
-            outline: 1px dotted ButtonText;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
-        input {
-            padding: 2px 4px;
-        }
-
-        img {
-            display: block;
-        }
-
-        html {
-            scroll-behavior: smooth
-        }
-    </style>
-    <style data-tag="default-style-sheet">
-        html {
-            font-family: 'Inter';
-            font-size: 16px;
-        }
-
-        body {
-            font-weight: 400;
-            font-style: normal;
-            text-decoration: none;
-            text-transform: none;
-            letter-spacing: normal;
-            line-height: 1.15;
-            color: var(--dl-color-gray-black);
-            background-color: var(--dl-color-gray-white);
-
-        }
-    </style>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-          data-tag="font"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О сервисе</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href={% static 'css/about.css' %}>
 </head>
 <body>
-<div>
-    <div class="frame-container">
-        <div class="frame-frame">
-            <header>
-                <div class="frame-frame46">
-                    <div class="frame-frame61">
-                        <div class="frame-text41">
-                            <a href="#">Вход для организаций</a>
-                        </div>
+    <section>
+        <header>
+            <div class="navbar">
+                <div class="navbar__container">
+                    <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
+                    <span>ЛОГО</span>
+                    </a>
+                    <div class="login-container">
+                        <a href="#"><span class="login">Вход для организаций</span></a>
                     </div>
-                    <div class="frame-text43">
-                        <span>ЛОГО</span>
-                    </div>
+                    <button class="navbar-toggler toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon custom-toggler"></span>
+                    </button>
                 </div>
-            </header>
-            <main>
-                <div class="frame-group48">
-                    <div class="frame-text45">
-                        <a href="{% url 'geo_handbook:index' %}">На главную</a>
-                    </div>
-                    <img src="public/playground_assets/arrow12972-knnm.svg" alt="Arrow12972" class="frame-arrow12"/>
+            </div>
+        </header>
+    </section> 
+    <section id="cards">
+        <span class="arrow-back"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"> На главную</span>
+        <div class="cards">
+            <div class="card__about">
+                <h3 class="card__about--title">О сервисе</h3>
+                <div class="card__about--text">
+                <span>
+                    Проверьте, какие сведения о вашей компании или ИП доступны вашим партнерам, клиентам и конкурентам.
+                    Редактировать можно следующую информацию об организации:
+                </span>
+                    <br>
+                    Электронная почта
+                    <br>
+                    Телефон
+                    <br>
+                    Сайт
+                    <br>
+                    Документы: устав, прайс-листы, пресс-релизы и другие
+                    <br>
+                    Английское наименование
+                    <br>
+                    Логотип
+                    <br>
+                    После обновления сведений, мы проверим их на достоверность и опубликуем в течение 2 рабочих дней.
+                    <br>
                 </div>
-                <div class="frame-frame6">
-                    <h4 class="frame-text"><span>О сервисе</span></h4>
-                    <div class="frame-text02">
-                        <p>
-                            Проверьте, какие сведения о вашей компании или ИП доступны
-                            вашим партнерам, клиентам и конкурентам.
-                        </p><br>
-                        <p>
-                            Редактировать можно следующую информацию об организации:
-                        </p>
-                        <br/>
-                        <p>Электронная почта</p>
-                        <p>Телефон</p>
-                        <p>Сайт</p>
-                        <p>
-                            Документы: устав, прайс-листы, пресс-релизы и другие
-                        </p>
-                        <p>Английское наименование</p>
-                        <p>Логотип</p>
-                        <p>
-                            После обновления сведений, мы проверим их на достоверность и
-                            опубликуем в течение 2 рабочих дней.
-                        </p>
-                    </div>
-                </div>
-                <div class="frame-frame7">
-                    <div class="frame-frame4">
-                        <div class="frame-frame41">
-                            <h4 class="frame-text25">Подтвердите данные своей организации!</h4>
-                            <div class="frame-text27">
-                                <p>
-                                    Сервис использует авторизацию пользователя по
-                                    квалифицированному сертификату ключа проверки электронной
-                                    подписи, выданному Удостоверяющим центром, аккредитованным в
-                                    сети доверенных удостоверяющих центров Министерства связи и
-                                    массовых коммуникаций России. Редактирование невозможно,
-                                    если технические требования не выполнены или не пройдена
-                                    проверка подлинности электронной подписи.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="frame-frame5">
-                            <div class="frame-text29">
-                                <a href="#">Внести данные</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <footer>
-                <div class="frame-frame47">
-                    <div class="frame-group28">
-                        <span class="frame-text31">ЛОГО</span>
-                    </div>
-                    <div class="frame-frame44">
-                        <div class="frame-frame441">
-                            <div class="frame-text33">
-                                <a href="#">О сервисе</a>
-                            </div>
-                        </div>
-                        <div class="frame-frame442">
-                            <div class="frame-text35">
-                                <a href="#">Как мы определяем актуальность</a>
-                            </div>
-                        </div>
-                        <div class="frame-frame443">
-                            <div class="frame-text37">
-                                <a href="#">Источники данных</a>
-                            </div>
-                        </div>
-                        <div class="frame-frame444">
-                            <div class="frame-text39">
-                                <a href="#">Для организаций</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            </div>
+            <div class="card__confirm-data">
+                <h3 class="card__confirm-data--title">Подтвердите данные своей организации!</h3>
+                <div class="card__confirm-data--text">
+                <span>
+                    Сервис использует авторизацию пользователя по квалифицированному сертификату ключа проверки электронной подписи, 
+                    выданному Удостоверяющим центром, аккредитованным в сети доверенных удостоверяющих центров Министерства связи и массовых 
+                    коммуникаций России. 
+                    Редактирование невозможно, если технические требования не выполнены или не пройдена проверка подлинности 
+                    электронной подписи.
+                </span>
+                <br>
+                <button class="card__confirm-button" type="submit">Внести данные</button>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
+    <section id="footer">
+        <footer class="footer">
+            <span class='navbar-brand d-flex align-items-center navbar__logo' style="margin-left: 60px;">ЛОГО</span>
+            <div class="footer--data">
+                <span style="color: #219653;">О сервисе</span>
+                <span>Как мы определяем актуальность</span>
+                <span>Источники данных</span>
+                <span style="color: #219653;">Для организаций</span>
+            </div>
+        </footer>
+    </section>
 </body>
 </html>

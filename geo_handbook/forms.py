@@ -28,18 +28,6 @@ class CompanyUpdateForm(forms.ModelForm):
         label='Номер дома',
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
-    sro_full_name = forms.CharField(
-        label='Название СРО',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    sro_date = forms.DateField(
-        label='Дата приёма в члены СРО',
-        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
-    )
-    sro_number = forms.CharField(
-        label='Номер решения о приёме в члены СРО',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
     type_works = forms.ModelMultipleChoiceField(
         label='Типы работ',
         queryset=TypeWork.objects.all(),
@@ -49,7 +37,7 @@ class CompanyUpdateForm(forms.ModelForm):
     class Meta:
         model = Company
         fields = ['type_works', 'short_name', 'inn', 'ogrn', 'legal_address', 'phonenumber', 'email', 'sro',
-                  'license_date', 'url',
+                  'sro_date', 'sro_number', 'license_date', 'url',
                   ]
         widgets = {
             'short_name': forms.TextInput(
@@ -63,7 +51,11 @@ class CompanyUpdateForm(forms.ModelForm):
                 attrs={'class': 'form-control', 'placeholder': '+7 955 556 55 88'}),
             'email': forms.EmailInput(
                 attrs={'class': 'form-control', 'placeholder': 'romashka@yandex.ru'}),
-            'sro': forms.HiddenInput(),
+            'sro': forms.Select(attrs={'class': 'form-control'}),
+            'sro_date': forms.DateInput(
+                attrs={'type': 'date', 'class': 'form-control', 'placeholder': 'Дата приёма в члены СРО”'}),
+            'sro_number': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Номер решения о приёме в члены СРО'}),
             'license_date': forms.DateInput(
                 attrs={'type': 'date', 'class': 'form-control', 'placeholder': 'Дата прекращения членства”'}),
             'url': forms.TextInput(
@@ -73,14 +65,10 @@ class CompanyUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         legal_address_instance = self.instance.legal_address
-        sro_instance = self.instance.sro
         self.fields['legal_address_postcode'].initial = legal_address_instance.postcode
         self.fields['legal_address_city'].initial = legal_address_instance.city
         self.fields['legal_address_street'].initial = legal_address_instance.street
         self.fields['legal_address_house_number'].initial = legal_address_instance.house_number
-        self.fields['sro_full_name'].initial = sro_instance.full_name
-        self.fields['sro_date'].initial = sro_instance.date
-        self.fields['sro_number'].initial = sro_instance.number
 
         # Получение выбранных типов работ для компании
         self.fields['type_works'].initial = self.instance.specialization.values_list('type_work__pk', flat=True)
@@ -92,12 +80,6 @@ class CompanyUpdateForm(forms.ModelForm):
         legal_address_instance.street = self.cleaned_data.get('legal_address_street')
         legal_address_instance.house_number = self.cleaned_data.get('legal_address_house_number')
         legal_address_instance.save()
-
-        sro_instance = self.instance.sro
-        sro_instance.full_name = self.cleaned_data.get('sro_full_name')
-        sro_instance.date = self.cleaned_data.get('sro_date')
-        sro_instance.number = self.cleaned_data.get('sro_number')
-        sro_instance.save()
 
         # Сохранение связанных типов работ
         type_works = self.cleaned_data.get('type_works')

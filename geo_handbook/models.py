@@ -22,13 +22,6 @@ class SRO(models.Model):
         'Название СРО',
         max_length=100
     )
-    date = models.DateField(
-        'Дата приёма в члены СРО'
-    )
-    number = models.CharField(
-        'Номер решения о приёме в члены СРО',
-        max_length=25
-    )
 
     def __str__(self):
         return f'{self.full_name}'
@@ -104,6 +97,17 @@ class Company(models.Model):
         related_name='companys',
         on_delete=models.PROTECT,
         verbose_name='СРО'
+    )
+    sro_date = models.DateField(
+        'Дата приёма в члены СРО',
+        blank=True,
+        null=True
+    )
+    sro_number = models.CharField(
+        'Номер решения о приёме в члены СРО',
+        max_length=25,
+        blank=True,
+        null=True
     )
     license = models.BooleanField(
         'Наличие лицензии',
