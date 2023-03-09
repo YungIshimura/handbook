@@ -120,14 +120,15 @@ body {
 .card-title {
     text-align: center;
     background: #F2F2F2FF;
-    height: auto;
     align-self: auto;
     font-style: Regular;
     text-align: center;
     font-family: Inter;
     line-height: 57px;
     font-stretch: normal;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    font-size: 23px;
+    font-weight: 550;
 }
 
 h3 {
