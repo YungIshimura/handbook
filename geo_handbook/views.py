@@ -222,3 +222,21 @@ def update_employee_branch(request, pk):
     }
 
     return render(request, 'employee/update_employee.html', context)
+
+
+# Добавить сотрудника филиала
+def add_employee_branch(request, pk):
+    branch = get_object_or_404(Branches, pk=pk)
+    form = EmployeeCreateForm(request.POST or None)
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+            employee = form.save(commit=False)
+            employee.company = branch.company
+            employee.branches = branch
+            employee.save()
+
+            return redirect('geo_handbook:edit_branches', pk=pk)
+
+    return render(request, 'employee/add_employee.html', {'form': form})
