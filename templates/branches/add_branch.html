@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4>Добавить филиал</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ branch_form.as_p }}
+    {{ director_form.as_p }}
+    <button type="submit">Добавить</button>
+</form>
+</body>
+</html>
