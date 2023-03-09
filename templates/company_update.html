@@ -30,7 +30,7 @@
         <li>
             <div>
                 {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
-                <a href="">Редактировать</a>
+                <a href="{% url 'geo_handbook:update_employee_company' employee.pk %}">Редактировать</a>
                 <a href="{% url 'geo_handbook:delete_employee' employee.pk %}">Удалить</a>
             </div>
         </li>

@@ -73,6 +73,7 @@ def company_update(request, pk):
     return render(request, 'company_update.html', context)
 
 
+# Редактировать филиал
 def update_branch(request, pk):
     branch = get_object_or_404(Branches, pk=pk)
 
@@ -95,7 +96,7 @@ def update_branch(request, pk):
     return render(request, 'branches/update_branch.html', context)
 
 
-# Удаление филиала и связанного с ним директора
+# Удалить филиал и связанного с ним директора
 def delete_branch(request, pk):
     branch = get_object_or_404(Branches, pk=pk)
 
@@ -107,7 +108,7 @@ def delete_branch(request, pk):
     return render(request, 'branches/delete_branch.html', {'branch': branch})
 
 
-# Добавление филиала компании и директора филиала
+# Добавить филиал компании и директора филиала
 def add_branch(request, pk):
     company = get_object_or_404(Company, pk=pk)
 
@@ -157,6 +158,26 @@ def add_employee_company(request, pk):
     }
 
     return render(request, 'employee/add_employee.html', context)
+
+
+# Редактировать сотрудника компании
+def update_employee_company(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+    form = EmployeeCreateForm(request.POST or None, instance=employee)
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('geo_handbook:edit_company', pk=employee.company.pk)
+
+    context = {
+        'form': form,
+        'employee': employee,
+    }
+
+    return render(request, 'employee/update_employee.html', context)
 
 
 # Удалить сотрудника компании
