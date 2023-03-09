@@ -1,269 +1,128 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Внести данные</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta charset="utf-8"/>
-    <meta property="twitter:card" content="summary_large_image"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href={% static 'css/enter_details_company.css'%}>
 
-    <style data-tag="reset-style-sheet">
-        html {
-            line-height: 1.15;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        * {
-            box-sizing: border-box;
-            border-width: 0;
-            border-style: solid;
-        }
-
-        p, li, ul, pre, div, h1, h2, h3, h4, h5, h6, figure, blockquote, figcaption {
-            margin: 0;
-            padding: 0;
-        }
-
-        button {
-            background-color: transparent;
-        }
-
-        button, input, optgroup, select, textarea {
-            font-family: inherit;
-            font-size: 100%;
-            line-height: 1.15;
-            margin: 0;
-        }
-
-        button, select {
-            text-transform: none;
-        }
-
-        button, [type="button"], [type="reset"], [type="submit"] {
-            -webkit-appearance: button;
-        }
-
-        button::-moz-focus-inner, [type="button"]::-moz-focus-inner,
-        [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
-            border-style: none;
-            padding: 0;
-        }
-
-
-        a {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
-        input {
-            padding: 2px 4px;
-        }
-
-        img {
-            display: block;
-        }
-
-        html {
-            scroll-behavior: smooth
-        }
-    </style>
-    <style data-tag="default-style-sheet">
-        html {
-            font-family: 'Inter';
-            font-size: 16px;
-        }
-
-        body {
-            font-weight: 400;
-            font-style: normal;
-            text-decoration: none;
-            text-transform: none;
-            letter-spacing: normal;
-            line-height: 1.15;
-            color: var(--dl-color-gray-black);
-            background-color: var(--dl-color-gray-white);
-
-        }
-    </style>
-    <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-            data-tag="font"
-    />
-    <link rel="stylesheet" href='/static/css/enter_details_company.css'>
 </head>
 <body>
-<div>
-    <div>
-        <div class="frame-frame">
-            <div class="frame-frame29">
-                <span class="frame-text"><a href='basic_data.html'><span>Основные данные</span></a></span>
-                <span class="frame-text02">
-          <a href='settings_profile.html'><span>Редактировать данные организации</span></a>
-        </span>
-                <span class="frame-text04"><a href='settings_profile.html'><span>Настройки профиля</span></a></span>
-            </div>
-
-
-            <select name="user_profile_color_1" class="frame-group16">>
-                <option selected class="frame-text06">Виды работ, выполняемые организацией</option>
-                <option value="1">Строительство</option>
-                <option value="2">Лицензирование</option>
-            </select>
-
-            <select name="user_profile_color_1" class="frame-group45">
-                <option selected class="frame-text06">Регион выполняемых работ</option>
-                <option value="1">Москва</option>
-                <option value="2">МО</option>
-            </select>
-
-            <div class="frame-frame27">
-                <div class="frame-group26">
-                    <span class="frame-text10"><span>Строительство</span></span>
-                    <div class="frame-group25">
-                        <img
-                                alt="Line83817"
-                                src={% static 'assets/enter_details_company/line83817-cgxa.svg' %}
-                                        class="frame-line8"
-                        />
-                        <img
-                                alt="Line93817"
-                                src={% static 'assets/enter_details_company/line93817-c16.svg' %}
-                                        class="frame-line9"
-                        />
-                    </div>
+<section>
+    <header>
+        <div class="navbar">
+            <div class="navbar__container">
+                <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
+                    <span>ЛОГО</span>
+                </a>
+                <div class="login-container">
+                    <a href="#"><span class="login">Вход для организаций</span></a>
                 </div>
-            </div>
-            <div class="frame-frame47">
-                <div class="frame-group261">
-                    <span class="frame-text12"><span>Москва</span></span>
-                    <div class="frame-group252">
-                        <img
-                                alt="Line87749"
-                                src={% static 'assets/enter_details_company/line87749-54a.svg' %}
-                                        class="frame-line81"
-                        />
-                        <img
-                                alt="Line97749"
-                                src={% static 'assets/enter_details_company/line97749-7zen.svg' %}
-                                        class="frame-line91"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div class="frame-frame48">
-                <div class="frame-group262">
-                    <span class="frame-text14"><span>МО</span></span>
-                    <div class="frame-group252">
-                        <img
-                                alt="Line87751"
-                                src={% static 'assets/enter_details_company/line87751-9zu.svg' %}
-                                        class="frame-line82"
-                        />
-                        <img
-                                alt="Line97751"
-                                src={% static 'assets/enter_details_company/line97751-vev.svg' %}
-                                        class="frame-line92"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <form action="#" method="post" class="frame-frame482">
-                <div class="frame-frame481">
-                    <label for="fname" class="frame-text16">Наименование оранизации</label>
-                    <input type="text" name="FirstName" id="fname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">ИНН</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">ОГРН/ОГРНИП</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">ИНН</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">Юридический адрес</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">ФИО и должность руководителя</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">Телефон</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">Email</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">Название и номер СРО</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <label for="lname" class="frame-text16">Дата прекращения членства</label>
-                    <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                    <div>
-                        <h1>Добавить данные</h1><br>
-                    </div>
-
-                </div>
-                <div class="frame-frame551">
-                    <div class="frame-frame541">
-                        <label for="lname" class="frame-text16">Телефоны:</label>
-                        <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
-                        <label for="lname" class="frame-text16">Email:</label>
-                        <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
-                        <label for="lname" class="frame-text16">Сайт:</label>
-                        <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
-                        <label for="lname" class="frame-text16">Адреса филиалов:</label>
-                        <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
-                        <label for="lname" class="frame-text16">ФИО и должность сотрудников</label>
-                        <input type="text" name="LastName" id="lname" class="frame-frame3511"/><br/>
-                    </div>
-                </div>
-                <div class="frame-frame5">
-                    <span class="frame-text75"><a href='#'><span>Сохранить</span></a></span>
-                </div>
-
-            </form>
-
-
-            <div class="frame-frame30">
-                <div class="frame-group263">
-                    <span class="frame-text69"><span>Лицензирование</span></span>
-                    <div class="frame-group253">
-                        <img
-                                alt="Line83817"
-                                src={% static 'assets/enter_details_company/line83817-g7r.svg' %}
-                                        class="frame-line83"
-                        />
-                        <img
-                                alt="Line93817"
-                                src={% static 'assets/enter_details_company/line93817-8o1.svg' %}
-                                        class="frame-line93"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div class="frame-frame46">
-                <img
-                        alt="Rectangle36I574"
-                        src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/20013023-0ed9-4905-ab5f-627a2bad4177/2e1f8746-a58f-45e7-920e-2fe113a9d8b8?org_if_sml=11024"
-                        class="frame-rectangle36"
-                />
-
-
-                <div class="frame-frame6">
-                    <span class="frame-text71"><a href='#'><span>Вход для организаций</span></a></span>
-                </div>
-                <span class="frame-text73"><span>ЛОГО</span></span>
-
-
+                <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon custom-toggler"></span>
+                </button>
             </div>
         </div>
+    </header>
+</section>
+<section class="data">
+    <div class="btn-group head-menu" role="group">
+    <span><span class="mr-3"><a href='#' class="text-menu"><span>Основные данные</span></a></span>
+    <span><span class="mr-3"><a href='#' class="text-menu"><span>Редактировать данные организации</span></a></span>
+    <span><span class="mr-3"><a href='#' class="text-menu"><span>Настройки профиля</span></a></span>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous"></script>
+    <div class="btn-group head-menu mt-5 mb-4" role="group">
+        <select name="user_profile_color_1" class="aa mr-5">
+            <option selected class="select-menu">Виды работ, выполняемые организацией</option>
+            <option value="1">Строительство</option>
+            <option value="2">Лицензирование</option>
+        </select>
 
+        <select name="user_profile_color_1" class="aa ml-3">
+            <option selected class="select-menu">Регион выполняемых работ</option>
+            <option value="1">Москва</option>
+            <option value="2">МО</option>
+        </select>
+    </div>
+    <form class="form-data">
+        <div class="row mt-5">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card border border-white">
+                    <div class="card-body">
+                        <label for="fname" class="frame-text16">Наименование оранизации</label><br/>
+                        <input type="text" class="frame-frame35" name="FirstName" id="fname"/><br/>
+                        <label for="lname" class="frame-text16">ИНН</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">ОГРН/ОГРНИП</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">ИНН</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">Юридический адрес</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">ФИО и должность руководителя</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">Телефон</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">Email</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">Название и номер СРО</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="lname" class="frame-text16">Дата прекращения членства</label><br/>
+                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
 
+                        <div>
+                            <h1>Добавить данные</h1><br>
+                        </div>
+                        <div>
+                            <label for="lname" class="frame-text16">Телефоны:</label>
+                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
+                            <label for="lname" class="frame-text16">Email:</label>
+                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
+                            <label for="lname" class="frame-text16">Сайт:</label>
+                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn-send-ap">Сохранить</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6 delimiter">
+                <div class="card border border-white">
+                    <div class="card-body">
+                        <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label><br/>
+                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                        <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label><br/>
+                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                        <label for="lname" class="frame-text16">Название и номер СРО</label><br/>
+                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                        <label for="lname" class="frame-text16">Дата прекращения членства</label><br/>
+                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+
+                        <div class="address-name">
+                            <label for="lname" class="frame-text16">Адреса филиалов:</label>
+                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
+                            <label for="lname" class="frame-text16">ФИО и должность сотрудников</label>
+                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</section>
 </body>
 </html>
