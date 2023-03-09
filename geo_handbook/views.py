@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from geo_handbook.forms import CompanyUpdateForm, BranchesUpdateForm, BranchCreateForm, DirectorCreateForm
+from geo_handbook.forms import CompanyUpdateForm, BranchCreateForm, DirectorCreateForm
 from geo_handbook.models import Company, Branches
 
 
@@ -68,37 +68,48 @@ def company_update(request, pk):
 
 
 def update_branch(request, pk):
-    branches = get_object_or_404(Branches, pk=pk)
+    branch = get_object_or_404(Branches, pk=pk)
+
+    branch_form = BranchCreateForm(request.POST or None, instance=branch)
+    director_form = DirectorCreateForm(request.POST or None, instance=branch.director.first())
+
     if request.method == 'POST':
-        form = BranchesUpdateForm(request.POST, instance=branches)
-        if form.is_valid():
-            form.save()
-            return redirect('geo_handbook:edit_company', pk=branches.company.pk)
-    else:
-        form = BranchesUpdateForm(instance=branches)
-    return render(request, 'branches/update_branch.html', {'form': form, 'branches': branches})
+
+        if branch_form.is_valid() and director_form.is_valid():
+            branch_form.save()
+            director_form.save()
+            return redirect('geo_handbook:edit_company', pk=branch.company.pk)
+
+    context = {
+        'branch_form': branch_form,
+        'director_form': director_form,
+        'branch': branch,
+    }
+
+    return render(request, 'branches/update_branch.html', context)
 
 
 # Удаление филиала и связанного с ним директора
 def delete_branch(request, pk):
     branch = get_object_or_404(Branches, pk=pk)
+
     if request.method == 'POST':
-        # Удалить директоров филиала
-        branch.director.all().delete()
-        # Удалить филиал
-        branch.delete()
+        branch.director.all().delete()  # Удалить директоров филиала
+        branch.delete()  # Удалить филиал
         return redirect('geo_handbook:edit_company', pk=branch.company.pk)
-    context = {'branch': branch}
-    return render(request, 'branches/delete_branch.html', context)
+
+    return render(request, 'branches/delete_branch.html', {'branch': branch})
 
 
 # Добавление филиала компании и директора филиала
 def add_branch(request, pk):
     company = get_object_or_404(Company, pk=pk)
+
     branch_form = BranchCreateForm(request.POST or None)
     director_form = DirectorCreateForm(request.POST or None)
 
     if request.method == 'POST':
+
         if branch_form.is_valid() and director_form.is_valid():
             branch = branch_form.save(commit=False)
             branch.company = company

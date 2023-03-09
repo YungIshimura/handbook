@@ -8,14 +8,15 @@
 <h4>{{ branches }}</h4>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ branch_form.as_p }}
+    {{ director_form.as_p }}
     <button type="submit">Сохранить</button>
 </form>
-{% if branches.director.first %}
-    <p>{{ branches.director.first.position }}</p>
-    {{ branches.director.first.surname }} {{ branches.director.first.name }} {{ branches.director.first.father_name }}
-{% else %}
-    Директор не назначен
-{% endif %}
+{#{% if branches.director.first %}#}
+{#    <p>{{ branches.director.first.position }}</p>#}
+{#    {{ branches.director.first.surname }} {{ branches.director.first.name }} {{ branches.director.first.father_name }}#}
+{#{% else %}#}
+{#    Директор не назначен#}
+{#{% endif %}#}
 </body>
 </html>

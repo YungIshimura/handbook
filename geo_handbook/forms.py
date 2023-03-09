@@ -108,23 +108,6 @@ class CompanyUpdateForm(forms.ModelForm):
         return super().save(commit=commit)
 
 
-# форма редактирования данных о филиале компании
-class BranchesUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Branches
-        fields = ['postcode', 'city', 'street', 'house_number']
-
-        widgets = {
-            'postcode': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Почтовый индекс'}),
-            'city': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Город'}),
-            'street': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Улица'}),
-            'house_number': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Номер дома'}),
-        }
-
 # Форма добавления филиала компании
 class BranchCreateForm(forms.ModelForm):
     class Meta:
