@@ -13,6 +13,7 @@ def view_sign_up_user(request):
 
 def view_card(request):
     return render(request, 'card.html')
+
 def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
 
