@@ -32,7 +32,7 @@
     <span class="arrow-back"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"><span style="margin-left: 8px;">К списку организаций</span></span>        
     <div class="company__info">
             <div class="company__data1">
-                <span class="company__data--rating">3</span>
+                <span class="company__data--rating">{{rating}}</span>
                 <div class="rating">
                     <span class="rating--title">Рейтинг</span>
                         <div class="stars">
@@ -49,19 +49,22 @@
                     <span class="company__data-bureaucracy-data">НРС</span>
                 </div>
                 <span class="company__address">
-                    <span class='company__data-text'>Юридический адрес: <br></span style='color: #333333;'>11111, г.Москва, Красная Площадь, д.1</span>
+                    <span class='company__data-text'>Юридический адрес: <br></span style='color: #333333;'>{{index}}, г.{{city}}, {{street}}, д.{{house_number}}</span>
                 </span>
                 <button class="button__nopris"><span class="button__nopris--text">ПРОВЕРИТЬ ДАННЫЕ В НОПРИЗ</span></button>
             </div>
 
             <div class="company__about">
                 <div class="company__about--title">
-                    <h4>ООО Ромашка</h4>
-                    <span>Общество с органиченной отвественностью “Ромашка”</span>
+                    <h4>{{short_name}}</h4>
+                    <span>{{full_name}}</span>
                 </div>
                 <hr>
                 <div class="company__about--data">
-                    <span class="company__about--text" style="color: #828282;">Виды работ:<span style="color:black;"> Лицензирование, строительство, монтаж</span></span>
+                    <span class="company__about--text" style="color: #828282;">Виды работ:<span style="color:black;"> 
+                    {% for work_type in work_types %}
+                        {{work_type}}
+                    {% endfor %}</span></span>
                     <span class="company__about--text" style="color: #828282; margin-top: 5px;">Регион работ: <span style="color:black;"> Москва, МО, Центральный округ</span></span>
                 </div>
                 <hr style="margin-top: 21px;">
@@ -72,40 +75,40 @@
                             <div class="legal_data__inn">
                                 <span>ИНН:</span>
                                 <br>
-                                <span>52252852816</span>
+                                <span>{{inn}}</span>
                             </div>
                             
                             <div class="legal_data__ogrn">
                                 <span>ОГРН/ОГРНИП:</span>
                                 <br>
-                                <span>525252528828</span>
+                                <span>{{ogrn}}</span>
                             </div>
                         </div>
 
                         <div class="legal_data--director">
                             <span>ФИО и должность руководителя:</span>
                             <br>
-                            <span style="display:block; margin-top: 10px;">Петр Петрович Иванов, генеральный директор</span>
+                            <span style="display:block; margin-top: 10px; width: 330px;">{% for director in directors %} {{director.surname}} {{director.name}} {{director.father_name}} {{director.position}}{% endfor %}</span>
                         </div>
                     </div>
 
-                    <div class="legal_data__sro">
+                    <div class="legal_data__sro" style='width:375px;'>
                         <div class="legal_data__sro--name">
                             <span>Название СРО</span>
                             <br>
-                            <span>5252822</span>
+                            <span>{{sro.full_name}}</span>
                         </div>
 
                         <div class="legal_data__sro--start-date" style="margin-top: 31px;">
                             <span>Дата и номер решения о приеме в члены СРО:</span>
                             <br>
-                            <span>№ 5252822 от 28.02.2022   </span>
+                            <span>№ {{sro_number}} от {{sro_license_date}}   </span>
                         </div>
 
                         <div class="legal_data__sro--end-date" style="margin-top: 25px;">
                             <span>Дата прекращения членства:</span>
                             <br>
-                            <span>22.08.2022</span>
+                            <span>{{sro_license_date}}</span>
                         </div>
                     </div>
             </div>

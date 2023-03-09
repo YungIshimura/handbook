@@ -20,7 +20,7 @@ class TypeWork(models.Model):
 class SRO(models.Model):
     full_name = models.CharField(
         'Название СРО',
-        max_length=100
+        max_length=500
     )
 
     def __str__(self):
@@ -180,13 +180,13 @@ class Branches(models.Model):
 class CompanySpecialization(models.Model):
     type_work = models.ForeignKey(
         TypeWork,
-        related_name='company',
+        related_name='work_types',
         on_delete=models.PROTECT,
         verbose_name='Тип работ'
     )
     company = models.ForeignKey(
         Company,
-        related_name='specialization',
+        related_name='specializations',
         on_delete=models.CASCADE,
         verbose_name='Компания'
     )
@@ -234,7 +234,7 @@ class Director(models.Model):
     )
 
     def __str__(self):
-        return f'Директор {self.name} {self.surname} {self.father_name} - {self.company}'
+        return f'{self.name} {self.surname} {self.father_name} - {self.company}'
 
     class Meta:
         verbose_name = 'Директор'
