@@ -129,9 +129,18 @@ class BranchesUpdateForm(forms.ModelForm):
 class BranchCreateForm(forms.ModelForm):
     class Meta:
         model = Branches
-        fields = ('postcode', 'city', 'street', 'house_number', 'company')
+        fields = ('postcode', 'city', 'street', 'house_number')
         widgets = {
             field: forms.TextInput(attrs={'class': 'form-control'})
             for field in fields
         }
-        widgets['company'] = forms.HiddenInput()
+
+# Форма добавления директора филиала
+class DirectorCreateForm(forms.ModelForm):
+    class Meta:
+        model = Director
+        fields = ('position', 'surname', 'name', 'father_name')
+        widgets = {
+            field: forms.TextInput(attrs={'class': 'form-control'})
+            for field in fields
+        }

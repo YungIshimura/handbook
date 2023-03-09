@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from geo_handbook.forms import CompanyUpdateForm, BranchesUpdateForm, BranchCreateForm
+from geo_handbook.forms import CompanyUpdateForm, BranchesUpdateForm, BranchCreateForm, DirectorCreateForm
 from geo_handbook.models import Company, Branches
 
 
@@ -92,16 +92,29 @@ def delete_branch(request, pk):
     return render(request, 'branches/delete_branch.html', context)
 
 
-# Добавление филиала компании
+# Добавление филиала компании и директора филиала
 def add_branch(request, pk):
     company = get_object_or_404(Company, pk=pk)
+    branch_form = BranchCreateForm(request.POST or None)
+    director_form = DirectorCreateForm(request.POST or None)
+
     if request.method == 'POST':
-        form = BranchCreateForm(request.POST)
-        if form.is_valid():
-            branch = form.save(commit=False)
+        if branch_form.is_valid() and director_form.is_valid():
+            branch = branch_form.save(commit=False)
             branch.company = company
             branch.save()
+
+            director = director_form.save(commit=False)
+            director.company = company
+            director.branches = branch
+            director.save()
+
             return redirect('geo_handbook:edit_company', pk=pk)
-    else:
-        form = BranchCreateForm(initial={'company': pk})
-    return render(request, 'branches/add_branch.html', {'form': form, 'company': company})
+
+    context = {
+        'branch_form': branch_form,
+        'director_form': director_form,
+        'company': company
+    }
+
+    return render(request, 'branches/add_branch.html', context)

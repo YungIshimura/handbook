@@ -8,7 +8,8 @@
 <h4>Добавить филиал</h4>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ branch_form.as_p }}
+    {{ director_form.as_p }}
     <button type="submit">Добавить</button>
 </form>
 </body>
