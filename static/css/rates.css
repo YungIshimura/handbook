@@ -173,7 +173,7 @@ body {
     margin-left: 390px;
 }
 
-.card-title {
+.card-header {
     text-align: center;
     background: #F2F2F2FF;
     height: auto;
@@ -181,10 +181,11 @@ body {
     font-style: Regular;
     text-align: center;
     font-family: Inter;
-    line-height: 57px;
+    line-height: 60px;
     font-stretch: normal;
-    margin-bottom: 30px;
-    padding-left: 2px;
+    margin-bottom: 20px;
+    font-size: 23px;
+
 }
 
 .card-text {
