@@ -11,22 +11,12 @@ def validate_legal_address_postcode(value):
 # форма редактирования данных о компании
 class CompanyUpdateForm(forms.ModelForm):
     # Добавляем поля для редактирования связанных моделей
+    legal_address_city = forms.CharField(label='Город')
+    legal_address_street = forms.CharField(label='Улица')
+    legal_address_house_number = forms.CharField(label='Номер дома')
     legal_address_postcode = forms.CharField(
         label='Почтовый индекс',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
         validators=[validate_legal_address_postcode]
-    )
-    legal_address_city = forms.CharField(
-        label='Город',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    legal_address_street = forms.CharField(
-        label='Улица',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-    legal_address_house_number = forms.CharField(
-        label='Номер дома',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
     )
     type_works = forms.ModelMultipleChoiceField(
         label='Типы работ',
@@ -64,6 +54,9 @@ class CompanyUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
         legal_address_instance = self.instance.legal_address
         self.fields['legal_address_postcode'].initial = legal_address_instance.postcode
         self.fields['legal_address_city'].initial = legal_address_instance.city
@@ -71,7 +64,7 @@ class CompanyUpdateForm(forms.ModelForm):
         self.fields['legal_address_house_number'].initial = legal_address_instance.house_number
 
         # Получение выбранных типов работ для компании
-        self.fields['type_works'].initial = self.instance.specialization.values_list('type_work__pk', flat=True)
+        self.fields['type_works'].initial = self.instance.specializations.values_list('type_work__pk', flat=True)
 
     def save(self, commit=True):
         legal_address_instance = self.instance.legal_address
@@ -83,7 +76,7 @@ class CompanyUpdateForm(forms.ModelForm):
 
         # Сохранение связанных типов работ
         type_works = self.cleaned_data.get('type_works')
-        self.instance.specialization.all().delete()  # Удаляем старые связи
+        self.instance.specializations.all().delete()  # Удаляем старые связи
         for type_work in type_works:
             CompanySpecialization.objects.create(type_work=type_work, company=self.instance)
 
