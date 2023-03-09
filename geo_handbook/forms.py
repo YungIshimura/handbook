@@ -1,5 +1,5 @@
 from django import forms
-from .models import Company, TypeWork, CompanySpecialization, Branches, Director
+from .models import Company, TypeWork, CompanySpecialization, Branches, Director, Employee
 from django.core.exceptions import ValidationError
 
 
@@ -118,10 +118,22 @@ class BranchCreateForm(forms.ModelForm):
             for field in fields
         }
 
+
 # Форма добавления директора филиала
 class DirectorCreateForm(forms.ModelForm):
     class Meta:
         model = Director
+        fields = ('position', 'surname', 'name', 'father_name')
+        widgets = {
+            field: forms.TextInput(attrs={'class': 'form-control'})
+            for field in fields
+        }
+
+
+# Форма добавления сотрудника
+class EmployeeCreateForm(forms.ModelForm):
+    class Meta:
+        model = Employee
         fields = ('position', 'surname', 'name', 'father_name')
         widgets = {
             field: forms.TextInput(attrs={'class': 'form-control'})

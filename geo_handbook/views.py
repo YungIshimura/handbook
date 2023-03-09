@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from geo_handbook.forms import CompanyUpdateForm, BranchCreateForm, DirectorCreateForm
+from geo_handbook.forms import CompanyUpdateForm, BranchCreateForm, DirectorCreateForm, EmployeeCreateForm
 from geo_handbook.models import Company, Branches, Employee
 
 
@@ -137,7 +137,29 @@ def add_branch(request, pk):
     return render(request, 'branches/add_branch.html', context)
 
 
-# Удаление сотрудника компании
+# Добавить сотрудника компании
+def add_employee_company(request, pk):
+    company = get_object_or_404(Company, pk=pk)
+    form = EmployeeCreateForm(request.POST or None)
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+            employee = form.save(commit=False)
+            employee.company = company
+            employee.save()
+
+            return redirect('geo_handbook:edit_company', pk=pk)
+
+    context = {
+        'form': form,
+        'company': company
+    }
+
+    return render(request, 'employee/add_employee.html', context)
+
+
+# Удалить сотрудника компании
 def delete_employee(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
 
