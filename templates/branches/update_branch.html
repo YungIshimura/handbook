@@ -10,13 +10,20 @@
     {% csrf_token %}
     {{ branch_form.as_p }}
     {{ director_form.as_p }}
-    <button type="submit">Сохранить</button>
+    <button type="submit">Сохранить</button><hr>
 </form>
-{#{% if branches.director.first %}#}
-{#    <p>{{ branches.director.first.position }}</p>#}
-{#    {{ branches.director.first.surname }} {{ branches.director.first.name }} {{ branches.director.first.father_name }}#}
-{#{% else %}#}
-{#    Директор не назначен#}
-{#{% endif %}#}
+<h4>Сотрудники филиала</h4>
+<ul>
+    {% for employee in employees %}
+        <li>
+            <div>
+                {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
+                <a href="{% url 'geo_handbook:update_employee_branch' employee.pk %}">Редактировать</a>
+                <a href="{% url 'geo_handbook:delete_employee_branch' employee.pk %}">Удалить</a>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'geo_handbook:add_employee_company' branch.pk %}">Добавить сотрудника</a>
 </body>
 </html>
