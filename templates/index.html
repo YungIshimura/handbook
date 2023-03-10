@@ -34,9 +34,12 @@
                     <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
                     <br>
                     <div class="region-area__select-region">
-                        <span class="select-region__text">Ваш регион Москва?</span>
-                        <button class="select-region__text--button" style="width: 87px;height: 40px;">Да</button>
-                        <button class="select-region__text--button" style="width: 278px;height: 40px;">Выбрать другой регион</button>
+                        <form method='POST'>
+                            {% csrf_token %}
+                            <span class="select-region__text">Ваш регион Москва?</span>
+                            <button type='submit' name='Moscow' value='Moscow' class="select-region__text--button" style="width: 87px;height: 40px;">Да</button>
+                            <button class="select-region__text--button" style="width: 278px;height: 40px;">Выбрать другой регион</button>
+                        </form>
                     </div>
                     <div class="search-area">
                         <form class="search-form" method='POST'>
