@@ -103,7 +103,7 @@ def company_update(request, pk):
         'company': company,
         'employees': employees
     }
-    return render(request, 'company_update.html', context)
+    return render(request, 'enter_details_company.html', context)
 
 
 # Редактировать филиал

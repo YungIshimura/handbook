@@ -8,7 +8,10 @@
     <title>Внести данные</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href={% static 'css/enter_details_company.css'%}>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href={% static 'css/enter_details_company.css' %}>
 
 </head>
 <body>
@@ -55,22 +58,54 @@
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <div class="card border border-white">
                     <div class="card-body">
-                        <label for="fname" class="frame-text16">Наименование оранизации</label><br/>
-                        <input type="text" class="frame-frame35" name="FirstName" id="fname"/><br/>
-                        <label for="lname" class="frame-text16">ИНН</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">ОГРН/ОГРНИП</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">ИНН</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Юридический адрес</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">ФИО и должность руководителя</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Телефон</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Email</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+
+                        <label for="{{ form.short_name.id_for_label }}" class="frame-text16">Наименование
+                            оранизации</label><br/>
+                        <input type="text" class="frame-frame35" name="organization_short_name"
+                               id="organization_short_name"
+                               value="{{ form.short_name.value }}" placeholder='ООО “Ромашка”'/><br/>
+
+                        <label for="{{ form.inn.id_for_label }}" class="frame-text16">ИНН</label><br/>
+                        <input type="text" class="frame-frame35" name="inn" id="inn"
+                               value="{{ form.inn.value }}" placeholder="525895655"/><br/>
+
+                        <label for="{{ form.ogrn.id_for_label }}" class="frame-text16">ОГРН/ОГРНИП</label><br/>
+                        <input type="text" class="frame-frame35" name="ogrn" id="ogrn" value="{{ form.ogrn.value }}"
+                               placeholder="2624151254854561"/><br/>
+
+                        <label for="{{ form.legal_address_postcode.id_for_label }}" class="frame-text16">Почтовый
+                            индекс</label><br/>
+                        <input type="text" class="frame-frame35" name="legal_address_postcode"
+                               id="legal_address_postcode" value="{{ form.legal_address_postcode.value }}"
+                               placeholder="142600"/><br/>
+
+                        <label for="{{ form.legal_address_city.id_for_label }}" class="frame-text16">Город</label><br/>
+                        <input type="text" class="frame-frame35" name="legal_address_city" id="legal_address_city"
+                               value="{{ form.legal_address_city.value }}"
+                               placeholder="Москва"/><br/>
+
+                        {% if company.director.first %}
+                            <label for="director" class="frame-text16">ФИО и должность руководителя</label><br/>
+                            <input type="text" class="frame-frame35" name="director" id="director"
+                                   value="{{ company.director.first.position }} {{ company.director.first.surname }} {{ company.director.first.name }} {{ company.director.first.father_name }}"
+                                   readonly/><br/>
+                        {% else %}
+                            <label for="director" class="frame-text16">ФИО и должность руководителя</label><br/>
+                            <input type="text" class="frame-frame35" name="director" id="director"
+                                   value="Руководитель не назначен"
+                                   readonly/><br/>
+                        {% endif %}
+
+
+                        <label for="{{ form.phonenumber.id_for_label }}" class="frame-text16">Телефон</label><br/>
+                        <input type="text" class="frame-frame35" name="phonenumber" id="phonenumber"
+                               value="{{ form.phonenumber.value }}"
+                               placeholder="+79555565588"/><br/>
+
+                        <label for="{{ form.email.id_for_label }}" class="frame-text16">Email</label><br/>
+                        <input type="text" class="frame-frame35" name="email" id="email" value="{{ form.email.value }}"
+                               placeholder="romashka@yandex.ru"/><br/>
+
                         <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label><br/>
                         <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
                         <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label><br/>
@@ -103,11 +138,18 @@
                 <div class="card border border-white">
                     <div class="card-body">
                         <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                        <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                        <label for="lname" class="frame-text16">Название и номер СРО</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                        <input type="text" name="LastName" id="lname" class="frame-frame35" placeholder="565265288269"
+                               readonly/><br/>
+
+                        <label for="{{ form.sro_date.id_for_label }}" class="frame-text16">Дата решения о приеме в члены
+                            СРО</label><br/>
+                        <input type="text" class="frame-frame35" name="sro_date" id="sro_date"
+                               value="{{ form.sro_date.value }}"/><br/>
+
+                        <label for="{{ form.sro_number.id_for_label }}" class="frame-text16">Номер решения о приеме в члены
+                            СРО</label><br/>
+                        <input type="text" class="frame-frame35" name="sro_number" id="sro_number" value="{{ form.sro_number.value }}" /><br/>
+
                         <label for="lname" class="frame-text16">Дата прекращения членства</label><br/>
                         <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
 
@@ -124,5 +166,12 @@
 
     </form>
 </section>
+<script>
+  $(function() {
+    $("#sro_date").datepicker({
+      dateFormat: "yy.mm.dd"
+    }).datepicker("setDate", new Date("{{ form.sro_date.value }}"));
+  });
+</script>
 </body>
 </html>
