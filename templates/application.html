@@ -8,7 +8,7 @@
     <title>Заявка</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href={% static 'css/application.css'%}>
+    <link rel="stylesheet" href='/static/css/application.css'>
 
 </head>
 <body>
@@ -37,7 +37,7 @@
 <section class="data">
     <form class="form-view">
         <div class="row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="col-sm-6 mb-sm-0">
                 <div class="card border border-white">
                     <div class="card-body">
                         <div class="data-input-number">
@@ -48,12 +48,12 @@
                             <h3>Адрес объекта</h3>
                         </div>
                         <div>
-                            <select name="user_profile_color_1" class="data-input">
+                            <select name="user_profile_color_1" class="data-input border">
                                 <option selected>Регион</option>
                                 <option value="1">Строительство</option>
                                 <option value="2">Лицензирование</option>
                             </select><br>
-                            <select name="user_profile_color_1" class="data-input">
+                            <select name="user_profile_color_1" class="data-input border">
                                 <option selected>Область/район/округ</option>
                                 <option value="1">Строительство</option>
                                 <option value="2">Лицензирование</option>
@@ -65,14 +65,10 @@
 
 
                             <div class="input-group">
-                                    <input type="text" class="border mr-2 house" name="FirstName"
-                                           placeholder="Дом"/>
-                                    <input type="text" class="border house" name="FirstName"
-                                           placeholder="Корпус/строение"/>
-                                </div>
-
-                            <div>
-                                <button type="submit" class="btn-send-ap">ОТПРАВИТЬ ЗАЯВКУ</button>
+                                <input type="text" class="border mr-2 house" name="FirstName"
+                                       placeholder="Дом"/>
+                                <input type="text" class="border house" name="FirstName"
+                                       placeholder="Корпус/строение"/>
                             </div>
                         </div>
                     </div>
@@ -167,7 +163,6 @@
                             <div class="textarea-input">
                                 <textarea class="textarea-input-text border"
                                           placeholder="Опишите задачу или оставьте комментарий"></textarea>
-
                             </div>
                             <div class="common-row border">
                                 <input type="file" id="file">
@@ -181,13 +176,19 @@
                                     Прикрепить файлы
                                 </label>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
+            </div>
+
+
+            <div>
+                <button type="submit" class="btn-send-ap">ОТПРАВИТЬ ЗАЯВКУ</button>
+            </div>
+
 
     </form>
-
 
 </section>
 
