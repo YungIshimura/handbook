@@ -8,15 +8,15 @@ from django.contrib import messages
 
 def view_index(request):
     search_vector = SearchVector('short_name', 'inn', 'ogrn', 'director')
-    if request.method == 'POST':
+    if request.POST.get('search'):
         company = Company.objects.annotate(search=search_vector).filter(search=request.POST.get('search'))
         if company:
             return HttpResponseRedirect(reverse('geo_handbook:card', args=[company[0].id]))
         else:
             messages.error(request, 'По данному запросу ничего не найдено')
 
-    if request.POST.get('Moscow'):
-        request.session['city'] = 'Москва'
+    if request.POST.get('city'):
+        request.session['city'] = request.POST.get('city')
 
         return HttpResponseRedirect(reverse('geo_handbook:region'))
 
@@ -85,7 +85,8 @@ def view_selected_region(request):
                 'legal_address': company.legal_address
             }
             for company in companys
-        ]
+        ],
+        'region': request.session['city'],
     }
 
     return render(request, 'selected_region.html', context=context)

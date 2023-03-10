@@ -81,12 +81,22 @@
     color: #219653;
     font-family: 'Inter';
     font-style: normal;
-    align-items: center;
-    justify-content: center;
+    cursor: pointer;
+    height: 20px;
+    margin-right: 10px;
+}
+.select-region__text--button1 {
+    /* TODO нейминг блять!  */
+    position: absolute;
+    background-color: black;
+    border-radius: 60px ;
+    text-align: center;
+    width: 280px;
+    height: 40px;
+    padding-top: 8px;
     cursor: pointer;
 }
-
-.select-region__text--button:active {
+.select-region__text--button1:active, .select-region__text--button:active {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }

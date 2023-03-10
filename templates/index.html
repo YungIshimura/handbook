@@ -8,7 +8,7 @@
     <title>Главная</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href={% static 'css/index.css'%}>
-    <script src={% static 'js/index.js' %}>></script>
+    <script src={% static 'js/index.js' %}></script>
 </head>
 <body>
     <section>
@@ -36,9 +36,9 @@
                     <div class="region-area__select-region">
                         <form method='POST'>
                             {% csrf_token %}
-                            <span class="select-region__text">Ваш регион Москва?</span>
-                            <button type='submit' name='Moscow' value='Moscow' class="select-region__text--button" style="width: 87px;height: 40px;">Да</button>
-                            <button class="select-region__text--button" style="width: 278px;height: 40px;">Выбрать другой регион</button>
+                            <span class="select-region__text">Ваш регион <span id='city' is-moscow='true'>Москва</span>?</span>
+                            <button id='region' type='submit' name='city' value='Москва' class="select-region__text--button" style="width: 87px;height: 40px;">Да</button>
+                            <a class="select-region__text--button1" style="color: #219653;" onClick='changeRegion(this)'>Выбрать другой регион</a>
                         </form>
                     </div>
                     <div class="search-area">
