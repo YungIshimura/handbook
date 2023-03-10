@@ -254,3 +254,13 @@ body {
     justify-content: space-around;
     align-items: center;
 }
+
+.text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 48px;
+    display:flex;
+    gap:45px;
+}
