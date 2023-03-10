@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
     <link rel="stylesheet" href={% static 'css/enter_details_company.css' %}>
 
 </head>
@@ -36,10 +37,11 @@
 </section>
 <section class="data">
     <div class="btn-group head-menu" role="group">
-    <span><span class="mr-3"><a href='#' class="text-menu"><span>Основные данные</span></a></span>
-    <span><span class="mr-3"><a href='#' class="text-menu"><span>Редактировать данные организации</span></a></span>
-    <span><span class="mr-3"><a href='#' class="text-menu"><span>Настройки профиля</span></a></span>
+        <span><span class="mr-3"><a href='#' class="text-menu"><span>Основные данные</span></a></span></span>
+        <span><span class="mr-3"><a href='#' class="text-menu"><span>Редактировать данные организации</span></a></span></span>
+        <span><span class="mr-3"><a href='#' class="text-menu"><span>Настройки профиля</span></a></span></span>
     </div>
+
     <div class="btn-group head-menu mt-5 mb-4" role="group">
         <select name="user_profile_color_1" class="aa mr-5">
             <option selected class="select-menu">Виды работ, выполняемые организацией</option>
@@ -53,7 +55,16 @@
             <option value="2">МО</option>
         </select>
     </div>
-    <form class="form-data">
+
+    <form class="form-data" method="post">
+        {% csrf_token %}
+        {% for choice in form.type_works %}
+            <div class="form-check form-check-inline">
+                {{ choice.tag }}
+                <label class="form-check-label" for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+            </div>
+        {% endfor %}
+
         <div class="row mt-5">
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <div class="card border border-white">
@@ -61,28 +72,50 @@
 
                         <label for="{{ form.short_name.id_for_label }}" class="frame-text16">Наименование
                             оранизации</label><br/>
-                        <input type="text" class="frame-frame35" name="organization_short_name"
-                               id="organization_short_name"
+                        <input type="text" class="frame-frame35" name="{{ form.short_name.name }}"
+                               id="short_name"
                                value="{{ form.short_name.value }}" placeholder='ООО “Ромашка”'/><br/>
+                        <div class="error-message">{{ form.short_name.errors }}</div>
 
                         <label for="{{ form.inn.id_for_label }}" class="frame-text16">ИНН</label><br/>
-                        <input type="text" class="frame-frame35" name="inn" id="inn"
+                        <input type="text" class="frame-frame35" name="{{ form.inn.name }}" id="inn"
                                value="{{ form.inn.value }}" placeholder="525895655"/><br/>
+                        <div class="error-message">{{ form.inn.errors }}</div>
 
                         <label for="{{ form.ogrn.id_for_label }}" class="frame-text16">ОГРН/ОГРНИП</label><br/>
-                        <input type="text" class="frame-frame35" name="ogrn" id="ogrn" value="{{ form.ogrn.value }}"
+                        <input type="text" class="frame-frame35" name="{{ form.ogrn.name }}" id="ogrn"
+                               value="{{ form.ogrn.value }}"
                                placeholder="2624151254854561"/><br/>
+                        <div class="error-message">{{ form.ogrn.errors }}</div>
 
                         <label for="{{ form.legal_address_postcode.id_for_label }}" class="frame-text16">Почтовый
                             индекс</label><br/>
-                        <input type="text" class="frame-frame35" name="legal_address_postcode"
+                        <input type="text" class="frame-frame35" name="{{ form.legal_address_postcode.name }}"
                                id="legal_address_postcode" value="{{ form.legal_address_postcode.value }}"
                                placeholder="142600"/><br/>
+                        <div class="error-message">{{ form.legal_address_postcode.errors }}</div>
 
                         <label for="{{ form.legal_address_city.id_for_label }}" class="frame-text16">Город</label><br/>
-                        <input type="text" class="frame-frame35" name="legal_address_city" id="legal_address_city"
+                        <input type="text" class="frame-frame35" name="{{ form.legal_address_city.name }}"
+                               id="legal_address_city"
                                value="{{ form.legal_address_city.value }}"
                                placeholder="Москва"/><br/>
+                        <div class="error-message">{{ form.legal_address_city.errors }}</div>
+
+                        <label for="{{ form.legal_address_street.id_for_label }}"
+                               class="frame-text16">Улица</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ form.legal_address_street.name }}"
+                               id="legal_address_street"
+                               value="{{ form.legal_address_street.value }}"
+                               placeholder="ул. Щербаковская"/><br/>
+                        <div class="error-message">{{ form.legal_address_street.errors }}</div>
+
+                        <label for="{{ form.legal_address_house_number.id_for_label }}" class="frame-text16">Дом</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ form.legal_address_house_number.name }}"
+                               id="legal_address_house_number"
+                               value="{{ form.legal_address_house_number.value }}"
+                               placeholder="15"/><br/>
+                        <div class="error-message">{{ form.legal_address_house_number.errors }}</div>
 
                         {% if company.director.first %}
                             <label for="director" class="frame-text16">ФИО и должность руководителя</label><br/>
@@ -98,34 +131,23 @@
 
 
                         <label for="{{ form.phonenumber.id_for_label }}" class="frame-text16">Телефон</label><br/>
-                        <input type="text" class="frame-frame35" name="phonenumber" id="phonenumber"
+                        <input type="text" class="frame-frame35" name="{{ form.phonenumber.name }}" id="phonenumber"
                                value="{{ form.phonenumber.value }}"
                                placeholder="+79555565588"/><br/>
+                        <div class="error-message">{{ form.phonenumber.errors }}</div>
 
                         <label for="{{ form.email.id_for_label }}" class="frame-text16">Email</label><br/>
-                        <input type="text" class="frame-frame35" name="email" id="email" value="{{ form.email.value }}"
+                        <input type="email" class="frame-frame35" name="{{ form.email.name }}" id="email"
+                               value="{{ form.email.value }}"
                                placeholder="romashka@yandex.ru"/><br/>
+                        <div class="error-message">{{ form.email.errors }}</div>
 
-                        <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Название и номер СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Дата прекращения членства</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <label for="{{ form.url.id_for_label }}" class="frame-text16">Сайт компании</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ form.url.name }}" id="url"
+                               value="{{ form.url.value }}"
+                               placeholder="https://example.com"/><br/>
+                        <div class="error-message">{{ form.url.errors }}</div>
 
-                        <div>
-                            <h1>Добавить данные</h1><br>
-                        </div>
-                        <div>
-                            <label for="lname" class="frame-text16">Телефоны:</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                            <label for="lname" class="frame-text16">Email:</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                            <label for="lname" class="frame-text16">Сайт:</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                        </div>
                         <div>
                             <button type="submit" class="btn-send-ap">Сохранить</button>
                         </div>
@@ -137,41 +159,104 @@
             <div class="col-sm-6 delimiter">
                 <div class="card border border-white">
                     <div class="card-body">
-                        <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35" placeholder="565265288269"
-                               readonly/><br/>
+                        <label for="{{ form.sro.id_for_label }}" class="frame-text16">Саморегулируемая
+                            организация</label><br/>
+                        <select class="frame-frame35" name="{{ form.sro.name }}" id="sro">
+                            {% for option in form.sro.field.choices %}
+                                <option value="{{ option.0 }}"
+                                        {% if option.0 == form.sro.value %}selected{% endif %}>{{ option.1 }}</option>
+                            {% endfor %}
+                        </select><br/>
+                        <div class="error-message">{{ form.sro.errors }}</div>
 
                         <label for="{{ form.sro_date.id_for_label }}" class="frame-text16">Дата решения о приеме в члены
                             СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="sro_date" id="sro_date"
+                        <input type="text" class="frame-frame35" name="{{ form.sro_date.name }}" id="sro_date"
                                value="{{ form.sro_date.value }}"/><br/>
+                        <div class="error-message">{{ form.sro_date.errors }}</div>
 
-                        <label for="{{ form.sro_number.id_for_label }}" class="frame-text16">Номер решения о приеме в члены
+                        <label for="{{ form.sro_number.id_for_label }}" class="frame-text16">Номер решения о приеме в
+                            члены
                             СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="sro_number" id="sro_number" value="{{ form.sro_number.value }}" /><br/>
+                        <input type="text" class="frame-frame35" name="{{ form.sro_number.name }}" id="sro_number"
+                               value="{{ form.sro_number.value }}" placeholder="507"/><br/>
+                        <div class="error-message">{{ form.sro_number.errors }}</div>
 
-                        <label for="lname" class="frame-text16">Дата прекращения членства</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                        <label for="{{ form.license_date.id_for_label }}" class="frame-text16">Дата прекращения
+                            членства</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ form.license_date.name }}" id="license_date"
+                               value="{{ form.license_date.value }}"/><br/>
+                        <div class="error-message">{{ form.license_date.errors }}</div>
 
-                        <div class="address-name">
-                            <label for="lname" class="frame-text16">Адреса филиалов:</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                            <label for="lname" class="frame-text16">ФИО и должность сотрудников</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                        </div>
+                        {{ form.legal_address.as_hidden }}
+
                     </div>
                 </div>
             </div>
+            <div class="row mt-5">
+                <div class="col-sm-12 mb-3 mb-sm-0">
+                    <div>
+                        <h1>Добавить данные</h1><br>
+                    </div>
+                    <div>
+                        <h4>Филиалы</h4><br>
+                    </div>
+                    <div>
+                        <ul>
+                            {% for branche in company.branches.all %}
+                                <li>
+                                    <h5>
+                                        {{ branche.postcode }} {{ branche.city }} {{ branche.street }} {{ branche.house_number }}
+                                        <a href='{% url 'geo_handbook:edit_branches' branche.pk %}' class="text-menu">Редактировать</a>
+                                        <a href='{% url 'geo_handbook:delete_branches' branche.pk %}' class="text-menu">Удалить</a>
+                                    </h5>
+
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <span><span class="mr-3"><a href='{% url 'geo_handbook:add_branches' company.pk %}'
+                                                class="text-menu"><span>Добавить филиал</span></a></span></span>
+                    <hr>
+
+                    <div>
+                        <h4>Сотрудники компании</h4><br>
+                    </div>
+                    <div>
+                        <ul>
+                            {% for employee in employees %}
+                                <li>
+                                    <div>
+                                        <h5>
+                                            {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
+                                            <a href="{% url 'geo_handbook:update_employee_company' employee.pk %}" class="text-menu">Редактировать</a>
+                                            <a href="{% url 'geo_handbook:delete_employee_company' employee.pk %}" class="text-menu">Удалить</a>
+                                        </h5>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <span><span class="mr-3"><a href='{% url 'geo_handbook:add_employee_company' company.pk %}'
+                                                    class="text-menu"><span>Добавить сотрудника</span></a></span></span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </form>
 </section>
 <script>
-  $(function() {
-    $("#sro_date").datepicker({
-      dateFormat: "yy.mm.dd"
-    }).datepicker("setDate", new Date("{{ form.sro_date.value }}"));
-  });
+    $(function () {
+        $("#sro_date").datepicker({
+            dateFormat: "yy-mm-dd"
+        }).datepicker("setDate", new Date("{{ form.sro_date.value }}"));
+
+        $("#license_date").datepicker({
+            dateFormat: "yy-mm-dd"
+        }).datepicker("setDate", new Date("{{ form.license_date.value }}"));
+    });
 </script>
 </body>
 </html>

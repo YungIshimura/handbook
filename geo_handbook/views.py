@@ -38,11 +38,12 @@ def view_card(request, company_id):
         'street': company.legal_address.street,
         'index': company.legal_address.postcode,
         'house_number': company.legal_address.house_number,
-        'work_types':[work_type.type_work for work_type in company.specializations.all()],
+        'work_types': [work_type.type_work for work_type in company.specializations.all()],
         'directors': [director for director in company.director.all()]
     }
 
     return render(request, 'card.html', context=context)
+
 
 def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
