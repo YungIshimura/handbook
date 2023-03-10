@@ -15,7 +15,7 @@
         <header>
             <div class="navbar">
                 <div class="navbar__container">
-                    <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
+                    <a href={% url 'geo_handbook:index' %} class="navbar-brand d-flex align-items-center navbar__logo">
                     <span>ЛОГО</span>
                     </a>
                     <div class="login-container">
@@ -29,7 +29,7 @@
         </header>
     </div>
 
-    <span class="arrow-back"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"><span style="margin-left: 8px;">К списку организаций</span></span>        
+    <a href={% url 'geo_handbook:index' %}><span class="arrow-back"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"><span style="margin-left: 8px;">К списку организаций</span></span></a>        
     <div class="company__info">
             <div class="company__data1">
                 <span class="company__data--rating">{{rating}}</span>

@@ -170,12 +170,12 @@
 .company-container {
     position: relative;
     width: 480px;
-    height: 150px;
+    height: 270px;
     border: 1px solid #d2d1d1;
 }
 .company{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .company__data-text {

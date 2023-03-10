@@ -15,6 +15,11 @@ def view_index(request):
         else:
             messages.error(request, 'По данному запросу ничего не найдено')
 
+    if request.POST.get('Moscow'):
+        request.session['city'] = 'Москва'
+
+        return HttpResponseRedirect(reverse('geo_handbook:region'))
+
     return render(request, 'index.html')
 
 
@@ -38,7 +43,7 @@ def view_card(request, company_id):
         'street': company.legal_address.street,
         'index': company.legal_address.postcode,
         'house_number': company.legal_address.house_number,
-        'work_types':[work_type.type_work for work_type in company.specializations.all()],
+        'work_types': [work_type.type_work for work_type in company.specializations.all()],
         'directors': [director for director in company.director.all()]
     }
 
@@ -69,7 +74,21 @@ def view_select(request):
 
 
 def view_selected_region(request):
-    return render(request, 'selected_region.html')
+    selected_city = request.session['city']
+    companys = Company.objects.filter(city=selected_city)
+    context = {
+        'companys': [
+            {
+                'id': company.id,
+                'name': company.short_name,
+                'work_types': [work_type.type_work for work_type in company.specializations.all()],
+                'legal_address': company.legal_address
+            }
+            for company in companys
+        ]
+    }
+
+    return render(request, 'selected_region.html', context=context)
 
 
 def view_application(request):
