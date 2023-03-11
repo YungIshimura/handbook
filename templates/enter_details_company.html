@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href={% static 'css/enter_details_company.css' %}>
 
@@ -208,7 +209,8 @@
                                     <h5>
                                         {{ branche.postcode }} {{ branche.city }} {{ branche.street }} {{ branche.house_number }}
                                         <a href='{% url 'users:edit_branches' branche.pk %}' class="text-menu">Редактировать</a>
-                                        <a href='{% url 'users:delete_branches' branche.pk %}' class="text-menu">Удалить</a>
+                                        <a href='{% url 'users:delete_branches' branche.pk %}'
+                                           class="text-menu">Удалить</a>
                                     </h5>
 
                                 </li>
@@ -230,24 +232,60 @@
                                     <div>
                                         <h5>
                                             {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
-                                            <a href="{% url 'users:update_employee_company' employee.pk %}" class="text-menu">Редактировать</a>
-                                            <a href="{% url 'users:delete_employee_company' employee.pk %}" class="text-menu">Удалить</a>
+                                            <a href="{% url 'users:update_employee_company' employee.pk %}"
+                                               class="text-menu">Редактировать</a>
+                                            <a href="#" class="delete-employee-btn" data-employee-id="{{ employee.pk }}"
+                                               data-toggle="modal" data-target="#confirm-delete-modal">Удалить</a>
                                         </h5>
                                     </div>
                                 </li>
+
+                                <div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog"
+                                     aria-labelledby="confirm-delete-modal-title" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="confirm-delete-modal-title">Подтвердить
+                                                    удаление</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Вы уверены, что хотите удалить сотрудника?
+                                                <p>{{ employee.surname }} {{ employee.name }} {{ employee.father_name }}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    Отмена
+                                                </button>
+                                                <button type="button" class="btn btn-danger" id="confirm-delete-btn">
+                                                    Удалить
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             {% endfor %}
                         </ul>
                         <span><span class="mr-3"><a href='{% url 'users:add_employee_company' company.pk %}'
                                                     class="text-menu"><span>Добавить сотрудника</span></a></span></span>
                     </div>
+
+
                 </div>
+
             </div>
 
         </div>
-
     </form>
+
+
 </section>
 <script>
+    // календарь формы
     $(function () {
         $("#sro_date").datepicker({
             dateFormat: "yy-mm-dd"
@@ -257,6 +295,27 @@
             dateFormat: "yy-mm-dd"
         }).datepicker("setDate", new Date("{{ form.license_date.value }}"));
     });
+
+    // удаление сотрудника
+    $(document).ready(function () {
+        var employeeIdToDelete;
+
+        $('.delete-employee-btn').click(function () {
+            employeeIdToDelete = $(this).data('employee-id');
+        });
+
+        $('#confirm-delete-btn').click(function () {
+            var url = '{% url "users:delete_employee_company" 0 %}'.replace('0', employeeIdToDelete);
+            $.post(url, {'employee_id': employeeIdToDelete, csrfmiddlewaretoken: '{{ csrf_token }}'})
+                .done(function (data) {
+                    window.location.reload();
+                })
+                .fail(function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                });
+        });
+    });
+
 </script>
 </body>
 </html>
