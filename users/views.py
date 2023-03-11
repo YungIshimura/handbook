@@ -13,7 +13,7 @@ def update_company(request, pk):
         form = CompanyUpdateForm(request.POST, instance=company)
         if form.is_valid():
             form.save()
-            return redirect('geo_handbook:edit_company', pk=company.pk)
+            return redirect('users:edit_company', pk=company.pk)
     else:
         form = CompanyUpdateForm(instance=company)
     context = {
@@ -37,7 +37,7 @@ def update_branch(request, pk):
         if branch_form.is_valid() and director_form.is_valid():
             branch_form.save()
             director_form.save()
-            return redirect('geo_handbook:edit_company', pk=branch.company.pk)
+            return redirect('users:edit_company', pk=branch.company.pk)
 
     context = {
         'branch_form': branch_form,
@@ -56,7 +56,7 @@ def delete_branch(request, pk):
     if request.method == 'POST':
         branch.director.all().delete()  # Удалить директоров филиала
         branch.delete()  # Удалить филиал
-        return redirect('geo_handbook:edit_company', pk=branch.company.pk)
+        return redirect('users:edit_company', pk=branch.company.pk)
 
     return render(request, 'branches/delete_branch.html', {'branch': branch})
 
@@ -80,7 +80,7 @@ def add_branch(request, pk):
             director.branches = branch
             director.save()
 
-            return redirect('geo_handbook:edit_company', pk=pk)
+            return redirect('users:edit_company', pk=pk)
 
     context = {
         'branch_form': branch_form,
@@ -103,7 +103,7 @@ def add_employee_company(request, pk):
             employee.company = company
             employee.save()
 
-            return redirect('geo_handbook:edit_company', pk=pk)
+            return redirect('users:edit_company', pk=pk)
 
     context = {
         'form': form,
@@ -123,7 +123,7 @@ def update_employee_company(request, pk):
         if form.is_valid():
             form.save()
 
-            return redirect('geo_handbook:edit_company', pk=employee.company.pk)
+            return redirect('users:edit_company', pk=employee.company.pk)
 
     context = {
         'form': form,
@@ -139,7 +139,7 @@ def delete_employee_company(request, pk):
 
     if request.method == 'POST':
         employee.delete()
-        return redirect('geo_handbook:edit_company', pk=employee.company.pk)
+        return redirect('users:edit_company', pk=employee.company.pk)
 
     return render(request, 'employee/delete_employee.html', {'employee': employee})
 
@@ -150,7 +150,7 @@ def delete_employee_branch(request, pk):
 
     if request.method == 'POST':
         employee.delete()
-        return redirect('geo_handbook:edit_branches', pk=employee.branches.pk)
+        return redirect('users:edit_branches', pk=employee.branches.pk)
 
     return render(request, 'employee/delete_employee.html', {'employee': employee})
 
@@ -165,7 +165,7 @@ def update_employee_branch(request, pk):
         if form.is_valid():
             form.save()
 
-            return redirect('geo_handbook:edit_branches', pk=employee.branches.pk)
+            return redirect('users:edit_branches', pk=employee.branches.pk)
 
     context = {
         'form': form,
@@ -188,6 +188,6 @@ def add_employee_branch(request, pk):
             employee.branches = branch
             employee.save()
 
-            return redirect('geo_handbook:edit_branches', pk=pk)
+            return redirect('users:edit_branches', pk=pk)
 
     return render(request, 'employee/add_employee.html', {'form': form})
