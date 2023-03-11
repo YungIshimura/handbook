@@ -1,5 +1,5 @@
 from django import forms
-from .models import Company, TypeWork, CompanySpecialization, Branches, Director, Employee
+from geo_handbook.models import Company, TypeWork, CompanySpecialization, Branches, Director, Employee
 from django.core.exceptions import ValidationError
 
 

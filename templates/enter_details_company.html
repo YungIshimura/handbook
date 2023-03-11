@@ -207,8 +207,8 @@
                                 <li>
                                     <h5>
                                         {{ branche.postcode }} {{ branche.city }} {{ branche.street }} {{ branche.house_number }}
-                                        <a href='{% url 'geo_handbook:edit_branches' branche.pk %}' class="text-menu">Редактировать</a>
-                                        <a href='{% url 'geo_handbook:delete_branches' branche.pk %}' class="text-menu">Удалить</a>
+                                        <a href='{% url 'users:edit_branches' branche.pk %}' class="text-menu">Редактировать</a>
+                                        <a href='{% url 'users:delete_branches' branche.pk %}' class="text-menu">Удалить</a>
                                     </h5>
 
                                 </li>
@@ -216,7 +216,7 @@
                         </ul>
                     </div>
 
-                    <span><span class="mr-3"><a href='{% url 'geo_handbook:add_branches' company.pk %}'
+                    <span><span class="mr-3"><a href='{% url 'users:add_branches' company.pk %}'
                                                 class="text-menu"><span>Добавить филиал</span></a></span></span>
                     <hr>
 
@@ -230,14 +230,14 @@
                                     <div>
                                         <h5>
                                             {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
-                                            <a href="{% url 'geo_handbook:update_employee_company' employee.pk %}" class="text-menu">Редактировать</a>
-                                            <a href="{% url 'geo_handbook:delete_employee_company' employee.pk %}" class="text-menu">Удалить</a>
+                                            <a href="{% url 'users:update_employee_company' employee.pk %}" class="text-menu">Редактировать</a>
+                                            <a href="{% url 'users:delete_employee_company' employee.pk %}" class="text-menu">Удалить</a>
                                         </h5>
                                     </div>
                                 </li>
                             {% endfor %}
                         </ul>
-                        <span><span class="mr-3"><a href='{% url 'geo_handbook:add_employee_company' company.pk %}'
+                        <span><span class="mr-3"><a href='{% url 'users:add_employee_company' company.pk %}'
                                                     class="text-menu"><span>Добавить сотрудника</span></a></span></span>
                     </div>
                 </div>
