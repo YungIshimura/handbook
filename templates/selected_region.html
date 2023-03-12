@@ -1,98 +1,70 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block list %}Карточки организаций{% endblock %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Карточки организаций</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href={% static 'css/selected_region.css' %}>
-</head>
-<body>
-    <header>
-        <div class="navbar">
-            <div class="navbar__container">
-                <a href="{% url 'geo_handbook:index' %}" class="navbar-brand d-flex align-items-center navbar__logo">
-                <span>ЛОГО</span>
-                </a>
-                <div class="login-container">
-                    <a href="#"><span class="login">Вход для организаций</span></a>
-                </div>
-                <button class="navbar-toggler toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon custom-toggler"></span>
-                </button>
-            </div>
-        </div>
-    </header>
-        <div class="region-area">
-            <div class="region-area__text">
-                <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
-                <div class="region-area__selected-region">
-                    <span class="region" style="margin-right: 15px;"><img src="https://img.icons8.com/ios/20/null/place-marker--v1.png"/ style="margin-right: 5px;">{{region}}</span>
-                    <a href="#"><span class="another-region">Выбрать другой регион</span></a>
-                </div>
-                <div class="search-area">
-                    <form class="search-form">
-                        <input class='search' type="search" id="site-search" name="search" placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
-                        <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span></button>
-                    </form>
-                </div>
-            </div>
-        </div>
 
-        <div class="request">
-            <div class="request__data">
-                <div class="request__data--text">
-                    <span >Ищите услуги проверенных компаний? Создайте задание и в 1 клик отправьте его лучшим компаниям региона. Получайте заявки и выбирайте лучшее предложение.</span>
-                </div>
-                <button class="request__data--button">Создать заявку</button>
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/selected_region.css' %}"/>
+    <div class="region-area">
+        <div class="region-area__text">
+            <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
+            <div class="region-area__selected-region">
+                <span class="region" style="margin-right: 15px;"><img
+                        src="https://img.icons8.com/ios/20/null/place-marker--v1.png"/ style="margin-right: 5px;">{{ region }}</span>
+                <a href="#"><span class="another-region">Выбрать другой регион</span></a>
+            </div>
+            <div class="search-area">
+                <form class="search-form">
+                    <input class='search' type="search" id="site-search" name="search"
+                           placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
+                    <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span></button>
+                </form>
             </div>
         </div>
+    </div>
 
-        <div class="companys">
-            <span class="companys--title">Лучшие компании региона</span>
-            <br>
-            <br>
-            <div class="container overflow-hidden">
-                <div class="row gx-5">
-                    {% for company in companys%}
-                    <div class="col" onclick="location.href='{% url 'geo_handbook:card' company.id %}'"; style='cursor:pointer;'>
+    <div class="request">
+        <div class="request__data">
+            <div class="request__data--text">
+                <span>Ищите услуги проверенных компаний? Создайте задание и в 1 клик отправьте его лучшим компаниям региона. Получайте заявки и выбирайте лучшее предложение.</span>
+            </div>
+            <button class="request__data--button">Создать заявку</button>
+        </div>
+    </div>
+
+    <div class="companys">
+        <span class="companys--title">Лучшие компании региона</span>
+        <br>
+        <br>
+        <div class="container overflow-hidden">
+            <div class="row gx-5">
+                {% for company in companys %}
+                    <div class="col" onclick="location.href='{% url 'geo_handbook:card' company.id %}'" ;
+                         style='cursor:pointer;'>
                         <div class="p-3 company-container">
                             <div class="company" style='height:80px;'>
-                                    <h4 style='width:auto'>{{company.name}}</h4>
-                                    <div class="rating" style='width:120px;'>
-                                        <img src={% static 'assets/stars/black-star.svg' %}>
-                                        <img src={% static 'assets/stars/black-star.svg' %}>
-                                        <img src={% static 'assets/stars/black-star.svg' %}>
-                                        <img src={% static 'assets/stars/white-star.svg' %}>
-                                        <img src={% static 'assets/stars/white-star.svg' %}>
-                                    </div>
+                                <h4 style='width:auto'>{{ company.name }}</h4>
+                                <div class="rating" style='width:120px;'>
+                                    <img src={% static 'assets/stars/black-star.svg' %}>
+                                    <img src={% static 'assets/stars/black-star.svg' %}>
+                                    <img src={% static 'assets/stars/black-star.svg' %}>
+                                    <img src={% static 'assets/stars/white-star.svg' %}>
+                                    <img src={% static 'assets/stars/white-star.svg' %}>
+                                </div>
                             </div>
                             <div class="company__data">
                                 <span class="company__address" style='display:block; width:100%; height:60px;'>
-                                    <span class='company__data-text'>Юридический адрес: </span>{{company.legal_address.postcode}}, {{company.legal_address.city}}, {{company.legal_address.street}} д.{{company.legal_address.house_number}}</span>
-                                    <span class='company__data-text'>Виды работ: </span>
-                                        {% for work_type in company.work_types %}
-                                            {{work_type}} |
-                                        {% endfor %} 
-                                    </span>
+                                    <span class='company__data-text'>Юридический адрес: </span>{{ company.legal_address.postcode }}, {{ company.legal_address.city }}, {{ company.legal_address.street }} д.{{ company.legal_address.house_number }}</span>
+                                <span class='company__data-text'>Виды работ: </span>
+                                {% for work_type in company.work_types %}
+                                    {{ work_type }} |
+                                {% endfor %}
+                                </span>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
-                </div>
+                {% endfor %}
             </div>
         </div>
-    <footer class="footer">
-        <span class="navbar-brand d-flex align-items-center navbar__logo" style="margin-left: 60px;">ЛОГО</span>
-        <div class="text">
-            <span style="color: #219653;">О сервисе</span>
-            <span>Как мы определяем актуальность</span>
-            <span>Источники данных</span>
-            <span style="color: #219653;">Для организаций</span>
-        </div>
-    </footer>
-</body>
-</html>
+    </div>
+{% endblock %}

@@ -1,19 +1,13 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block list %}Поиск{% endblock %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Посик</title>
-    <link rel="stylesheet" href={% static 'css/select_city.css' %}>
-</head>
-<body>
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/select_city.css' %}"/>
     <div class="search-area">
         <form class="search-form">
             <input class='search' type="search" id="site-search" name="search" placeholder="Город или регион">
             <button type="submit" class="search-button"><span class="search-button--text">ВЫБРАТЬ</span></button>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}
