@@ -4,7 +4,7 @@ from .views import (view_about, view_select, view_selected_region, view_applicat
                     view_sign_up_company, view_select_city, view_search, view_card_layer, company_update,
                     update_branch, delete_branch, add_branch, delete_employee_company, add_employee_company,
                     update_employee_company, delete_employee_branch, update_employee_branch, add_employee_branch,
-                    view_card, view_profile)
+                    view_card, view_profile, view_rates)
 
 app_name = 'geo_handbook'
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('enter_details_company/', view_enter_details_company, name='enter_details_company'),
     path('settings_profile/', view_settings_profile, name='settings_profile'),
     path('profile/', view_profile, name='profile'),
+    path('rates/', view_rates, name='rates'),
 
     path('company/edit/<int:pk>/', company_update, name='edit_company'),
     path('branches/edit/<int:pk>/', update_branch, name='edit_branches'),
