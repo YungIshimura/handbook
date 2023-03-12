@@ -49,6 +49,7 @@ def view_card(request, company_id):
 
     return render(request, 'card.html', context=context)
 
+
 def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
 

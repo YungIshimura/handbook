@@ -1,32 +1,10 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block list %}О компании{% endblock %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О сервисе</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href={% static 'css/about.css' %}>
-</head>
-<body>
-    <section>
-        <header>
-            <div class="navbar">
-                <div class="navbar__container">
-                    <a href={% url 'geo_handbook:index' %} class="navbar-brand d-flex align-items-center navbar__logo">
-                    <span>ЛОГО</span>
-                    </a>
-                    <div class="login-container">
-                        <a href="{% url 'geo_handbook:index' %}"><span class="login">Вход для организаций</span></a>
-                    </div>
-                    <button class="navbar-toggler toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon custom-toggler"></span>
-                    </button>
-                </div>
-            </div>
-        </header>
-    </section> 
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}"/>
+
     <section id="cards">
         <span class="arrow-back"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"> На главную</span>
         <div class="cards">
@@ -64,21 +42,11 @@
                     Редактирование невозможно, если технические требования не выполнены или не пройдена проверка подлинности 
                     электронной подписи.
                 </span>
-                <br>
-                <button class="card__confirm-button" type="submit">Внести данные</button>
+                    <br>
+                    <button class="card__confirm-button" type="submit">Внести данные</button>
+                </div>
             </div>
         </div>
     </section>
-    <section id="footer">
-        <footer class="footer">
-            <span class='navbar-brand d-flex align-items-center navbar__logo' style="margin-left: 60px;">ЛОГО</span>
-            <div class="footer--data">
-                <span style="color: #219653;">О сервисе</span>
-                <span>Как мы определяем актуальность</span>
-                <span>Источники данных</span>
-                <span style="color: #219653;">Для организаций</span>
-            </div>
-        </footer>
-    </section>
-</body>
-</html>
+
+{% endblock %}
