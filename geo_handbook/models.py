@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.postgres.fields import ArrayField
 
 
 class TypeWork(models.Model):
@@ -17,26 +18,55 @@ class TypeWork(models.Model):
         verbose_name_plural = 'Типы работ'
 
 
+class City(models.Model):
+    name = models.CharField(
+        'Название города',
+        max_length=100
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Город'
+
+
+class Region(models.Model):
+    name = models.CharField(
+        'Навзание региона',
+        max_length=180
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Регион'
+
+
 class CompanyAddress(models.Model):
-    city = models.CharField(
-        'Город нахождения компании',
+    city = models.ForeignKey(
+        City,
+        related_name='companys',
+        on_delete=models.CASCADE,
+        verbose_name='Город нахождения компании',
         max_length=50
+    )
+    region = models.ForeignKey(
+        Region,
+        related_name='companys',
+        on_delete=models.CASCADE,
+        max_length=120,
+        blank=True,
+        null=True
     )
     postcode = models.PositiveIntegerField(
         'Почтовый индес',
         validators=[MaxValueValidator(999999)]
     )
-    region = models.CharField(
-        'Субъект РФ',
-        max_length=120,
-        blank=True,
-        null=True
-    )
     district = models.CharField(
         'Район города',
         max_length=100,
-        blank=True,
-        null=True
     )
     street = models.CharField(
         'Улица',
@@ -45,14 +75,14 @@ class CompanyAddress(models.Model):
     house_number = models.PositiveIntegerField(
         'Номер дома'
     )
-    is_legal = models.BooleanField(
-        'Юридический адрес компании',
-        default=False
-    )
 
     def __str__(self):
-        return self.city
-    
+        return f'{self.city} {self.region} - {self.postcode}'
+
+    class Meta:
+        verbose_name = 'Адрес компании'
+        verbose_name_plural = 'Адреса компаний'
+
 
 class SRO(models.Model):
     full_name = models.CharField(
@@ -83,13 +113,11 @@ class Company(models.Model):
         blank=True,
         null=True
     )
-    address = models.ForeignKey(
+    legal_address = models.ForeignKey(
         CompanyAddress,
         related_name='companys',
         on_delete=models.CASCADE,
-        verbose_name='Место',
-        blank=True,
-        null=True
+        verbose_name='Юридический адрес',
     )
     rating = models.PositiveIntegerField(
         'Рейтинг компании',
@@ -107,7 +135,9 @@ class Company(models.Model):
         SRO,
         related_name='companys',
         on_delete=models.PROTECT,
-        verbose_name='СРО'
+        verbose_name='СРО',
+        blank=True,
+        null=True
     )
     sro_date = models.DateField(
         'Дата приёма в члены СРО',
@@ -120,28 +150,23 @@ class Company(models.Model):
         blank=True,
         null=True
     )
-    license = models.BooleanField(
-        'Наличие лицензии',
-        default=True
-    )
-    license_date = models.DateField(
-        'Дата прикращения членства',
-        blank=True,
-        null=True
-    )
-    phonenumber = PhoneNumberField(
+    phonenumber = ArrayField(PhoneNumberField(
         verbose_name='Номер телефона',
         db_index=True,
+    ),
         blank=True,
-        null=True
-    )
-    email = models.EmailField(
+        null=True)
+    email = ArrayField(models.EmailField(
         'Электронная почта'
-    )
-    url = models.URLField(
+    ),
+        blank=True,
+        null=True)
+    url = ArrayField(models.URLField(
         'Сайт компании',
         max_length=128,
-    )
+    ),
+        blank=True,
+        null=True)
 
     def __str__(self):
         return f'{self.full_name}'
@@ -151,14 +176,35 @@ class Company(models.Model):
         verbose_name_plural = 'Организации'
 
 
+class License(models.Model):
+    name = models.CharField(
+        'Название лицензии',
+        max_length=250
+    )
+    license_date = models.DateField(
+        'Срок действия лицензии'
+    )
+    license_area = models.CharField(
+        'Область применения лицензии',
+        max_length=250
+    )
+    license_organization = models.CharField(
+        'Организация выдавшая лицензию',
+        max_length=250
+    )
+    company = models.ForeignKey(
+        Company,
+        related_name='licenses',
+        on_delete=models.PROTECT,
+        verbose_name='Компания',
+    )
+
 class Branches(models.Model):
     address = models.ForeignKey(
         CompanyAddress,
         on_delete=models.CASCADE,
         related_name='branches',
         verbose_name='Aдресс',
-        blank=True,
-        null=True
     )
     company = models.ForeignKey(
         Company,
@@ -168,7 +214,7 @@ class Branches(models.Model):
     )
 
     def __str__(self):
-        return f'Филиал компании - {self.company} {self.city} {self.street} {self.house_number}'
+        return f'Филиал компании - {self.company}'
 
     class Meta:
         verbose_name = 'Филиал'
