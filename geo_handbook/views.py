@@ -41,7 +41,7 @@ def view_card(request, company_id):
         'full_name': company.full_name,
         'inn': company.inn,
         'ogrn': company.ogrn,
-        # 'city': company.legal_address.city,
+        'city': company.legal_address.city,
         'rating': company.rating,
         'sro': company.sro,
         'sro_date': company.sro_date,
