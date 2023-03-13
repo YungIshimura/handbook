@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TypeWork, SRO, LegalAddress, Company, Branches, CompanySpecialization, Director, Employee
+from .models import TypeWork, SRO, CompanyAddress, Company, Branches, CompanySpecialization, Director, Employee
 
 
 @admin.register(TypeWork)
@@ -12,8 +12,8 @@ class SROAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(LegalAddress)
-class LegalAddressAdmin(admin.ModelAdmin):
+@admin.register(CompanyAddress)
+class CompanyAddressAdmin(admin.ModelAdmin):
     pass
 
 
