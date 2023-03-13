@@ -15,7 +15,6 @@ def view_index(request):
             return HttpResponseRedirect(reverse('geo_handbook:card', args=[company[0].id]))
         else:
             messages.error(request, 'По данному запросу ничего не найдено')
-    
     if 'term' in request.GET:
         qs = City.objects.filter(name__icontains=request.GET.get('term'))
         citys = []
@@ -42,7 +41,7 @@ def view_card(request, company_id):
         'full_name': company.full_name,
         'inn': company.inn,
         'ogrn': company.ogrn,
-        'city': company.legal_address.city,
+        # 'city': company.legal_address.city,
         'rating': company.rating,
         'sro': company.sro,
         'sro_date': company.sro_date,
@@ -136,27 +135,27 @@ def view_settings_profile(request):
 
 # Редактировать филиал
 # def update_branch(request, pk):
-    # branch = get_object_or_404(Branches, pk=pk)
-    # employees = Employee.objects.filter(branches=branch)
+# branch = get_object_or_404(Branches, pk=pk)
+# employees = Employee.objects.filter(branches=branch)
 
-    # branch_form = BranchCreateForm(request.POST or None, instance=branch)
-    # director_form = DirectorCreateForm(request.POST or None, instance=branch.director.first())
+# branch_form = BranchCreateForm(request.POST or None, instance=branch)
+# director_form = DirectorCreateForm(request.POST or None, instance=branch.director.first())
 
-    # if request.method == 'POST':
+# if request.method == 'POST':
 
-    #     if branch_form.is_valid() and director_form.is_valid():
-    #         branch_form.save()
-    #         director_form.save()
-    #         return redirect('geo_handbook:edit_company', pk=branch.company.pk)
+#     if branch_form.is_valid() and director_form.is_valid():
+#         branch_form.save()
+#         director_form.save()
+#         return redirect('geo_handbook:edit_company', pk=branch.company.pk)
 
-    # context = {
-    #     'branch_form': branch_form,
-    #     'director_form': director_form,
-    #     'branch': branch,
-    #     'employees': employees
-    # }
+# context = {
+#     'branch_form': branch_form,
+#     'director_form': director_form,
+#     'branch': branch,
+#     'employees': employees
+# }
 
-    # return render(request, 'branches/update_branch.html', context)
+# return render(request, 'branches/update_branch.html', context)
 
 
 # Удалить филиал и связанного с ним директора
