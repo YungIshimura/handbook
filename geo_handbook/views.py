@@ -62,16 +62,6 @@ def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
 
 
-def view_select_city(request):
-    # if 'term' in request.GET:
-    #     qs = CompanyAddress.objects.filter(city__icontains=request.GET.get('term'))
-    #     companys = []
-    #     for company in qs:
-    #         companys.append(company.city)
-    #     return JsonResponse(companys, safe=False)
-    return render(request, 'select_city.html')
-
-
 def view_search(request):
     return render(request, 'search.html')
 
