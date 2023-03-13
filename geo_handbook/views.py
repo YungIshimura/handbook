@@ -1,7 +1,7 @@
 from django.shortcuts import HttpResponseRedirect, redirect, render, get_object_or_404
 from django.urls import reverse
 from geo_handbook.forms import  DirectorCreateForm, EmployeeCreateForm
-from geo_handbook.models import Company, Branches, Employee, CompanyAddress
+from geo_handbook.models import Company, Branches, Employee, CompanyAddress, City
 from django.contrib.postgres.search import SearchVector
 from django.contrib import messages
 from django.http import JsonResponse
@@ -15,19 +15,19 @@ def view_index(request):
             return HttpResponseRedirect(reverse('geo_handbook:card', args=[company[0].id]))
         else:
             messages.error(request, 'По данному запросу ничего не найдено')
-
-    if request.POST.get('city'):
-        request.session['city'] = request.POST.get('city')
-
-        return HttpResponseRedirect(reverse('geo_handbook:region'))
     
     if 'term' in request.GET:
-        qs = CompanyAddress.objects.filter(city__icontains=request.GET.get('term'))
-        companys = []
+        qs = City.objects.filter(name__icontains=request.GET.get('term'))
+        citys = []
         for company in qs:
-            companys.append(company.city)
-        return JsonResponse(companys, safe=False)
-
+            citys.append(company.name)
+        return JsonResponse(citys, safe=False)
+    
+    if 'city_search' in request.GET:
+        city = request.GET.get('city_search')
+        city_id = City.objects.get(name=city).id
+        return HttpResponseRedirect(reverse('geo_handbook:region', args=[city_id]))
+    
     return render(request, 'index.html')
 
 
@@ -47,7 +47,7 @@ def view_card(request, company_id):
         'sro': company.sro,
         'sro_date': company.sro_date,
         'sro_number': company.sro_number,
-        'sro_license_date': company.license_date,
+        'sro_license_date': [company for company in company.licenses.all()],
         'street': company.legal_address.street,
         'index': company.legal_address.postcode,
         'house_number': company.legal_address.house_number,
@@ -82,9 +82,8 @@ def view_select(request):
     return render(request, 'select_city.html')
 
 
-def view_selected_region(request):
-    selected_city = request.session['city']
-    companys = Company.objects.filter(city=selected_city)
+def view_selected_region(request, city_id):
+    companys = Company.objects.filter(legal_address__city=city_id)
     context = {
         'companys': [
             {
@@ -95,7 +94,7 @@ def view_selected_region(request):
             }
             for company in companys
         ],
-        'region': request.session['city'],
+        'region': city_id
     }
 
     return render(request, 'selected_region.html', context=context)
