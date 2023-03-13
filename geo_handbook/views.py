@@ -49,6 +49,7 @@ def view_card(request, company_id):
 
     return render(request, 'card.html', context=context)
 
+
 def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
 
@@ -67,6 +68,10 @@ def view_card_layer(request):
 
 def view_about(request):
     return render(request, 'about.html')
+
+
+def view_rates(request):
+    return render(request, 'rates.html')
 
 
 def view_select(request):

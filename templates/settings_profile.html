@@ -1,61 +1,34 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block list %}настройки профиля{% endblock %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Настройки профиля</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href={% static "css/settings_profile.css" %}/>
-</head>
-<body>
-<section>
-    <header>
-        <div class="navbar">
-            <div class="navbar__container">
-                <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
-                    <span>ЛОГО</span>
-                </a>
-                <div class="login-container">
-                    <a href="#"><span class="login">Вход для организаций</span></a>
-                </div>
-                <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon custom-toggler"></span>
-                </button>
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/settings_profile.css' %}"/>
+    <section>
+        <div class="card-menu">
+            <div class="menu">
+                <a href="{% url 'geo_handbook:profile' %}">Основные данные</a>
+            </div>
+            <div class="menu">
+                <a href="{% url 'geo_handbook:settings_profile' %}"><span>Редактировать данные организации</span></a>
+            </div>
+            <div class="menu">
+                <span><a href="{% url 'geo_handbook:settings_profile' %}"><span>Настройки профиля</span></a></span>
             </div>
         </div>
-    </header>
-</section>
-<section>
-    <div class="card-menu">
-        <div class="menu">
-            <a href='basic_data.html'>Основные данные</a>
-        </div>
-        <div class="menu">
-            <a href='settings_profile.html'><span>Редактировать данные организации</span></a>
-        </div>
-        <div class="menu">
-            <span><a href='settings_profile.html'><span>Настройки профиля</span></a></span>
-        </div>
-    </div>
-</section>
-<section class="login-input">
-    <form>
-        <div class="mb-3">
-            <input type="email" class="form-control-lg border rounded-0" id="exampleFormControlInput1"
-                   placeholder="Email">
-        </div>
-        <div class="mb-3">
-            <input type="password" class="form-control-lg border rounded-0" id="exampleFormControlTextarea1"
-                   placeholder="Пароль"></input>
-        </div>
-        <button type="submit" class="btn">СОХРАНИТЬ</button>
-    </form>
-</section>
+    </section>
+    <section class="login-input">
+        <form>
+            <div class="mb-3">
+                <input type="email" class="form-control-lg border rounded-0" id="exampleFormControlInput1"
+                       placeholder="Email">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control-lg border rounded-0" id="exampleFormControlTextarea1"
+                       placeholder="Пароль"></input>
+            </div>
+            <button type="submit" class="btn">СОХРАНИТЬ</button>
+        </form>
+    </section>
 
-</body>
-</html>
+{% endblock %}

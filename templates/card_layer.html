@@ -1,125 +1,104 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block list %}Карточка организации{% endblock %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href={% static 'css/card_layer.css' %}>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-    <div class="page">
-        <div class="header">
-            <header>
-                <div class="navbar">
-                    <div class="navbar__container">
-                        <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
-                        <span>ЛОГО</span>
-                        </a>
-                        <div class="login-container">
-                            <a href="#"><span class="login">Вход для организаций</span></a>
-                        </div>
-                        <button class="navbar-toggler toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon custom-toggler"></span>
-                        </button>
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/card_layer.css' %}"/>
+        <span class="arrow-back"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"><span
+                style="margin-left: 8px;">К списку организаций</span></span>
+        <div class="company__info">
+            <div class="company__data1">
+                <span class="company__data--rating">3</span>
+                <div class="rating">
+                    <span class="rating--title">Рейтинг</span>
+                    <div class="stars">
+                        <img src={% static 'assets/stars/black-star.svg' %}>
+                        <img src={% static 'assets/stars/black-star.svg' %}>
+                        <img src={% static 'assets/stars/black-star.svg' %}>
+                        <img src={% static 'assets/stars/white-star.svg' %}>
+                        <img src={% static 'assets/stars/white-star.svg' %}>
                     </div>
                 </div>
-            </header>
-        </div>
-    
-        <span class="arrow-back"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"><span style="margin-left: 8px;">К списку организаций</span></span>        
-        <div class="company__info">
-                <div class="company__data1">
-                    <span class="company__data--rating">3</span>
-                    <div class="rating">
-                        <span class="rating--title">Рейтинг</span>
-                            <div class="stars">
-                                <img src={% static 'assets/stars/black-star.svg' %}>
-                                <img src={% static 'assets/stars/black-star.svg' %}>
-                                <img src={% static 'assets/stars/black-star.svg' %}>
-                                <img src={% static 'assets/stars/white-star.svg' %}>
-                                <img src={% static 'assets/stars/white-star.svg' %}>
-                            </div>
-                    </div>
-                    <div class="company__data-bureaucracy">
-                        <span class="company__data-bureaucracy-data">ИНН</span>
-                        <span class="company__data-bureaucracy-data">СРО</span>
-                        <span class="company__data-bureaucracy-data">НРС</span>
-                    </div>
-                    <span style="display:block;margin-top: 30px; margin-bottom: 22px;">
+                <div class="company__data-bureaucracy">
+                    <span class="company__data-bureaucracy-data">ИНН</span>
+                    <span class="company__data-bureaucracy-data">СРО</span>
+                    <span class="company__data-bureaucracy-data">НРС</span>
+                </div>
+                <span style="display:block;margin-top: 30px; margin-bottom: 22px;">
                         ДАННЫЕ В НОПРИЗ
                     </span>
-                    <span>
+                <span>
                         <span class='company__data--text-title'>Телефоны: </span><span class='company__data--text'>+79001234567</span>
                     </span>
-                    <span style="display: block; margin-top:15px ;">
+                <span style="display: block; margin-top:15px ;">
                         <span class='company__data--text-title'>Email:</span><span class='company__data--text'>ivanov@gmail.com</span>
                     </span>
-                    <span class="company__address">
+                <span class="company__address">
                         <span class='company__data--text-title'>Юридический адрес: <br></span class='company__data--text'>11111, г.Москва, Красная Площадь, д.1</span>
-                    </span>
-                    <button class="button__nopris"><span class="button__nopris--text">ПРОВЕРИТЬ ДАННЫЕ В НОПРИЗ</span></button>
-                </div>
-    
-                <div class="company__about">
-                    <div class="company__about--title">
-                        <h4>ООО Ромашка</h4>
-                        <span>Общество с органиченной отвественностью “Ромашка”</span>
-                        <span style="display: block; margin-top:15px ;">
-                            <span class='company__data--text-title'>Фирменное наименование: </span><span class='company__data--text'>Московская строительная компания</span>
+                </span>
+                <button class="button__nopris"><span class="button__nopris--text">ПРОВЕРИТЬ ДАННЫЕ В НОПРИЗ</span>
+                </button>
+            </div>
+
+            <div class="company__about">
+                <div class="company__about--title">
+                    <h4>ООО Ромашка</h4>
+                    <span>Общество с органиченной отвественностью “Ромашка”</span>
+                    <span style="display: block; margin-top:15px ;">
+                            <span class='company__data--text-title'>Фирменное наименование: </span><span
+                            class='company__data--text'>Московская строительная компания</span>
                         </span>
-                    </div>
-                    <hr>
-                    <div class="company__about--data">
-                        <span class="company__about--text" style="color: #828282;">Виды работ:<span style="color:black;"> Лицензирование, строительство, монтаж</span></span>
-                        <span class="company__about--text" style="color: #828282; margin-top: 5px;">Регион работ: <span style="color:black;"> Москва, МО, Центральный округ</span></span>
-                    </div>
-                    <hr style="margin-top: 21px;">
-                    
-                    <div class="legal_data">
-                        <div class="legal_data__company">
-                            <div class="legal_data--info">
-                                <div class="legal_data__inn">
-                                    <span class='company__data--text-title'>ИНН:</span>
-                                    <br>
-                                    <span>52252852816</span>
-                                </div>
-                                
-                                <div class="legal_data__ogrn">
-                                    <span class='company__data--text-title'>ОГРН/ОГРНИП:</span>
-                                    <br>
-                                    <span>525252528828</span>
-                                </div>
-                            </div>
-    
-                            <div class="legal_data--director">
-                                <span class='company__data--text-title'>ФИО и должность руководителя:</span>
+                </div>
+                <hr>
+                <div class="company__about--data">
+                    <span class="company__about--text" style="color: #828282;">Виды работ:<span style="color:black;"> Лицензирование, строительство, монтаж</span></span>
+                    <span class="company__about--text" style="color: #828282; margin-top: 5px;">Регион работ: <span
+                            style="color:black;"> Москва, МО, Центральный округ</span></span>
+                </div>
+                <hr style="margin-top: 21px;">
+
+                <div class="legal_data">
+                    <div class="legal_data__company">
+                        <div class="legal_data--info">
+                            <div class="legal_data__inn">
+                                <span class='company__data--text-title'>ИНН:</span>
                                 <br>
-                                <span style="display:block; margin-top: 10px;">Петр Петрович Иванов, генеральный директор</span>
+                                <span>52252852816</span>
+                            </div>
+
+                            <div class="legal_data__ogrn">
+                                <span class='company__data--text-title'>ОГРН/ОГРНИП:</span>
+                                <br>
+                                <span>525252528828</span>
                             </div>
                         </div>
-    
-                        <div class="legal_data__sro">
-                            <div class="legal_data__sro--name">
-                                <span class='company__data--text-title'>Название СРО</span>
-                                <br>
-                                <span>5252822</span>
-                            </div>
-    
-                            <div class="legal_data__sro--start-date" style="margin-top: 31px;">
-                                <span class='company__data--text-title'>Дата и номер решения о приеме в члены СРО:</span>
-                                <br>
-                                <span>№ 5252822 от 28.02.2022   </span>
-                            </div>
-    
-                            <div class="legal_data__sro--end-date" style="margin-top: 25px;">
-                                <span class='company__data--text-title'>Дата прекращения членства:</span>
-                                <br>
-                                <span>22.08.2022</span>
-                            </div>
+
+                        <div class="legal_data--director">
+                            <span class='company__data--text-title'>ФИО и должность руководителя:</span>
+                            <br>
+                            <span style="display:block; margin-top: 10px;">Петр Петрович Иванов, генеральный директор</span>
                         </div>
+                    </div>
+
+                    <div class="legal_data__sro">
+                        <div class="legal_data__sro--name">
+                            <span class='company__data--text-title'>Название СРО</span>
+                            <br>
+                            <span>5252822</span>
+                        </div>
+
+                        <div class="legal_data__sro--start-date" style="margin-top: 31px;">
+                            <span class='company__data--text-title'>Дата и номер решения о приеме в члены СРО:</span>
+                            <br>
+                            <span>№ 5252822 от 28.02.2022   </span>
+                        </div>
+
+                        <div class="legal_data__sro--end-date" style="margin-top: 25px;">
+                            <span class='company__data--text-title'>Дата прекращения членства:</span>
+                            <br>
+                            <span>22.08.2022</span>
+                        </div>
+                    </div>
                 </div>
                 <hr style="margin-top: 40px;">
                 <div class="user__data">
@@ -143,15 +122,5 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <span class="navbar-brand d-flex align-items-center navbar__logo" style="margin-left: 60px;">ЛОГО</span>
-            <div class="text">
-                <span style="color: #219653;">О сервисе</span>
-                <span>Как мы определяем актуальность</span>
-                <span>Источники данных</span>
-                <span style="color: #219653;">Для организаций</span>
-            </div>
-        </footer>
     </div>
-</body>
-</html>
+{% endblock %}
