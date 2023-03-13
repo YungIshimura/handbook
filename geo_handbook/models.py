@@ -50,6 +50,10 @@ class CompanyAddress(models.Model):
         default=False
     )
 
+    def __str__(self):
+        return self.city
+    
+
 class SRO(models.Model):
     full_name = models.CharField(
         'Название СРО',
