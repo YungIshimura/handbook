@@ -52,11 +52,11 @@ class CompanyAddress(models.Model):
 
     def __str__(self):
         return self.city
-    
+
 
 class SRO(models.Model):
     full_name = models.CharField(
-        'Название СРО полное',
+        'Название СРО',
         max_length=500
     )
 
