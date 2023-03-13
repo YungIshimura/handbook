@@ -5,26 +5,6 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/card.css' %}"/>
     <div class="page">
-        <div class="header">
-            <header>
-                <div class="navbar">
-                    <div class="navbar__container">
-                        <a href={% url 'geo_handbook:index' %} class="navbar-brand d-flex align-items-center
-                           navbar__logo">
-                        <span>ЛОГО</span>
-                        </a>
-                        <div class="login-container">
-                            <a href="#"><span class="login">Вход для организаций</span></a>
-                        </div>
-                        <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon custom-toggler"></span>
-                        </button>
-                    </div>
-                </div>
-            </header>
-        </div>
 
         <a href={% url 'geo_handbook:index' %}><span class="arrow-back"><img
                 src="https://img.icons8.com/ios/50/null/long-arrow-left.png"><span style="margin-left: 8px;">К списку организаций</span></span></a>

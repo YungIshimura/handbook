@@ -8,7 +8,7 @@
     <title>{% block list %}{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
 </head>
 <body>
 <section>
@@ -34,7 +34,7 @@
 {% block content %}
 {% endblock %}
 
-<section id="footer">
+<section id="footer" class="popa">
     <footer class="footer">
         <span class='navbar-brand d-flex align-items-center navbar__logo' style="margin-left: 60px;">ЛОГО</span>
         <div class="text">
