@@ -182,7 +182,7 @@ class Branches(models.Model):
     )
 
     def __str__(self):
-        return f'Филиал компании - {self.company} {self.city} {self.street} {self.house_number}'
+        return f'Филиал компании - {self.company} {self.address}'
 
     class Meta:
         verbose_name = 'Филиал'

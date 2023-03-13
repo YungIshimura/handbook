@@ -1,5 +1,7 @@
 from django import forms
-from geo_handbook.models import Company, TypeWork, CompanySpecialization, Branches, Director, Employee
+from django.core.validators import MaxValueValidator
+
+from geo_handbook.models import Company, TypeWork, CompanySpecialization, Branches, Director, Employee, CompanyAddress
 from django.core.exceptions import ValidationError
 
 
@@ -10,10 +12,10 @@ def validate_legal_address_postcode(value):
 
 # форма редактирования данных о компании
 class CompanyUpdateForm(forms.ModelForm):
-
     class Meta:
         model = Company
         fields = '__all__'
+
 
 #     # Добавляем поля для редактирования связанных моделей
 #     # legal_address_postcode = forms.CharField(
@@ -97,18 +99,40 @@ class CompanyUpdateForm(forms.ModelForm):
 
 # Форма добавления филиала компании
 class BranchCreateForm(forms.ModelForm):
+    # поля для создания нового адреса
+    city = forms.CharField(label='Город нахождения компании', max_length=50)
+    postcode = forms.IntegerField(label='Почтовый индекс', validators=[MaxValueValidator(999999)])
+    region = forms.CharField(label='Субъект РФ', max_length=120, required=False)
+    district = forms.CharField(label='Район города', max_length=100, required=False)
+    street = forms.CharField(label='Улица', max_length=150)
+    house_number = forms.IntegerField(label='Номер дома')
+
     class Meta:
         model = Branches
-        fields = '__all__'
+        fields = ('company', )
+        widgets = {
+            'company': forms.HiddenInput(),
+        }
 
+    def save(self, commit=True):
+        # сохраняем данные из формы в базу данных
+        instance = super().save(commit=False)
 
-#     class Meta:
-#         model = Branches
-#         fields = ('postcode', 'city', 'street', 'house_number')
-#         widgets = {
-#             field: forms.TextInput(attrs={'class': 'form-control'})
-#             for field in fields
-#         }
+        # создаем новый адрес
+        address = CompanyAddress.objects.create(
+            city=self.cleaned_data['city'],
+            postcode=self.cleaned_data['postcode'],
+            region=self.cleaned_data['region'],
+            district=self.cleaned_data['district'],
+            street=self.cleaned_data['street'],
+            house_number=self.cleaned_data['house_number']
+        )
+        instance.address = address
+
+        if commit:
+            instance.save()
+
+        return instance
 
 
 # Форма добавления директора филиала

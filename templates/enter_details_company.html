@@ -147,12 +147,28 @@
                             <div class="frame-frame35"></div>
                             <br/>
 
-                            <div class="frame-text16">Адреса филиалов</div>
-                            <div class="frame-frame35"></div>
-                            <br/>
-                            {% for branche in company.branches.all %}
+                            {% if company.branches.all.exists %}
+                                {% for branche in company.branches.all %}
+                                    <div class="frame-text16">Адреса филиалов</div>
+                                    <div class="frame-frame25">
+                                        {{ branche.address.postcode }}, {{ branche.address.region }},
+                                        {{ branche.address.city }},
+                                        {{ branche.address.district }}, {{ company.address.street }},
+                                        {{ branche.address.house_number }}
+                                    </div>
+                                    <a href="" class="delete-branches-btn"
+                                       data-branche-pk="{{ branche.pk }}"
+                                       data-delete-url="{% url 'users:delete_branches' branche.pk %}"
+                                       data-toggle="modal"
+                                       data-target="#confirm-delete-branches-modal">Удалить</a>
+                                {% endfor %}
+                            {% else %}
+                                <div class="frame-text16">Адреса филиалов</div>
+                                <div class="frame-frame25">-</div>
+                                <br/>
+                            {% endif %}
+                            <a href="" data-toggle="modal" data-target="#add-branches-modal">+ Добавить филиал</a>
 
-                            {% endfor %}
                         </div>
 
                     </div>
@@ -220,9 +236,13 @@
 
     {% include 'inc/_confirm_delete_employee_modal.html' %}
 
+    {% include 'inc/_confirm_delete_branches_modal.html' %}
+
     {% include 'inc/_edit_employee_company_modal.html' %}
 
     {% include 'inc/_add_employee_company_modal.html' %}
+
+    {% include 'inc/_add_branches_modal.html' %}
 
     <script src="{% static 'js/enter_details_company.js' %}"></script>
     <script>

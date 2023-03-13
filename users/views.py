@@ -16,6 +16,7 @@ def update_company(request, pk):
     form = CompanyUpdateForm(request.POST or None, instance=company)
     add_employee_form = EmployeeCreateForm()
     edit_employee_form = EmployeeCreateForm()
+    add_branch_form = BranchCreateForm()
 
     if request.method == 'POST':
         if form.is_valid():
@@ -26,6 +27,7 @@ def update_company(request, pk):
         'form': form,
         'add_employee_form': add_employee_form,
         'edit_employee_form': edit_employee_form,
+        'add_branch_form': add_branch_form,
         'company': company,
         'employees': employees
     }
@@ -57,16 +59,22 @@ def update_branch(request, pk):
     return render(request, 'branches/update_branch.html', context)
 
 
-# Удалить филиал и связанного с ним директора
+# Удалить филиал
+@require_POST
 def delete_branch(request, pk):
-    branch = get_object_or_404(Branches, pk=pk)
+    try:
+        branch = get_object_or_404(Branches, pk=pk)
 
-    if request.method == 'POST':
-        branch.director.all().delete()  # Удалить директоров филиала
-        branch.delete()  # Удалить филиал
-        return redirect('users:edit_company', pk=branch.company.pk)
+        # удаляем адрес и филиал
+        branch.address.delete()
+        branch.delete()
 
-    return render(request, 'branches/delete_branch.html', {'branch': branch})
+        data = {'success': True}
+
+    except Exception as e:
+        data = {'error': str(e)}
+
+    return JsonResponse(data)
 
 
 # Добавить филиал компании и директора филиала

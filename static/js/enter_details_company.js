@@ -46,11 +46,11 @@ $(document).ready(function () {
     $('#confirm-delete-employee-modal').on('show.bs.modal', function (e) {
         let employeePk = $(e.relatedTarget).data('employee-pk');
         let deleteUrl = $(e.relatedTarget).data('delete-url');
-        $('#confirm-delete-btn').data('employee-pk', employeePk);
-        $('#confirm-delete-btn').data('delete-url', deleteUrl);
+        $('#confirm-delete-employee-btn').data('employee-pk', employeePk);
+        $('#confirm-delete-employee-btn').data('delete-url', deleteUrl);
     });
 
-    $('#confirm-delete-btn').click(function () {
+    $('#confirm-delete-employee-btn').click(function () {
         let employeePk = $(this).data('employee-pk');
         let deleteUrl = $(this).data('delete-url');
         let csrftoken = getCookie('csrftoken');
@@ -66,6 +66,41 @@ $(document).ready(function () {
                     $('#confirm-delete-employee-modal').modal('hide');
                     location.reload();
                 }
+            }
+        });
+    });
+});
+
+
+// удаление филиала
+$(document).ready(function () {
+    $('#confirm-delete-branches-modal').on('show.bs.modal', function (e) {
+        let branchePk = $(e.relatedTarget).data('branche-pk');
+        let deleteUrl = $(e.relatedTarget).data('delete-url');
+        $('#confirm-delete-branches-btn').data('branche-pk', branchePk);
+        $('#confirm-delete-branches-btn').data('delete-url', deleteUrl);
+    });
+
+    $('#confirm-delete-branches-btn').click(function () {
+        let branchePk = $(this).data('branche-pk');
+        let deleteUrl = $(this).data('delete-url');
+        let csrftoken = getCookie('csrftoken');
+        $.ajax({
+            type: 'POST',
+            url: deleteUrl,
+            data: {
+                csrfmiddlewaretoken: csrftoken,
+            },
+            success: function (data) {
+                if (data.success) {
+                    $('#confirm-delete-branches-modal').modal('hide');
+                    location.reload();
+                } else if (data.error) {
+                    $('.modal-body').html('Ошибка: ' + data.error);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('.modal-body').html('Ошибка: ' + textStatus);
             }
         });
     });
