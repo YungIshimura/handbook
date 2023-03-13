@@ -170,12 +170,12 @@
 .company-container {
     position: relative;
     width: 480px;
-    height: 150px;
+    height: 270px;
     border: 1px solid #d2d1d1;
 }
 .company{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .company__data-text {
@@ -197,4 +197,13 @@
     background-color: rgba(242, 242, 242, 1);
     justify-content: space-around;
     align-items: center;
+}
+.text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 48px;
+    display:flex;
+    gap:45px;
 }

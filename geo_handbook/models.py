@@ -17,6 +17,39 @@ class TypeWork(models.Model):
         verbose_name_plural = 'Типы работ'
 
 
+class CompanyAddress(models.Model):
+    city = models.CharField(
+        'Город нахождения компании',
+        max_length=50
+    )
+    postcode = models.PositiveIntegerField(
+        'Почтовый индес',
+        validators=[MaxValueValidator(999999)]
+    )
+    region = models.CharField(
+        'Субъект РФ',
+        max_length=120,
+        blank=True,
+        null=True
+    )
+    district = models.CharField(
+        'Район города',
+        max_length=100,
+        blank=True,
+        null=True
+    )
+    street = models.CharField(
+        'Улица',
+        max_length=150,
+    )
+    house_number = models.PositiveIntegerField(
+        'Номер дома'
+    )
+    is_legal = models.BooleanField(
+        'Юридический адрес компании',
+        default=False
+    )
+
 class SRO(models.Model):
     full_name = models.CharField(
         'Название СРО полное',
@@ -45,32 +78,6 @@ class SRO(models.Model):
         verbose_name_plural = 'Саморегулируемые организации'
 
 
-class LegalAddress(models.Model):
-    postcode = models.PositiveIntegerField(  # TODO написать валидатор для почтового индекса
-        'Почтовый индекс',
-        validators=[MaxValueValidator(999999)]
-    )
-    city = models.CharField(
-        'Город',
-        max_length=80
-    )
-    street = models.CharField(
-        'Улица',
-        max_length=200
-    )
-    house_number = models.PositiveIntegerField(
-        'Номер дома',
-        validators=[MinValueValidator(1)]
-    )
-
-    def __str__(self):
-        return f'{self.city} {self.street} {self.house_number}'
-
-    class Meta:
-        verbose_name = 'Юр. адресс'
-        verbose_name_plural = 'Юр. адреса'
-
-
 class Company(models.Model):
     short_name = models.CharField(
         'Короткое название компании',
@@ -86,13 +93,13 @@ class Company(models.Model):
         blank=True,
         null=True
     )
-    city = models.CharField(
-        'Город',
-        max_length=30
-    )
-    area = models.CharField(
-        'Район',
-        max_length=80
+    address = models.ForeignKey(
+        CompanyAddress,
+        related_name='companys',
+        on_delete=models.CASCADE,
+        verbose_name='Место',
+        blank=True,
+        null=True
     )
     rating = models.PositiveIntegerField(
         'Рейтинг компании',
@@ -145,11 +152,6 @@ class Company(models.Model):
         'Сайт компании',
         max_length=128,
     )
-    legal_address = models.OneToOneField(
-        LegalAddress,
-        on_delete=models.CASCADE,
-        verbose_name='Юридический адрес'
-    )
 
     def __str__(self):
         return f'{self.full_name}'
@@ -160,21 +162,13 @@ class Company(models.Model):
 
 
 class Branches(models.Model):
-    postcode = models.PositiveBigIntegerField(  # TODO написать валидатор для почтового индекса
-        'Почтовый индекс',
-        validators=[MaxValueValidator(999999)]
-    )
-    city = models.CharField(
-        'Город',
-        max_length=80
-    )
-    street = models.CharField(
-        'Улица',
-        max_length=200
-    )
-    house_number = models.PositiveIntegerField(
-        'Номер дома',
-        validators=[MinValueValidator(1)]
+    address = models.ForeignKey(
+        CompanyAddress,
+        on_delete=models.CASCADE,
+        related_name='branches',
+        verbose_name='Aдресс',
+        blank=True,
+        null=True
     )
     company = models.ForeignKey(
         Company,

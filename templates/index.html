@@ -1,58 +1,46 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block list %}Главная{% endblock %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href={% static 'css/index.css'%}>
-    <script src={% static 'js/index.js' %}>></script>
-</head>
-<body>
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+    <script src="{% static "js/index.js" %}"></script>
     <section>
-        <header>
-            <div class="navbar">
-                <div class="navbar__container">
-                    <a href="{% url 'geo_handbook:index'%}" class="navbar-brand d-flex align-items-center navbar__logo">
-                    <span>ЛОГО</span>
-                    </a>
-                    <div class="login-container">
-                        <a href="#"><span class="login">Вход для организаций</span></a>
-                    </div>
-                    <button class="navbar-toggler toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon custom-toggler"></span>
-                    </button>
+        <div class="region-area">
+            <div class="region-area__text">
+                <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
+                <br>
+                <div class="region-area__select-region">
+                    <form method='POST'>
+                        {% csrf_token %}
+                        <span class="select-region__text">Ваш регион <span id='city'
+                                                                           is-moscow='true'>Москва</span>?</span>
+                        <button id='region' type='submit' name='city' value='Москва' class="select-region__text--button"
+                                style="width: 87px;height: 40px;">Да
+                        </button>
+                        <a class="select-region__text--button1" style="color: #219653;" onClick='changeRegion(this)'>Выбрать
+                            другой регион</a>
+                    </form>
                 </div>
-            </div>
-        </header>
-    </section>  
-    <section>
-            <div class="region-area">
-                <div class="region-area__text">
-                    <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
-                    <br>
-                    <div class="region-area__select-region">
-                        <span class="select-region__text">Ваш регион Москва?</span>
-                        <button class="select-region__text--button" style="width: 87px;height: 40px;">Да</button>
-                        <button class="select-region__text--button" style="width: 278px;height: 40px;">Выбрать другой регион</button>
-                    </div>
-                    <div class="search-area">
-                        <form class="search-form" method='POST'>
-                            {% csrf_token %}
-                            <input class='search' type="search" id="site-search" name="search" placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
-                            <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span></button>
-                            {% if messages%}
-                                <div id='message'; style='display: block; width: 300px; height: auto; border: 1px solid black; margin-left:400px; margin-top: 25px; background-color: lightgray;'>
-                                    <span class='x-button' style='display:block; cursor:pointer; width:5px; margin-left:280px;' onClick='Vanish()'>&#x2715</span>
-                                    {% for message in messages%}
-                                        <span style='display:flex; margin-top:10px;'>{{message}}</span>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        </form>
-                    </div>
+                <div class="search-area">
+                    <form class="search-form" method='POST'>
+                        {% csrf_token %}
+                        <input class='search' type="search" id="site-search" name="search"
+                               placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
+                        <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span>
+                        </button>
+                        {% if messages %}
+                            <div id='message' ;
+                                 style='display: block; width: 300px; height: auto; border: 1px solid black; margin-left:400px; margin-top: 25px; background-color: lightgray;'>
+                                <span class='x-button'
+                                      style='display:block; cursor:pointer; width:5px; margin-left:280px;'
+                                      onClick='Vanish()'>&#x2715</span>
+                                {% for message in messages %}
+                                    <span style='display:flex; margin-top:10px;'>{{ message }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </form>
                 </div>
             </div>
         </div>
@@ -87,27 +75,16 @@
                 <h3 class="card__confirm-data--title">Подтвердите данные своей организации!</h3>
                 <div class="card__confirm-data--text">
                 <span>
-                    Сервис использует авторизацию пользователя по квалифицированному сертификату ключа проверки электронной подписи, 
-                    выданному Удостоверяющим центром, аккредитованным в сети доверенных удостоверяющих центров Министерства связи и массовых 
-                    коммуникаций России. 
-                    Редактирование невозможно, если технические требования не выполнены или не пройдена проверка подлинности 
+                    Сервис использует авторизацию пользователя по квалифицированному сертификату ключа проверки электронной подписи,
+                    выданному Удостоверяющим центром, аккредитованным в сети доверенных удостоверяющих центров Министерства связи и массовых
+                    коммуникаций России.
+                    Редактирование невозможно, если технические требования не выполнены или не пройдена проверка подлинности
                     электронной подписи.
                 </span>
-                <br>
-                <button class="card__confirm-button" type="submit">Внести данные</button>
+                    <br>
+                    <button class="card__confirm-button" type="submit">Внести данные</button>
+                </div>
             </div>
         </div>
     </section>
-    <section id="footer">
-        <footer class="footer">
-            <span class='navbar-brand d-flex align-items-center navbar__logo' style="margin-left: 60px;">ЛОГО</span>
-            <div class="text">
-                <a href={% url 'geo_handbook:about' %}><span style="color: #219653;">О сервисе</span></a>
-                <span>Как мы определяем актуальность</span>
-                <span>Источники данных</span>
-                <span style="color: #219653;">Для организаций</span>
-            </div>
-        </footer>
-    </section>
-</body>
-</html>
+{% endblock %}

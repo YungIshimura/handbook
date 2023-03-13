@@ -7,12 +7,17 @@ from django.contrib import messages
 
 def view_index(request):
     search_vector = SearchVector('short_name', 'inn', 'ogrn', 'director')
-    if request.method == 'POST':
+    if request.POST.get('search'):
         company = Company.objects.annotate(search=search_vector).filter(search=request.POST.get('search'))
         if company:
             return HttpResponseRedirect(reverse('geo_handbook:card', args=[company[0].id]))
         else:
             messages.error(request, 'По данному запросу ничего не найдено')
+
+    if request.POST.get('city'):
+        request.session['city'] = request.POST.get('city')
+
+        return HttpResponseRedirect(reverse('geo_handbook:region'))
 
     return render(request, 'index.html')
 
@@ -64,12 +69,31 @@ def view_about(request):
     return render(request, 'about.html')
 
 
+def view_rates(request):
+    return render(request, 'rates.html')
+
+
 def view_select(request):
     return render(request, 'select_city.html')
 
 
 def view_selected_region(request):
-    return render(request, 'selected_region.html')
+    selected_city = request.session['city']
+    companys = Company.objects.filter(city=selected_city)
+    context = {
+        'companys': [
+            {
+                'id': company.id,
+                'name': company.short_name,
+                'work_types': [work_type.type_work for work_type in company.specializations.all()],
+                'legal_address': company.legal_address
+            }
+            for company in companys
+        ],
+        'region': request.session['city'],
+    }
+
+    return render(request, 'selected_region.html', context=context)
 
 
 def view_application(request):
