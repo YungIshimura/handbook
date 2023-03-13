@@ -1,6 +1,6 @@
 from django.shortcuts import HttpResponseRedirect, redirect, render, get_object_or_404
 from django.urls import reverse
-from geo_handbook.forms import  DirectorCreateForm, EmployeeCreateForm
+from geo_handbook.forms import DirectorCreateForm, EmployeeCreateForm
 from geo_handbook.models import Company, Branches, Employee, CompanyAddress
 from django.contrib.postgres.search import SearchVector
 from django.contrib import messages
@@ -20,7 +20,7 @@ def view_index(request):
         request.session['city'] = request.POST.get('city')
 
         return HttpResponseRedirect(reverse('geo_handbook:region'))
-    
+
     if 'term' in request.GET:
         qs = CompanyAddress.objects.filter(city__icontains=request.GET.get('term'))
         companys = []
@@ -42,15 +42,15 @@ def view_card(request, company_id):
         'full_name': company.full_name,
         'inn': company.inn,
         'ogrn': company.ogrn,
-        'city': company.legal_address.city,
+        # 'city': company.legal_address.city,
         'rating': company.rating,
         'sro': company.sro,
         'sro_date': company.sro_date,
         'sro_number': company.sro_number,
         'sro_license_date': company.license_date,
-        'street': company.legal_address.street,
-        'index': company.legal_address.postcode,
-        'house_number': company.legal_address.house_number,
+        # 'street': company.legal_address.street,
+        # 'index': company.legal_address.postcode,
+        # 'house_number': company.legal_address.house_number,
         'work_types': [work_type.type_work for work_type in company.specializations.all()],
         'directors': [director for director in company.director.all()]
     }
@@ -137,27 +137,27 @@ def view_settings_profile(request):
 
 # Редактировать филиал
 # def update_branch(request, pk):
-    # branch = get_object_or_404(Branches, pk=pk)
-    # employees = Employee.objects.filter(branches=branch)
+# branch = get_object_or_404(Branches, pk=pk)
+# employees = Employee.objects.filter(branches=branch)
 
-    # branch_form = BranchCreateForm(request.POST or None, instance=branch)
-    # director_form = DirectorCreateForm(request.POST or None, instance=branch.director.first())
+# branch_form = BranchCreateForm(request.POST or None, instance=branch)
+# director_form = DirectorCreateForm(request.POST or None, instance=branch.director.first())
 
-    # if request.method == 'POST':
+# if request.method == 'POST':
 
-    #     if branch_form.is_valid() and director_form.is_valid():
-    #         branch_form.save()
-    #         director_form.save()
-    #         return redirect('geo_handbook:edit_company', pk=branch.company.pk)
+#     if branch_form.is_valid() and director_form.is_valid():
+#         branch_form.save()
+#         director_form.save()
+#         return redirect('geo_handbook:edit_company', pk=branch.company.pk)
 
-    # context = {
-    #     'branch_form': branch_form,
-    #     'director_form': director_form,
-    #     'branch': branch,
-    #     'employees': employees
-    # }
+# context = {
+#     'branch_form': branch_form,
+#     'director_form': director_form,
+#     'branch': branch,
+#     'employees': employees
+# }
 
-    # return render(request, 'branches/update_branch.html', context)
+# return render(request, 'branches/update_branch.html', context)
 
 
 # Удалить филиал и связанного с ним директора
