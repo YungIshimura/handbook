@@ -6,11 +6,13 @@
     margin-left: 300px;
     margin-top: 20px;
 }
+
 .region-area__text {
     width: 870px;
     height: 96px;
     margin: 64px 397px 261px 53px;
 }
+
 .region-area__title {
     font-family: 'Inter';
     font-style: normal;
@@ -27,6 +29,7 @@
     margin: 25px 1087px 160px 53px;
     align-items: baseline
 }
+
 .region-area__selected-region {
     margin-top: 40px;
 }
@@ -36,17 +39,19 @@
     text-decoration: none;
     color: #219653;
 }
+
 .search-area {
     margin: 34px 93px 933px -7px;
     display: flex;
 }
+
 .search {
     width: 1132px;
     height: 80px;
     padding-left: 43px;
     border: 1px solid lightgray;
 }
-  
+
 .search-form {
     position: relative;
 }
@@ -85,6 +90,7 @@
 .request__data {
     display: flex;
 }
+
 .request__data--text {
     width: 668px;
     height: 81px;
@@ -105,12 +111,16 @@
     background-color: transparent;
     color: #219653;
     cursor: pointer;
+
 }
 
 .companys {
-    position: absolute;
-    margin: 800px 430px;
+    margin-top: 800px;
+    position: relative;
+    margin-left: 400px;
+    margin-bottom: 50px;
 }
+
 .companys--title {
     font-family: 'Inter';
     font-style: normal;
@@ -120,13 +130,15 @@
     color: #4F4F4F;
     margin-left: 15px;
 }
+
 .company-container {
     position: relative;
     width: 480px;
     height: 270px;
     border: 1px solid #d2d1d1;
 }
-.company{
+
+.company {
     display: flex;
     justify-content: space-between;
 }
@@ -146,6 +158,6 @@
     font-weight: 500;
     font-size: 19px;
     line-height: 48px;
-    display:flex;
-    gap:45px;
+    display: flex;
+    gap: 45px;
 }

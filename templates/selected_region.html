@@ -4,66 +4,66 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/selected_region.css' %}"/>
-    <div class="region-area">
-        <div class="region-area__text">
-            <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
-            <div class="region-area__selected-region">
+        <div class="region-area">
+            <div class="region-area__text">
+                <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
+                <div class="region-area__selected-region">
                 <span class="region" style="margin-right: 15px;"><img
                         src="https://img.icons8.com/ios/20/null/place-marker--v1.png"/ style="margin-right: 5px;">{{ region }}</span>
-                <a href="#"><span class="another-region">Выбрать другой регион</span></a>
-            </div>
-            <div class="search-area">
-                <form class="search-form">
-                    <input class='search' type="search" id="site-search" name="search"
-                           placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
-                    <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span></button>
-                </form>
+                    <a href="#"><span class="another-region">Выбрать другой регион</span></a>
+                </div>
+                <div class="search-area">
+                    <form class="search-form">
+                        <input class='search' type="search" id="site-search" name="search"
+                               placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
+                        <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="request">
-        <div class="request__data">
-            <div class="request__data--text">
-                <span>Ищите услуги проверенных компаний? Создайте задание и в 1 клик отправьте его лучшим компаниям региона. Получайте заявки и выбирайте лучшее предложение.</span>
+        <div class="request">
+            <div class="request__data">
+                <div class="request__data--text">
+                    <span>Ищите услуги проверенных компаний? Создайте задание и в 1 клик отправьте его лучшим компаниям региона. Получайте заявки и выбирайте лучшее предложение.</span>
+                </div>
+                <button class="request__data--button">Создать заявку</button>
             </div>
-            <button class="request__data--button">Создать заявку</button>
         </div>
-    </div>
-
-    <div class="companys">
-        <span class="companys--title">Лучшие компании региона</span>
-        <br>
-        <br>
-        <div class="container overflow-hidden">
-            <div class="row gx-5">
-                {% for company in companys %}
-                    <div class="col" onclick="location.href='{% url 'geo_handbook:card' company.id %}'" ;
-                         style='cursor:pointer;'>
-                        <div class="p-3 company-container">
-                            <div class="company" style='height:80px;'>
-                                <h4 style='width:auto'>{{ company.name }}</h4>
-                                <div class="rating" style='width:120px;'>
-                                    <img src={% static 'assets/stars/black-star.svg' %}>
-                                    <img src={% static 'assets/stars/black-star.svg' %}>
-                                    <img src={% static 'assets/stars/black-star.svg' %}>
-                                    <img src={% static 'assets/stars/white-star.svg' %}>
-                                    <img src={% static 'assets/stars/white-star.svg' %}>
+        <div class="companys">
+            <span class="companys--title">Лучшие компании региона</span>
+            <br>
+            <br>
+            <div class="container overflow-hidden">
+                <div class="row gx-5">
+                    {% for company in companys %}
+                        <div class="col mb-5" onclick="location.href='{% url 'geo_handbook:card' company.id %}'" ;
+                             style='cursor:pointer;'>
+                            <div class="p-3 company-container">
+                                <div class="company" style='height:80px;'>
+                                    <h4 style='width:auto'>{{ company.name }}</h4>
+                                    <div class="rating" style='width:120px;'>
+                                        <img src={% static 'assets/stars/black-star.svg' %}>
+                                        <img src={% static 'assets/stars/black-star.svg' %}>
+                                        <img src={% static 'assets/stars/black-star.svg' %}>
+                                        <img src={% static 'assets/stars/white-star.svg' %}>
+                                        <img src={% static 'assets/stars/white-star.svg' %}>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="company__data">
+                                <div class="company__data">
                                 <span class="company__address" style='display:block; width:100%; height:60px;'>
                                     <span class='company__data-text'>Юридический адрес: </span>{{ company.legal_address.postcode }}, {{ company.legal_address.city }}, {{ company.legal_address.street }} д.{{ company.legal_address.house_number }}</span>
-                                <span class='company__data-text'>Виды работ: </span>
-                                {% for work_type in company.work_types %}
-                                    {{ work_type }} |
-                                {% endfor %}
-                                </span>
-                                </span>
+                                    <span class='company__data-text'>Виды работ: </span>
+                                    {% for work_type in company.work_types %}
+                                        {{ work_type }} |
+                                    {% endfor %}
+                                    </span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
             </div>
         </div>
     </div>
