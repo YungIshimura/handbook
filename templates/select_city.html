@@ -4,10 +4,20 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/select_city.css' %}"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <div class="search-area">
         <form class="search-form">
-            <input class='search' type="search" id="site-search" name="search" placeholder="Город или регион">
+            <input class='search' type="search" id="city__search" name="city__search" placeholder="Город или регион">
             <button type="submit" class="search-button"><span class="search-button--text">ВЫБРАТЬ</span></button>
         </form>
     </div>
+    <script>
+        $(function () {
+            $("#city__search").autocomplete({
+                source: '{% url 'geo_handbook:select_city' %}',
+                minLength: 2
+            });
+        });
+    </script>
 {% endblock %}
