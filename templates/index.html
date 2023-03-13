@@ -4,7 +4,7 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
-    <script src="{% static "js/index.js" %}"></script>
+    <link rel="stylesheet" href="{% static 'css/select_city.css' %}"/>
     <section>
         <div class="region-area">
             <div class="region-area__text">
@@ -18,8 +18,15 @@
                         <button id='region' type='submit' name='city' value='Москва' class="select-region__text--button"
                                 style="width: 87px;height: 40px;">Да
                         </button>
-                        <a class="select-region__text--button1" style="color: #219653;" onClick='changeRegion(this)'>Выбрать
+                        <a class="select-region__text--button1" style="color: #219653;" onClick='SelectCity()'>Выбрать
                             другой регион</a>
+                    </form>
+                </div>
+                <div id='city__search--container' class="city__search-area">
+                    <form class="city__search-form">
+                        {% csrf_token %}
+                        <input class='city__search' type="search" id="city__search" name="city__search" placeholder="Город или регион">
+                        <button type="submit" class="city__search-button"><span class="city__search-button--text">ВЫБРАТЬ</span></button>
                     </form>
                 </div>
                 <div class="search-area">
@@ -87,4 +94,14 @@
             </div>
         </div>
     </section>
+    <script>
+        $(function () {
+            $("#city__search").autocomplete({
+                source: '{% url 'geo_handbook:index' %}',
+                minLength: 2
+            });
+        });
+    </script>
+    <script src="{% static "js/index.js" %}"></script>
+
 {% endblock %}

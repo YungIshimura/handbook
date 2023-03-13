@@ -1,9 +1,10 @@
 from django.shortcuts import HttpResponseRedirect, redirect, render, get_object_or_404
 from django.urls import reverse
-from geo_handbook.forms import CompanyUpdateForm, BranchCreateForm, DirectorCreateForm, EmployeeCreateForm
-from geo_handbook.models import Company, Branches, Employee
+from geo_handbook.forms import  DirectorCreateForm, EmployeeCreateForm
+from geo_handbook.models import Company, Branches, Employee, CompanyAddress
 from django.contrib.postgres.search import SearchVector
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 def view_index(request):
@@ -19,6 +20,13 @@ def view_index(request):
         request.session['city'] = request.POST.get('city')
 
         return HttpResponseRedirect(reverse('geo_handbook:region'))
+    
+    if 'term' in request.GET:
+        qs = CompanyAddress.objects.filter(city__icontains=request.GET.get('term'))
+        companys = []
+        for company in qs:
+            companys.append(company.city)
+        return JsonResponse(companys, safe=False)
 
     return render(request, 'index.html')
 
@@ -52,10 +60,6 @@ def view_card(request, company_id):
 
 def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
-
-
-def view_select_city(request):
-    return render(request, 'select_city.html')
 
 
 def view_search(request):
@@ -113,47 +117,47 @@ def view_settings_profile(request):
     return render(request, 'settings_profile.html')
 
 
-def company_update(request, pk):
-    company = get_object_or_404(Company, pk=pk)
-    employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
-    if request.method == 'POST':
-        form = CompanyUpdateForm(request.POST, instance=company)
-        if form.is_valid():
-            form.save()
-            return redirect('geo_handbook:edit_company', pk=company.pk)
-    else:
-        form = CompanyUpdateForm(instance=company)
-    context = {
-        'form': form,
-        'company': company,
-        'employees': employees
-    }
-    return render(request, 'company_update.html', context)
+# def company_update(request, pk):
+#     company = get_object_or_404(Company, pk=pk)
+#     employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
+#     if request.method == 'POST':
+#         form = CompanyUpdateForm(request.POST, instance=company)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('geo_handbook:edit_company', pk=company.pk)
+#     else:
+#         form = CompanyUpdateForm(instance=company)
+#     context = {
+#         'form': form,
+#         'company': company,
+#         'employees': employees
+#     }
+#     return render(request, 'company_update.html', context)
 
 
 # Редактировать филиал
-def update_branch(request, pk):
-    branch = get_object_or_404(Branches, pk=pk)
-    employees = Employee.objects.filter(branches=branch)
+# def update_branch(request, pk):
+    # branch = get_object_or_404(Branches, pk=pk)
+    # employees = Employee.objects.filter(branches=branch)
 
-    branch_form = BranchCreateForm(request.POST or None, instance=branch)
-    director_form = DirectorCreateForm(request.POST or None, instance=branch.director.first())
+    # branch_form = BranchCreateForm(request.POST or None, instance=branch)
+    # director_form = DirectorCreateForm(request.POST or None, instance=branch.director.first())
 
-    if request.method == 'POST':
+    # if request.method == 'POST':
 
-        if branch_form.is_valid() and director_form.is_valid():
-            branch_form.save()
-            director_form.save()
-            return redirect('geo_handbook:edit_company', pk=branch.company.pk)
+    #     if branch_form.is_valid() and director_form.is_valid():
+    #         branch_form.save()
+    #         director_form.save()
+    #         return redirect('geo_handbook:edit_company', pk=branch.company.pk)
 
-    context = {
-        'branch_form': branch_form,
-        'director_form': director_form,
-        'branch': branch,
-        'employees': employees
-    }
+    # context = {
+    #     'branch_form': branch_form,
+    #     'director_form': director_form,
+    #     'branch': branch,
+    #     'employees': employees
+    # }
 
-    return render(request, 'branches/update_branch.html', context)
+    # return render(request, 'branches/update_branch.html', context)
 
 
 # Удалить филиал и связанного с ним директора
@@ -169,33 +173,33 @@ def delete_branch(request, pk):
 
 
 # Добавить филиал компании и директора филиала
-def add_branch(request, pk):
-    company = get_object_or_404(Company, pk=pk)
+# def add_branch(request, pk):
+#     company = get_object_or_404(Company, pk=pk)
 
-    branch_form = BranchCreateForm(request.POST or None)
-    director_form = DirectorCreateForm(request.POST or None)
+#     branch_form = BranchCreateForm(request.POST or None)
+#     director_form = DirectorCreateForm(request.POST or None)
 
-    if request.method == 'POST':
+#     if request.method == 'POST':
 
-        if branch_form.is_valid() and director_form.is_valid():
-            branch = branch_form.save(commit=False)
-            branch.company = company
-            branch.save()
+#         if branch_form.is_valid() and director_form.is_valid():
+#             branch = branch_form.save(commit=False)
+#             branch.company = company
+#             branch.save()
 
-            director = director_form.save(commit=False)
-            director.company = company
-            director.branches = branch
-            director.save()
+#             director = director_form.save(commit=False)
+#             director.company = company
+#             director.branches = branch
+#             director.save()
 
-            return redirect('geo_handbook:edit_company', pk=pk)
+#             return redirect('geo_handbook:edit_company', pk=pk)
 
-    context = {
-        'branch_form': branch_form,
-        'director_form': director_form,
-        'company': company
-    }
+#     context = {
+#         'branch_form': branch_form,
+#         'director_form': director_form,
+#         'company': company
+#     }
 
-    return render(request, 'branches/add_branch.html', context)
+#     return render(request, 'branches/add_branch.html', context)
 
 
 # Добавить сотрудника компании

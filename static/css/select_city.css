@@ -1,5 +1,14 @@
 .search-area {
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+.city__search-area {
     display: flex;
+    position: absolute;
+    opacity: 0;
+    padding: 2em;
+    transition: 300ms all;
+
 }
 .search {
     width: 840px;

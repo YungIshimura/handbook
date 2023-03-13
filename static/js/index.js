@@ -3,7 +3,7 @@ function Vanish(){
 }
 
 
-function changeRegion() {
-    document.getElementById('city').innerHTML = 'Тула'
-    document.getElementById('region').value = 'Тула'
+function SelectCity() {
+    document.getElementById("city__search--container").style.cssText = 'opacity:1;'
+
 }
