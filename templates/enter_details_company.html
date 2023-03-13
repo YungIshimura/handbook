@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+
     <link rel="stylesheet" href={% static 'css/enter_details_company.css' %}>
 
 </head>
@@ -36,7 +37,7 @@
         </div>
     </header>
 </section>
-<section class="data">
+<div class="data">
     <div class="btn-group head-menu" role="group">
         <span><span class="mr-3"><a href='#' class="text-menu"><span>Основные данные</span></a></span></span>
         <span><span class="mr-3"><a href='#' class="text-menu"><span>Редактировать данные организации</span></a></span></span>
@@ -173,7 +174,7 @@
                         <label for="{{ form.sro_date.id_for_label }}" class="frame-text16">Дата решения о приеме в члены
                             СРО</label><br/>
                         <input type="text" class="frame-frame35" name="{{ form.sro_date.name }}" id="sro_date"
-                               value="{{ form.sro_date.value }}"/><br/>
+                               value="{{ form.sro_date.value }}" data-sro-date="{{ form.sro_date.value }}"/><br/>
                         <div class="error-message">{{ form.sro_date.errors }}</div>
 
                         <label for="{{ form.sro_number.id_for_label }}" class="frame-text16">Номер решения о приеме в
@@ -186,7 +187,7 @@
                         <label for="{{ form.license_date.id_for_label }}" class="frame-text16">Дата прекращения
                             членства</label><br/>
                         <input type="text" class="frame-frame35" name="{{ form.license_date.name }}" id="license_date"
-                               value="{{ form.license_date.value }}"/><br/>
+                               value="{{ form.license_date.value }}" data-license-date="{{ form.license_date.value }}"/><br/>
                         <div class="error-message">{{ form.license_date.errors }}</div>
 
                         {{ form.legal_address.as_hidden }}
@@ -232,48 +233,32 @@
                                     <div>
                                         <h5>
                                             {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
-                                            <a href="{% url 'users:update_employee_company' employee.pk %}"
-                                               class="text-menu">Редактировать</a>
-                                            <a href="#" class="delete-employee-btn" data-employee-id="{{ employee.pk }}"
-                                               data-toggle="modal" data-target="#confirm-delete-modal">Удалить</a>
+
+                                            <a href="#"
+                                               class="text-menu edit-employee-btn"
+                                               data-employee-pk="{{ employee.pk }}"
+                                               data-update-url="{% url 'users:update_employee_company' employee.pk %}"
+                                               data-toggle="modal"
+                                               data-target="#edit-employee-modal">Редактировать</a>
+
+
+                                            <a href="#" class="text-menu delete-employee-btn"
+                                               data-employee-pk="{{ employee.pk }}"
+                                               data-delete-url="{% url 'users:delete_employee_company' employee.pk %}"
+                                               data-toggle="modal"
+                                               data-target="#confirm-delete-employee-modal">Удалить</a>
+
                                         </h5>
                                     </div>
                                 </li>
 
-                                <div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog"
-                                     aria-labelledby="confirm-delete-modal-title" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="confirm-delete-modal-title">Подтвердить
-                                                    удаление</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Вы уверены, что хотите удалить сотрудника?
-                                                <p>{{ employee.surname }} {{ employee.name }} {{ employee.father_name }}</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                    Отмена
-                                                </button>
-                                                <button type="button" class="btn btn-danger" id="confirm-delete-btn">
-                                                    Удалить
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             {% endfor %}
                         </ul>
-                        <span><span class="mr-3"><a href='{% url 'users:add_employee_company' company.pk %}'
-                                                    class="text-menu"><span>Добавить сотрудника</span></a></span></span>
-                    </div>
 
+                        <a href="#" class="text-menu" data-toggle="modal" data-target="#add-employee-modal">Добавить
+                            сотрудника</a>
+
+                    </div>
 
                 </div>
 
@@ -282,40 +267,20 @@
         </div>
     </form>
 
+    {% include 'inc/_confirm_delete_employee_modal.html' %}
 
-</section>
-<script>
-    // календарь формы
-    $(function () {
-        $("#sro_date").datepicker({
-            dateFormat: "yy-mm-dd"
-        }).datepicker("setDate", new Date("{{ form.sro_date.value }}"));
+    {% include 'inc/_edit_employee_company_modal.html' %}
 
-        $("#license_date").datepicker({
-            dateFormat: "yy-mm-dd"
-        }).datepicker("setDate", new Date("{{ form.license_date.value }}"));
-    });
+    {% include 'inc/_add_employee_company_modal.html' %}
 
-    // удаление сотрудника
-    $(document).ready(function () {
-        var employeeIdToDelete;
+</div>
 
-        $('.delete-employee-btn').click(function () {
-            employeeIdToDelete = $(this).data('employee-id');
-        });
+    <script src="{% static 'js/enter_details_company.js' %}"></script>
+    <script>
+        let company_pk = {{ company.pk }};
+        const editCompanyUrl = "{% url 'users:edit_company' company.pk %}";
+        initDatepickers('{{ form.sro_date.value }}', '{{ form.license_date.value }}');
+    </script>
 
-        $('#confirm-delete-btn').click(function () {
-            var url = '{% url "users:delete_employee_company" 0 %}'.replace('0', employeeIdToDelete);
-            $.post(url, {'employee_id': employeeIdToDelete, csrfmiddlewaretoken: '{{ csrf_token }}'})
-                .done(function (data) {
-                    window.location.reload();
-                })
-                .fail(function (xhr, status, error) {
-                    console.log(xhr.responseText);
-                });
-        });
-    });
-
-</script>
 </body>
 </html>

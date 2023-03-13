@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (view_profile, update_company,
                     update_branch, delete_branch, add_branch, delete_employee_company, add_employee_company,
-                    update_employee_company, delete_employee_branch, update_employee_branch, add_employee_branch)
+                    update_employee_company, delete_employee_branch, update_employee_branch, add_employee_branch,
+                    get_employee_data)
 
 app_name = 'users'
 
@@ -24,4 +25,5 @@ urlpatterns = [
     # редактировать сотрудника филиала
     path('company/branches/employee/delete/<int:pk>/', delete_employee_branch, name='delete_employee_branch'),
     # удалить сотрудника филиала
+    path('get_employee_data/<int:pk>/', get_employee_data, name='get_employee_data'),  # получить данные о сотруднике
 ]
