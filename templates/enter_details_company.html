@@ -186,21 +186,31 @@
 
                             <div class="employee-info">
                                 <div class="frame-frame25">
-                                    {{ employee.surname }} {{ employee.name }} {{ employee.father_name }} {{ employee.position }}
+                                    {{ employee.surname }} {{ employee.name }} {{ employee.father_name }} {{ employee.position|truncatechars:10 }}
                                 </div>
-                                <div class="employee-fields">
+                                <div class="employee-fields hidden-field">
                                     <br/>
-                                    <div class="frame-text16 hidden-field">Телефон сотрудника</div>
-                                    <div class="frame-frame25 hidden-field">{{ employee.phone_number }}</div>
+                                    <div class="frame-text16">Телефон сотрудника</div>
+                                    <div class="frame-frame25">{{ employee.phone_number }}</div>
                                     <br/>
-                                    <div class="frame-text16 hidden-field">Электронная почта сотрудника</div>
-                                    <div class="frame-frame25 hidden-field">{{ employee.email }}</div>
+                                    <div class="frame-text16">Электронная почта сотрудника</div>
+                                    <div class="frame-frame25">{{ employee.email }}</div>
+                                    <a href=""
+                                               class="edit-employee-btn"
+                                               data-employee-pk="{{ employee.pk }}"
+                                               data-update-url="{% url 'users:update_employee_company' employee.pk %}"
+                                               data-toggle="modal"
+                                               data-target="#edit-employee-modal">Редактировать</a>
+                                    <a href="" class="delete-employee-btn"
+                                               data-employee-pk="{{ employee.pk }}"
+                                               data-delete-url="{% url 'users:delete_employee_company' employee.pk %}"
+                                               data-toggle="modal"
+                                               data-target="#confirm-delete-employee-modal">Удалить</a>
                                 </div>
                             </div><br/>
                         {% endfor %}
 
-                        <a href="">+ Добавить еще сотрудника</a>
-
+                        <a href="" data-toggle="modal" data-target="#add-employee-modal">+ Добавить еще сотрудника</a>
 
                     </div>
                 </div>
@@ -233,43 +243,6 @@
                                                 class="text-menu"><span>Добавить филиал</span></a></span></span>
                     <hr>
 
-                    <div>
-                        <h4>Сотрудники компании</h4><br>
-                    </div>
-                    <div>
-                        <ul>
-                            {% for employee in employees %}
-                                <li>
-                                    <div>
-                                        <h5>
-                                            {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
-
-                                            <a href="#"
-                                               class="text-menu edit-employee-btn"
-                                               data-employee-pk="{{ employee.pk }}"
-                                               data-update-url="{% url 'users:update_employee_company' employee.pk %}"
-                                               data-toggle="modal"
-                                               data-target="#edit-employee-modal">Редактировать</a>
-
-
-                                            <a href="#" class="text-menu delete-employee-btn"
-                                               data-employee-pk="{{ employee.pk }}"
-                                               data-delete-url="{% url 'users:delete_employee_company' employee.pk %}"
-                                               data-toggle="modal"
-                                               data-target="#confirm-delete-employee-modal">Удалить</a>
-
-                                        </h5>
-                                    </div>
-                                </li>
-
-                            {% endfor %}
-                        </ul>
-
-                        <a href="#" class="text-menu" data-toggle="modal" data-target="#add-employee-modal">Добавить
-                            сотрудника</a>
-
-                    </div>
-
                 </div>
 
             </div>
@@ -289,28 +262,6 @@
 <script>
     let company_pk = {{ company.pk }};
     const editCompanyUrl = "{% url 'users:edit_company' company.pk %}";
-    // получить все элементы с классом toggle-fields
-    var toggleFields = document.querySelectorAll(".toggle-fields");
-
-    // цикл по всем элементам toggle-fields
-    toggleFields.forEach(function (toggleField) {
-        // получить следующий элемент после toggleFields и добавить класс employee-fields
-        var employeeFields = toggleField.nextElementSibling.querySelector('.employee-fields');
-
-        // добавить обработчик событий для кликов на элемент toggleFields
-        toggleField.addEventListener("click", function () {
-            // проверить, отображается ли уже employeeFields, и изменить его стиль соответственно
-            if (employeeFields.style.display === "block") {
-                employeeFields.style.display = "none";
-                toggleField.querySelector(".arrow").innerHTML = "&#9660;";
-            } else {
-                employeeFields.style.display = "block";
-                toggleField.querySelector(".arrow").innerHTML = "&#9650;";
-            }
-        });
-    });
-
-    initDatepickers('{{ form.sro_date.value }}', '{{ form.license_date.value }}');
 </script>
 
 </body>

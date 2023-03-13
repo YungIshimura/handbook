@@ -1,13 +1,28 @@
-// календарь формы
-function initDatepickers(sroDate, licenseDate) {
-    $("#sro_date").datepicker({
-        dateFormat: "yy-mm-dd"
-    }).datepicker("setDate", new Date(sroDate));
+// скрытие полей с телефоном и почтой сотрудника
+function toggleEmployeeFields() {
+    // получить все элементы с классом toggle-fields
+    var toggleFields = document.querySelectorAll(".toggle-fields");
 
-    $("#license_date").datepicker({
-        dateFormat: "yy-mm-dd"
-    }).datepicker("setDate", new Date(licenseDate));
+    // цикл по всем элементам toggle-fields
+    toggleFields.forEach(function (toggleField) {
+        // получить следующий элемент после toggleFields и добавить класс employee-fields
+        var employeeFields = toggleField.nextElementSibling.querySelector('.employee-fields');
+
+        // добавить обработчик событий для кликов на элемент toggleFields
+        toggleField.addEventListener("click", function () {
+            // проверить, отображается ли уже employeeFields, и изменить его стиль соответственно
+            if (employeeFields.style.display === "block") {
+                employeeFields.style.display = "none";
+                toggleField.querySelector(".arrow").innerHTML = "&#9660;";
+            } else {
+                employeeFields.style.display = "block";
+                toggleField.querySelector(".arrow").innerHTML = "&#9650;";
+            }
+        });
+    });
 }
+
+toggleEmployeeFields();
 
 
 // Функция для получения значения cookie

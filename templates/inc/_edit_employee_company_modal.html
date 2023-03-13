@@ -13,25 +13,25 @@
                     {% csrf_token %}
                     <label for="{{ edit_employee_form.position.id_for_label }}" class="frame-text16">Должность
                         сотрудника</label><br/>
-                    <input type="text" class="frame-frame35" name="{{ edit_employee_form.position.name }}" id="position"
+                    <input type="text" class="frame-frame25" name="{{ edit_employee_form.position.name }}" id="position"
                            value="{{ edit_employee_form.position.value }}"><br/>
                     <div class="error-message" id="edit-employee-position-error"
                          style="display: none;">{{ edit_employee_form.position.errors }}</div>
 
                     <label for="{{ edit_employee_form.surname.id_for_label }}" class="frame-text16">Фамилия</label><br/>
-                    <input type="text" class="frame-frame35" name="{{ edit_employee_form.surname.name }}" id="surname"
+                    <input type="text" class="frame-frame25" name="{{ edit_employee_form.surname.name }}" id="surname"
                            value="{{ edit_employee_form.surname.value }}"><br/>
                     <div class="error-message" id="edit-employee-surname-error"
                          style="display: none;">{{ edit_employee_form.surname.errors }}</div>
 
                     <label for="{{ edit_employee_form.name.id_for_label }}" class="frame-text16">Имя</label><br/>
-                    <input type="text" class="frame-frame35" name="{{ edit_employee_form.name.name }}" id="name"
+                    <input type="text" class="frame-frame25" name="{{ edit_employee_form.name.name }}" id="name"
                            value="{{ edit_employee_form.name.value }}"><br/>
                     <div class="error-message" id="edit-employee-name-error"
                          style="display: none;">{{ edit_employee_form.name.errors }}</div>
 
                     <label for="{{ edit_employee_form.father_name.id_for_label }}" class="frame-text16">Отчество</label><br/>
-                    <input type="text" class="frame-frame35" name="{{ edit_employee_form.father_name.name }}"
+                    <input type="text" class="frame-frame25" name="{{ edit_employee_form.father_name.name }}"
                            id="father_name" value="{{ edit_employee_form.father_name.value }}"><br/>
                     <div class="error-message" id="edit-employee-father_name-error"
                          style="display: none;">{{ edit_employee_form.father_name.errors }}</div>
