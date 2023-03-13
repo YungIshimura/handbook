@@ -123,7 +123,8 @@ body {
 .frame-frame25 {
     width: 375px;
     display: flex;
-    padding: 21px 19px;
+    /*padding: 21px 19px;*/
+    padding: .75rem 1rem;
     position: relative;
     align-items: flex-start;
     flex-shrink: 0;
@@ -162,25 +163,25 @@ body {
 }
 
 .modal-content {
-  text-align: center;
+    text-align: center;
 }
 
 .modal-body label {
-  display: inline-block;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  text-align: left;
+    display: inline-block;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 .modal-body input {
-  display: inline-block;
-  margin-right: 0px;
-  margin-bottom: 10px;
-  text-align: left;
+    display: inline-block;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 .error-message {
-        color: red;
-        margin-top: 5px;
-        font-size: 14px;
-    }
+    color: red;
+    margin-top: 5px;
+    font-size: 14px;
+}

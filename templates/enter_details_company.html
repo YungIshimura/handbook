@@ -72,83 +72,43 @@
                 <div class="card border border-white">
                     <div class="card-body">
 
-                        <label for="{{ form.short_name.id_for_label }}" class="frame-text16">Наименование
-                            оранизации</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.short_name.name }}"
-                               id="short_name"
-                               value="{{ form.short_name.value }}" placeholder='ООО “Ромашка”'/><br/>
-                        <div class="error-message">{{ form.short_name.errors }}</div>
+                        <div class="frame-text16">Наименование оранизации</div>
+                        <div class="frame-frame35">{{ company.short_name }}</div>
+                        <br/>
 
-                        <label for="{{ form.inn.id_for_label }}" class="frame-text16">ИНН</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.inn.name }}" id="inn"
-                               value="{{ form.inn.value }}" placeholder="525895655"/><br/>
-                        <div class="error-message">{{ form.inn.errors }}</div>
+                        <div class="frame-text16">ИНН</div>
+                        <div class="frame-frame35">{{ company.inn }}</div>
+                        <br/>
 
-                        <label for="{{ form.ogrn.id_for_label }}" class="frame-text16">ОГРН/ОГРНИП</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.ogrn.name }}" id="ogrn"
-                               value="{{ form.ogrn.value }}"
-                               placeholder="2624151254854561"/><br/>
-                        <div class="error-message">{{ form.ogrn.errors }}</div>
+                        <div class="frame-text16">ОГРН/ОГРНИП</div>
+                        <div class="frame-frame35">{{ company.ogrn }}</div>
+                        <br/>
 
-                        <label for="{{ form.legal_address_postcode.id_for_label }}" class="frame-text16">Почтовый
-                            индекс</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.legal_address_postcode.name }}"
-                               id="legal_address_postcode" value="{{ form.legal_address_postcode.value }}"
-                               placeholder="142600"/><br/>
-                        <div class="error-message">{{ form.legal_address_postcode.errors }}</div>
+                        <div class="frame-text16">Юридический адрес</div>
+                        <div class="frame-frame35">
+                            {{ company.legal_address.postcode }}, {{ company.legal_address.city }}, {{ company.legal_address.street }},
+                            д.{{ company.legal_address.house_number }}
+                        </div>
+                        <br/>
 
-                        <label for="{{ form.legal_address_city.id_for_label }}" class="frame-text16">Город</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.legal_address_city.name }}"
-                               id="legal_address_city"
-                               value="{{ form.legal_address_city.value }}"
-                               placeholder="Москва"/><br/>
-                        <div class="error-message">{{ form.legal_address_city.errors }}</div>
+                        <div class="frame-text16">ФИО и должность руководителя</div>
+                        <div class="frame-frame35">
+                            {% if company.director.first %}
+                                {{ company.director.first.position }} {{ company.director.first.surname }}
+                                {{ company.director.first.name }} {{ company.director.first.father_name }}
+                            {% else %}
+                                Руководитель не назначен
+                            {% endif %}
+                        </div>
+                        <br/>
 
-                        <label for="{{ form.legal_address_street.id_for_label }}"
-                               class="frame-text16">Улица</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.legal_address_street.name }}"
-                               id="legal_address_street"
-                               value="{{ form.legal_address_street.value }}"
-                               placeholder="ул. Щербаковская"/><br/>
-                        <div class="error-message">{{ form.legal_address_street.errors }}</div>
+                        <div class="frame-text16">Телефон</div>
+                        <div class="frame-frame35">{{ company.phonenumber }}</div>
+                        <br/>
 
-                        <label for="{{ form.legal_address_house_number.id_for_label }}" class="frame-text16">Дом</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.legal_address_house_number.name }}"
-                               id="legal_address_house_number"
-                               value="{{ form.legal_address_house_number.value }}"
-                               placeholder="15"/><br/>
-                        <div class="error-message">{{ form.legal_address_house_number.errors }}</div>
-
-                        {% if company.director.first %}
-                            <label for="director" class="frame-text16">ФИО и должность руководителя</label><br/>
-                            <input type="text" class="frame-frame35" name="director" id="director"
-                                   value="{{ company.director.first.position }} {{ company.director.first.surname }} {{ company.director.first.name }} {{ company.director.first.father_name }}"
-                                   readonly/><br/>
-                        {% else %}
-                            <label for="director" class="frame-text16">ФИО и должность руководителя</label><br/>
-                            <input type="text" class="frame-frame35" name="director" id="director"
-                                   value="Руководитель не назначен"
-                                   readonly/><br/>
-                        {% endif %}
-
-
-                        <label for="{{ form.phonenumber.id_for_label }}" class="frame-text16">Телефон</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.phonenumber.name }}" id="phonenumber"
-                               value="{{ form.phonenumber.value }}"
-                               placeholder="+79555565588"/><br/>
-                        <div class="error-message">{{ form.phonenumber.errors }}</div>
-
-                        <label for="{{ form.email.id_for_label }}" class="frame-text16">Email</label><br/>
-                        <input type="email" class="frame-frame35" name="{{ form.email.name }}" id="email"
-                               value="{{ form.email.value }}"
-                               placeholder="romashka@yandex.ru"/><br/>
-                        <div class="error-message">{{ form.email.errors }}</div>
-
-                        <label for="{{ form.url.id_for_label }}" class="frame-text16">Сайт компании</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.url.name }}" id="url"
-                               value="{{ form.url.value }}"
-                               placeholder="https://example.com"/><br/>
-                        <div class="error-message">{{ form.url.errors }}</div>
+                        <div class="frame-text16">Email</div>
+                        <div class="frame-frame35">{{ company.email }}</div>
+                        <br/>
 
                         <div>
                             <button type="submit" class="btn-send-ap">Сохранить</button>
@@ -161,36 +121,86 @@
             <div class="col-sm-6 delimiter">
                 <div class="card border border-white">
                     <div class="card-body">
-                        <label for="{{ form.sro.id_for_label }}" class="frame-text16">Саморегулируемая
-                            организация</label><br/>
-                        <select class="frame-frame35" name="{{ form.sro.name }}" id="sro">
-                            {% for option in form.sro.field.choices %}
-                                <option value="{{ option.0 }}"
-                                        {% if option.0 == form.sro.value %}selected{% endif %}>{{ option.1 }}</option>
-                            {% endfor %}
-                        </select><br/>
-                        <div class="error-message">{{ form.sro.errors }}</div>
+                        <div class="frame-text16">Регистрационный номер в реестре СРО</div>
+                        <div class="frame-frame35">{{ company.sro_number }}</div>
+                        <br/>
 
-                        <label for="{{ form.sro_date.id_for_label }}" class="frame-text16">Дата решения о приеме в члены
-                            СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.sro_date.name }}" id="sro_date"
-                               value="{{ form.sro_date.value }}" data-sro-date="{{ form.sro_date.value }}"/><br/>
-                        <div class="error-message">{{ form.sro_date.errors }}</div>
+                        <div class="frame-text16">Дата и номер решения о приеме в члены СРО</div>
+                        <div class="frame-frame35">
+                            {% if company.sro_number and company.sro_date %}
+                                № {{ company.sro_number }} от {{ company.sro_date|date:"Y-m-d" }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                        <br/>
 
-                        <label for="{{ form.sro_number.id_for_label }}" class="frame-text16">Номер решения о приеме в
-                            члены
-                            СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.sro_number.name }}" id="sro_number"
-                               value="{{ form.sro_number.value }}" placeholder="507"/><br/>
-                        <div class="error-message">{{ form.sro_number.errors }}</div>
+                        <div class="frame-text16">Название и номер СРО</div>
+                        <div class="frame-frame35">{{ company.sro.short_name }} {{ company.sro.number }}</div>
+                        <br/>
 
-                        <label for="{{ form.license_date.id_for_label }}" class="frame-text16">Дата прекращения
-                            членства</label><br/>
-                        <input type="text" class="frame-frame35" name="{{ form.license_date.name }}" id="license_date"
-                               value="{{ form.license_date.value }}" data-license-date="{{ form.license_date.value }}"/><br/>
-                        <div class="error-message">{{ form.license_date.errors }}</div>
+                        <div class="frame-text16">Дата прекращения членства</div>
+                        <div class="frame-frame35">
+                            {% if company.license_date %}
+                                {{ company.license_date|date:"Y-m-d" }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
 
-                        {{ form.legal_address.as_hidden }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card border border-white">
+                    <div class="card-body">
+
+                        <div class="frame-text16">Телефоны организации</div>
+                        <div class="frame-frame35"></div>
+                        <br/>
+
+                        <div class="frame-text16">Email</div>
+                        <div class="frame-frame35"></div>
+                        <br/>
+
+                        <div class="frame-text16">Сайт</div>
+                        <div class="frame-frame35"></div>
+                        <br/>
+
+                        <div class="frame-text16">Адреса филиалов</div>
+                        <div class="frame-frame35"></div>
+                        <br/>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6 delimiter">
+                <div class="card border border-white">
+                    <div class="card-body">
+                        {% for employee in employees %}
+                            <div class="frame-text16 toggle-fields">
+                                ФИО и должность сотрудника
+                                <span class="arrow">&#9660;</span>
+                            </div>
+
+                            <div class="employee-info">
+                                <div class="frame-frame25">
+                                    {{ employee.surname }} {{ employee.name }} {{ employee.father_name }} {{ employee.position }}
+                                </div>
+                                <div class="employee-fields">
+                                    <br/>
+                                    <div class="frame-text16 hidden-field">Телефон сотрудника</div>
+                                    <div class="frame-frame25 hidden-field">{{ employee.phone_number }}</div>
+                                    <br/>
+                                    <div class="frame-text16 hidden-field">Электронная почта сотрудника</div>
+                                    <div class="frame-frame25 hidden-field">{{ employee.email }}</div>
+                                </div>
+                            </div><br/>
+                        {% endfor %}
+
+                        <a href="">+ Добавить еще сотрудника</a>
+
 
                     </div>
                 </div>
@@ -275,12 +285,33 @@
 
 </div>
 
-    <script src="{% static 'js/enter_details_company.js' %}"></script>
-    <script>
-        let company_pk = {{ company.pk }};
-        const editCompanyUrl = "{% url 'users:edit_company' company.pk %}";
-        initDatepickers('{{ form.sro_date.value }}', '{{ form.license_date.value }}');
-    </script>
+<script src="{% static 'js/enter_details_company.js' %}"></script>
+<script>
+    let company_pk = {{ company.pk }};
+    const editCompanyUrl = "{% url 'users:edit_company' company.pk %}";
+    // получить все элементы с классом toggle-fields
+    var toggleFields = document.querySelectorAll(".toggle-fields");
+
+    // цикл по всем элементам toggle-fields
+    toggleFields.forEach(function (toggleField) {
+        // получить следующий элемент после toggleFields и добавить класс employee-fields
+        var employeeFields = toggleField.nextElementSibling.querySelector('.employee-fields');
+
+        // добавить обработчик событий для кликов на элемент toggleFields
+        toggleField.addEventListener("click", function () {
+            // проверить, отображается ли уже employeeFields, и изменить его стиль соответственно
+            if (employeeFields.style.display === "block") {
+                employeeFields.style.display = "none";
+                toggleField.querySelector(".arrow").innerHTML = "&#9660;";
+            } else {
+                employeeFields.style.display = "block";
+                toggleField.querySelector(".arrow").innerHTML = "&#9650;";
+            }
+        });
+    });
+
+    initDatepickers('{{ form.sro_date.value }}', '{{ form.license_date.value }}');
+</script>
 
 </body>
 </html>
