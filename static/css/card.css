@@ -1,50 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
-
-.navbar__logo {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 48px;
-    color: #333333;
-}
-.navbar__container {
-    width: 1440px;
-    display: flex;
-    margin-left: 500px;
-}
-.button {
-    color: black;
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-.login {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 23px;
-    color: #219653;
-    text-decoration: none;
-}
-
-.login-container {
-    display: flex;
-    height: 80px;
-    width: 250px;
-    border: 1px solid black;
-    align-items: center;
-    justify-content: center;
-    margin-left: 600px;
-}
-
-.navbar__logo:hover {
-    color: #219653;
-}
-
 .arrow-back {
     display: block;
     margin-left: 300px;
@@ -53,14 +6,16 @@
     word-spacing: 2px;
     color: #219653
 }
-.company__info{
+
+.company__info {
     display: flex;
 }
+
 .company__data1 {
     width: 350px;
     height: 400px;
-    display: block;  
-    margin-left: 350px;  
+    display: block;
+    margin-left: 350px;
     margin-top: 70px;
 }
 
@@ -87,6 +42,7 @@
     margin-left: 65px;
     margin-top: 10px;
 }
+
 .stars {
     display: flex;
     column-gap: 4px;
@@ -136,19 +92,23 @@
     font-size: 14px;
     line-height: 23px;
 }
+
 .company__about {
     margin-top: 70px;
     margin-left: 20px;
 }
+
 .company__about--data {
     display: flex;
     flex-direction: column;
     margin-top: 31px;
     width: 721px;
 }
+
 .legal_data {
     display: flex;
 }
+
 .legal_data__company {
     display: block;
     position: absolute;
@@ -180,6 +140,7 @@
 .request__data {
     display: flex;
 }
+
 .request__data--text {
     width: 668px;
     height: 81px;
@@ -204,9 +165,12 @@
 
 .companys {
     width: 100%;
-    position: absolute;
-    margin: 340px 30px;
+    position: relative;
+    margin-top: 300px;
+    margin-bottom: 100px;
+    margin-left: 370px;
 }
+
 .companys--title {
     position: relative;
     font-family: 'Inter';
@@ -217,13 +181,15 @@
     color: #4F4F4F;
     margin-left: 400px;
 }
+
 .company-container {
     position: relative;
     width: 480px;
     height: 150px;
     border: 1px solid #d2d1d1;
 }
-.company{
+
+.company {
     display: flex;
     justify-content: space-around;
 }
@@ -239,20 +205,6 @@
 
 body {
     position: relative;
-    padding-bottom: 100px
-}
-
-.footer {
-    display: flex;
-    position: absolute;
-    margin-top: 50px;
-    margin-left: 250px;
-    height: 100px;
-    width: 1440px;
-    height: 173px;
-    background-color: rgba(242, 242, 242, 1);
-    justify-content: space-around;
-    align-items: center;
 }
 
 .text {
@@ -261,6 +213,6 @@ body {
     font-weight: 500;
     font-size: 19px;
     line-height: 48px;
-    display:flex;
-    gap:45px;
+    display: flex;
+    gap: 45px;
 }
