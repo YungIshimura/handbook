@@ -1,30 +1,31 @@
-.title-h1 {
-    text-align: center;
-    margin-top: 100px;
+.cards {
+    margin: 100px 0 0 375px;
 }
 
-h1 {
+.card__create {
     color: #333333FF;
-    width: 300px;
     height: auto;
-    position: absolute;
     font-size: 30px;
     font-style: normal;
-    font-family: Inter;
     font-weight: 500;
     line-height: 48px;
-    text-align: center;
-    margin-left: 700px;
+    margin-left: 320px;
 }
 
-.btn-send-ap {
+.application {
+    margin-left: 40px;
+    font-family: Inter;
+    font-style: normal;
+}
+
+
+.application--btn {
     color: white;
     width: 425px;
     height: auto;
     font-size: 16px;
     font-style: Regular;
     text-align: center;
-    font-family: Inter;
     font-weight: 400;
     line-height: 57px;
     border-color: transparent;
@@ -37,44 +38,41 @@ h1 {
     font-size: 14px;
     align-self: auto;
     font-style: Regular;
-    font-family: Inter;
     font-weight: 400;
     line-height: normal;
     font-stretch: normal;
 }
 
-.form-view {
-    margin-left: 250px;
+.application--form {
     padding-top: 100px;
     margin-bottom: 100px;
 }
 
-.data-input {
+.application--form__h3 {
+    font-size: 20px;
+    color: #000000;
+    margin: 10px 0 30px 0;
+}
+
+.application--form__data-input {
     width: 400px;
     height: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: #828282FF;
     font-size: 14px;
     align-self: auto;
     font-style: Regular;
-    font-family: Inter;
     font-weight: 400;
     line-height: normal;
     font-stretch: normal;
     background: white;
 }
 
-.card-body {
-    width: 320px;
-    padding-left: 2px;
-}
-
-.textarea-input {
+.application--form--textarea {
     margin-bottom: 30px;
-
 }
 
-.textarea-input-text {
+.application--form--textarea__text {
     width: 500px;
     height: 100px;
     padding-top: 20px;
@@ -93,33 +91,18 @@ h1 {
     font-size: 20px;
 }
 
-.dimensions {
+.application--form__dimensions {
     width: 150px;
     height: 50px;
     margin-bottom: 10px;
     margin-right: 10px;
 }
 
-.delimiter {
-    padding-left: 125px;
-}
-
-
-h3 {
-    font-size: 20px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    color: #000000;
-
-}
-
-.house {
+.application--form--input-group__house {
     width: 144px;
     height: 50px;
 }
 
-.input-group {
+.application--form--input-group {
     height: 20px;
 }
-
-
