@@ -53,7 +53,8 @@
 .frame-frame35 {
     width: 375px;
     display: flex;
-    padding: 21px 19px;
+    /*padding: 21px 19px;*/
+    padding: .75rem 1rem;
     position: relative;
     align-items: flex-start;
     flex-shrink: 0;
@@ -62,10 +63,12 @@
     border-width: 1px;
     background-color: #E0E0E0FF;
 }
+
 .frame-frame25 {
     width: 375px;
     display: flex;
-    padding: 21px 19px;
+    /*padding: 21px 19px;*/
+    padding: .75rem 1rem;
     position: relative;
     align-items: flex-start;
     flex-shrink: 0;
@@ -97,6 +100,39 @@
 .address-name {
     margin-top: 1112px;
 }
+
 .delimiter {
     padding-left: 80px;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.modal-body label {
+    display: inline-block;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.modal-body input {
+    display: inline-block;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.hidden-field {
+    display: none;
+}
+
+.arrow:hover {
+  cursor: pointer;
 }

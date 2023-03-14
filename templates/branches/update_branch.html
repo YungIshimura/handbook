@@ -1,29 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Внести данные</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href={% static 'css/enter_details_company.css' %}>
+
 </head>
 <body>
-<h4>{{ branch }}</h4>
-<form method="post">
-    {% csrf_token %}
-    {{ branch_form.as_p }}
-    {{ director_form.as_p }}
-    <button type="submit">Сохранить</button><hr>
-</form>
-<h4>Сотрудники филиала</h4>
-<ul>
-    {% for employee in employees %}
-        <li>
-            <div>
-                {{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
-                <a href="{% url 'geo_handbook:update_employee_branch' employee.pk %}">Редактировать</a>
-                <a href="{% url 'geo_handbook:delete_employee_branch' employee.pk %}">Удалить</a>
+<section>
+    <header>
+        <div class="navbar">
+            <div class="navbar__container">
+                <a href="#" class="navbar-brand d-flex align-items-center navbar__logo">
+                    <span>ЛОГО</span>
+                </a>
+                <div class="login-container">
+                    <a href="#"><span class="login">Вход для организаций</span></a>
+                </div>
+                <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon custom-toggler"></span>
+                </button>
             </div>
-        </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'geo_handbook:add_employee_branch' branch.pk %}">Добавить сотрудника</a>
+        </div>
+    </header>
+</section>
+<section class="data">
+    <div class="btn-group head-menu" role="group">
+        <span><span class="mr-3"><a href='#' class="text-menu"><span>Основные данные</span></a></span></span>
+        <span><span class="mr-3"><a href='#' class="text-menu"><span>Редактировать данные организации</span></a></span></span>
+        <span><span class="mr-3"><a href='#' class="text-menu"><span>Настройки профиля</span></a></span></span>
+    </div>
+
+    <form class="form-data" method="post">
+        {% csrf_token %}
+
+        <div class="row mt-5">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card border border-white">
+                    <div class="card-body">
+
+                        <label for="{{ branch_form.postcode.id_for_label }}" class="frame-text16">Почтовый
+                            индекс</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ branch_form.postcode.name }}" id="postcode"
+                               value="{{ branch_form.postcode.value }}"><br/>
+                        <div class="error-message">{{ branch_form.postcode.errors }}</div>
+
+                        <label for="{{ branch_form.city.id_for_label }}" class="frame-text16">Город</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ branch_form.city.name }}" id="city"
+                               value="{{ branch_form.city.value }}"><br/>
+                        <div class="error-message">{{ branch_form.city.errors }}</div>
+
+                        <label for="{{ branch_form.street.id_for_label }}" class="frame-text16">Улица</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ branch_form.street.name }}" id="street"
+                               value="{{ branch_form.street.value }}"><br/>
+                        <div class="error-message">{{ branch_form.street.errors }}</div>
+
+                        <label for="{{ branch_form.house_number.id_for_label }}" class="frame-text16">Номер дома</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ branch_form.house_number.name }}"
+                               id="house_number" value="{{ branch_form.house_number.value }}"><br/>
+                        <div class="error-message">{{ branch_form.house_number.errors }}</div>
+
+                        <div>
+                            <button type="submit" class="btn-send-ap">Сохранить</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6 delimiter">
+                <div class="card border border-white">
+                    <div class="card-body">
+
+                        <label for="{{ director_form.position.id_for_label }}" class="frame-text16">Должность
+                            руководителя</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ director_form.position.name }}" id="position"
+                               value="{{ director_form.position.value }}"><br/>
+                        <div class="error-message">{{ director_form.position.errors }}</div>
+
+                        <label for="{{ director_form.surname.id_for_label }}" class="frame-text16">Фамилия</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ director_form.surname.name }}" id="surname"
+                               value="{{ director_form.surname.value }}"><br/>
+                        <div class="error-message">{{ director_form.surname.errors }}</div>
+
+                        <label for="{{ director_form.name.id_for_label }}" class="frame-text16">Имя</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ director_form.name.name }}" id="name"
+                               value="{{ director_form.name.value }}"><br/>
+                        <div class="error-message">{{ director_form.name.errors }}</div>
+
+                        <label for="{{ director_form.father_name.id_for_label }}"
+                               class="frame-text16">Отчество</label><br/>
+                        <input type="text" class="frame-frame35" name="{{ director_form.father_name.name }}"
+                               id="father_name" value="{{ director_form.father_name.value }}"><br/>
+                        <div class="error-message">{{ director_form.father_name.errors }}</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm-12 mb-3 mb-sm-0">
+                <div>
+                    <h4>Сотрудники филиала</h4><br>
+                </div>
+                <ul>
+                    {% for employee in employees %}
+                        <li>
+                            <div>
+                                <h5>{{ employee.position }} {{ employee.surname }} {{ employee.name }} {{ employee.father_name }}
+                                    <a href="{% url 'users:update_employee_branch' employee.pk %}"
+                                       class="text-menu">Редактировать</a>
+                                    <a href="{% url 'users:delete_employee_branch' employee.pk %}"
+                                       class="text-menu">Удалить</a>
+                                </h5>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <span><span class="mr-3"><a href='{% url 'users:add_employee_branch' branch.pk %}'
+                                            class="text-menu"><span>Добавить сотрудника</span></a></span></span>
+            </div>
+        </div>
+
+    </form>
+</section>
 </body>
 </html>
