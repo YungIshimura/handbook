@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (view_about, view_select, view_selected_region, view_application,
                     view_enter_details_company, view_settings_profile, view_index, view_sign_up_user,
-                    view_sign_up_company, view_search, view_card_layer, #company_update
+                    view_sign_up_company, view_card_layer, #company_update
                     delete_branch, delete_employee_company, add_employee_company,
                     update_employee_company, delete_employee_branch, update_employee_branch, add_employee_branch,
                     view_card, view_profile, view_rates,
@@ -14,7 +14,6 @@ urlpatterns = [
     path('', view_index, name='index'),
     path('sign_up_user/', view_sign_up_user, name='sign_up_user'),
     path('sign_up_company/', view_sign_up_company, name='sign_up_company'),
-    path('search/', view_search, name='search'),
     path('card_layer/', view_card_layer, name='card_layer'),
     path('about/', view_about, name='about'),
     path('select/', view_select, name='select'),

@@ -9,18 +9,18 @@
     transition: 300ms all;
 
 }
-.search {
+.city__search {
     width: 840px;
     height: 60px;
     padding-left: 43px;
     border: 1px solid lightgray;
 }
   
-.search-form {
+.city__search-form {
     position: relative;
 }
 
-.search-button {
+.city__search-button {
     position: absolute;
     top: 1px;
     width: 240px;
