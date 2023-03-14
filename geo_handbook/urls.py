@@ -9,7 +9,6 @@ urlpatterns = [
     path('', view_index, name='index'),
     path('sign_up_user/', view_sign_up_user, name='sign_up_user'),
     path('sign_up_company/', view_sign_up_company, name='sign_up_company'),
-    path('search/', view_search, name='search'),
     path('card_layer/', view_card_layer, name='card_layer'),
     path('about/', view_about, name='about'),
     path('select/', view_select, name='select'),
