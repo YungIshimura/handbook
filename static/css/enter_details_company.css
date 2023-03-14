@@ -123,6 +123,13 @@
     text-align: left;
 }
 
+.modal-body select {
+    display: inline-block;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
 .error-message {
     color: red;
     margin-top: 5px;
@@ -133,6 +140,10 @@
     display: none;
 }
 
-.arrow:hover {
+.arrow-employee:hover {
+  cursor: pointer;
+}
+
+.arrow-branches:hover {
   cursor: pointer;
 }

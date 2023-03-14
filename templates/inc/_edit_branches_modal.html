@@ -1,0 +1,70 @@
+<div class="modal fade" id="edit-branches-modal" tabindex="-1" role="dialog"
+     aria-labelledby="edit-branches-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-branches-modal-label">Редактировать филиал</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Форма для добавления сотрудника -->
+                <form id="edit-branches-modal-form">
+                    {% csrf_token %}
+
+                    <label for="{{ edit_branch_address_form.region.id_for_label }}"
+                           class="frame-text16">Регион</label><br/>
+                    <select class="frame-frame25" name="{{ edit_branch_address_form.region.name }}" id="region">
+                        {% for option in edit_branch_address_form.region.field.choices %}
+                            <option value="{{ option.0 }}"
+                                    {% if option.0 == edit_branch_address_form.region.value %}selected{% endif %}>{{ option.1 }}</option>
+                        {% endfor %}
+                    </select><br/>
+                    <div class="error-message" id="edit-branches-region-error"
+                         style="display: none;">{{ edit_branch_address_form.region.errors }}</div>
+
+                    <label for="{{ edit_branch_address_form.postcode.id_for_label }}" class="frame-text16">Почтовый
+                        индекс</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_branch_address_form.postcode.name }}"
+                           id="postcode"
+                           value="{{ edit_branch_address_form.postcode.value }}"><br/>
+                    <div class="error-message" id="edit-branches-postcode-error"
+                         style="display: none;">{{ edit_branch_address_form.postcode.errors }}</div>
+
+                    <label for="{{ edit_branch_city_form.name.id_for_label }}" class="frame-text16">Название
+                        города</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_branch_city_form.name.name }}" id="name"
+                           value="{{ edit_branch_city_form.name.value }}"><br/>
+                    <div class="error-message" id="edit-branches-name-error"
+                         style="display: none;">{{ edit_branch_city_form.name.errors }}</div>
+
+                    <label for="{{ edit_branch_address_form.district.id_for_label }}" class="frame-text16">Район города</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_branch_address_form.district.name }}"
+                           id="district"
+                           value="{{ edit_branch_address_form.district.value }}"><br/>
+                    <div class="error-message" id="edit-branches-district-error"
+                         style="display: none;">{{ edit_branch_address_form.district.errors }}</div>
+
+                    <label for="{{ edit_branch_address_form.street.id_for_label }}" class="frame-text16">Улица</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_branch_address_form.street.name }}"
+                           id="street"
+                           value="{{ edit_branch_address_form.street.value }}"><br/>
+                    <div class="error-message" id="edit-branches-street-error"
+                         style="display: none;">{{ edit_branch_address_form.street.errors }}</div>
+
+                    <label for="{{ edit_branch_address_form.house_number.id_for_label }}" class="frame-text16">Номер дома/Строение</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_branch_address_form.house_number.name }}"
+                           id="house_number"
+                           value="{{ edit_branch_address_form.house_number.value }}"><br/>
+                    <div class="error-message" id="edit-branches-house_number-error"
+                         style="display: none;">{{ edit_branch_address_form.house_number.errors }}</div>
+
+                    <div>
+                        <button type="submit" class="btn-send-ap">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,29 +1,35 @@
-// скрытие полей с телефоном и почтой сотрудника
-function toggleEmployeeFields() {
-    // получить все элементы с классом toggle-fields
-    let toggleFields = document.querySelectorAll(".toggle-fields");
+// скрытие полей
+function toggleFields(className, arrowClassName) {
+    // Ищем все элементы с классом className.
+    let toggleFields = document.querySelectorAll('.' + className);
 
-    // цикл по всем элементам toggle-fields
+    // Для каждого элемента с классом className
     toggleFields.forEach(function (toggleField) {
-        // получить следующий элемент после toggleFields и добавить класс employee-fields
-        let employeeFields = toggleField.nextElementSibling.querySelector('.employee-fields');
+        // Ищем следующий элемент селектором '.hidden-field'.
+        let hiddenFields = toggleField.nextElementSibling.querySelectorAll('.hidden-field');
+        // Ищем элемент стрелки, который мы хотим поменять при переключении.
+        let arrow = toggleField.querySelector(`.${arrowClassName}`);
 
-        // добавить обработчик событий для кликов на элемент toggleFields
+         // Добавляем обработчик клика на элемент с классом className.
         toggleField.addEventListener("click", function () {
-            // проверить, отображается ли уже employeeFields, и изменить его стиль соответственно
-            if (employeeFields.style.display === "block") {
-                employeeFields.style.display = "none";
-                toggleField.querySelector(".arrow").innerHTML = "&#9660;";
-            } else {
-                employeeFields.style.display = "block";
-                toggleField.querySelector(".arrow").innerHTML = "&#9650;";
-            }
+            // Для каждого блока с классом hidden-field в следующем элементе после toggleField
+            hiddenFields.forEach(function (field) {
+                // Если блок уже виден, скрываем его и меняем стрелку.
+                if (field.style.display === "block") {
+                    field.style.display = "none";
+                    arrow.innerHTML = "&#9660;";
+                } else {
+                    // Иначе показываем блок и меняем стрелку.
+                    field.style.display = "block";
+                    arrow.innerHTML = "&#9650;";
+                }
+            });
         });
     });
 }
 
-toggleEmployeeFields();
-
+toggleFields("toggle-fields-employee", "arrow-employee");
+toggleFields("toggle-fields-branches", "arrow-branches");
 
 // Функция для получения значения cookie
 function getCookie(name) {
@@ -229,5 +235,128 @@ $(document).on('click', '.edit-employee-btn', function () {
         // Отправляем данные формы на сервер при отправке формы
         $(".error-message").hide();
         updateEmployee();
+    });
+});
+
+
+// добавить филиал
+$(document).ready(function () {
+    const addBranchesForm = $('#add-branches-modal-form');
+    const addBranchesModal = $('#add-branches-modal');
+
+    // Обработчик ошибок при отправке данных на сервер
+    function handleErrors(xhr) {
+        let errors = JSON.parse(xhr.responseText).errors;
+        if (errors) {
+            console.log(errors)
+            // Выводим ошибки валидации, если они есть
+            $.each(errors, function (key, value) {
+                console.log(key);
+                $("#" + "add-branches-" + key + "-error").text(value).show();
+            });
+        } else {
+            // Выводим общее сообщение об ошибке
+            alert('Произошла ошибка при добавлении филиала');
+        }
+    }
+
+    // Обработчик успешной отправки данных на сервер
+    function handleSuccess(data) {
+        // Закрываем модальное окно, очищаем форму и обновляем страницу
+        addBranchesModal.modal('hide');
+        addBranchesForm[0].reset();
+        location.reload();
+    }
+
+    // Функция, которая отправляет данные формы на сервер через AJAX-запрос
+    function addBranches() {
+        $.ajax({
+            url: `/users/company/edit/${company_pk}/add_branch/`,
+            method: 'POST',
+            data: addBranchesForm.serialize(),
+            success: handleSuccess,
+            error: handleErrors
+        });
+    }
+
+    // Очищаем сообщения об ошибках при каждом новом открытии формы
+    addBranchesModal.on('hidden.bs.modal', function () {
+        $(".error-message").text("").hide();
+    });
+
+    // Отправляем данные формы на сервер при отправке формы
+    addBranchesForm.submit(function (event) {
+        event.preventDefault();
+        $(".error-message").hide();
+        addBranches();
+    });
+})
+
+
+// редактировать филиал
+$(document).on('click', '.edit-branches-btn', function () {
+    let branche_pk = $(this).data('branche-pk');
+    let update_url = $(this).data('update-url');
+    let modal = $('#edit-branches-modal');
+
+    $.ajax({
+        url: `/users/get_branche_data/${branche_pk}/`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            modal.find('#region').val(data.region);
+            modal.find('#postcode').val(data.postcode);
+            modal.find('#name').val(data.city);
+            modal.find('#district').val(data.district);
+            modal.find('#street').val(data.street);
+            modal.find('#house_number').val(data.house_number);
+            modal.find('form').attr('action', update_url);
+        }
+    });
+
+    modal.find('form').off('submit').on('submit', function (e) {
+        e.preventDefault();
+        let form = $(this);
+
+        // Обработчик ошибок при отправке данных на сервер
+        function handleErrors(xhr) {
+            let errors = JSON.parse(xhr.responseText).errors;
+            if (errors) {
+                // Выводим ошибки валидации, если они есть
+                $.each(errors, function (key, value) {
+                    $("#" + "edit-branches-" + key + "-error").text(value).show();
+                });
+            } else {
+                // Выводим общее сообщение об ошибке
+                alert('Произошла ошибка при обновлении данных сотрудника');
+            }
+        }
+
+        // Обработчик успешной отправки данных на сервер
+        function handleSuccess(data) {
+            modal.modal('hide');
+            location.reload();
+        }
+
+        // Функция, которая отправляет данные формы на сервер через AJAX-запрос
+        function updateBranche() {
+            $.ajax({
+                url: update_url,
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+                success: handleSuccess,
+                error: handleErrors
+            });
+        }
+
+        // Очищаем сообщения об ошибках при каждом новом открытии формы
+        modal.on('hidden.bs.modal', function () {
+            $(".error-message").text("").hide();
+        });
+
+        // Отправляем данные формы на сервер при отправке формы
+        $(".error-message").hide();
+        updateBranche();
     });
 });
