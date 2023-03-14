@@ -12,7 +12,53 @@
                 <!-- Форма для добавления сотрудника -->
                 <form id="add-branches-modal-form">
                     {% csrf_token %}
-                        {{ add_branch_form.as_p }}
+
+                    <label for="{{ add_branch_address_form.region.id_for_label }}"
+                           class="frame-text16">Регион</label><br/>
+                    <select class="frame-frame25" name="{{ add_branch_address_form.region.name }}" id="region">
+                        {% for option in add_branch_address_form.region.field.choices %}
+                            <option value="{{ option.0 }}"
+                                    {% if option.0 == add_branch_address_form.region.value %}selected{% endif %}>{{ option.1 }}</option>
+                        {% endfor %}
+                    </select><br/>
+                    <div class="error-message" id="add-branches-region-error"
+                         style="display: none;">{{ add_branch_address_form.region.errors }}</div>
+
+                    <label for="{{ add_branch_address_form.postcode.id_for_label }}" class="frame-text16">Почтовый
+                        индекс</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_branch_address_form.postcode.name }}"
+                           id="postcode"
+                           value="{{ add_branch_address_form.postcode.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-branches-postcode-error"
+                         style="display: none;">{{ add_branch_address_form.postcode.errors }}</div>
+
+                    <label for="{{ add_branch_city_form.name.id_for_label }}" class="frame-text16">Название
+                        города</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_branch_city_form.name.name }}" id="name"
+                           value="{{ add_branch_city_form.name.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-branches-city-errors-name-error"
+                         style="display: none;">{{ add_branch_city_form.name.errors }}</div>
+
+                    <label for="{{ add_branch_address_form.district.id_for_label }}" class="frame-text16">Район города</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_branch_address_form.district.name }}"
+                           id="district"
+                           value="{{ add_branch_address_form.district.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-branches-district-error"
+                         style="display: none;">{{ add_branch_address_form.district.errors }}</div>
+
+                    <label for="{{ add_branch_address_form.street.id_for_label }}" class="frame-text16">Улица</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_branch_address_form.street.name }}"
+                           id="street"
+                           value="{{ add_branch_address_form.street.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-branches-street-error"
+                         style="display: none;">{{ add_branch_address_form.street.errors }}</div>
+
+                    <label for="{{ add_branch_address_form.house_number.id_for_label }}" class="frame-text16">Номер дома/Строение</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_branch_address_form.house_number.name }}"
+                           id="house_number"
+                           value="{{ add_branch_address_form.house_number.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-branches-house_number-error"
+                         style="display: none;">{{ add_branch_address_form.house_number.errors }}</div>
 
                     <div>
                         <button type="submit" class="btn-send-ap">Добавить</button>

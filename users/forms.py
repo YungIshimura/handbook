@@ -1,7 +1,5 @@
 from django import forms
-from django.core.validators import MaxValueValidator
-
-from geo_handbook.models import Company, TypeWork, CompanySpecialization, Branches, Director, Employee, CompanyAddress
+from geo_handbook.models import Company, Director, Employee, City, CompanyAddress
 from django.core.exceptions import ValidationError
 
 
@@ -96,43 +94,21 @@ class CompanyUpdateForm(forms.ModelForm):
 
 #     return super().save(commit=commit)
 
-
-# Форма добавления филиала компании
-class BranchCreateForm(forms.ModelForm):
-    # поля для создания нового адреса
-    city = forms.CharField(label='Город нахождения компании', max_length=50)
-    postcode = forms.IntegerField(label='Почтовый индекс', validators=[MaxValueValidator(999999)])
-    region = forms.CharField(label='Субъект РФ', max_length=120, required=False)
-    district = forms.CharField(label='Район города', max_length=100, required=False)
-    street = forms.CharField(label='Улица', max_length=150)
-    house_number = forms.IntegerField(label='Номер дома')
-
+# Форма создания адреса
+class AddressCreateForm(forms.ModelForm):
     class Meta:
-        model = Branches
-        fields = ('company', )
-        widgets = {
-            'company': forms.HiddenInput(),
-        }
+        model = CompanyAddress
+        fields = ['postcode', 'region', 'district', 'street', 'house_number']
+        widgets = {field: forms.TextInput(attrs={'class': 'form-control'}) for field in fields[:-1]}
+        widgets['region'] = forms.Select(attrs={'class': 'form-control'})
 
-    def save(self, commit=True):
-        # сохраняем данные из формы в базу данных
-        instance = super().save(commit=False)
 
-        # создаем новый адрес
-        address = CompanyAddress.objects.create(
-            city=self.cleaned_data['city'],
-            postcode=self.cleaned_data['postcode'],
-            region=self.cleaned_data['region'],
-            district=self.cleaned_data['district'],
-            street=self.cleaned_data['street'],
-            house_number=self.cleaned_data['house_number']
-        )
-        instance.address = address
-
-        if commit:
-            instance.save()
-
-        return instance
+# Форма создания города
+class CityCreateForm(forms.ModelForm):
+    class Meta:
+        model = City
+        fields = ('name', )
+        widgets = {'name': forms.TextInput(attrs={'class': 'form-control'})}
 
 
 # Форма добавления директора филиала
