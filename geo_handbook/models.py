@@ -86,12 +86,26 @@ class CompanyAddress(models.Model):
 
 class SRO(models.Model):
     full_name = models.CharField(
-        'Название СРО',
+        'Название СРО полное',
         max_length=500
     )
 
+    short_name = models.CharField(
+        'Название СРО сокращенное',
+        max_length=100,
+        null=True,
+        blank=True
+    )
+
+    number = models.CharField(
+        'Номер СРО',
+        max_length=18,
+        null=True,
+        blank=True
+    )
+
     def __str__(self):
-        return f'{self.full_name}'
+        return f'{self.short_name} {self.number}'
 
     class Meta:
         verbose_name = 'Саморегулируемая организация'
@@ -302,6 +316,16 @@ class Employee(models.Model):
         'Должность сотрудника',
         max_length=50
     )
+    phonenumber = ArrayField(PhoneNumberField(
+        'Номер телефона',
+    ),
+        blank=True,
+        null=True)
+    email = ArrayField(models.EmailField(
+        'Электронная почта'
+    ),
+        blank=True,
+        null=True)
     company = models.ForeignKey(
         Company,
         related_name='employee',

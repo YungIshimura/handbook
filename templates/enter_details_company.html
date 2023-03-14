@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="{% static 'css/enter_details_company.css' %}"/>
     <section class="data">
         <div class="btn-group head-menu" role="group">
-    <span><span class="mr-3"><a href="{% url 'geo_handbook:profile' %}" class="text-menu"><span>Основные данные</span></a></span>
+    <span><span class="mr-3"><a href="{% url 'geo_handbook:profile' %}"
+                                class="text-menu"><span>Основные данные</span></a></span>
     <span><span class="mr-3"><a href="{% url 'geo_handbook:settings_profile' %}" class="text-menu"><span>Редактировать данные организации</span></a></span>
     <span><span class="mr-3"><a href="{% url 'geo_handbook:settings_profile' %}" class="text-menu"><span>Настройки профиля</span></a></span>
     <div class="btn-group mt-5 mb-4" role="group">
@@ -27,45 +28,72 @@
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <div class="card border border-white">
                     <div class="card-body">
-                        <label for="fname" class="frame-text16">Наименование оранизации</label><br/>
-                        <input type="text" class="frame-frame35" name="FirstName" id="fname"/><br/>
-                        <label for="lname" class="frame-text16">ИНН</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">ОГРН/ОГРНИП</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">ИНН</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Юридический адрес</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">ФИО и должность руководителя</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Телефон</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Email</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Название и номер СРО</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
-                        <label for="lname" class="frame-text16">Дата прекращения членства</label><br/>
-                        <input type="text" class="frame-frame35" name="LastName" id="lname"/><br/>
+                        <div class="frame-text16">Наименование оранизации</div>
+                            <div class="frame-frame35">{{ company.short_name }}</div>
+                            <br/>
 
-                        <div>
-                            <h1>Добавить данные</h1><br>
-                        </div>
-                        <div>
-                            <label for="lname" class="frame-text16">Телефоны:</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                            <label for="lname" class="frame-text16">Email:</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                            <label for="lname" class="frame-text16">Сайт:</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn-send-ap">Сохранить</button>
-                        </div>
+                            <div class="frame-text16">ИНН</div>
+                            <div class="frame-frame35">{{ company.inn }}</div>
+                            <br/>
+
+                            <div class="frame-text16">ОГРН/ОГРНИП</div>
+                            <div class="frame-frame35">{{ company.ogrn }}</div>
+                            <br/>
+
+                            <div class="frame-text16">Юридический адрес</div>
+                            <div class="frame-frame35">
+                                {% if company.address.is_legal %}
+                                    {{ company.address.postcode }}, {{ company.address.region }},
+                                    {{ company.address.city }},
+                                    {{ company.address.district }}, {{ company.address.street }},
+                                    {{ company.address.house_number }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </div>
+                            <br/>
+
+                            <div class="frame-text16">ФИО и должность руководителя</div>
+                            <div class="frame-frame35">
+                                {% if company.director.first %}
+                                    {{ company.director.first.position }} {{ company.director.first.surname }}
+                                    {{ company.director.first.name }} {{ company.director.first.father_name }}
+                                {% else %}
+                                    Руководитель не назначен
+                                {% endif %}
+                            </div>
+                            <br/>
+
+                            <div class="frame-text16">Телефон</div>
+                            <div class="frame-frame35">
+                                {% for phonenumber in company.phonenumber %}
+                                    {{ phonenumber }}
+                                {% endfor %}
+                            </div>
+                            <br/>
+
+                            <div class="frame-text16">Email</div>
+                            <div class="frame-frame35">
+                                {% for email in company.email %}
+                                    {{ email }}
+                                {% endfor %}
+                            </div>
+                            <br/>
+
+                            {#                            <div>#}
+                            {#                                <h1>Добавить данные</h1><br>#}
+                            {#                            </div>#}
+                            {#                            <div>#}
+                            {#                                <label for="lname" class="frame-text16">Телефоны:</label>#}
+                            {#                                <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>#}
+                            {#                                <label for="lname" class="frame-text16">Email:</label>#}
+                            {#                                <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>#}
+                            {#                                <label for="lname" class="frame-text16">Сайт:</label>#}
+                            {#                                <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>#}
+                            {#                            </div>#}
+                            <div>
+                                <button type="submit" class="btn-send-ap">Сохранить</button>
+                            </div>
 
                     </div>
 
@@ -74,26 +102,163 @@
             <div class="col-sm-6 delimiter">
                 <div class="card border border-white">
                     <div class="card-body">
-                        <label for="lname" class="frame-text16">Регистрационный номер в реестре СРО</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                        <label for="lname" class="frame-text16">Дата и номер решения о приеме в члены СРО</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                        <label for="lname" class="frame-text16">Название и номер СРО</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
-                        <label for="lname" class="frame-text16">Дата прекращения членства</label><br/>
-                        <input type="text" name="LastName" id="lname" class="frame-frame35"/><br/>
+                        <div class="frame-text16">Регистрационный номер в реестре СРО</div>
+                            <div class="frame-frame35">{{ company.sro_number }}</div>
+                            <br/>
 
-                        <div class="address-name">
-                            <label for="lname" class="frame-text16">Адреса филиалов:</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                            <label for="lname" class="frame-text16">ФИО и должность сотрудников</label>
-                            <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>
-                        </div>
+                            <div class="frame-text16">Дата и номер решения о приеме в члены СРО</div>
+                            <div class="frame-frame35">
+                                {% if company.sro_number and company.sro_date %}
+                                    № {{ company.sro_number }} от {{ company.sro_date|date:"Y-m-d" }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </div>
+                            <br/>
+
+                            <div class="frame-text16">Название и номер СРО</div>
+                            <div class="frame-frame35">{{ company.sro.short_name }} {{ company.sro.number }}</div>
+                            <br/>
+
+                            <div class="frame-text16">Дата прекращения членства</div>
+                            <div class="frame-frame35">
+                                {% if company.license_date %}
+                                    {{ company.license_date|date:"Y-m-d" }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card border border-white">
+                        <div class="card-body">
 
+                            <div class="frame-text16">Телефоны организации</div>
+                            <div class="frame-frame35"></div>
+                            <br/>
+
+                            <div class="frame-text16">Email</div>
+                            <div class="frame-frame35"></div>
+                            <br/>
+
+                            <div class="frame-text16">Сайт</div>
+                            <div class="frame-frame35"></div>
+                            <br/>
+
+                            {% if company.branches.all.exists %}
+                                {% for branche in company.branches.all %}
+                                    <div class="frame-text16">Адреса филиалов</div>
+                                    <div class="frame-frame25">
+                                        {{ branche.address.postcode }}, {{ branche.address.region }},
+                                        {{ branche.address.city }},
+                                        {{ branche.address.district }}, {{ company.address.street }},
+                                        {{ branche.address.house_number }}
+                                    </div>
+                                    <a href="" class="delete-branches-btn"
+                                       data-branche-pk="{{ branche.pk }}"
+                                       data-delete-url="{% url 'users:delete_branches' branche.pk %}"
+                                       data-toggle="modal"
+                                       data-target="#confirm-delete-branches-modal">Удалить</a>
+                                {% endfor %}
+                            {% else %}
+                                <div class="frame-text16">Адреса филиалов</div>
+                                <div class="frame-frame25">-</div>
+                                <br/>
+                            {% endif %}
+                            <a href="" data-toggle="modal" data-target="#add-branches-modal">+ Добавить филиал</a>
+
+                        </div>
+
+                    </div>
+                </div>
+            <div class="col-sm-6 delimiter">
+                    <div class="card border border-white">
+                        <div class="card-body">
+                            {% if employees %}
+                                {% for employee in employees %}
+
+                                    <div class="frame-text16 toggle-fields">
+                                        ФИО и должность сотрудника
+                                        <span class="arrow">&#9660;</span>
+                                    </div>
+
+                                    <div class="employee-info">
+                                        <div class="frame-frame25">
+                                            {{ employee.surname }} {{ employee.name }} {{ employee.father_name }} {{ employee.position|truncatechars:10 }}
+                                        </div>
+                                        <div class="employee-fields hidden-field">
+                                            <br/>
+                                            <div class="frame-text16">Телефон сотрудника</div>
+                                            <div class="frame-frame25">
+                                            {% if employee.phonenumber %}
+                                                {% for phonenumber in employee.phonenumber %}
+                                                    {{ phonenumber }}
+                                                {% endfor %}
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                            </div>
+                                            <br/>
+                                            <div class="frame-text16">Электронная почта сотрудника</div>
+                                            <div class="frame-frame25">
+                                                {% if employee.email %}
+                                                    {% for email in employee.email %}
+                                                        {{ email }}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    -
+                                                {% endif %}</div>
+                                            <a href=""
+                                               class="edit-employee-btn"
+                                               data-employee-pk="{{ employee.pk }}"
+                                               data-update-url="{% url 'users:update_employee_company' employee.pk %}"
+                                               data-toggle="modal"
+                                               data-target="#edit-employee-modal">Редактировать</a>
+                                            <a href="" class="delete-employee-btn"
+                                               data-employee-pk="{{ employee.pk }}"
+                                               data-delete-url="{% url 'users:delete_employee_company' employee.pk %}"
+                                               data-toggle="modal"
+                                               data-target="#confirm-delete-employee-modal">Удалить</a>
+                                        </div>
+                                    </div><br/>
+                                {% endfor %}
+
+                            {% else %}
+                                <div class="frame-text16">
+                                    ФИО и должность сотрудника
+                                </div>
+
+                                <div class="frame-frame25">
+                                    -
+                                </div><br/>
+                            {% endif %}
+
+
+                            <a href="" data-toggle="modal" data-target="#add-employee-modal">+ Добавить еще
+                                сотрудника</a>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
     </form>
     </section>
+
+    {% include 'inc/_confirm_delete_employee_modal.html' %}
+
+    {% include 'inc/_confirm_delete_branches_modal.html' %}
+
+    {% include 'inc/_edit_employee_company_modal.html' %}
+
+    {% include 'inc/_add_employee_company_modal.html' %}
+
+    {% include 'inc/_add_branches_modal.html' %}
+
+    <script src="{% static 'js/enter_details_company.js' %}"></script>
+    <script>
+        let company_pk = {{ company.pk }};
+        const editCompanyUrl = "{% url 'users:edit_company' company.pk %}";
+    </script>
 {% endblock %}
