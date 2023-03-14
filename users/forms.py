@@ -150,7 +150,7 @@ class DirectorCreateForm(forms.ModelForm):
 class EmployeeCreateForm(forms.ModelForm):
     class Meta:
         model = Employee
-        fields = ('position', 'surname', 'name', 'father_name')
+        fields = ('position', 'surname', 'name', 'father_name', 'phonenumber', 'email')
         widgets = {
             field: forms.TextInput(attrs={'class': 'form-control'})
             for field in fields

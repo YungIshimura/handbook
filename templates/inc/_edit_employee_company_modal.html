@@ -36,6 +36,20 @@
                     <div class="error-message" id="edit-employee-father_name-error"
                          style="display: none;">{{ edit_employee_form.father_name.errors }}</div>
 
+                    <label for="{{ edit_employee_form.phonenumber.id_for_label }}" class="frame-text16">Номер
+                        телефона</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_employee_form.phonenumber.name }}"
+                           id="phonenumber" value="{{ edit_employee_form.phonenumber.value }}"><br/>
+                    <div class="error-message" id="edit-employee-email-error"
+                         style="display: none;">{{ edit_employee_form.phonenumber.errors }}</div>
+
+                    <label for="{{ edit_employee_form.email.id_for_label }}" class="frame-text16">Электронная
+                        почта</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_employee_form.email.name }}"
+                           id="email" value="{{ edit_employee_form.email.value }}"><br/>
+                    <div class="error-message" id="edit-employee-email-error"
+                         style="display: none;">{{ edit_employee_form.email.errors }}</div>
+
                     <div>
                         <button type="submit" class="btn-send-ap">Сохранить</button>
                     </div>

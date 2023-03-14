@@ -38,6 +38,20 @@
                     <div class="error-message" id="add-employee-father_name-error"
                          style="display: none;">{{ add_employee_form.father_name.errors }}</div>
 
+                    <label for="{{ add_employee_form.phonenumber.id_for_label }}"
+                           class="frame-text16">Номер телефона</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_employee_form.phonenumber.name }}"
+                           id="phonenumber" value="{{ add_employee_form.phonenumber.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-employee-phonenumber-error"
+                         style="display: none;">{{ add_employee_form.phonenumber.errors }}</div>
+
+                    <label for="{{ add_employee_form.email.id_for_label }}"
+                           class="frame-text16">Электронная почта</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_employee_form.email.name }}"
+                           id="email" value="{{ add_employee_form.email.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-employee-email-error"
+                         style="display: none;">{{ add_employee_form.email.errors }}</div>
+
                     <div>
                         <button type="submit" class="btn-send-ap">Добавить</button>
                     </div>

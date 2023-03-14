@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
-
 from users.forms import CompanyUpdateForm, BranchCreateForm, DirectorCreateForm, EmployeeCreateForm
 from geo_handbook.models import Company, Branches, Employee
 
@@ -64,11 +63,9 @@ def update_branch(request, pk):
 def delete_branch(request, pk):
     try:
         branch = get_object_or_404(Branches, pk=pk)
-
         # удаляем адрес и филиал
         branch.address.delete()
         branch.delete()
-
         data = {'success': True}
 
     except Exception as e:
@@ -131,6 +128,8 @@ def get_employee_data(request, pk):
         'surname': employee.surname,
         'name': employee.name,
         'father_name': employee.father_name,
+        'phonenumber': employee.phonenumber,
+        'email': employee.email
     }
     return JsonResponse(data)
 
@@ -150,15 +149,15 @@ def update_employee_company(request, pk):
 # Удалить сотрудника компании
 @require_POST
 def delete_employee_company(request, pk):
-    employee = get_object_or_404(Employee, pk=pk)
-
-    employee.delete()
-
-    if request.is_ajax():
+    try:
+        employee = get_object_or_404(Employee, pk=pk)
+        employee.delete()
         data = {'success': True}
-        return JsonResponse(data)
-    else:
-        return redirect('users:edit_company', pk=employee.company.pk)
+
+    except Exception as e:
+        data = {'error': str(e)}
+
+    return JsonResponse(data)
 
 
 # Удалить сотрудника филиала

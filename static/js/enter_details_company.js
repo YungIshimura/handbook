@@ -1,12 +1,12 @@
 // скрытие полей с телефоном и почтой сотрудника
 function toggleEmployeeFields() {
     // получить все элементы с классом toggle-fields
-    var toggleFields = document.querySelectorAll(".toggle-fields");
+    let toggleFields = document.querySelectorAll(".toggle-fields");
 
     // цикл по всем элементам toggle-fields
     toggleFields.forEach(function (toggleField) {
         // получить следующий элемент после toggleFields и добавить класс employee-fields
-        var employeeFields = toggleField.nextElementSibling.querySelector('.employee-fields');
+        let employeeFields = toggleField.nextElementSibling.querySelector('.employee-fields');
 
         // добавить обработчик событий для кликов на элемент toggleFields
         toggleField.addEventListener("click", function () {
@@ -62,10 +62,14 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.success) {
-                    // window.location.href = editCompanyUrl;
                     $('#confirm-delete-employee-modal').modal('hide');
                     location.reload();
+                } else if (data.error) {
+                    $('.modal-body').html('Ошибка: ' + data.error);
                 }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('.modal-body').html('Ошибка: ' + textStatus);
             }
         });
     });
@@ -175,6 +179,8 @@ $(document).on('click', '.edit-employee-btn', function () {
             modal.find('#surname').val(data.surname);
             modal.find('#name').val(data.name);
             modal.find('#father_name').val(data.father_name);
+            modal.find('#phonenumber').val(data.phonenumber);
+            modal.find('#email').val(data.email);
             modal.find('form').attr('action', update_url);
         }
     });
