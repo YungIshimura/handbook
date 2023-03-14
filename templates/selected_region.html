@@ -4,7 +4,6 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/selected_region.css' %}"/>
-    <div class="container">
         <div class="region-area">
             <div class="region-area__text">
                 <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
@@ -36,7 +35,7 @@
             <span class="companys--title">Лучшие компании региона</span>
             <br>
             <br>
-            <div class="container overflow-hidden">
+            <div class="container overflow-hidden" style='width:1050px;'>
                 <div class="row gx-5">
                     {% for company in companys %}
                         <div class="col mb-5" onclick="location.href='{% url 'geo_handbook:card' company.id %}'" ;
@@ -52,20 +51,20 @@
                                         <img src={% static 'assets/stars/white-star.svg' %}>
                                     </div>
                                 </div>
-                                <div class="company__data">
-                                <span class="company__address" style='display:block; width:100%; height:60px;'>
-                                    <span class='company__data-text'>Юридический адрес: </span>{{ company.legal_address.postcode }}, {{ company.legal_address.city }}, {{ company.legal_address.street }} д.{{ company.legal_address.house_number }}</span>
-                                    <span class='company__data-text'>Виды работ: </span>
-                                    {% for work_type in company.work_types %}
-                                        {{ work_type }} |
-                                    {% endfor %}
-                                    </span>
-                                    </span>
-                                </div>
+                                    <div class="company__data">
+                                        <span class="company__address" style='display:block; width:100%; height:60px;'>
+                                        <span class='company__data-text'>Юридический адрес: </span>{{ company.legal_address.postcode }}, {{ company.legal_address.city }}, {{ company.legal_address.street }} д.{{ company.legal_address.house_number }}</span>
+                                        <span class='company__data-text'>Виды работ: </span>
+                                        {% for work_type in company.work_types %}
+                                            {{ work_type }} |
+                                        {% endfor %}
+                                        </span>
+                                        </span>
+                                    </div>
                             </div>
                         </div>
                     {% endfor %}
-                </div>
+                    </div>
             </div>
         </div>
     </div>
