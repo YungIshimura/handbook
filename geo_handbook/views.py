@@ -7,6 +7,7 @@ from django.http import JsonResponse
 
 
 def view_index(request):
+    print(request)
     search_vector = SearchVector('short_name', 'inn', 'ogrn', 'director')
     if request.POST.get('search'):
         company = Company.objects.annotate(search=search_vector).filter(search=request.POST.get('search'))
@@ -14,12 +15,18 @@ def view_index(request):
             return HttpResponseRedirect(reverse('geo_handbook:card', args=[company[0].id]))
         else:
             messages.error(request, 'По данному запросу ничего не найдено')
+
     if 'term' in request.GET:
         qs = City.objects.filter(name__icontains=request.GET.get('term'))
         citys = []
         for company in qs:
             citys.append(company.name)
         return JsonResponse(citys, safe=False)
+
+    if 'region' in request.POST:
+        region = request.POST.get('region')
+        city_id = City.objects.get(name=region).id
+        return HttpResponseRedirect(reverse('geo_handbook:region', args=[city_id]))
 
     if 'city_search' in request.GET:
         city = request.GET.get('city_search')
