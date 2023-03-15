@@ -149,25 +149,37 @@
 
                             {% if company.branches.all.exists %}
                                 {% for branche in company.branches.all %}
-                                    <div class="frame-text16">Адреса филиалов</div>
+                                    <div class="frame-text16 toggle-fields-branches">
+                                        Адреса филиалов
+                                    <span class="arrow-branches">&#9660;</span>
+                                    </div>
+                                    <div class="branches-info">
                                     <div class="frame-frame25">
                                         {{ branche.address.postcode }}, {{ branche.address.region }},
                                         {{ branche.address.city }},
-                                        {{ branche.address.district }}, {{ company.address.street }},
+                                        {{ branche.address.district }}, {{ branche.address.street }},
                                         {{ branche.address.house_number }}
                                     </div>
-                                    <a href="" class="delete-branches-btn"
-                                       data-branche-pk="{{ branche.pk }}"
-                                       data-delete-url="{% url 'users:delete_branches' branche.pk %}"
-                                       data-toggle="modal"
-                                       data-target="#confirm-delete-branches-modal">Удалить</a>
+                                        <div class="branches-link hidden-field">
+                                            <a href="" class="edit-branches-btn"
+                                               data-branche-pk="{{ branche.pk }}"
+                                               data-update-url="{% url 'users:edit_branches' branche.pk %}"
+                                               data-toggle="modal"
+                                               data-target="#edit-branches-modal">Редактировать</a>
+                                            <a href="" class="delete-branches-btn"
+                                               data-branche-pk="{{ branche.pk }}"
+                                               data-delete-url="{% url 'users:delete_branches' branche.pk %}"
+                                               data-toggle="modal"
+                                               data-target="#confirm-delete-branches-modal">Удалить</a>
+                                        </div>
+                                    </div><br/>
                                 {% endfor %}
                             {% else %}
                                 <div class="frame-text16">Адреса филиалов</div>
                                 <div class="frame-frame25">-</div>
                                 <br/>
                             {% endif %}
-                            <a href="" data-toggle="modal" data-target="#add-branches-modal">+ Добавить филиал</a>
+                            <a href="" data-toggle="modal" data-target="#add-branches-modal">+ Добавить еще филиал</a>
 
                         </div>
 
@@ -179,9 +191,9 @@
                             {% if employees %}
                                 {% for employee in employees %}
 
-                                    <div class="frame-text16 toggle-fields">
+                                    <div class="frame-text16 toggle-fields-employee">
                                         ФИО и должность сотрудника
-                                        <span class="arrow">&#9660;</span>
+                                        <span class="arrow-employee">&#9660;</span>
                                     </div>
 
                                     <div class="employee-info">
@@ -256,9 +268,13 @@
 
     {% include 'inc/_add_branches_modal.html' %}
 
+    {% include 'inc/_edit_branches_modal.html' %}
+
     <script src="{% static 'js/enter_details_company.js' %}"></script>
     <script>
         let company_pk = {{ company.pk }};
         const editCompanyUrl = "{% url 'users:edit_company' company.pk %}";
+
+
     </script>
 {% endblock %}

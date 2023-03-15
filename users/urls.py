@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import (view_profile, update_company,
-                    update_branch, delete_branch, add_branch, delete_employee_company, add_employee_company,
+from .views import (view_profile, update_company, delete_branch, delete_employee_company, add_employee_company,
                     update_employee_company, delete_employee_branch, update_employee_branch, add_employee_branch,
-                    get_employee_data)
+                    get_employee_data, add_branch_company, edit_branch_company, get_branche_data)
 
 app_name = 'users'
 
@@ -16,8 +15,8 @@ urlpatterns = [
     # редактировать сотрудника компании
     path('company/employee/delete/<int:pk>/', delete_employee_company, name='delete_employee_company'),
     # удалить сотрудника компании
-    path('company/edit/<int:pk>/add_branch/', add_branch, name='add_branches'),  # добавить филиал
-    path('company/branches/edit/<int:pk>/', update_branch, name='edit_branches'),  # редактировать филиал
+    path('company/edit/<int:pk>/add_branch/', add_branch_company, name='add_branches_company'),  # добавить филиал
+    path('company/branches/edit/<int:pk>/', edit_branch_company, name='edit_branches'),  # редактировать филиал
     path('company/branches/delete/<int:pk>/', delete_branch, name='delete_branches'),  # удалить филиал
     path('company/branches/edit/<int:pk>/add_employee/', add_employee_branch, name='add_employee_branch'),
     # добавить сотрудника филиала
@@ -26,4 +25,5 @@ urlpatterns = [
     path('company/branches/employee/delete/<int:pk>/', delete_employee_branch, name='delete_employee_branch'),
     # удалить сотрудника филиала
     path('get_employee_data/<int:pk>/', get_employee_data, name='get_employee_data'),  # получить данные о сотруднике
+    path('get_branche_data/<int:pk>/', get_branche_data, name='get_branches_data'),  # получить данные о филиале
 ]
