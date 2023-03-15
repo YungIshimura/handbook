@@ -44,10 +44,29 @@
 }
 
 .stars {
-    display: flex;
+    display: inline-flex;
     column-gap: 4px;
     margin-top: 4px;
     margin-left: 45px;
+    flex-direction: row-reverse;
+}
+.stars__item{
+    color: #dcdcdc;
+    font-size: 15px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.stars__item:hover,
+.stars__item:hover ~ .stars__item {
+    color: gray;
+}
+
+.stars[data-total-value="1"] .stars__item:nth-child(n + 5),
+.stars[data-total-value="2"] .stars__item:nth-child(n + 4),
+.stars[data-total-value="3"] .stars__item:nth-child(n + 3),
+.stars[data-total-value="4"] .stars__item:nth-child(n + 2),
+.stars[data-total-value="5"] .stars__item:nth-child(n + 1) {
+    color: gray;
 }
 
 .company__data-bureaucracy {

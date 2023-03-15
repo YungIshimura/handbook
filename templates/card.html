@@ -13,12 +13,12 @@
                 <span class="company__data--rating">{{ rating }}</span>
                 <div class="rating">
                     <span class="rating--title">Рейтинг</span>
-                    <div class="stars">
-                        <img src={% static 'assets/stars/black-star.svg' %}>
-                        <img src={% static 'assets/stars/black-star.svg' %}>
-                        <img src={% static 'assets/stars/black-star.svg' %}>
-                        <img src={% static 'assets/stars/white-star.svg' %}>
-                        <img src={% static 'assets/stars/white-star.svg' %}>
+                    <div class="stars" data-total-value="{{ rating }}">
+                        <div class="stars__item" data-item-value="5">★</div>
+                        <div class="stars__item" data-item-value="4">★</div>
+                        <div class="stars__item" data-item-value="3">★</div>
+                        <div class="stars__item" data-item-value="2">★</div>
+                        <div class="stars__item" data-item-value="1">★</div>
                     </div>
                 </div>
                 <div class="company__data-bureaucracy">

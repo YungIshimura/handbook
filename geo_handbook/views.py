@@ -34,34 +34,34 @@ def view_sign_up_user(request):
 
 
 def view_card(request, company_id):
-    company = Company.objects.get(id=company_id)
-    type_works = [work_type.type_work for work_type in company.specializations.all()]
-    companys = []
-    context = {
-        'short_name': company.short_name,
-        'full_name': company.full_name,
-        'inn': company.inn,
-        'ogrn': company.ogrn,
-        'city': company.legal_address.city,
-        'rating': company.rating,
-        'sro': company.sro,
-        'sro_date': company.sro_date,
-        'sro_number': company.sro_number,
-        'sro_license_date': [company for company in company.licenses.all()],
-        'street': company.legal_address.street,
-        'index': company.legal_address.postcode,
-        'house_number': company.legal_address.house_number,
-        'directors': [director for director in company.director.all()]
-    }
-    for type_work in type_works:
-        region_company = Company.objects.filter(specializations=type_work.id,legal_address__city_id=company.legal_address.city)
-        if region_company:
-            companys.append(region_company)
-        
-    context['type_works'] = type_works
-    context['companys'] = companys
+    # company = Company.objects.get(id=company_id)
+    # type_works = [work_type.type_work for work_type in company.specializations.all()]
+    # companys = []
+    # context = {
+    #     'short_name': company.short_name,
+    #     'full_name': company.full_name,
+    #     'inn': company.inn,
+    #     'ogrn': company.ogrn,
+    #     'city': company.legal_address.city,
+    #     'rating': company.rating,
+    #     'sro': company.sro,
+    #     'sro_date': company.sro_date,
+    #     'sro_number': company.sro_number,
+    #     'sro_license_date': [company for company in company.licenses.all()],
+    #     'street': company.legal_address.street,
+    #     'index': company.legal_address.postcode,
+    #     'house_number': company.legal_address.house_number,
+    #     'directors': [director for director in company.director.all()]
+    # }
+    # for type_work in type_works:
+    #     region_company = Company.objects.filter(specializations=type_work.id,legal_address__city_id=company.legal_address.city)
+    #     if region_company:
+    #         companys.append(region_company)
+    #
+    # context['type_works'] = type_works
+    # context['companys'] = companys
 
-    return render(request, 'card.html', context=context)
+    return render(request, 'card.html')
 
 
 def view_sign_up_company(request):
