@@ -10,8 +10,11 @@
                 src="https://img.icons8.com/ios/50/null/long-arrow-left.png"><span style="margin-left: 8px;">К списку организаций</span></span></a>
         <div class="company__info">
             <div class="company__data1">
-                <span class="company__data--rating">{{ rating }}</span>
                 <div class="rating">
+                    <div class="company__data--rating">
+                        <div class="rating__value">{{ ratings }}</div>
+                    <span class="rating--title">Рейтинг</span>
+                    </div>
                     <div class="rating__body">
                         <div class="rating__active">
                             <div class="rating__items">
@@ -19,7 +22,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="rating__value">3.6</div>
                 </div>
                 <div class="company__data-bureaucracy">
                     <span class="company__data-bureaucracy-data">ИНН</span>
@@ -149,34 +151,5 @@
             </div>
         </div>
     </div>
-    <script>
-        const ratings = document.querySelectorAll('.rating')
-        if (ratings.length > 0) {
-            initRatings();
-        }
-
-        function initRatings() {
-            let ratingActive, ratingValue;
-            for (let index = 0; index < ratings.length; index++) {
-                const rating = ratings[index];
-                initRating(rating)
-            }
-
-
-            function initRating(rating) {
-                initRatingVars(rating);
-                setRatingActiveWidth();
-            }
-
-            function initRatingVars(rating) {
-                ratingActive = rating.querySelector('.rating__active');
-                ratingValue = rating.querySelector('.rating__value');
-            }
-
-            function setRatingActiveWidth(index = ratingValue.innerHTML) {
-                const ratingActiveWidth = index / 0.05;
-                ratingActive.style.width = `${ratingActiveWidth}%`
-            }
-        }
-    </script>
+    <script src="{% static 'js/ratings.js' %}"></script>
 {% endblock %}

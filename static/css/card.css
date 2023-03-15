@@ -34,39 +34,20 @@
     line-height: 57px;
     color: #333333;
     padding-top: 5px;
-    margin-left: 60px;
+margin-left: 65px;
 }
 
 .rating--title {
     display: block;
-    margin-left: 65px;
     margin-top: 10px;
+    font-size: 20px;
+    color: #828282;
 }
-
-.stars {
-    column-gap: 4px;
-    margin-top: 4px;
-    margin-left: 45px;
-}
-
-/*.stars__item{*/
-/*    color: #dcdcdc;*/
-/*    font-size: 15px;*/
-/*    transition: 0.2s;*/
-/*}*/
-
-/*.stars[data-total-value="1"] .stars__item:nth-child(n + 5),*/
-/*.stars[data-total-value="2"] .stars__item:nth-child(n + 4),*/
-/*.stars[data-total-value="3"] .stars__item:nth-child(n + 3),*/
-/*.stars[data-total-value="4"] .stars__item:nth-child(n + 2),*/
-/*.stars[data-total-value="5"] .stars__item:nth-child(n + 1) {*/
-/*    color: black;*/
-/*}*/
 
 .company__data-bureaucracy {
     display: block;
-    margin-top: 32px;
-    margin-left: 5px;
+    margin-top: 85px;
+    margin-left: 7px;
     word-spacing: 15px;
 }
 
@@ -232,19 +213,21 @@ body {
 
 .rating {
     display: flex;
-    align-items: flex-end;
-    font-size: 40px;
+    font-size: 25px;
     line-height: 0.75;
 }
 
 .rating__body {
-    position: relative;
+    position: absolute;
+    margin-top: 115px;
+    margin-left: 45px;
 }
 
 .rating__body::before {
-    content: "★★★★★";
+    content: "☆☆☆☆☆";
     display: block;
 }
+
 .rating__active {
     position: absolute;
     width: 0;
@@ -253,9 +236,10 @@ body {
     left: 0;
     overflow: hidden;
 }
+
 .rating__active::before {
-        content: "★★★★★";
-position: absolute;
+    content: "★★★★★";
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
@@ -279,13 +263,5 @@ position: absolute;
 }
 
 .rating__value {
-    font-size: 50%;
+    font-size: 60%;
 }
-
-/*<div class="stars" data-total-value="">*/
-/*    <div class="stars__item" data-item-value="5">★</div>*/
-/*    <div class="stars__item" data-item-value="4">★</div>*/
-/*    <div class="stars__item" data-item-value="3">★</div>*/
-/*    <div class="stars__item" data-item-value="2">★</div>*/
-/*    <div class="stars__item" data-item-value="1">★</div>*/
-/*</div>*/
