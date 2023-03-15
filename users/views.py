@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
-from users.forms import CompanyUpdateForm, DirectorCreateForm, EmployeeCreateForm, CityCreateForm, AddressCreateForm
-from geo_handbook.models import Company, Branches, Employee, CompanyAddress
+from users.forms import CompanyUpdateForm, DirectorCreateForm, EmployeeCreateForm, CityCreateForm, AddressCreateForm, \
+    LicenseCreateForm
+from geo_handbook.models import Company, Branches, Employee, CompanyAddress, License
 
 
 def view_profile(request):
@@ -20,6 +21,8 @@ def update_company(request, pk):
     add_branch_address_form = AddressCreateForm()
     edit_branch_city_form = CityCreateForm()
     edit_branch_address_form = AddressCreateForm()
+    add_license_form = LicenseCreateForm()
+    edit_license_form = LicenseCreateForm()
     # add_branch_form = BranchCreateForm()
 
     if request.method == 'POST':
@@ -35,6 +38,8 @@ def update_company(request, pk):
         'add_branch_address_form': add_branch_address_form,
         'edit_branch_city_form': add_branch_city_form,
         'edit_branch_address_form': add_branch_address_form,
+        'add_license_form': add_license_form,
+        'edit_license_form': edit_license_form,
         # 'add_branch_form': add_branch_form,
         'company': company,
         'employees': employees
@@ -111,6 +116,7 @@ def get_branche_data(request, pk):
     }
     return JsonResponse(data)
 
+
 # Добавить филиал компании
 @require_POST
 def add_branch_company(request, pk):
@@ -174,59 +180,58 @@ def delete_branch(request, pk):
     return JsonResponse(data)
 
 
-# Редактировать филиал
-# def update_branch(request, pk):
-#     branch = get_object_or_404(Branches, pk=pk)
-#     employees = Employee.objects.filter(branches=branch)
-#
-#     branch_form = BranchCreateForm(request.POST or None, instance=branch)
-#     director_form = DirectorCreateForm(request.POST or None, instance=branch.director.first())
-#
-#     if request.method == 'POST':
-#
-#         if branch_form.is_valid() and director_form.is_valid():
-#             branch_form.save()
-#             director_form.save()
-#             return redirect('users:edit_company', pk=branch.company.pk)
-#
-#     context = {
-#         'branch_form': branch_form,
-#         'director_form': director_form,
-#         'branch': branch,
-#         'employees': employees
-#     }
-#
-#     return render(request, 'branches/update_branch.html', context)
+# Получить данные о лицензии компании
+def get_license_data(request, pk):
+    license = get_object_or_404(License, pk=pk)
+    data = {
+        'name': license.name,
+        'license_date': license.license_date,
+        'license_area': license.license_area,
+        'license_organization': license.license_organization
+    }
+    return JsonResponse(data)
 
 
-# Добавить филиал компании и директора филиала
-# def add_branch(request, pk):
-#     company = get_object_or_404(Company, pk=pk)
-#
-#     branch_form = BranchCreateForm(request.POST or None)
-#     director_form = DirectorCreateForm(request.POST or None)
-#
-#     if request.method == 'POST':
-#
-#         if branch_form.is_valid() and director_form.is_valid():
-#             branch = branch_form.save(commit=False)
-#             branch.company = company
-#             branch.save()
-#
-#             director = director_form.save(commit=False)
-#             director.company = company
-#             director.branches = branch
-#             director.save()
-#
-#             return redirect('users:edit_company', pk=pk)
-#
-#     context = {
-#         'branch_form': branch_form,
-#         'director_form': director_form,
-#         'company': company
-#     }
-#
-#     return render(request, 'branches/add_branch.html', context)
+# Добавить лицензию компании
+@require_POST
+def add_license_company(request, pk):
+    company = get_object_or_404(Company, pk=pk)
+    add_license_form = LicenseCreateForm(request.POST)
+
+    if add_license_form.is_valid():
+        license = add_license_form.save(commit=False)
+        license.company = company
+        license.save()
+
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'success': False, 'errors': add_license_form.errors}, status=400)
+
+
+# Редактировать лицензию компании
+@require_POST
+def update_license_company(request, pk):
+    license = get_object_or_404(License, pk=pk)
+    edit_license_form = LicenseCreateForm(request.POST, instance=license)
+    if edit_license_form.is_valid():
+        edit_license_form.save()
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'success': False, 'errors': edit_license_form.errors}, status=400)
+
+
+# Удалить лицензию компании
+@require_POST
+def delete_license_company(request, pk):
+    try:
+        license = get_object_or_404(License, pk=pk)
+        license.delete()
+        data = {'success': True}
+
+    except Exception as e:
+        data = {'error': str(e)}
+
+    return JsonResponse(data)
 
 
 # Удалить сотрудника филиала

@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (view_about, view_select, view_selected_region, view_application,
                     view_enter_details_company, view_settings_profile, view_index, view_sign_up_user,
-                    view_sign_up_company, view_search, view_card_layer, view_card, view_profile, view_rates)
+                    view_sign_up_company, view_card_layer, view_card, view_profile, view_rates)
 
 app_name = 'geo_handbook'
 

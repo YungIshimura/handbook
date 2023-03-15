@@ -143,9 +143,42 @@
                             <div class="frame-frame35"></div>
                             <br/>
 
-                            <div class="frame-text16">Сайт</div>
-                            <div class="frame-frame35"></div>
-                            <br/>
+                            {% if company.url %}
+
+                                {% for site in company.url %}
+                                    <div class="frame-text16 toggle-fields-site">
+                                        Сайт
+                                    <span class="arrow-site">&#9660;</span>
+                                    </div>
+                                    <div class="site-info">
+                                        <div class="frame-frame25">
+                                        {{ site }}
+                                        </div>
+                                        <div class="site-link hidden-field">
+                                            <a href="" class="edit-site-btn"
+{#                                               data-branche-pk="{{ branche.pk }}"#}
+{#                                               data-update-url="{% url 'users:update_branches' branche.pk %}"#}
+                                               data-toggle="modal"
+                                               data-target="#edit-site-modal">Редактировать</a>
+                                            <a href="" class="delete-site-btn"
+{#                                               data-branche-pk="{{ branche.pk }}"#}
+{#                                               data-delete-url="{% url 'users:delete_branches' branche.pk %}"#}
+                                               data-toggle="modal"
+                                               data-target="#confirm-delete-site-modal">Удалить</a>
+                                        </div>
+                                    </div><br/>
+                                {% endfor %}
+
+                            {% else %}
+                                <div class="frame-text16">Сайт</div>
+                                <div class="frame-frame25">
+                                -
+                                </div>
+                                <br/>
+                            {% endif %}
+                            <div>
+                                <a href="" data-toggle="modal" data-target="#">+ Добавить еще</a>
+                            </div><br/>
 
                             {% if company.branches.all.exists %}
                                 {% for branche in company.branches.all %}
@@ -163,7 +196,7 @@
                                         <div class="branches-link hidden-field">
                                             <a href="" class="edit-branches-btn"
                                                data-branche-pk="{{ branche.pk }}"
-                                               data-update-url="{% url 'users:edit_branches' branche.pk %}"
+                                               data-update-url="{% url 'users:update_branches' branche.pk %}"
                                                data-toggle="modal"
                                                data-target="#edit-branches-modal">Редактировать</a>
                                             <a href="" class="delete-branches-btn"
@@ -179,14 +212,14 @@
                                 <div class="frame-frame25">-</div>
                                 <br/>
                             {% endif %}
-                            <a href="" data-toggle="modal" data-target="#add-branches-modal">+ Добавить еще филиал</a>
+                            <a href="" data-toggle="modal" data-target="#add-branches-modal">+ Добавить еще</a>
 
                         </div>
 
                     </div>
                 </div>
             <div class="col-sm-6 delimiter">
-                    <div class="card border border-white">
+                <div class="card border border-white">
                         <div class="card-body">
                             {% if employees %}
                                 {% for employee in employees %}
@@ -253,7 +286,91 @@
 
                         </div>
                     </div>
-                </div>
+            </div>
+            {% if company.licenses.all.exists %}
+                {% for license in company.licenses.all %}
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <div class="card border border-white">
+                            <div class="card-body">
+                                <div class="frame-text16 toggle-fields-license">
+                                        Название лицензии
+                                    <span class="arrow-license">&#9660;</span>
+                                </div>
+                                <div class="license-info">
+                                    <div class="frame-frame25">
+                                        {{ license.name }}
+                                    </div><br/>
+                                    <div class="frame-text16">Срок действия лицензии</div>
+                                    <div class="frame-frame25">
+                                        {{ license.license_date|date:"Y-m-d" }}
+                                    </div>
+                                    <div class="license-link hidden-field">
+                                        <a href="" class="edit-license-btn"
+                                           data-license-pk="{{ license.pk }}"
+                                           data-update-url="{% url 'users:update_license' license.pk %}"
+                                           data-toggle="modal"
+                                           data-target="#edit-license-modal">Редактировать</a>
+                                        <a href="" class="delete-license-btn"
+                                           data-license-pk="{{ license.pk }}"
+                                           data-delete-url="{% url 'users:delete_license' license.pk %}"
+                                           data-toggle="modal"
+                                           data-target="#confirm-delete-license-modal">Удалить</a>
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 delimiter">
+                        <div class="card border border-white">
+                            <div class="card-body">
+                                <div class="frame-text16">Область применения лицензии</div>
+                                <div class="frame-frame25">
+                                    {{ license.license_area }}
+                                </div><br/>
+                                <div class="frame-text16">Организация выдавшая лицензию</div>
+                                <div class="frame-frame25">
+                                    {{ license.license_organization }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                        <div class="card border border-white">
+                            <div class="card-body">
+                                <div class="frame-text16">Название лицензии</div>
+                                <div class="frame-frame25">
+                                    -
+                                </div><br/>
+                                <div class="frame-text16">Срок действия лицензии</div>
+                                <div class="frame-frame25">
+                                    -
+                                </div><br/>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-sm-6 delimiter">
+                        <div class="card border border-white">
+                            <div class="card--body">
+                                <div class="frame-text16">Область применения лицензии</div>
+                                <div class="frame-frame25">
+                                    -
+                                </div><br/>
+                                <div class="frame-text16">Организация выдавшая лицензию</div>
+                                <div class="frame-frame25">
+                                    -
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endif %}
+            <a href="" class="add-license-link" data-toggle="modal" data-target="#add-license-modal">+ Добавить еще лицензию</a>
+
+
+
+
         </div>
     </form>
     </section>
@@ -262,19 +379,31 @@
 
     {% include 'inc/_confirm_delete_branches_modal.html' %}
 
-    {% include 'inc/_edit_employee_company_modal.html' %}
+    {% include 'inc/_confirm_delete_license_modal.html' %}
 
     {% include 'inc/_add_employee_company_modal.html' %}
 
     {% include 'inc/_add_branches_modal.html' %}
 
+    {% include 'inc/_add_license_modal.html' %}
+
+    {% include 'inc/_edit_employee_company_modal.html' %}
+
     {% include 'inc/_edit_branches_modal.html' %}
+
+    {% include 'inc/_edit_license_modal.html' %}
 
     <script src="{% static 'js/enter_details_company.js' %}"></script>
     <script>
         let company_pk = {{ company.pk }};
         const editCompanyUrl = "{% url 'users:edit_company' company.pk %}";
 
-
+        document.addEventListener("DOMContentLoaded", function () {
+            $('#license_date').datepicker({
+                format: 'dd.mm.yyyy',
+                autoclose: true,
+                todayHighlight: true,
+            });
+        });
     </script>
 {% endblock %}

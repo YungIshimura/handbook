@@ -147,3 +147,16 @@
 .arrow-branches:hover {
   cursor: pointer;
 }
+
+.arrow-license:hover {
+  cursor: pointer;
+}
+
+.arrow-site:hover {
+  cursor: pointer;
+}
+
+.add-license-link {
+    margin-top: -7px;
+    margin-left: 33px;
+}
