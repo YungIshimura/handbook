@@ -4,7 +4,7 @@ from geo_handbook.models import Company, City
 from django.contrib.postgres.search import SearchVector
 from django.contrib import messages
 from django.http import JsonResponse
-
+from django.db.models import Q
 
 def view_index(request):
     search_vector = SearchVector('short_name', 'inn', 'ogrn', 'director')
@@ -40,8 +40,8 @@ def view_sign_up_user(request):
 
 
 def view_card(request, company_id):
-    company = Company.objects.get(id=company_id)
-    type_works = [work_type.type_work for work_type in company.specializations.all()]
+    company = Company.objects.select_related('legal_address').get(id=company_id)
+    type_works = [work_type.type_work for work_type in company.specializations.select_related('type_work').all()]
     companys = []
     context = {
         'short_name': company.short_name,
@@ -60,7 +60,7 @@ def view_card(request, company_id):
         'directors': [director for director in company.director.all()]
     }
     for type_work in type_works:
-        region_company = Company.objects.filter(specializations=type_work.id,legal_address__city_id=company.legal_address.city)
+        region_company = Company.objects.filter(specializations__id=type_work.id, legal_address__city_id=company.legal_address.city).select_related('legal_address__city')
         if region_company:
             companys.append(region_company)
         
@@ -88,7 +88,7 @@ def view_rates(request):
 
 
 def view_selected_region(request, city_id):
-    companys = Company.objects.filter(legal_address__city=city_id)
+    companys = Company.objects.filter(legal_address__city=city_id).select_related('legal_address__city')
     context = {
         'companys': [
             {
