@@ -10,9 +10,8 @@
     width: 1320px;
     height: 415px;
     display: flex;
-    margin-left: 300px;
-    margin-top: 130px;
     gap: 30px;
+    margin: 130px 0 100px 300px;
 }
 
 .card__about {

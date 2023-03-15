@@ -3,8 +3,7 @@
     width: 1320px;
     height: 415px;
     background-color: #F2F2F2;
-    margin-left: 300px;
-    margin-top: 20px;
+    margin: 100px 0 0 300px;
 }
 
 .region-area__text {
@@ -83,7 +82,7 @@
     width: 1050px;
     height: 130px;
     border: 1px solid black;
-    margin: 525px 420px;
+    margin: 600px 420px;
 }
 
 
