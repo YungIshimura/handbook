@@ -12,14 +12,14 @@
             <div class="company__data1">
                 <span class="company__data--rating">{{ rating }}</span>
                 <div class="rating">
-                    <span class="rating--title">Рейтинг</span>
-                    <div class="stars" data-total-value="{{ rating }}">
-                        <div class="stars__item" data-item-value="5">★</div>
-                        <div class="stars__item" data-item-value="4">★</div>
-                        <div class="stars__item" data-item-value="3">★</div>
-                        <div class="stars__item" data-item-value="2">★</div>
-                        <div class="stars__item" data-item-value="1">★</div>
+                    <div class="rating__body">
+                        <div class="rating__active">
+                            <div class="rating__items">
+                                <div class="rating__item" data-item-value="5" name="rating"></div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="rating__value">3.6</div>
                 </div>
                 <div class="company__data-bureaucracy">
                     <span class="company__data-bureaucracy-data">ИНН</span>
@@ -114,12 +114,14 @@
             <br>
             <div class="container overflow-hidden" style='width:1050px;'>
                 <div class="row gx-5">
-                    {% for company in companys%}
-                        {% for company_data in company%}
-                            <div class="col mb-5" onclick="location.href='{% url 'geo_handbook:card' company_data.id %}'"; style='cursor:pointer;'>
+                    {% for company in companys %}
+                        {% for company_data in company %}
+                            <div class="col mb-5"
+                                 onclick="location.href='{% url 'geo_handbook:card' company_data.id %}'" ;
+                                 style='cursor:pointer;'>
                                 <div class="p-3 company-container">
                                     <div class="company" style='height:80px;'>
-                                        <h4>{{company_data.short_name}}</h4>
+                                        <h4>{{ company_data.short_name }}</h4>
                                         <div class="rating" style='width:120px;'>
                                             <img src={% static 'assets/stars/black-star.svg' %}>
                                             <img src={% static 'assets/stars/black-star.svg' %}>
@@ -130,13 +132,13 @@
                                     </div>
                                     <div class="company__data">
                                     <span class="company__address" style='display:block; width:100%; height:60px;'>
-                                        <span class='company__data-text'>Юридический адрес: </span>{{company_data.legal_address.postcode}}, г.{{company_data.legal_address.city}}, {{company_data.legal_address.street}}, д.{{company_data.legal_address.house_number}}</span>
+                                        <span class='company__data-text'>Юридический адрес: </span>{{ company_data.legal_address.postcode }}, г.{{ company_data.legal_address.city }}, {{ company_data.legal_address.street }}, д.{{ company_data.legal_address.house_number }}</span>
                                         <span class='company__data-text'>Виды работ: 
                                             </span>
-                                            {% for type_work in type_works %}
-                                                {{ type_work }} |
-                                            {% endfor %}
-                                            </span>
+                                        {% for type_work in type_works %}
+                                            {{ type_work }} |
+                                        {% endfor %}
+                                        </span>
                                         </span>
                                     </div>
                                 </div>
@@ -147,4 +149,34 @@
             </div>
         </div>
     </div>
+    <script>
+        const ratings = document.querySelectorAll('.rating')
+        if (ratings.length > 0) {
+            initRatings();
+        }
+
+        function initRatings() {
+            let ratingActive, ratingValue;
+            for (let index = 0; index < ratings.length; index++) {
+                const rating = ratings[index];
+                initRating(rating)
+            }
+
+
+            function initRating(rating) {
+                initRatingVars(rating);
+                setRatingActiveWidth();
+            }
+
+            function initRatingVars(rating) {
+                ratingActive = rating.querySelector('.rating__active');
+                ratingValue = rating.querySelector('.rating__value');
+            }
+
+            function setRatingActiveWidth(index = ratingValue.innerHTML) {
+                const ratingActiveWidth = index / 0.05;
+                ratingActive.style.width = `${ratingActiveWidth}%`
+            }
+        }
+    </script>
 {% endblock %}
