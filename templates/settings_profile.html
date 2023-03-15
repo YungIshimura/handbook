@@ -4,32 +4,22 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/settings_profile.css' %}"/>
-    <div class="container">
-        <section>
-            <div class="card-menu">
-                <div class="menu">
-                    <a href="{% url 'geo_handbook:profile' %}">Основные данные</a>
-                </div>
-                <div class="menu">
-                    <a href="{% url 'geo_handbook:settings_profile' %}"><span>Редактировать данные организации</span></a>
-                </div>
-                <div class="menu">
-                    <span><a href="{% url 'geo_handbook:settings_profile' %}"><span>Настройки профиля</span></a></span>
-                </div>
+        <div class="enter">
+            <div class="enter-container__menu">
+                <a class="enter-container__menu--a mr-2" href="{% url 'geo_handbook:profile' %}">Основные данные</a>
+                <a class="enter-container__menu--a mr-2" href="{% url 'geo_handbook:settings_profile' %}"><span>Редактировать данные организации</span></a>
+                <a class="enter-container__menu--a" href="{% url 'geo_handbook:settings_profile' %}"><span>Настройки профиля</span></a>
             </div>
-        </section>
-        <section class="login-input">
-            <form>
-                <div class="mb-4">
-                    <input type="email" class="form-control-lg border rounded-0" id="exampleFormControlInput1"
-                           placeholder="Email">
-                </div>
-                <div class="mb-3">
-                    <input type="password" class="form-control-lg border rounded-0" id="exampleFormControlTextarea1"
+            <div class="enter__input">
+                <form>
+                    <input type="email" class="enter-container__login form-control-lg border rounded-0"
+                           id="exampleFormControlInput1"
+                           placeholder="Email"><br>
+                    <input type="password" class="enter-container__login form-control-lg border rounded-0"
+                           id="exampleFormControlTextarea1"
                            placeholder="Пароль"></input>
+                    <button type="submit" class="btn">СОХРАНИТЬ</button>
+                </form>
                 </div>
-                <button type="submit" class="btn">СОХРАНИТЬ</button>
-            </form>
-        </section>
-    </div>
+        </div>
 {% endblock %}

@@ -1,12 +1,27 @@
-.card-menu {
-    margin-top: 100px;
-    margin-left: 326px;
-    text-align: center;
-    display: flex;
+.enter {
+    margin-left: 500px;
 }
 
-.menu {
-    margin-left: 50px;
+.enter-container__menu {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.enter-container__menu--a {
+    color: #219653;
+    text-decoration: none;
+    font-size: 18px;
+    font-style: Regular;
+    padding-right: 10px;
+}
+
+
+.enter-container__login {
+    width: 450px;
+    margin-top: 20px;
+}
+
+.enter__input {
     width: 325px;
     font-size: 18px;
     font-style: Regular;
@@ -15,32 +30,14 @@
     font-stretch: normal;
 }
 
-a {
-    color: #219653;
-    text-decoration: none;
-}
-
-.login-input {
-    margin-top: 100px;
-    margin-left: 450px;
-    max-width: 600px;
-}
-
 .btn {
     color: white;
-    width: 600px;
+    width: 450px;
     height: auto;
-    font-size: 16px;
-    font-style: Regular;
-    text-align: center;
-    font-family: Inter;
     font-weight: 400;
     line-height: 57px;
     border-color: transparent;
     justify-content: center;
     background-color: #333333FF;
-}
-
-.form-control-lg {
-    padding-right: 317px;
+    margin: 50px 0 238px 0;
 }
