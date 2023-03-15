@@ -7,7 +7,6 @@ from django.http import JsonResponse
 
 
 def view_index(request):
-    print(request)
     search_vector = SearchVector('short_name', 'inn', 'ogrn', 'director')
     if request.POST.get('search'):
         company = Company.objects.annotate(search=search_vector).filter(search=request.POST.get('search'))
@@ -86,10 +85,6 @@ def view_about(request):
 
 def view_rates(request):
     return render(request, 'rates.html')
-
-
-def view_select(request):
-    return render(request, 'select_city.html')
 
 
 def view_selected_region(request, city_id):
