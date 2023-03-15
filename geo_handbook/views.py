@@ -94,7 +94,8 @@ def view_selected_region(request, city_id):
                 'id': company.id,
                 'name': company.short_name,
                 'work_types': [work_type.type_work for work_type in company.specializations.all()],
-                'legal_address': company.legal_address
+                'legal_address': company.legal_address,
+                'rating': company.rating
             }
             for company in companys
         ],

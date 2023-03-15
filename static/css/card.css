@@ -265,3 +265,11 @@ body {
 .rating__value {
     font-size: 60%;
 }
+
+.hide {
+    display: none;
+}
+.delim {
+    margin-top: 10px;
+    margin-left: 100px;
+}
