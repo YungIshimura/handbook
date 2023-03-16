@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from users.forms import EmployeeCreateForm, CityCreateForm, AddressCreateForm, \
     LicenseCreateForm, CompanyContactPhoneForm, CompanyContactEmailForm, CompanyContactUrlForm
-from geo_handbook.models import Company, Branches, Employee, License
+from geo_handbook.models import Company, Branches, Employee, License, TypeWork
 
 
 def view_profile(request):
@@ -13,6 +13,7 @@ def view_profile(request):
 def update_company(request, pk):
     company = get_object_or_404(Company, pk=pk)
     employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
+    type_works = TypeWork.objects.all()
     # формы, которые передаем для модальных окон
     forms = {
         'add_employee_form': EmployeeCreateForm(),
@@ -34,7 +35,8 @@ def update_company(request, pk):
     context = {
         **forms,
         'company': company,
-        'employees': employees
+        'employees': employees,
+        'type_works': type_works
     }
     return render(request, 'enter_details_company.html', context)
 
