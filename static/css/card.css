@@ -34,7 +34,7 @@
     line-height: 57px;
     color: #333333;
     padding-top: 5px;
-margin-left: 65px;
+    margin-left: 65px;
 }
 
 .rating--title {
@@ -179,13 +179,12 @@ margin-left: 65px;
 .company-container {
     position: relative;
     width: 480px;
-    height: 270px;
+    height: 240px;
     border: 1px solid #d2d1d1;
 }
 
 .company {
-    display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .company__data-text {
@@ -269,7 +268,17 @@ body {
 .hide {
     display: none;
 }
+
 .delim {
-    margin-top: 10px;
-    margin-left: 100px;
+    margin-top: 5px;
+}
+
+.card-group__h4 {
+    max-width: 300px;
+}
+
+.position {
+    position: absolute;
+    top: 15px;
+    left: 300px;
 }

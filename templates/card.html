@@ -114,47 +114,54 @@
             <span class="companys--title">Лучшие компании региона</span>
             <br>
             <br>
-            <div class="container overflow-hidden" style='width:1050px;'>
+
+            <div class="container overflow-hidden">
                 <div class="row gx-5">
                     {% for company in companys %}
                         {% for company_data in company %}
-                            <div class="col mb-5"
+                            <div class="card-group ml-5 mb-3"
                                  onclick="location.href='{% url 'geo_handbook:card' company_data.id %}'" ;
                                  style='cursor:pointer;'>
-                            <div class="p-3 company-container">
-                                <div class="company" style='height:80px;'>
-                                    <h4>{{ company_data.short_name }}</h4>
-                                    <div class="rating">
-                                        <div class="company__data--rating hide">
-                                            <div class="rating__value hide">{{ rating|default:"4." }}</div>
-                                        </div>
-                                        <div class="delim rating__body">
-                                            <div class="rating__active">
-                                                <div class="rating__items hide">
-                                                    <div class="rating__item"></div>
+                                <div class="p-3 company-container">
+                                    <div class="company" style='height:80px;'>
+                                        <div class="card-group">
+                                            <h4 class="card-group__h4">{{ company_data.short_name }}</h4>
+                                            <div class="position rating mr-3">
+                                                <div class="company__data--rating hide">
+                                                    <div class="rating__value hide">{{ rating|default:"4." }}</div>
+                                                </div>
+                                                <div class="delim rating__body">
+                                                    <div class="rating__active">
+                                                        <div class="rating__items hide">
+                                                            <div class="sd rating__item"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="company__data mt-5">
-                                    <span class="company__address" style='display:block; width:100%; height:60px;'>
+
+                                        <div class="company__data">
+                                    <span class="company__address" style='display: block; width:100%; height:100%;'>
                                         <span class='company__data-text'>Юридический адрес: </span>{{ company_data.legal_address.postcode }}, г.{{ company_data.legal_address.city }}, {{ company_data.legal_address.street }}, д.{{ company_data.legal_address.house_number }}</span>
-                                        <span class='company__data-text'>Виды работ: 
+                                            <span class='company__data-text'>Виды работ:
                                             </span>
-                                        {% for type_work in type_works %}
-                                            {{ type_work }} |
-                                        {% endfor %}
-                                        </span>
-                                        </span>
+                                            {% for type_work in type_works %}
+                                                {{ type_work }} |
+                                            {% endfor %}
+                                            </span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
                     {% endfor %}
-                    </div>
                 </div>
             </div>
+
         </div>
+    </div>
+
     </div>
     <script src="{% static 'js/ratings.js' %}"></script>
 {% endblock %}
