@@ -9,6 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <!-- Форма для редактирования сотрудников компании -->
                 <form id="edit-employee-modal-form">
                     {% csrf_token %}
                     <label for="{{ edit_employee_form.position.id_for_label }}" class="frame-text16">Должность

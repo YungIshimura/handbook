@@ -1,5 +1,5 @@
 from django import forms
-from geo_handbook.models import Company, Director, Employee, City, CompanyAddress
+from geo_handbook.models import Company, Director, Employee, City, CompanyAddress, License
 from django.core.exceptions import ValidationError
 
 
@@ -99,7 +99,7 @@ class AddressCreateForm(forms.ModelForm):
     class Meta:
         model = CompanyAddress
         fields = ['postcode', 'region', 'district', 'street', 'house_number']
-        widgets = {field: forms.TextInput(attrs={'class': 'form-control'}) for field in fields[:-1]}
+        widgets = {field: forms.TextInput(attrs={'class': 'form-control'}) for field in fields}
         widgets['region'] = forms.Select(attrs={'class': 'form-control'})
 
 
@@ -107,7 +107,7 @@ class AddressCreateForm(forms.ModelForm):
 class CityCreateForm(forms.ModelForm):
     class Meta:
         model = City
-        fields = ('name', )
+        fields = ('name',)
         widgets = {'name': forms.TextInput(attrs={'class': 'form-control'})}
 
 
@@ -130,4 +130,43 @@ class EmployeeCreateForm(forms.ModelForm):
         widgets = {
             field: forms.TextInput(attrs={'class': 'form-control'})
             for field in fields
+        }
+
+
+# Форма добавления лицензии
+class LicenseCreateForm(forms.ModelForm):
+    class Meta:
+        model = License
+        fields = ('name', 'license_date', 'license_area', 'license_organization')
+        widgets = {field: forms.TextInput(attrs={'class': 'form-control'}) for field in fields}
+        widgets['license_date'] = forms.DateInput(attrs={'class': 'form-control'})
+
+
+# Форма добавления контактных телефонов организации пользователем
+class CompanyContactPhoneForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ('contact_phone',)
+        widgets = {
+            'contact_phone': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+# Форма добавления контактного email организации пользователем
+class CompanyContactEmailForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ('contact_email',)
+        widgets = {
+            'contact_email': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+# Форма добавления контактного url организации пользователем
+class CompanyContactUrlForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ('contact_url',)
+        widgets = {
+            'contact_url': forms.TextInput(attrs={'class': 'form-control'})
         }

@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Форма для добавления сотрудника -->
+                <!-- Форма для добавления филиала -->
                 <form id="add-branches-modal-form">
                     {% csrf_token %}
 
@@ -36,7 +36,7 @@
                         города</label><br/>
                     <input type="text" class="frame-frame25" name="{{ add_branch_city_form.name.name }}" id="name"
                            value="{{ add_branch_city_form.name.widget.attrs.value }}"><br/>
-                    <div class="error-message" id="add-branches-city-errors-name-error"
+                    <div class="error-message" id="add-branches-name-error"
                          style="display: none;">{{ add_branch_city_form.name.errors }}</div>
 
                     <label for="{{ add_branch_address_form.district.id_for_label }}" class="frame-text16">Район города</label><br/>

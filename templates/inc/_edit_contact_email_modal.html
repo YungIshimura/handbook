@@ -1,0 +1,30 @@
+<div class="modal fade" id="edit-contact_email-modal" tabindex="-1" role="dialog" aria-labelledby="edit-contact_phone-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-contact_email-modal-label">Редактировать email</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Форма для редактирования email компании -->
+                <form id="edit-contact_email-modal-form">
+                    {% csrf_token %}
+
+                    <label for="{{ edit_contact_email_form.contact_email.id_for_label }}" class="frame-text16">Email</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_contact_email_form.contact_email.name }}"
+                           id="contact_email" value="{{ edit_contact_email_form.contact_email.value }}"><br/>
+                    <div class="error-message" id="edit-contact_email-contact_email-error"
+                         style="display: none;">{{ edit_contact_email_form.contact_email.errors }}</div>
+
+                    <div>
+                        <button type="submit" class="btn-send-ap">Сохранить</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -147,3 +147,28 @@
 .arrow-branches:hover {
   cursor: pointer;
 }
+
+.arrow-license:hover {
+  cursor: pointer;
+}
+
+.arrow-site:hover {
+  cursor: pointer;
+}
+
+.arrow-contact_phone {
+    cursor: pointer;
+}
+
+.arrow-contact_email {
+    cursor: pointer;
+}
+
+.arrow-contact_url {
+    cursor: pointer;
+}
+
+.add-license-link {
+    margin-top: -7px;
+    margin-left: 33px;
+}
