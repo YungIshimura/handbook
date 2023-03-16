@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('geo_handbook.urls', namespace='geo_handbook')),
-    path('users/', include('users.urls', namespace='users'))
+    path('users/', include('users.urls', namespace='users')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ] 
 
 if settings.DEBUG:

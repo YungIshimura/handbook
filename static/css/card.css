@@ -34,26 +34,20 @@
     line-height: 57px;
     color: #333333;
     padding-top: 5px;
-    margin-left: 60px;
+margin-left: 65px;
 }
 
 .rating--title {
     display: block;
-    margin-left: 65px;
     margin-top: 10px;
-}
-
-.stars {
-    display: flex;
-    column-gap: 4px;
-    margin-top: 4px;
-    margin-left: 45px;
+    font-size: 20px;
+    color: #828282;
 }
 
 .company__data-bureaucracy {
     display: block;
-    margin-top: 32px;
-    margin-left: 5px;
+    margin-top: 85px;
+    margin-left: 7px;
     word-spacing: 15px;
 }
 
@@ -185,7 +179,7 @@
 .company-container {
     position: relative;
     width: 480px;
-    height: 150px;
+    height: 270px;
     border: 1px solid #d2d1d1;
 }
 
@@ -215,4 +209,67 @@ body {
     line-height: 48px;
     display: flex;
     gap: 45px;
+}
+
+.rating {
+    display: flex;
+    font-size: 25px;
+    line-height: 0.75;
+}
+
+.rating__body {
+    position: absolute;
+    margin-top: 115px;
+    margin-left: 45px;
+}
+
+.rating__body::before {
+    content: "☆☆☆☆☆";
+    display: block;
+}
+
+.rating__active {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.rating__active::before {
+    content: "★★★★★";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: orange;
+}
+
+.rating__items {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.rating_item {
+    flex: 0 0 20%;
+    height: 100%;
+    opacity: 0;
+}
+
+.rating__value {
+    font-size: 60%;
+}
+
+.hide {
+    display: none;
+}
+.delim {
+    margin-top: 10px;
+    margin-left: 100px;
 }

@@ -1,25 +1,33 @@
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
-from geo_handbook.models import Company, City
+from geo_handbook.models import Company, City, CompanySpecialization
 from django.contrib.postgres.search import SearchVector
 from django.contrib import messages
 from django.http import JsonResponse
+from django.db.models import Q
 
 
 def view_index(request):
     search_vector = SearchVector('short_name', 'inn', 'ogrn', 'director')
     if request.POST.get('search'):
-        company = Company.objects.annotate(search=search_vector).filter(search=request.POST.get('search'))
+        company = Company.objects.annotate(search=search_vector).filter(
+            search=request.POST.get('search'))
         if company:
             return HttpResponseRedirect(reverse('geo_handbook:card', args=[company[0].id]))
         else:
             messages.error(request, 'По данному запросу ничего не найдено')
+
     if 'term' in request.GET:
         qs = City.objects.filter(name__icontains=request.GET.get('term'))
         citys = []
         for company in qs:
             citys.append(company.name)
         return JsonResponse(citys, safe=False)
+
+    if 'region' in request.POST:
+        region = request.POST.get('region')
+        city_id = City.objects.get(name=region).id
+        return HttpResponseRedirect(reverse('geo_handbook:region', args=[city_id]))
 
     if 'city_search' in request.GET:
         city = request.GET.get('city_search')
@@ -34,7 +42,10 @@ def view_sign_up_user(request):
 
 
 def view_card(request, company_id):
-    company = Company.objects.get(id=company_id)
+    company = Company.objects.select_related(
+        'legal_address').get(id=company_id)
+    type_works = [type_work.type_work for type_work in company.specializations.select_related(
+        'type_work').all()]
     context = {
         'short_name': company.short_name,
         'full_name': company.full_name,
@@ -49,16 +60,20 @@ def view_card(request, company_id):
         'street': company.legal_address.street,
         'index': company.legal_address.postcode,
         'house_number': company.legal_address.house_number,
-        'work_types': [work_type.type_work for work_type in company.specializations.all()],
         'directors': [director for director in company.director.all()]
     }
+    region_companys = CompanySpecialization.objects.filter(
+        company__legal_address__city_id=company.legal_address.city.id, type_work__in=type_works).distinct('company_id').select_related(
+        'type_work', 'company')
+
+    context['type_works'] = type_works  
+    context['companys'] = region_companys
 
     return render(request, 'card.html', context=context)
 
 
 def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
-
 
 
 def view_card_layer(request):
@@ -73,19 +88,17 @@ def view_rates(request):
     return render(request, 'rates.html')
 
 
-def view_select(request):
-    return render(request, 'select_city.html')
-
-
 def view_selected_region(request, city_id):
-    companys = Company.objects.filter(legal_address__city=city_id)
+    companys = Company.objects.filter(legal_address__city=city_id).order_by(
+        '-rating').select_related('legal_address__city')
     context = {
         'companys': [
             {
                 'id': company.id,
                 'name': company.short_name,
                 'work_types': [work_type.type_work for work_type in company.specializations.all()],
-                'legal_address': company.legal_address
+                'legal_address': company.legal_address,
+                'rating': company.rating
             }
             for company in companys
         ],
