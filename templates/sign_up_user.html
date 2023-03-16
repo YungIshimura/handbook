@@ -1,65 +1,45 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block list %}Вход/регистрация{% endblock %}
 {% load static %}
-<html lang="english">
-<head>
-    <title>Авторизация пользователя</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta charset="utf-8"/>
-    <meta property="twitter:card" content="summary_large_image"/>
 
-    <style data-tag="reset-style-sheet">
-        html {line-height: 1.15;}  body {margin: 0;}  * {box-sizing: border-box;border-width: 0;border-style: solid;}  p, li, ul, pre, div, h1, h2, h3, h4, h5, h6, figure, blockquote, figcaption {margin: 0;padding: 0;}  button {background-color: transparent;}  button, input, optgroup, select, textarea {font-family: inherit;font-size: 100%;line-height: 1.15;margin: 0;}  button, select {text-transform: none;}  button, [type="button"], [type="reset"], [type="submit"] {-webkit-appearance: button;}  button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {border-style: none;padding: 0;}  button:-moz-focus, [type="button"]:-moz-focus, [type="reset"]:-moz-focus, [type="submit"]:-moz-focus {outline: 1px dotted ButtonText;}  a {color: inherit;text-decoration: inherit;}  input {padding: 2px 4px;}  img {display: block;}  html {scroll-behavior: smooth}
-    </style>
-    <style data-tag="default-style-sheet">
-        html {font-family: Inter;font-size: 16px;}  body {font-weight: 400;font-style: normal;text-decoration: none;text-transform: none;letter-spacing: normal;line-height: 1.15;color: var(--dl-color-gray-black);background-color: var(--dl-color-gray-white);}
-    </style>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" data-tag="font"/>
+{% block content %}
     <link rel="stylesheet" href="{% static 'css/sign_up_user.css' %}"/>
-</head>
-<body>
-<div>
-    <div class="frame-container">
-        <div class="frame-frame">
-            <img src="{% static 'assets/sign_up_user/rectangle132228-lyuu-600h.png' %}" alt="Rectangle132228"
-                 class="frame-rectangle13"/>
-            <div class="frame-text08">
-                <span>Вход</span>
+
+    <div class="card text-center">
+        <div class="card-header border-0">
+            Вход
+        </div>
+        <div class="card-body">
+            <div class="ml-5 mb-5 mt-3">
+                <div class="card-dody__input col-sm-10">
+                    <input type="text" class="form-control"
+                           placeholder="Email">
+                </div>
             </div>
-            <form>
-                <div class="frame-group8">
-                    <div class="frame-group4">
-                        <input type="text" class="frame-group4" placeholder="Email">
-                    </div>
+            <div class="ml-5 mb-4">
+                <div class="card-dody__input col-sm-10">
+                    <input type="password" class="form-control"
+                           placeholder="Пароль">
                 </div>
-                <div class="frame-group">
-                    <div class="frame-group5">
-                        <input type="text" class="frame-group5" placeholder="   Пароль">
-                    </div>
-                </div>
-                <div class="frame-group9">
-                    <label>
-                        <input type="checkbox" class="frame-rectangle15" name="agree" value="yes">
-                        <span class="frame-text16"><span>Запомнить пароль</span></span>
+            </div>
+            <div class="card-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Запомнить пароль
                     </label>
                 </div>
-                <div class="frame-frame5">
-                    <button type="submit" class="frame-text14"><span>ВОЙТИ</span></button>
+                <div class="form-check">
+                    <a href="#" class="form-check__a">Забыли пароль?</a>
                 </div>
-            </form>
-            <div class="frame-text12">
-                <a href="#"><span>Забыли пароль?</span></a>
             </div>
-
-            <div class="frame-group10">
-                <img src="{% static 'assets/sign_up_user/line12248-qgqc.svg' %}" alt="Line12248" class="frame-line1"/>
-                <img src="{% static 'assets/sign_up_user/line22249-hew.svg' %}" alt="Line22249" class="frame-line2"/>
-            </div>
-            <div class="frame-text10">
-                <a href="#"><span>Подтвердить данные о компании</span></a>
+            <div class="card-btn">
+                <a href="#" class="card-btn__a">Войти</a>
             </div>
         </div>
+        <div class="card-link border-0">
+            <a class="card-footer__a" href="{% url 'geo_handbook:sign_up_company' %}"><span>Подтвердить данные о компании</span></a>
+        </div>
     </div>
-</div>
-</body>
-</html>
+
+{% endblock %}
