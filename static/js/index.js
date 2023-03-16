@@ -3,9 +3,14 @@ function Vanish(){
 }
 
 
-function SelectCity() {
-    document.getElementById("city__search--container").style.cssText = 'opacity:1;'
+function OpenSelectCityForm() {
+    document.getElementById("city__search--container").style.cssText = 'opacity:1; display:block; z-index:55; box-shadow: rgba(0,0,0,.5) 0 0 0 1000px; height:200px; background-color: white;' 
+    document.getElementsByName('html').style.cssText = 'bacground-color: lightgray;'
 
+}
+
+function CloseSelectCityForm(){
+    document.getElementById('city__search--container').style.cssText = 'display:none;'
 }
 
 $(document).ready ( function(){

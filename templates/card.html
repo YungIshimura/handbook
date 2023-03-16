@@ -118,17 +118,16 @@
             <div class="container overflow-hidden">
                 <div class="row gx-5">
                     {% for company in companys %}
-                        {% for company_data in company %}
                             <div class="card-group ml-5 mb-3"
-                                 onclick="location.href='{% url 'geo_handbook:card' company_data.id %}'" ;
+                                 onclick="location.href='{% url 'geo_handbook:card' company.company.id %}'" ;
                                  style='cursor:pointer;'>
                                 <div class="p-3 company-container">
                                     <div class="company" style='height:80px;'>
                                         <div class="card-group">
-                                            <h4 class="card-group__h4">{{ company_data.short_name }}</h4>
+                                            <h4 class="card-group__h4">{{ company.company.short_name }}</h4>
                                             <div class="position rating mr-3">
                                                 <div class="company__data--rating hide">
-                                                    <div class="rating__value hide">{{ rating|default:"4." }}</div>
+                                                    <div class="rating__value hide">{{ company.company.rating }}</div>
                                                 </div>
                                                 <div class="delim rating__body">
                                                     <div class="rating__active">
@@ -142,7 +141,7 @@
 
                                         <div class="company__data">
                                     <span class="company__address" style='display: block; width:100%; height:100%;'>
-                                        <span class='company__data-text'>Юридический адрес: </span>{{ company_data.legal_address.postcode }}, г.{{ company_data.legal_address.city }}, {{ company_data.legal_address.street }}, д.{{ company_data.legal_address.house_number }}</span>
+                                        <span class='company__data-text'>Юридический адрес: </span>{{ company.company.legal_address.postcode }}, г.{{ company.company.legal_address.city }}, {{ company.company.legal_address.street }}, д.{{ company.company.legal_address.house_number }}</span>
                                             <span class='company__data-text'>Виды работ:
                                             </span>
                                             {% for type_work in type_works %}
@@ -154,7 +153,6 @@
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
                     {% endfor %}
                 </div>
             </div>

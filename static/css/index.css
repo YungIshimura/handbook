@@ -22,12 +22,13 @@
 }
 
 .region-area__select-region {
+    display: block;
     width: 578px;
     height: 40px;
     gap: 17px;
     display: flex;
     margin: 25px 1087px 160px 53px;
-    align-items: baseline
+    align-items: baseline;
 }
 
 .select-region__text--button {

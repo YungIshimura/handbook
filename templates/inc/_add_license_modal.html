@@ -1,0 +1,51 @@
+<div class="modal fade" id="add-license-modal" tabindex="-1" role="dialog"
+     aria-labelledby="add-license-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-license-modal-label">Добавить лицензию</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Форма для добавления лицензии -->
+                <form id="add-license-modal-form">
+                    {% csrf_token %}
+
+                    <label for="{{ add_license_form.name.id_for_label }}" class="frame-text16">Название лицензии</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_license_form.name.name }}"
+                           id="name"
+                           value="{{ add_license_form.name.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-license-name-error"
+                         style="display: none;">{{ add_license_form.name.errors }}</div>
+
+                    <label for="{{ add_license_form.license_date.id_for_label }}" class="frame-text16">Срок действия лицензии</label><br/>
+                    <input type="date" class="frame-frame25" name="{{ add_license_form.license_date.name }}"
+                           id="license_date"
+                           value="{{ add_license_form.license_date.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-license-license_date-error"
+                         style="display: none;">{{ add_license_form.license_date.errors }}</div>
+
+                    <label for="{{ add_license_form.license_area.id_for_label }}" class="frame-text16">Область применения лицензии</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_license_form.license_area.name }}"
+                           id="license_area"
+                           value="{{ add_license_form.license_area.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-license-license_area-error"
+                         style="display: none;">{{ add_license_form.license_area.errors }}</div>
+
+                    <label for="{{ add_license_form.license_organization.id_for_label }}" class="frame-text16">Организация выдавшая лицензию</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_license_form.license_organization.name }}"
+                           id="license_organization"
+                           value="{{ add_license_form.license_organization.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-license-license_organization-error"
+                         style="display: none;">{{ add_license_form.license_organization.errors }}</div>
+
+                    <div>
+                        <button type="submit" class="btn-send-ap">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

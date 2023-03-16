@@ -181,6 +181,21 @@ class Company(models.Model):
     ),
         blank=True,
         null=True)
+    contact_phone = ArrayField(PhoneNumberField(
+        verbose_name='Номер телефона(пользователь)',
+    ),
+        blank=True,
+        null=True)
+    contact_email = ArrayField(models.EmailField(
+        'Электронная почта(пользователь)'
+    ),
+        blank=True,
+        null=True)
+    contact_url = models.URLField(
+        'Сайт компании(пользователь)',
+        max_length=128,
+        blank=True,
+        null=True)
 
     def __str__(self):
         return f'{self.full_name}'

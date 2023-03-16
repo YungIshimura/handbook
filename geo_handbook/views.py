@@ -64,7 +64,7 @@ def view_card(request, company_id):
     }
     region_companys = CompanySpecialization.objects.filter(
         company__legal_address__city_id=company.legal_address.city.id, type_work__in=type_works).distinct('company_id').select_related(
-        'type_work', 'company')
+        'type_work', 'company').order_by('-company')
 
     context['type_works'] = type_works
     context['companys'] = region_companys

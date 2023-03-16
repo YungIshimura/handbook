@@ -1,0 +1,30 @@
+<div class="modal fade" id="edit-contact_url-modal" tabindex="-1" role="dialog" aria-labelledby="edit-contact_url-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-contact_url-modal-label">Редактировать сайт</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Форма для редактирования сайта компании -->
+                <form id="edit-contact_url-modal-form">
+                    {% csrf_token %}
+
+                    <label for="{{ edit_contact_url_form.contact_url.id_for_label }}" class="frame-text16">Сайт компании</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_contact_url_form.contact_url.name }}"
+                           id="contact_url" value="{{ edit_contact_url_form.contact_url.value }}"><br/>
+                    <div class="error-message" id="edit-contact_url-contact_url-error"
+                         style="display: none;">{{ edit_contact_url_form.contact_url.errors }}</div>
+
+                    <div>
+                        <button type="submit" class="btn-send-ap">Сохранить</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

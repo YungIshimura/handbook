@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
+.x-mark {
+    top: 10px;
+    position: absolute;
+    right: 10px;
+}
 
 .city__search-area {
-    display: flex;
+    display: none;
     position: absolute;
     opacity: 0;
-    padding: 2em;
     transition: 300ms all;
 
 }
