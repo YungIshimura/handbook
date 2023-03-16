@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.db.models import Q
 
+
 def view_index(request):
     search_vector = SearchVector('short_name', 'inn', 'ogrn', 'director')
     if request.POST.get('search'):
@@ -60,7 +61,8 @@ def view_card(request, company_id):
         'directors': [director for director in company.director.all()]
     }
     for type_work in type_works:
-        region_company = Company.objects.filter(specializations__id=type_work.id, legal_address__city_id=company.legal_address.city).select_related('legal_address__city')
+        region_company = Company.objects.filter(specializations__id=type_work.id,
+                                                legal_address__city_id=company.legal_address.city).select_related('legal_address__city')
         if region_company:
             companys.append(region_company)
 
