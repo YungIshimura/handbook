@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Форма для добавления сотрудника -->
+                <!-- Форма для редактирования филиала -->
                 <form id="edit-branches-modal-form">
                     {% csrf_token %}
 
@@ -34,7 +34,7 @@
 
                     <label for="{{ edit_branch_city_form.name.id_for_label }}" class="frame-text16">Название
                         города</label><br/>
-                    <input type="text" class="frame-frame25" name="{{ edit_branch_city_form.name.name }}" id="name"
+                    <input type="text" class="frame-frame25" name="{{ edit_branch_city_form.name.name }}" id="city"
                            value="{{ edit_branch_city_form.name.value }}"><br/>
                     <div class="error-message" id="edit-branches-name-error"
                          style="display: none;">{{ edit_branch_city_form.name.errors }}</div>

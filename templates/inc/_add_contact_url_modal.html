@@ -1,0 +1,30 @@
+<div class="modal fade" id="add-contact_url-modal" tabindex="-1" role="dialog"
+     aria-labelledby="add-contact_url-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-contact_url-modal-label">Добавить сайт компании</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Форма для добавления url -->
+                <form id="add-contact_url-modal-form">
+                    {% csrf_token %}
+
+                    <label for="{{ add_contact_url_form.contact_url.id_for_label }}"
+                           class="frame-text16">Сайт компании</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ add_contact_url_form.contact_url.name }}"
+                           id="add_contact_url_form" value="{{ add_contact_url_form.contact_url.widget.attrs.value }}"><br/>
+                    <div class="error-message" id="add-contact_url-contact_url-error"
+                         style="display: none;">{{ add_contact_url_form.contact_url.errors }}</div>
+
+                    <div>
+                        <button type="submit" class="btn-send-ap">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

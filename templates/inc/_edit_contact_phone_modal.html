@@ -1,0 +1,30 @@
+<div class="modal fade" id="edit-contact_phone-modal" tabindex="-1" role="dialog" aria-labelledby="edit-contact_phone-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-contact_phone-modal-label">Редактировать телефонные номера</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Форма для редактирования телефонных номеров компании -->
+                <form id="edit-contact_phone-modal-form">
+                    {% csrf_token %}
+
+                    <label for="{{ edit_contact_phone_form.contact_phone.id_for_label }}" class="frame-text16">Номера телефонов компании</label><br/>
+                    <input type="text" class="frame-frame25" name="{{ edit_contact_phone_form.contact_phone.name }}"
+                           id="contact_phone" value="{{ edit_contact_phone_form.contact_phone.value }}"><br/>
+                    <div class="error-message" id="edit-contact_phone-contact_phone-error"
+                         style="display: none;">{{ edit_contact_phone_form.contact_phone.errors }}</div>
+
+                    <div>
+                        <button type="submit" class="btn-send-ap">Сохранить</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
