@@ -63,7 +63,7 @@ def view_card(request, company_id):
         region_company = Company.objects.filter(specializations__id=type_work.id, legal_address__city_id=company.legal_address.city).select_related('legal_address__city')
         if region_company:
             companys.append(region_company)
-        
+
     context['type_works'] = type_works
     context['companys'] = companys
 
@@ -72,7 +72,6 @@ def view_card(request, company_id):
 
 def view_sign_up_company(request):
     return render(request, 'sign_up_company.html')
-
 
 
 def view_card_layer(request):
@@ -95,7 +94,8 @@ def view_selected_region(request, city_id):
                 'id': company.id,
                 'name': company.short_name,
                 'work_types': [work_type.type_work for work_type in company.specializations.all()],
-                'legal_address': company.legal_address
+                'legal_address': company.legal_address,
+                'rating': company.rating
             }
             for company in companys
         ],
