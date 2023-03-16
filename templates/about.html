@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/about.css' %}"/>
 
     <section id="cards">
-        <span class="arrow-back"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"> На главную</span>
+        <span class="arrow-back" onclick="location.href='{% url 'geo_handbook:index' %}'"><img src="https://img.icons8.com/ios/50/null/long-arrow-left.png"> На главную</span>
         <div class="cards">
             <div class="card__about">
                 <h3 class="card__about--title">О сервисе</h3>
