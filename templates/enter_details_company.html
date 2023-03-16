@@ -135,50 +135,106 @@
                     <div class="card border border-white">
                         <div class="card-body">
 
-                            <div class="frame-text16">Телефоны организации</div>
-                            <div class="frame-frame35"></div>
-                            <br/>
-
-                            <div class="frame-text16">Email</div>
-                            <div class="frame-frame35"></div>
-                            <br/>
-
-                            {% if company.url %}
-
-                                {% for site in company.url %}
-                                    <div class="frame-text16 toggle-fields-site">
-                                        Сайт
-                                    <span class="arrow-site">&#9660;</span>
+                            {% if company.contact_phone %}
+                                <div class="frame-text16 toggle-fields-contact_phone">
+                                    Телефоны организации
+                                    <span class="arrow-contact_phone">&#9660;</span>
+                                </div>
+                                <div class="contact_phone-info">
+                                    <div class="frame-frame25">
+                                        {% for contact_phone in company.contact_phone %}
+                                            {{ contact_phone }}
+                                        {% endfor %}
                                     </div>
-                                    <div class="site-info">
-                                        <div class="frame-frame25">
-                                        {{ site }}
-                                        </div>
-                                        <div class="site-link hidden-field">
-                                            <a href="" class="edit-site-btn"
-{#                                               data-branche-pk="{{ branche.pk }}"#}
-{#                                               data-update-url="{% url 'users:update_branches' branche.pk %}"#}
-                                               data-toggle="modal"
-                                               data-target="#edit-site-modal">Редактировать</a>
-                                            <a href="" class="delete-site-btn"
-{#                                               data-branche-pk="{{ branche.pk }}"#}
-{#                                               data-delete-url="{% url 'users:delete_branches' branche.pk %}"#}
-                                               data-toggle="modal"
-                                               data-target="#confirm-delete-site-modal">Удалить</a>
-                                        </div>
-                                    </div><br/>
-                                {% endfor %}
+                                    <div class="contact_phone-link hidden-field">
+                                          <a href="" class="edit-contact_phone-btn"
+                                             data-contact_phone-pk="{{ company.pk }}"
+                                             data-update-url="{% url 'users:update_contact_phone' company.pk %}"
+                                             data-toggle="modal"
+                                             data-target="#edit-contact_phone-modal">Редактировать</a>
+                                         <a href="" class="delete-contact_phone-btn"
+                                            data-contact_phone-pk="{{ company.pk }}"
+                                            data-delete-url="{% url 'users:delete_contact_phone' company.pk %}"
+                                            data-toggle="modal"
+                                            data-target="#confirm-delete-contact_phone-modal">Удалить</a>
+                                    </div>
+                                </div><br/>
+                            {% else %}
+                                <div class="frame-text16">Телефоны организации</div>
+                                <div class="frame-frame25">-</div>
+                                <br/>
+                                <div>
+                                    <a href="" data-toggle="modal"
+                                       data-target="#add-contact_phone-modal">+ Добавить еще</a>
+                                </div><br/>
+                            {% endif %}
 
+
+                            {% if company.contact_email %}
+                                <div class="frame-text16 toggle-fields-contact_email">
+                                    Email
+                                    <span class="arrow-contact_email">&#9660;</span>
+                                </div>
+                                <div class="contact_email-info">
+                                    <div class="frame-frame25">
+                                        {% for email in company.contact_email %}
+                                            {{ email }}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="contact_email-link hidden-field">
+                                          <a href="" class="edit-contact_email-btn"
+                                             data-contact_email-pk="{{ company.pk }}"
+                                             data-update-url="{% url 'users:update_contact_email' company.pk %}"
+                                             data-toggle="modal"
+                                             data-target="#edit-contact_email-modal">Редактировать</a>
+                                         <a href="" class="delete-contact_email-btn"
+                                            data-contact_email-pk="{{ company.pk }}"
+                                            data-delete-url="{% url 'users:delete_contact_email' company.pk %}"
+                                            data-toggle="modal"
+                                            data-target="#confirm-delete-contact_email-modal">Удалить</a>
+                                    </div>
+                                </div><br/>
+                            {% else %}
+                                <div class="frame-text16">Email</div>
+                                <div class="frame-frame25">-</div>
+                                <br/>
+                                <div>
+                                    <a href="" data-toggle="modal"
+                                       data-target="#add-contact_email-modal">+ Добавить еще</a>
+                                </div><br/>
+                            {% endif %}
+
+                            {% if company.contact_url %}
+                                <div class="frame-text16 toggle-fields-contact_url">
+                                    Сайт
+                                    <span class="arrow-contact_url">&#9660;</span>
+                                </div>
+                                <div class="contact_url-info">
+                                    <div class="frame-frame25">
+                                        {{ company.contact_url }}
+                                    </div>
+                                    <div class="contact_url-link hidden-field">
+                                          <a href="" class="edit-contact_url-btn"
+                                             data-contact_url-pk="{{ company.pk }}"
+                                             data-update-url="{% url 'users:update_contact_url' company.pk %}"
+                                             data-toggle="modal"
+                                             data-target="#edit-contact_url-modal">Редактировать</a>
+                                         <a href="" class="delete-contact_url-btn"
+                                            data-contact_url-pk="{{ company.pk }}"
+                                            data-delete-url="{% url 'users:delete_contact_url' company.pk %}"
+                                            data-toggle="modal"
+                                            data-target="#confirm-delete-contact_url-modal">Удалить</a>
+                                    </div>
+                                </div><br/>
                             {% else %}
                                 <div class="frame-text16">Сайт</div>
-                                <div class="frame-frame25">
-                                -
-                                </div>
+                                <div class="frame-frame25">-</div>
                                 <br/>
+                                <div>
+                                    <a href="" data-toggle="modal"
+                                       data-target="#add-contact_url-modal">+ Добавить еще</a>
+                                </div><br/>
                             {% endif %}
-                            <div>
-                                <a href="" data-toggle="modal" data-target="#">+ Добавить еще</a>
-                            </div><br/>
 
                             {% if company.branches.all.exists %}
                                 {% for branche in company.branches.all %}
@@ -268,6 +324,7 @@
                                                data-target="#confirm-delete-employee-modal">Удалить</a>
                                         </div>
                                     </div><br/>
+
                                 {% endfor %}
 
                             {% else %}
@@ -279,7 +336,6 @@
                                     -
                                 </div><br/>
                             {% endif %}
-
 
                             <a href="" data-toggle="modal" data-target="#add-employee-modal">+ Добавить еще
                                 сотрудника</a>
@@ -353,7 +409,7 @@
                     </div>
                 <div class="col-sm-6 delimiter">
                         <div class="card border border-white">
-                            <div class="card--body">
+                            <div class="card-body">
                                 <div class="frame-text16">Область применения лицензии</div>
                                 <div class="frame-frame25">
                                     -
@@ -366,13 +422,10 @@
                         </div>
                     </div>
             {% endif %}
-            <a href="" class="add-license-link" data-toggle="modal" data-target="#add-license-modal">+ Добавить еще лицензию</a>
+            <a href="" class="add-license-link" data-toggle="modal"
+               data-target="#add-license-modal">+ Добавить еще лицензию</a>
 
-
-
-
-        </div>
-    </form>
+        </form>
     </section>
 
     {% include 'inc/_confirm_delete_employee_modal.html' %}
@@ -381,11 +434,23 @@
 
     {% include 'inc/_confirm_delete_license_modal.html' %}
 
+    {% include 'inc/_confirm_delete_contact_phone_modal.html' %}
+
+    {% include 'inc/_confirm_delete_contact_email_modal.html' %}
+
+    {% include 'inc/_confirm_delete_contact_url_modal.html' %}
+
     {% include 'inc/_add_employee_company_modal.html' %}
 
     {% include 'inc/_add_branches_modal.html' %}
 
     {% include 'inc/_add_license_modal.html' %}
+
+    {% include 'inc/_add_contact_phone_modal.html' %}
+
+    {% include 'inc/_add_contact_email_modal.html' %}
+
+    {% include 'inc/_add_contact_url_modal.html' %}
 
     {% include 'inc/_edit_employee_company_modal.html' %}
 
@@ -393,17 +458,16 @@
 
     {% include 'inc/_edit_license_modal.html' %}
 
+    {% include 'inc/_edit_contact_phone_modal.html' %}
+
+    {% include 'inc/_edit_contact_email_modal.html' %}
+
+    {% include 'inc/_edit_contact_url_modal.html' %}
+
     <script src="{% static 'js/enter_details_company.js' %}"></script>
     <script>
         let company_pk = {{ company.pk }};
         const editCompanyUrl = "{% url 'users:edit_company' company.pk %}";
 
-        document.addEventListener("DOMContentLoaded", function () {
-            $('#license_date').datepicker({
-                format: 'dd.mm.yyyy',
-                autoclose: true,
-                todayHighlight: true,
-            });
-        });
     </script>
 {% endblock %}

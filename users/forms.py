@@ -140,3 +140,33 @@ class LicenseCreateForm(forms.ModelForm):
         fields = ('name', 'license_date', 'license_area', 'license_organization')
         widgets = {field: forms.TextInput(attrs={'class': 'form-control'}) for field in fields}
         widgets['license_date'] = forms.DateInput(attrs={'class': 'form-control'})
+
+
+# Форма добавления контактных телефонов организации пользователем
+class CompanyContactPhoneForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ('contact_phone',)
+        widgets = {
+            'contact_phone': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+# Форма добавления контактного email организации пользователем
+class CompanyContactEmailForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ('contact_email',)
+        widgets = {
+            'contact_email': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+# Форма добавления контактного url организации пользователем
+class CompanyContactUrlForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ('contact_url',)
+        widgets = {
+            'contact_url': forms.TextInput(attrs={'class': 'form-control'})
+        }

@@ -32,6 +32,9 @@ toggleFields("toggle-fields-employee", "arrow-employee");
 toggleFields("toggle-fields-branches", "arrow-branches");
 toggleFields("toggle-fields-license", "arrow-license");
 toggleFields("toggle-fields-site", "arrow-site");
+toggleFields("toggle-fields-contact_phone", "arrow-contact_phone");
+toggleFields("toggle-fields-contact_email", "arrow-contact_email");
+toggleFields("toggle-fields-contact_url", "arrow-contact_url");
 
 
 // Функция для получения значения cookie
@@ -91,6 +94,9 @@ $(document).ready(function () {
     deleteItem('#confirm-delete-employee-modal', '#confirm-delete-employee-btn');
     deleteItem('#confirm-delete-branches-modal', '#confirm-delete-branches-btn');
     deleteItem('#confirm-delete-license-modal', '#confirm-delete-license-btn');
+    deleteItem('#confirm-delete-contact_phone-modal', '#confirm-delete-contact_phone-btn');
+    deleteItem('#confirm-delete-contact_email-modal', '#confirm-delete-contact_email-btn');
+    deleteItem('#confirm-delete-contact_url-modal', '#confirm-delete-contact_url-btn');
 });
 
 
@@ -99,12 +105,20 @@ $(document).ready(function () {
     const addEmployeeForm = $('#add-employee-modal-form');
     const addEmployeeModal = $('#add-employee-modal');
 
-
     const addBranchesForm = $('#add-branches-modal-form');
     const addBranchesModal = $('#add-branches-modal');
 
     const addLicenseForm = $('#add-license-modal-form');
     const addLicenseModal = $('#add-license-modal');
+
+    const addContactPhoneForm = $('#add-contact_phone-modal-form');
+    const addContactPhoneModal = $('#add-contact_phone-modal');
+
+    const addContactEmailForm = $('#add-contact_email-modal-form');
+    const addContactEmailModal = $('#add-contact_email-modal');
+
+    const addContactUrlForm = $('#add-contact_url-modal-form');
+    const addContactUrlModal = $('#add-contact_url-modal');
 
     // Общая функция для отправки данных формы на сервер через AJAX-запрос
     function sendData(form, url, successCallback, errorCallback) {
@@ -152,6 +166,18 @@ $(document).ready(function () {
         addLicenseForm.find(".error-message").text("").hide();
     });
 
+    addContactPhoneModal.on('hidden.bs.modal', function () {
+        addContactPhoneForm.find(".error-message").text("").hide();
+    });
+
+    addContactEmailModal.on('hidden.bs.modal', function () {
+        addContactEmailForm.find(".error-message").text("").hide();
+    });
+
+    addContactUrlModal.on('hidden.bs.modal', function () {
+        addContactUrlForm.find(".error-message").text("").hide();
+    });
+
     // Отправляем данные формы на сервер при отправке формы
     addEmployeeForm.submit(function (event) {
         event.preventDefault();
@@ -183,6 +209,36 @@ $(document).ready(function () {
         });
     });
 
+    addContactPhoneForm.submit(function (event) {
+        event.preventDefault();
+        addContactPhoneForm.find(".error-message").hide();
+        sendData(addContactPhoneForm, `/users/company/edit/${company_pk}/add_contact_phone/`, function (data) {
+            handleSuccess(addContactPhoneForm, addContactPhoneModal);
+        }, function (xhr) {
+            handleErrors(xhr, addContactPhoneForm);
+        });
+    });
+
+    addContactEmailForm.submit(function (event) {
+        event.preventDefault();
+        addContactEmailForm.find(".error-message").hide();
+        sendData(addContactEmailForm, `/users/company/edit/${company_pk}/add_contact_email/`, function (data) {
+            handleSuccess(addContactEmailForm, addContactEmailModal);
+        }, function (xhr) {
+            handleErrors(xhr, addContactEmailForm);
+        });
+    });
+
+    addContactUrlForm.submit(function (event) {
+        event.preventDefault();
+        addContactUrlForm.find(".error-message").hide();
+        sendData(addContactUrlForm, `/users/company/edit/${company_pk}/add_contact_url/`, function (data) {
+            handleSuccess(addContactUrlForm, addContactUrlModal);
+        }, function (xhr) {
+            handleErrors(xhr, addContactUrlForm);
+        });
+    });
+
 });
 
 
@@ -198,6 +254,7 @@ function editData(data_type, pk_name, url, modal_id, form_id, handleSuccess, han
             type: 'GET',
             dataType: 'json',
             success: function (data) {
+                console.log(data);
                 // Обновляем значения полей формы данными полученными из сервера
                 for (const [key, value] of Object.entries(data)) {
                     modal.find(`#${key}`).val(value);
@@ -236,62 +293,139 @@ function editData(data_type, pk_name, url, modal_id, form_id, handleSuccess, han
 
 // Редактирование сотрудника
 editData('employee', 'employee-pk', '/users/get_employee_data', 'edit-employee-modal', 'edit-employee',
-function handleSuccess(data) {
-    $('#edit-employee-modal').modal('hide');
-    location.reload();
-},
-function handleErrors(xhr) {
-    let errors = JSON.parse(xhr.responseText).errors;
-    if (errors) {
-        // Выводим ошибки валидации, если они есть
-        $.each(errors, function (key, value) {
-            $("#edit-employee-" + key + "-error").text(value).show();
-        });
-    } else {
-        // Выводим общее сообщение об ошибке
-        alert('Произошла ошибка при обновлении данных сотрудника');
-    }
-});
+    function handleSuccess(data) {
+        $('#edit-employee-modal').modal('hide');
+        location.reload();
+    },
+    function handleErrors(xhr) {
+        let errors = JSON.parse(xhr.responseText).errors;
+        if (errors) {
+            // Выводим ошибки валидации, если они есть
+            $.each(errors, function (key, value) {
+                $("#edit-employee-" + key + "-error").text(value).show();
+            });
+        } else {
+            // Выводим общее сообщение об ошибке
+            alert('Произошла ошибка при обновлении данных сотрудника');
+        }
+    });
 
 
 // Редактирование филиала
 editData('branches', 'branche-pk', '/users/get_branche_data', 'edit-branches-modal', 'edit-branches',
-function handleSuccess(data) {
-    $('#edit-branches-modal').modal('hide');
-    location.reload();
-},
-function handleErrors(xhr) {
-    let errors = JSON.parse(xhr.responseText).errors;
-    if (errors) {
-        // Выводим ошибки валидации, если они есть
-        $.each(errors, function (key, value) {
-            $("#edit-branches-" + key + "-error").text(value).show();
-        });
-    } else {
-        // Выводим общее сообщение об ошибке
-        alert('Произошла ошибка при обновлении данных филиала');
-    }
-});
+    function handleSuccess(data) {
+        $('#edit-branches-modal').modal('hide');
+        location.reload();
+    },
+    function handleErrors(xhr) {
+        let errors = JSON.parse(xhr.responseText).errors;
+        if (errors) {
+            // Выводим ошибки валидации, если они есть
+            $.each(errors, function (key, value) {
+                $("#edit-branches-" + key + "-error").text(value).show();
+            });
+        } else {
+            // Выводим общее сообщение об ошибке
+            alert('Произошла ошибка при обновлении данных филиала');
+        }
+    });
 
 
 // Редактирование лицензии
 editData('license', 'license-pk', '/users/get_license_data', 'edit-license-modal', 'edit-license',
-function handleSuccess(data) {
-    $('#edit-license-modal').modal('hide');
-    location.reload();
-},
-function handleErrors(xhr) {
-    let errors = JSON.parse(xhr.responseText).errors;
-    if (errors) {
-        // Выводим ошибки валидации, если они есть
-        $.each(errors, function (key, value) {
-            $("#edit-license-" + key + "-error").text(value).show();
-        });
-    } else {
-        // Выводим общее сообщение об ошибке
-        alert('Произошла ошибка при обновлении данных лицензии');
-    }
-});
+    function handleSuccess(data) {
+        $('#edit-license-modal').modal('hide');
+        location.reload();
+    },
+    function handleErrors(xhr) {
+        let errors = JSON.parse(xhr.responseText).errors;
+        if (errors) {
+            // Выводим ошибки валидации, если они есть
+            $.each(errors, function (key, value) {
+                $("#edit-license-" + key + "-error").text(value).show();
+            });
+        } else {
+            // Выводим общее сообщение об ошибке
+            alert('Произошла ошибка при обновлении данных лицензии');
+        }
+    });
+
+// Редактирование телефонных номеров компании
+editData('contact_phone', 'contact_phone-pk', '/users/get_contact_phone_data', 'edit-contact_phone-modal', 'edit-contact_phone',
+    function handleSuccess(data) {
+        $('#edit-contact_phone-modal').modal('hide');
+        location.reload();
+    },
+    function handleErrors(xhr) {
+        let errors = JSON.parse(xhr.responseText).errors;
+        if (errors) {
+            // Выводим ошибки валидации, если они есть
+            $.each(errors, function (key, value) {
+                $("#edit-contact_phone-" + key + "-error").text(value).show();
+            });
+        } else {
+            // Выводим общее сообщение об ошибке
+            alert('Произошла ошибка при обновлении данных лицензии');
+        }
+    });
+
+// Редактирование email компании
+editData('contact_email', 'contact_email-pk', '/users/get_contact_email_data', 'edit-contact_email-modal', 'edit-contact_email',
+    function handleSuccess(data) {
+        $('#edit-contact_email-modal').modal('hide');
+        location.reload();
+    },
+    function handleErrors(xhr) {
+        let errors = JSON.parse(xhr.responseText).errors;
+        if (errors) {
+            // Выводим ошибки валидации, если они есть
+            $.each(errors, function (key, value) {
+                $("#edit-contact_email-" + key + "-error").text(value).show();
+            });
+        } else {
+            // Выводим общее сообщение об ошибке
+            alert('Произошла ошибка при обновлении данных лицензии');
+        }
+    });
+
+// Редактирование email компании
+editData('contact_email', 'contact_email-pk', '/users/get_contact_email_data', 'edit-contact_email-modal', 'edit-contact_email',
+    function handleSuccess(data) {
+        $('#edit-contact_email-modal').modal('hide');
+        location.reload();
+    },
+    function handleErrors(xhr) {
+        let errors = JSON.parse(xhr.responseText).errors;
+        if (errors) {
+            // Выводим ошибки валидации, если они есть
+            $.each(errors, function (key, value) {
+                $("#edit-contact_email-" + key + "-error").text(value).show();
+            });
+        } else {
+            // Выводим общее сообщение об ошибке
+            alert('Произошла ошибка при обновлении данных лицензии');
+        }
+    });
+
+
+// Редактирование сайт компании
+editData('contact_url', 'contact_url-pk', '/users/get_contact_url_data', 'edit-contact_url-modal', 'edit-contact_url',
+    function handleSuccess(data) {
+        $('#edit-contact_url-modal').modal('hide');
+        location.reload();
+    },
+    function handleErrors(xhr) {
+        let errors = JSON.parse(xhr.responseText).errors;
+        if (errors) {
+            // Выводим ошибки валидации, если они есть
+            $.each(errors, function (key, value) {
+                $("#edit-contact_url-" + key + "-error").text(value).show();
+            });
+        } else {
+            // Выводим общее сообщение об ошибке
+            alert('Произошла ошибка при обновлении данных лицензии');
+        }
+    });
 
 // редактировать сотрудника
 // $(document).on('click', '.edit-employee-btn', function () {
