@@ -1,9 +1,11 @@
+import json
+
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from users.forms import EmployeeCreateForm, CityCreateForm, AddressCreateForm, \
     LicenseCreateForm, CompanyContactPhoneForm, CompanyContactEmailForm, CompanyContactUrlForm
-from geo_handbook.models import Company, Branches, Employee, License
+from geo_handbook.models import Company, Branches, Employee, License, TypeWork, CompanySpecialization
 
 
 def view_profile(request):
@@ -13,6 +15,7 @@ def view_profile(request):
 def update_company(request, pk):
     company = get_object_or_404(Company, pk=pk)
     employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
+    type_works = TypeWork.objects.all()
     # формы, которые передаем для модальных окон
     forms = {
         'add_employee_form': EmployeeCreateForm(),
@@ -34,7 +37,8 @@ def update_company(request, pk):
     context = {
         **forms,
         'company': company,
-        'employees': employees
+        'employees': employees,
+        'type_works': type_works
     }
     return render(request, 'enter_details_company.html', context)
 
@@ -396,3 +400,26 @@ def delete_contact_url_company(request, pk):
         data = {'error': str(e)}
 
     return JsonResponse(data)
+
+
+@require_POST
+def update_specializations(request, pk):
+    company = get_object_or_404(Company, pk=pk)
+
+    # Получаем типы работ, отправленные с клиента, очищаем данные
+    specializations = [item.strip() for item in json.loads(request.body)['type_works']]
+
+    if specializations:
+        # удаляем те работы, которых нет в списке
+        company.specializations.exclude(type_work__type__in=specializations).delete()
+
+        # Добавляем новые связи между компанией и типами работ
+        for specialization in specializations:
+            type_work = get_object_or_404(TypeWork, type=specialization)
+            CompanySpecialization.objects.get_or_create(company=company, type_work=type_work)
+
+    else:
+        # если список пустой, удаляем типы работ компании
+        company.specializations.all().delete()
+
+    return JsonResponse({'success': True})
