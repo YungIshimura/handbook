@@ -459,9 +459,13 @@ function addNewSpecialization(selectedWork, specializationsDiv) {
 function updateWorksList() {
     const specializationsDiv = document.querySelector('#specializations');
     const worksList = document.querySelector('#works');
+    // Проверяем, что списки элементов на странице найдены
+    if (!specializationsDiv || !worksList) {
+        return;
+    }
     // Очищаем список работ компании
     worksList.innerHTML = '';
-    // Получаем список всех работ в <div> с id="works"
+    // Получаем список всех работ в <div> с id="specializations"
     const specializations = specializationsDiv.querySelectorAll('span');
     // Проходимся по всем работам и добавляем их в список работ компании
     specializations.forEach(span => {
@@ -486,6 +490,7 @@ removeButtons.forEach(button => {
 const select = document.querySelector('#type_works');
 const specializationsDiv = document.querySelector('#specializations');
 
+
 select.addEventListener('change', () => {
     // Получаем выбранную работу из <select>
     const selectedWork = select.value;
@@ -505,8 +510,124 @@ select.addEventListener('change', () => {
     if (!workExists) {
         addNewSpecialization(selectedWork, specializationsDiv);
     }
+
+    select.selectedIndex = 0;
 });
 
+
+// Функция обновления типов работ компании
+function updateSpecializations() {
+    const button = document.querySelector('#update-specializations-btn');
+    const specializationsCompany = document.querySelector('#specializations');
+
+    button.addEventListener('click', () => {
+        const updateUrl = `/users/company/edit/${company_pk}/update_specializations/`;
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', updateUrl, true);
+
+        // Получаем CSRF-токен из cookies
+        const csrftoken = getCookie('csrftoken');
+
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        // Добавляем заголовок X-CSRFToken в запрос
+        xhr.setRequestHeader('X-CSRFToken', csrftoken);
+
+        const specializations = Array.from(specializationsCompany.querySelectorAll('span'))
+            .map(span => span.textContent.replace(/✕/g, ''))
+            .filter(specialization => specialization !== '');
+        const data = {type_works: specializations};
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+                window.location.href = window.location.href;
+            }
+        };
+
+        xhr.send(JSON.stringify(data));
+    });
+}
+
+updateSpecializations();
+
+
+// function handleRemoveButtonClick(button, specializationsDiv) {
+//     // Получаем родительский элемент кнопки - <span>
+//     const span = button.parentNode;
+//     // Удаляем элемент <span> из <div>
+//     specializationsDiv.removeChild(span);
+//     // Обновляем список работ в <div> с id="works"
+//     updateWorksList();
+// }
+//
+// function addNewSpecialization(selectedWork, specializationsDiv) {
+//     const newSpan = document.createElement('span');
+//     newSpan.textContent = selectedWork;
+//     const removeButton = document.createElement('span');
+//     removeButton.classList.add('remove-work');
+//     removeButton.textContent = '✕';
+//     newSpan.appendChild(removeButton);
+//     specializationsDiv.appendChild(newSpan);
+//
+//     // Добавляем обработчик клика на кнопку удаления
+//     removeButton.addEventListener('click', () => {
+//         handleRemoveButtonClick(removeButton, specializationsDiv);
+//     });
+//
+//     // Обновляем список работ в <div> с id="works"
+//     updateWorksList();
+// }
+//
+// function updateWorksList() {
+//     const specializationsDiv = document.querySelector('#specializations');
+//     const worksList = document.querySelector('#works');
+//     // Очищаем список работ компании
+//     worksList.innerHTML = '';
+//     // Получаем список всех работ в <div> с id="works"
+//     const specializations = specializationsDiv.querySelectorAll('span');
+//     // Проходимся по всем работам и добавляем их в список работ компании
+//     specializations.forEach(span => {
+//         const work = span.textContent;
+//         const li = document.createElement('li');
+//         li.textContent = work;
+//         worksList.appendChild(li);
+//     });
+// }
+//
+// // Получаем список элементов с классом 'remove-work'
+// const removeButtons = document.querySelectorAll('.remove-work');
+//
+// // Добавляем обработчик клика на каждую кнопку
+// removeButtons.forEach(button => {
+//     button.addEventListener('click', () => {
+//         const specializationsDiv = document.querySelector('#specializations');
+//         handleRemoveButtonClick(button, specializationsDiv);
+//     });
+// });
+//
+// const select = document.querySelector('#type_works');
+// const specializationsDiv = document.querySelector('#specializations');
+//
+// select.addEventListener('change', () => {
+//     // Получаем выбранную работу из <select>
+//     const selectedWork = select.value;
+//     // Получаем список всех работ в <div> с id="specializations"
+//     const specializations = specializationsDiv.querySelectorAll('span');
+//
+//     // Проходимся по всем работам и проверяем, есть ли выбранная работа
+//     let workExists = false;
+//     specializations.forEach(span => {
+//         if (span.textContent.includes(selectedWork)) {
+//             workExists = true;
+//             return;
+//         }
+//     });
+//
+//     // Если выбранной работы еще нет, добавляем ее в <div>
+//     if (!workExists) {
+//         addNewSpecialization(selectedWork, specializationsDiv);
+//     }
+// });
 // редактировать сотрудника
 // $(document).on('click', '.edit-employee-btn', function () {
 //     let employee_pk = $(this).data('employee-pk');

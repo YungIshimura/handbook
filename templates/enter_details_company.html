@@ -26,9 +26,10 @@
     </div>
     <div id="specializations">
         {% for specialization in company.specializations.all %}
-            <span>{{ specialization.type_work.type }} <span class="remove-work">✕</span></span>&nbsp;
+            <span>{{ specialization.type_work.type }} <span class="remove-work">✕</span></span>
         {% endfor %}
     </div>
+
     <form class="form-data">
         <div class="row mt-5">
             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -97,9 +98,6 @@
                             {#                                <label for="lname" class="frame-text16">Сайт:</label>#}
                             {#                                <input type="text" class="frame-frame25" name="LastName" id="lname"/><br/>#}
                             {#                            </div>#}
-                            <div>
-                                <button type="submit" class="btn-send-ap">Сохранить</button>
-                            </div>
 
                     </div>
 
@@ -428,8 +426,18 @@
                         </div>
                     </div>
             {% endif %}
-            <a href="" class="add-license-link" data-toggle="modal"
-               data-target="#add-license-modal">+ Добавить еще лицензию</a>
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card border border-white">
+                    <div class="card-body">
+                            <a href="" data-toggle="modal"
+                                   data-target="#add-license-modal">+ Добавить еще лицензию</a>
+                              <button id="update-specializations-btn" class="btn-send-ap">Сохранить</button>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
 
         </form>
     </section>
