@@ -87,7 +87,7 @@ body {
     flex: 0 0 auto;
 }
 
-.modal-dialog {
+.modal-dialog-width {
     max-width: 600px;
 }
 

@@ -49,7 +49,6 @@
     text-align: center;
     width: 280px;
     height: 40px;
-    padding-top: 8px;
     cursor: pointer;
 }
 
@@ -193,4 +192,8 @@
     background-image: url(https://img.icons8.com/ios/30/null/search--v1.png);
     background-repeat: no-repeat;
     background-position: 12px;
+}
+
+.gg {
+    max-width: 900px;
 }
