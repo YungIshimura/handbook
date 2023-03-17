@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'geo_handbook',
     'users',
     "debug_toolbar",
+    "smart_selects"
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,5 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
+
+USE_DJANGO_JQUERY = True

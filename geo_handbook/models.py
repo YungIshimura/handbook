@@ -429,8 +429,7 @@ class Order(models.Model):
     )
     cadastral_number = models.CharField(
         'Кадастровый номер',
-        max_length=17,
-        validators=[MinValueValidator(17)]
+        max_length=50,
     )
     region = models.ForeignKey(
         Region,
@@ -476,7 +475,7 @@ class Order(models.Model):
         'Длина',
         validators=[MinValueValidator(0)]
     )
-    height = models.PositiveIntegerField(
+    heigth = models.PositiveIntegerField(
         'Высота',
         validators=[MinValueValidator(0)]
     )
@@ -488,7 +487,9 @@ class Order(models.Model):
         TypeWork,
         related_name='orders',
         on_delete=models.CASCADE,
-        verbose_name='Тип работы'
+        verbose_name='Тип работы',
+        blank=True,
+        null=True
     )
     title = models.TextField(
         'Навзание объекта'
@@ -497,7 +498,8 @@ class Order(models.Model):
         'Статус заказа',
         max_length=100,
         choices=STATUS,
-        blank=True
+        blank=True,
+        default='not processed'
     )
 
 

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('geo_handbook.urls', namespace='geo_handbook')),
     path('users/', include('users.urls', namespace='users')),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('chaining/', include('smart_selects.urls')),
 ] 
 
 if settings.DEBUG:

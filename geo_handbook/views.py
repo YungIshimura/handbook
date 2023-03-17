@@ -4,6 +4,7 @@ from geo_handbook.models import Company, City, CompanySpecialization
 from django.contrib.postgres.search import SearchVector
 from django.contrib import messages
 from django.http import JsonResponse
+from .forms import OrderForm
 
 
 def get_city(req):
@@ -128,7 +129,21 @@ def view_selected_region(request, city_id):
 
 
 def view_application(request):
-    return render(request, 'application.html')
+    context = {}
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return HttpResponseRedirect(reverse('geo_handbook:index'))
+        else:
+            print(form.errors)
+    else:
+        form = OrderForm()
+
+    context['form'] = form
+    return render(request, 'application.html', context=context)
 
 
 def view_profile(request):
