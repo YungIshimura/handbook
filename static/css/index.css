@@ -194,6 +194,10 @@
     background-position: 12px;
 }
 
-.gg {
+.modal-width {
     max-width: 900px;
+}
+
+.modal-body-marg {
+    margin: 20px 0 40px 0;
 }

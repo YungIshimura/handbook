@@ -32,8 +32,8 @@ def view_index(request):
             messages.error(request, 'По данному запросу ничего не найдено')
 
     if 'term' in request.GET:
-        citys = get_city(request)
-        return JsonResponse(citys, safe=False)
+        cities = get_city(request)
+        return JsonResponse(cities, safe=False)
 
     if 'region' in request.POST:
         region = request.POST.get('region')
@@ -74,7 +74,8 @@ def view_card(request, company_id):
         'directors': [director for director in company.director.all()]
     }
     region_companys = CompanySpecialization.objects.filter(
-        company__legal_address__city_id=company.legal_address.city.id, type_work__in=type_works).distinct('company_id').select_related(
+        company__legal_address__city_id=company.legal_address.city.id, type_work__in=type_works).distinct(
+        'company_id').select_related(
         'type_work', 'company').order_by('-company')
 
     context['type_works'] = type_works
@@ -101,8 +102,8 @@ def view_rates(request):
 
 def view_selected_region(request, city_id):
     if 'term' in request.GET:
-        citys = get_city(request)
-        return JsonResponse(citys, safe=False)
+        cities = get_city(request)
+        return JsonResponse(cities, safe=False)
 
     if request.POST.get('search'):
         company = get_company(request)
@@ -115,7 +116,8 @@ def view_selected_region(request, city_id):
             {
                 'id': company.id,
                 'name': company.short_name,
-                'work_types': [type_work.type_work for type_work in company.specializations.select_related('type_work').all()],
+                'work_types': [type_work.type_work for type_work in
+                               company.specializations.select_related('type_work').all()],
                 'legal_address': company.legal_address,
                 'rating': company.rating
             }

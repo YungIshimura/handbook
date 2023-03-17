@@ -60,12 +60,10 @@
         </div>
     </section>
 
-
-
     <div class="modal fade" id="searchCity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="gg modal-dialog modal-dialog-centered">
+        <div class="modal-width modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body">
+                <div class="modal-body-marg modal-body">
                     <form class="city__search-form" method='GET'>
                         {% csrf_token %}
                         <input class='city__search input-select-city' type="search" id="city_search" name="city_search"
@@ -77,8 +75,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="cards mb-5">
         <div class="card__about">
