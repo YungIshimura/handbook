@@ -42,8 +42,7 @@
     margin-right: 10px;
 }
 
-.select-region__text--button1 {
-    /* TODO нейминг блять!  */
+.select-region__text--button-region {
     position: absolute;
     background-color: black;
     border-radius: 60px;
@@ -54,7 +53,7 @@
     cursor: pointer;
 }
 
-.select-region__text--button1:active, .select-region__text--button:active {
+.select-region__text--button-region:active, .select-region__text--button:active {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
@@ -190,7 +189,7 @@
     gap: 45px;
 }
 
-input {
+.input-select-city {
     background-image: url(https://img.icons8.com/ios/30/null/search--v1.png);
     background-repeat: no-repeat;
     background-position: 12px;

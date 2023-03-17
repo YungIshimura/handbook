@@ -19,7 +19,7 @@
                         <button id='region' type='submit' name='region' class="select-region__text--button" value=''
                                 style="width: 87px;height: 40px;">Да
                         </button>
-                        <a class="select-region__text--button1" style="color: #219653;" onClick='OpenSelectCityForm()'>Выбрать
+                        <a class="select-region__text--button-region" style="color: #219653;" onClick='OpenSelectCityForm()'>Выбрать
                             другой регион</a>
                     </form>
                 </div>
@@ -32,14 +32,14 @@
                     </div>
                     <form class="city__search-form" method='GET'>
                         {% csrf_token %}
-                        <input class='city__search' type="search" id="city_search" name="city_search" placeholder="Город или регион">
+                        <input class='city__search input-select-city' type="search" id="city_search" name="city_search" placeholder="Город или регион">
                         <button type="submit" class="city__search-button"><span class="city__search-button--text">ВЫБРАТЬ</span></button>
                     </form>
                 </div>
                 <div class="search-area">
                     <form class="search-form" method='POST'>
                         {% csrf_token %}
-                        <input class='search' type="search" id="site-search" name="search"
+                        <input class='input-select-city search' type="search" id="site-search" name="search"
                                placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
                         <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span>
                         </button>
