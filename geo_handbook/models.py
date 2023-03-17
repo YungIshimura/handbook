@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.postgres.fields import ArrayField
-
+from smart_selects.db_fields import ChainedForeignKey
 
 class TypeWork(models.Model):
     type = models.CharField(
@@ -18,19 +18,6 @@ class TypeWork(models.Model):
         verbose_name_plural = 'Типы работ'
 
 
-class City(models.Model):
-    name = models.CharField(
-        'Название города',
-        max_length=100
-    )
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Город'
-
-
 class Region(models.Model):
     name = models.CharField(
         'Навзание региона',
@@ -42,6 +29,51 @@ class Region(models.Model):
 
     class Meta:
         verbose_name = 'Регион'
+        verbose_name_plural = 'Регионы'
+
+
+class Area(models.Model):
+    name = models.CharField(
+        'Навзание района',
+        max_length=200
+    )
+    region = models.ForeignKey(
+        Region,
+        related_name='areas',
+        on_delete=models.CASCADE,
+        verbose_name='Регион',
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Район'
+        verbose_name_plural = 'Районы'
+
+
+class City(models.Model):
+    name = models.CharField(
+        'Название города',
+        max_length=100
+    )
+    area = models.ForeignKey(
+        Area,
+        related_name='citys',
+        on_delete=models.CASCADE,
+        verbose_name='Район',
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Город'
+        verbose_name_plural = 'Города'
 
 
 class CompanyAddress(models.Model):
@@ -228,6 +260,7 @@ class License(models.Model):
         verbose_name='Компания',
     )
 
+
 class Branches(models.Model):
     address = models.ForeignKey(
         CompanyAddress,
@@ -364,3 +397,117 @@ class Employee(models.Model):
     class Meta:
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудник'
+
+
+class Order(models.Model):
+    STATUS = (
+        ('processed', 'Обработанная'),
+        ('not processed', 'Не обработанная')
+    )
+    name = models.CharField(
+        'Имя заказчика',
+        max_length=100,
+        blank=True
+    )
+    surname = models.CharField(
+        'Фамилия заказчика',
+        max_length=250,
+        blank=True
+    )
+    father_name = models.CharField(
+        'Отчество заказчика',
+        max_length=250,
+        blank=True
+    )
+    phone_number = PhoneNumberField(
+        blank=True
+    )
+    email = models.EmailField(
+        "Электронная почта заказчика",
+        max_length=254,
+        blank=True
+    )
+    cadastral_number = models.CharField(
+        'Кадастровый номер',
+        max_length=17,
+        validators=[MinValueValidator(17)]
+    )
+    region = models.ForeignKey(
+        Region,
+        related_name='orders',
+        on_delete=models.CASCADE,
+        verbose_name='Регион'
+    )
+    area = ChainedForeignKey(
+        Area,
+        blank=True,
+        null=True,
+        chained_field='region',
+        chained_model_field='region',
+        show_all=False,
+        auto_choose=True,
+        sort=True
+    )
+    city =ChainedForeignKey(
+        City,
+        chained_field='area',
+        chained_model_field='area',
+        show_all=False,
+        auto_choose=True,
+        sort=True
+    )
+    street = models.CharField(
+        'Улица',
+        max_length=250,
+    )
+    house_number = models.PositiveIntegerField(
+        'Номер дома',
+        validators=[MinValueValidator(0)]
+    )
+    building = models.PositiveBigIntegerField(
+        'Строение/Корпус',
+        validators=[MinValueValidator(0)]
+    )
+    square = models.PositiveIntegerField(
+        'Площадь участка',
+        validators=[MinValueValidator(0)]
+    )
+    length = models.PositiveIntegerField(
+        'Длина',
+        validators=[MinValueValidator(0)]
+    )
+    height = models.PositiveIntegerField(
+        'Высота',
+        validators=[MinValueValidator(0)]
+    )
+    width = models.PositiveIntegerField(
+        'Ширина',
+        validators=[MinValueValidator(0)]
+    )
+    type_work = models.ForeignKey(
+        TypeWork,
+        related_name='orders',
+        on_delete=models.CASCADE,
+        verbose_name='Тип работы'
+    )
+    title = models.TextField(
+        'Навзание объекта'
+    )
+    status = models.CharField(
+        'Статус заказа',
+        max_length=100,
+        choices=STATUS,
+        blank=True
+    )
+
+
+class OrderFiles(models.Model):
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+        related_name='files',
+        verbose_name='Заказы'
+    )
+    file = models.FileField(
+        'Файл'
+    )
