@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/select_city.css' %}"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <section>
+    <section onload='GetUserLocation();'>
         <div class="region-area">
             <div class="region-area__text">
                 <span class="region-area__title">Поиск лицензированных организаций в области проектирования</span>
@@ -15,9 +15,8 @@
                 <div class="region-area__select-region">
                     <form method='POST'>
                         {% csrf_token %}
-                        <span class="select-region__text">Ваш регион <span id='city'
-                                                                           is-moscow='true'>Москва</span>?</span>
-                        <button id='region' type='submit' name='city' value='Москва' class="select-region__text--button"
+                        <span class="select-region__text" id='test'>Ваш регион <span id='city'></span>?</span>
+                        <button id='region' type='submit' name='region' class="select-region__text--button" value=''
                                 style="width: 87px;height: 40px;">Да
                         </button>
                         <a class="select-region__text--button1" style="color: #219653;" onClick='SelectCity()'>Выбрать
