@@ -19,11 +19,19 @@
                         <button id='region' type='submit' name='region' class="select-region__text--button" value=''
                                 style="width: 87px;height: 40px;">Да
                         </button>
-                        <a class="select-region__text--button1" style="color: #219653;" onClick='SelectCity()'>Выбрать
+                        <a class="select-region__text--button1" style="color: #219653;" onClick='OpenSelectCityForm()'>Выбрать
                             другой регион</a>
                     </form>
                 </div>
                 <div id='city__search--container' class="city__search-area">
+                    <div class='x-mark' onClick='CloseSelectCityForm()'>
+                        <span style='cursor: pointer;'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </span>
+                    </div>
                     <form class="city__search-form" method='GET'>
                         {% csrf_token %}
                         <input class='city__search' type="search" id="city_search" name="city_search" placeholder="Город или регион">
@@ -53,7 +61,6 @@
             </div>
         </div>
     </section>
-    <section id="cards">
         <div class="cards mb-5">
             <div class="card__about">
                 <h3 class="card__about--title">О сервисе</h3>
@@ -94,7 +101,6 @@
                 </div>
             </div>
         </div>
-    </section>
     <script>
         $(function () {
             $("#city_search").autocomplete({
