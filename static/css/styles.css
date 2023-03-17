@@ -81,4 +81,121 @@ body {
 .footer {
 	flex: 0 0 auto;
 }
+.card {
+    margin: 100px 0 200px 550px;
+    max-width: 700px;
+    max-height: 500px;
+    font-family: Inter;
+    font-style: Regular;
+
+}
+
+.card-header {
+    color: #333333FF;
+    height: auto;
+    font-size: 30px;
+    align-self: auto;
+    font-style: Medium;
+    font-weight: 500;
+    line-height: 48px;
+    font-stretch: normal;
+    text-decoration: none;
+    background-color: white;
+    margin-left: 168px;
+}
+
+.form-control {
+    width: 500px;
+    height: 60px;
+    display: flex;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-style: solid;
+    border-width: 1px;
+    margin-right: 0;
+    border-radius: 0 0 0 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-decoration: none;
+    color: white;
+}
+
+.form-check-label {
+    color: #4F4F4FFF;
+    width: 183px;
+    height: auto;
+    font-size: 18px;
+    text-align: left;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.form-check {
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.form-check__a {
+    color: #828282FF;
+    width: 128px;
+    height: auto;
+    position: absolute;
+    font-size: 14px;
+    align-self: auto;
+    text-align: right;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+    margin: 0 0 0 110px;
+}
+
+.card-btn {
+    width: 500px;
+    height: 56px;
+    display: flex;
+    padding: 0 45px;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+    background-color: #333333FF;
+    margin-top: 20px;
+margin-left: 18px;
+}
+
+.card-btn__a {
+    color: #219653FF;
+    width: 400px;
+    height: auto;
+    font-size: 16px;
+    align-self: auto;
+    text-align: center;
+    font-weight: 400;
+    line-height: 57px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.card-link {
+    width: 500px;
+    height: auto;
+    font-size: 20px;
+    align-self: auto;
+    font-style: Medium;
+    text-align: center;
+    font-weight: 500;
+    line-height: 48px;
+    font-stretch: normal;
+    text-decoration: none;
+    margin-bottom: 30px;
+    color: #219653FF;
+    margin-left: 40px;
+}
+.modal-dialog {
+    max-width: 600px;
+}
 
