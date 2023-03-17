@@ -8,11 +8,14 @@
     <title>{% block list %}{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-{#    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>#}
+    {#    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>#}
     {#    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>#}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
@@ -28,13 +31,117 @@
                         <span>ЛОГО</span>
                     </a>
                     <div class="login-container">
-                        <a href="#"><span class="login">Вход для организаций</span></a>
+                        <a data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><span class="login">Вход для организаций</span>
+                        </a>
                     </div>
-                    <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon custom-toggler"></span>
-                    </button>
+
+                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                         aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                        <div class="modal-dialog-width modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="card-header-login border-0 modal-title fs-5" id="exampleModalToggleLabel">
+                                        Вход
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body ml-3">
+                                    <div class="card-body-login">
+                                        <div class="mb-4">
+                                            <div class="card-dody-login__input col-sm-10">
+                                                <input type="email" class="form-control-login"
+                                                       placeholder="Email">
+                                            </div>
+                                        </div>
+                                            <div class="card-dody-login__input col-sm-10">
+                                                <input type="password" class="form-control-login"
+                                                       placeholder="Пароль">
+                                            </div>
+
+                                        <div class="card-group">
+                                            <div class="form-check-login">
+                                                <input class="form-check-input-login" type="checkbox" value=""
+                                                       id="defaultCheck1">
+                                                <label class="form-check-label-login" for="defaultCheck1">
+                                                    Запомнить пароль
+                                                </label>
+                                            </div>
+                                            <div class="form-check-login">
+                                                <a href="#" class="form-check-login__a">Забыли пароль?</a>
+                                            </div>
+                                        </div>
+                                        <div class="card-btn-login">
+                                            <a href="#" class="card-btn-login__a">Войти</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-link-login">
+                                    <a class="card-footer-login__a" data-bs-target="#exampleModalToggle2"
+                                       data-bs-toggle="modal"><span>Подтвердить данные о компании</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
+                         aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                        <div class="modal-dialog-width modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="card-header-login__data border-0 modal-title" id="exampleModalToggleLabel">
+                                        Подтвердить данные о компании
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body ml-3">
+                                    <div class="card-body-login">
+                                        <div class="mb-5 mt-3">
+                                            <div class="card-body-login__input col-sm-10">
+                                                <input type="text" class="form-control-login" readonly="readonly"
+                                                       placeholder='ООО "Ромашка"'>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="card-body-login__input col-sm-10">
+                                                <input type="text" class="form-control-login" readonly="readonly"
+                                                       placeholder="ИНН: 586656458">
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="card-body-login__input col-sm-10">
+                                                <input type="text" class="form-control-login"
+                                                       placeholder="Расчетный счет">
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="card-body-login__input col-sm-10">
+                                                <input type="text" class="form-control-login"
+                                                       placeholder="Бик">
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="card-body-login__input col-sm-10">
+                                                <input type="text" class="form-control-login"
+                                                       placeholder="Название банка">
+                                            </div>
+                                        </div>
+                                        <div class="card-btn-login mb-5">
+                                            <a href="#" class="card-btn-login__a">СФОРМИРОВАТЬ СЧЁТ</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button class="navbar-toggler toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon custom-toggler"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -43,17 +150,25 @@
     {% block content %}
     {% endblock %}
 
-<section id="footer">
-    <footer class="footer">
-        <span class='navbar-brand d-flex align-items-center navbar__logo' style="margin-left: 60px;">ЛОГО</span>
-        <div class="text">
-            <a href={% url 'geo_handbook:about' %}><span style="color: #219653;">О сервисе</span></a>
-            <span>Как мы определяем актуальность</span>
-            <span>Источники данных</span>
-            <span style="color: #219653;">Для организаций</span>
-        </div>
-    </footer>
-</section>
+    <section id="footer">
+        <footer class="footer">
+            <span class='navbar-brand d-flex align-items-center navbar__logo' style="margin-left: 60px;">ЛОГО</span>
+            <div class="text">
+                <a href={% url 'geo_handbook:about' %}><span style="color: #219653;">О сервисе</span></a>
+                <span>Как мы определяем актуальность</span>
+                <span>Источники данных</span>
+                <span style="color: #219653;">Для организаций</span>
+            </div>
+        </footer>
+    </section>
 </div>
+<script>
+    const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+    myInput.focus()
+})
+</script>
 </body>
 </html>

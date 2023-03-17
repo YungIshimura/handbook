@@ -59,26 +59,157 @@ body {
     background-color: rgba(242, 242, 242, 1);
     justify-content: space-around;
     align-items: center;
-    	flex: 0 0 auto;
+    flex: 0 0 auto;
 
 }
+
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
+
 html,
 body {
-	height: 100%;
+    height: 100%;
 }
+
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
+
 .content {
-	flex: 1 0 auto;
+    flex: 1 0 auto;
 }
+
 .footer {
-	flex: 0 0 auto;
+    flex: 0 0 auto;
 }
+
+.modal-dialog-width {
+    max-width: 600px;
+}
+
+.card-header-login {
+    color: #333333FF;
+    height: auto;
+    font-size: 30px;
+    align-self: auto;
+    font-style: Medium;
+    font-weight: 500;
+    line-height: 48px;
+    font-stretch: normal;
+    text-decoration: none;
+    background-color: white;
+    margin-left: 240px;
+}
+
+.card-header-login__data {
+    color: #333333FF;
+    height: auto;
+    font-size: 25px;
+    align-self: auto;
+    font-style: Medium;
+    font-weight: 500;
+    line-height: 40px;
+    font-stretch: normal;
+    text-decoration: none;
+    background-color: white;
+    margin-left: 100px;
+}
+
+.form-control-login {
+    width: 500px;
+    height: 60px;
+    display: flex;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0 0 0 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-decoration: none;
+    padding-left: 15px;
+}
+
+.form-check-label-login {
+    color: #4F4F4FFF;
+    width: 183px;
+    height: auto;
+    font-size: 18px;
+    text-align: left;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.form-check-login {
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.form-check-login__a {
+    color: #828282FF;
+    height: auto;
+    position: absolute;
+    font-size: 14px;
+    align-self: auto;
+    text-align: right;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+    margin: 5px 0 0 170px;
+}
+
+.card-btn-login {
+    width: 500px;
+    height: 56px;
+    display: flex;
+    padding: 0 45px;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+    background-color: #333333FF;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.card-btn-login__a {
+    color: #219653FF;
+    width: 400px;
+    height: auto;
+    font-size: 16px;
+    align-self: auto;
+    text-align: center;
+    font-weight: 400;
+    line-height: 57px;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.card-link-login {
+    width: 500px;
+    height: auto;
+    font-size: 20px;
+    align-self: auto;
+    font-style: Medium;
+    text-align: center;
+    font-weight: 500;
+    line-height: 48px;
+    font-stretch: normal;
+    text-decoration: none;
+    margin-bottom: 30px;
+    color: #219653FF;
+    margin-left: 40px;
+}
+
+
+
+
 

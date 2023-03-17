@@ -19,29 +19,27 @@
                         <button id='region' type='submit' name='region' class="select-region__text--button" value=''
                                 style="width: 87px;height: 40px;">Да
                         </button>
-                        <a class="select-region__text--button1" style="color: #219653;" onClick='OpenSelectCityForm()'>Выбрать
-                            другой регион</a>
+                        <button type="button" class="select-region__text--button-region" style="color: #219653;"
+                                data-bs-toggle="modal" data-bs-target="#searchCity" data-bs-whatever="@getbootstrap">
+                            Выбрать другой регион
+                        </button>
                     </form>
                 </div>
                 <div id='city__search--container' class="city__search-area">
                     <div class='x-mark' onClick='CloseSelectCityForm()'>
                         <span style='cursor: pointer;'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-x-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                             </svg>
                         </span>
                     </div>
-                    <form class="city__search-form" method='GET'>
-                        {% csrf_token %}
-                        <input class='city__search' type="search" id="city_search" name="city_search" placeholder="Город или регион">
-                        <button type="submit" class="city__search-button"><span class="city__search-button--text">ВЫБРАТЬ</span></button>
-                    </form>
                 </div>
                 <div class="search-area">
                     <form class="search-form" method='POST'>
                         {% csrf_token %}
-                        <input class='search' type="search" id="site-search" name="search"
+                        <input class='input-select-city search' type="search" id="site-search" name="search"
                                placeholder=" Начните вводить ИНН, ОГРН, название орагнизации иили ФИО руководителя">
                         <button type="submit" class="search-button"><span class="search-button--text">НАЙТИ</span>
                         </button>
@@ -61,34 +59,51 @@
             </div>
         </div>
     </section>
-        <div class="cards mb-5">
-            <div class="card__about">
-                <h3 class="card__about--title">О сервисе</h3>
-                <div class="card__about--text">
+
+    <div class="modal fade" id="searchCity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-width modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body-marg modal-body">
+                    <form class="city__search-form" method='GET'>
+                        {% csrf_token %}
+                        <input class='city__search input-select-city' type="search" id="city_search" name="city_search"
+                               placeholder="Город или регион">
+                        <button type="submit" class="city__search-button"><span class="city__search-button--text">ВЫБРАТЬ</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cards mb-5">
+        <div class="card__about">
+            <h3 class="card__about--title">О сервисе</h3>
+            <div class="card__about--text">
                 <span>
                     Проверьте, какие сведения о вашей компании или ИП доступны вашим партнерам, клиентам и конкурентам.
                     Редактировать можно следующую информацию об организации:
                 </span>
-                    <br>
-                    Электронная почта
-                    <br>
-                    Телефон
-                    <br>
-                    Сайт
-                    <br>
-                    Документы: устав, прайс-листы, пресс-релизы и другие
-                    <br>
-                    Английское наименование
-                    <br>
-                    Логотип
-                    <br>
-                    После обновления сведений, мы проверим их на достоверность и опубликуем в течение 2 рабочих дней.
-                    <br>
-                </div>
+                <br>
+                Электронная почта
+                <br>
+                Телефон
+                <br>
+                Сайт
+                <br>
+                Документы: устав, прайс-листы, пресс-релизы и другие
+                <br>
+                Английское наименование
+                <br>
+                Логотип
+                <br>
+                После обновления сведений, мы проверим их на достоверность и опубликуем в течение 2 рабочих дней.
+                <br>
             </div>
-            <div class="card__confirm-data">
-                <h3 class="card__confirm-data--title">Подтвердите данные своей организации!</h3>
-                <div class="card__confirm-data--text">
+        </div>
+        <div class="card__confirm-data">
+            <h3 class="card__confirm-data--title">Подтвердите данные своей организации!</h3>
+            <div class="card__confirm-data--text">
                 <span>
                     Сервис использует авторизацию пользователя по квалифицированному сертификату ключа проверки электронной подписи,
                     выданному Удостоверяющим центром, аккредитованным в сети доверенных удостоверяющих центров Министерства связи и массовых
@@ -96,11 +111,11 @@
                     Редактирование невозможно, если технические требования не выполнены или не пройдена проверка подлинности
                     электронной подписи.
                 </span>
-                    <br>
-                    <button class="card__confirm-button" type="submit">Внести данные</button>
-                </div>
+                <br>
+                <button class="card__confirm-button" type="submit">Внести данные</button>
             </div>
         </div>
+    </div>
     <script>
         $(function () {
             $("#city_search").autocomplete({
