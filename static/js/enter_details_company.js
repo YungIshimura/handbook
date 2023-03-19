@@ -428,6 +428,162 @@ editData('contact_url', 'contact_url-pk', '/users/get_contact_url_data', 'edit-c
     });
 
 
+/* Блок выбора типов работ, выполняемых организацией и региона выполняемых*/
+
+// функция обрабатывает удаление элемента span из его контейнера
+function handleRemoveButtonClick(button, container, updateList) {
+    // Получаем родительский элемент
+    const span = button.parentNode;
+    // Удаляем элемент <span>
+    container.removeChild(span);
+    // обновляем список после удаления элементов
+    updateList();
+}
+
+// функция создает новый элемент span с заданным значением и добавляет к нему кнопку удаления
+function createNewElement(value, container, listId, removeButtonClass, updateList) {
+    // создаем новый элемент span и устанавливаем ему значение
+    const newSpan = document.createElement('span');
+    newSpan.textContent = value;
+    // создаем кнопку удаления и добавляем класс
+    const removeButton = document.createElement('span');
+    removeButton.classList.add(removeButtonClass);
+    removeButton.textContent = '✕';
+    // добавляем кнопку удаления внутрь элемента span, а сам span в контейнер
+    newSpan.appendChild(removeButton);
+    container.appendChild(newSpan);
+    // добавляем обработчик событий на кнопку удаления
+    removeButton.addEventListener('click', () => {
+        handleRemoveButtonClick(removeButton, container, updateList);
+    });
+    // обновляем список после удаления элементов
+    updateList();
+}
+
+// функция обновляет список, заменяя старые элементы на новые
+function updateList(containerId, listId) {
+    // получаем контейнер и содержащийся в нем список
+    const container = document.querySelector(`#${containerId}`);
+    const list = document.querySelector(`#${listId}`);
+    if (!container || !list) {
+        return;
+    }
+    // очищаем список
+    list.innerHTML = '';
+    // для каждого элемента span в контейнере
+    container.querySelectorAll('span').forEach(span => {
+        // получаем значение
+        const value = span.textContent;
+        // создаем новый элемент li
+        const li = document.createElement('li');
+        // устанавливаем значение для li
+        li.textContent = value;
+        // добавим в список
+        list.appendChild(li);
+    });
+}
+
+// функция инициализирует кнопки удаления элементов
+function initRemoveButtons(buttons, containerId, updateList) {
+    // для каждой кнопки Х добавляем обработчик событий
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const container = document.querySelector(`#${containerId}`);
+            handleRemoveButtonClick(button, container, updateList);
+        });
+    });
+}
+
+// функция инициализирует элемент select и обрабатывает его изменение
+function initSelect(selectId, containerId, listId, removeButtonClass, updateList) {
+    // получаем элемент select и контейнер
+    const select = document.querySelector(`#${selectId}`);
+    const container = document.querySelector(`#${containerId}`);
+
+    // добавляем обработчик событий для изменения элемента select
+    select.addEventListener('change', () => {
+        // получаем выбранное значение
+        const selectedValue = select.value;
+        const elements = container.querySelectorAll('span');
+        // устанавливаем флаг
+        let valueExists = false;
+        elements.forEach(span => {
+            // если значение элемента повторяется
+            if (span.textContent.includes(selectedValue)) {
+                // устанавливаем флаг в true
+                valueExists = true;
+                return;
+            }
+        });
+        // если выбранного значения нет в списке, добавляем его
+        if (!valueExists) {
+            createNewElement(selectedValue, container, listId, removeButtonClass, updateList);
+        }
+        // сбрасываем select на дефолтное значение
+        select.selectedIndex = 0;
+    });
+}
+
+// инициализуем секцию специализаций и регионов
+const specializationsContainer = document.querySelector('#specializations');
+initRemoveButtons(document.querySelectorAll('.remove-work'), 'specializations', updateWorksList);
+initSelect('type_works', 'specializations', 'works', 'remove-work', updateWorksList);
+
+const jobRegionsContainer = document.querySelector('#job_regions');
+initRemoveButtons(document.querySelectorAll('.remove-region'), 'job_regions', updateRegionsList);
+initSelect('work_regions', 'job_regions', 'regions', 'remove-region', updateRegionsList);
+
+// функции обновления типов работ и регионов
+function updateWorksList() {
+    updateList('specializations', 'works');
+}
+
+function updateRegionsList() {
+    updateList('job_regions', 'regions');
+}
+
+
+// функция обновляет данные компании
+function updateData() {
+  const button = document.querySelector('#update-company-data-btn');
+  const specializationsCompany = document.querySelector('#specializations');
+  const regionworkCompany = document.querySelector('#job_regions');
+
+  button.addEventListener('click', () => {
+    const updateUrl = `/users/company/edit/${company_pk}/update_data_company/`;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', updateUrl, true);
+
+    // Получаем CSRF-токен из cookies
+    const csrftoken = getCookie('csrftoken');
+
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    // Добавляем заголовок X-CSRFToken в запрос
+    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+
+    const specializations = Array.from(specializationsCompany.querySelectorAll('span'))
+      .map(span => span.textContent.replace(/✕/g, ''))
+      .filter(specialization => specialization !== '');
+
+    const regions = Array.from(regionworkCompany.querySelectorAll('span'))
+      .map(span => span.textContent.replace(/✕/g, ''))
+      .filter(region => region !== '');
+
+    const data = { type_works: specializations, region_works: regions };
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+        window.location.href = window.location.href;
+      }
+    };
+
+    xhr.send(JSON.stringify(data));
+  });
+}
+
+updateData();
+=======
 /* Блок выбора типов работ, выполняемых организацией */
 function handleRemoveButtonClick(button, specializationsDiv) {
     // Получаем родительский элемент кнопки - <span>

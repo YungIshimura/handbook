@@ -1,11 +1,14 @@
 import json
+from django.db import transaction
 
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from users.forms import EmployeeCreateForm, CityCreateForm, AddressCreateForm, \
     LicenseCreateForm, CompanyContactPhoneForm, CompanyContactEmailForm, CompanyContactUrlForm
-from geo_handbook.models import Company, Branches, Employee, License, TypeWork, CompanySpecialization
+
+from geo_handbook.models import Company, Branches, Employee, License, TypeWork, CompanySpecialization, Director, \
+    WorkRegion, CompanyWorkRegion
 
 
 def view_profile(request):
@@ -13,9 +16,11 @@ def view_profile(request):
 
 
 def update_company(request, pk):
-    company = get_object_or_404(Company, pk=pk)
+    company = get_object_or_404(Company.objects.select_related('legal_address__region'), pk=pk)
     employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
     type_works = TypeWork.objects.all()
+    work_regions = WorkRegion.objects.all()
+    branches = company.branches.select_related('address').all()
     # формы, которые передаем для модальных окон
     forms = {
         'add_employee_form': EmployeeCreateForm(),
@@ -37,8 +42,10 @@ def update_company(request, pk):
     context = {
         **forms,
         'company': company,
+        'branches': branches,
         'employees': employees,
-        'type_works': type_works
+        'type_works': type_works,
+        'work_regions': work_regions
     }
     return render(request, 'enter_details_company.html', context)
 
@@ -402,24 +409,32 @@ def delete_contact_url_company(request, pk):
     return JsonResponse(data)
 
 
+# обновляем данные компании
 @require_POST
-def update_specializations(request, pk):
-    company = get_object_or_404(Company, pk=pk)
+def update_data_company(request, pk):
 
-    # Получаем типы работ, отправленные с клиента, очищаем данные
-    specializations = [item.strip() for item in json.loads(request.body)['type_works']]
+    # Получаем типы работ и регионы выполняемых работ, отправленные с клиента, очищаем данные
+    type_works = [item.strip() for item in json.loads(request.body)['type_works']]
+    region_works = [item.strip() for item in json.loads(request.body)['region_works']]
 
-    if specializations:
+    with transaction.atomic():
+        company = get_object_or_404(Company, pk=pk)
+
         # удаляем те работы, которых нет в списке
-        company.specializations.exclude(type_work__type__in=specializations).delete()
+        company.specializations.exclude(type_work__type__in=type_works).delete()
 
         # Добавляем новые связи между компанией и типами работ
-        for specialization in specializations:
+        for specialization in type_works:
             type_work = get_object_or_404(TypeWork, type=specialization)
             CompanySpecialization.objects.get_or_create(company=company, type_work=type_work)
 
-    else:
-        # если список пустой, удаляем типы работ компании
-        company.specializations.all().delete()
+        # удаляем те регионы выполняемых работ, которых нет в списке
+        company.work_regions_companies.exclude(working_zone__title__in=region_works).delete()
+
+        # Добавляем новые связи между компанией и регионами выполняемых работ
+        for region in region_works:
+            work_region = get_object_or_404(WorkRegion, title=region)
+            CompanyWorkRegion.objects.get_or_create(company=company, working_zone=work_region)
+=
 
     return JsonResponse({'success': True})

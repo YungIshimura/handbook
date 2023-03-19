@@ -7,7 +7,7 @@ from .views import (view_profile, update_company, delete_branch, delete_employee
                     get_contact_phone_data, update_contact_phone_company, delete_contact_email_company,
                     add_contact_email_company, get_contact_email_data, update_contact_email_company,
                     delete_contact_url_company, add_contact_url_company, get_contact_url_data,
-                    update_contact_url_company, update_specializations)
+                    update_contact_url_company, update_data_company)
 
 app_name = 'users'
 
@@ -46,6 +46,7 @@ urlpatterns = [
     # редактировать url компании
     path('company/contact_url/delete/<int:pk>/', delete_contact_url_company, name='delete_contact_url'),
     # удалить контактный url компании
+    path('company/edit/<int:pk>/update_data_company/', update_data_company, name='update_data_company'),
     path('company/edit/<int:pk>/update_specializations/', update_specializations, name='update_specializations'),
 
     path('get_employee_data/<int:pk>/', get_employee_data, name='get_employee_data'),  # получить данные о сотруднике

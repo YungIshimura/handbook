@@ -4,6 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.postgres.fields import ArrayField
 from smart_selects.db_fields import ChainedForeignKey
 
+
 class TypeWork(models.Model):
     type = models.CharField(
         'Тип работы',
@@ -20,7 +21,7 @@ class TypeWork(models.Model):
 
 class Region(models.Model):
     name = models.CharField(
-        'Навзание региона',
+        'Название региона',
         max_length=180
     )
 
@@ -34,7 +35,7 @@ class Region(models.Model):
 
 class Area(models.Model):
     name = models.CharField(
-        'Навзание района',
+        'Название района',
         max_length=200
     )
     region = models.ForeignKey(
@@ -93,7 +94,7 @@ class CompanyAddress(models.Model):
         null=True
     )
     postcode = models.PositiveIntegerField(
-        'Почтовый индес',
+        'Почтовый индекс',
         validators=[MaxValueValidator(999999)]
     )
     district = models.CharField(
@@ -447,7 +448,7 @@ class Order(models.Model):
         auto_choose=True,
         sort=True
     )
-    city =ChainedForeignKey(
+    city = ChainedForeignKey(
         City,
         chained_field='area',
         chained_model_field='area',
@@ -513,3 +514,39 @@ class OrderFiles(models.Model):
     file = models.FileField(
         'Файл'
     )
+
+
+class WorkRegion(models.Model):
+    title = models.CharField(
+        'название субъекта',
+        max_length=50
+    )
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Регион работ'
+        verbose_name_plural = 'Регионы работ'
+
+
+class CompanyWorkRegion(models.Model):
+    working_zone = models.ForeignKey(
+        WorkRegion,
+        related_name='company_work_regions',
+        on_delete=models.PROTECT,
+        verbose_name='Регион выполняемых работ'
+    )
+    company = models.ForeignKey(
+        Company,
+        related_name='work_regions_companies',
+        on_delete=models.CASCADE,
+        verbose_name='Компания'
+    )
+
+    def __str__(self):
+        return f'{self.working_zone} - {self.company}'
+
+    class Meta:
+        verbose_name = 'Регион работ компаний'
+        verbose_name_plural = 'Регионы работ компаний'
