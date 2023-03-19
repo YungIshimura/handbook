@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import TypeWork, SRO, CompanyAddress, Company, Branches, CompanySpecialization, Director, Employee, City, \
-    Region, License, WorkRegion, CompanyWorkRegion, Area
+    Region, License, WorkRegion, CompanyWorkRegion, Area, Order
 
 
 @admin.register(License)
