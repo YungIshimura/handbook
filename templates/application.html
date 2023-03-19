@@ -4,66 +4,67 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/application.css' %}"/>
+    <script src="/static/smart-selects/admin/js/chainedfk.js"></script>
+    <script src="/static/smart-selects/admin/js/bindfields.js"></script>
     <section id="cards">
         <div class="cards">
             <div class="card__create">
                 <h1 class="card__create--title">Создайте заявку</h1>
             </div>
             <section class="application">
-                <form class="application--form">
+                <form action="{% url 'geo_handbook:application' %}" class="application--form" method='POST'>
+                    {% csrf_token %}
+                    
+                        <h1>{{errors}}</h1>
+                    
                     <div class="row">
                         <div class="col-sm-6 mb-sm-0">
                             <div class="card border border-white">
                                 <div class="application--card-body">
                                     <div class="data-input-number">
-                                        <input type="text" class="application--form__data-input border" name="FirstName"
-                                               id="fname"
-                                               placeholder="Кадастровый номер"/><br/>
+                                        <label for="{{form.cadastral_number.id_for_label}}">Кадастровый номер</label>
+                                        {{form.cadastral_number}}
                                     </div>
                                     <div>
                                         <h3 class="application--form__h3">Адрес объекта</h3>
                                     </div>
                                     <div>
-                                        <select name="user_profile_color_1"
-                                                class="application--form__data-input border">
-                                            <option selected>Регион</option>
-                                            <option value="1">Строительство</option>
-                                            <option value="2">Лицензирование</option>
-                                        </select><br>
-                                        <select name="user_profile_color_1"
-                                                class="application--form__data-input border">
-                                            <option selected>Область/район/округ</option>
-                                            <option value="1">Строительство</option>
-                                            <option value="2">Лицензирование</option>
-                                        </select><br>
-                                        <input type="text" class="application--form__data-input border" name="FirstName"
-                                               id="fname"
-                                               placeholder="Населенный пункт"/><br/>
-                                        <input type="text" class="application--form__data-input border" name="FirstName"
-                                               id="fname"
-                                               placeholder="Улица"/><br/>
+                                        {{form.media.js}}
+                                        <label for="{{form.region.id_for_label}}">Регион</label>
+                                        {{form.region}}
+                                        
+                                        <label for="{{form.area.id_for_label}}">Район</label>
+                                        {{form.area}}
+                                        
+                                        <label for="{{form.city.id_for_label}}">Город</label>
+                                        {{form.city}}
+            
+                                        <label for="{{form.street.id_for_label}}">Улица</label>
+                                        {{form.street}}
 
 
                                         <div class="application--form--input-group">
-                                            <input type="text" class="border mr-2 application--form--input-group__house"
-                                                   name="FirstName"
-                                                   placeholder="Дом"/>
-                                            <input type="text" class="border application--form--input-group__house"
-                                                   name="FirstName"
-                                                   placeholder="Корпус/строение"/>
+                                            <label class='house_label' for="{{form.house_number.id_for_label}}">Номер дома</label>
+                                            {{form.house_number}}
+
+                                            <label class='building_label' for="{{form.building.id_for_label}}">Корпус/Строение</label>
+                                            {{form.building}}
+                                        </div>
+                                        
+                                        <div>
+                                            <button type="submit" class="application--btn">ОТПРАВИТЬ ЗАЯВКУ</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-5" style='margin-left:40px; width:500px;'>
                             <h3 class="application--form__h3 ml-4">Площадь участка</h3>
                             <div class="card border border-white">
                                 <div class="card-body">
                                     <div class="input-group border mb-3">
-                                        <input type="text" class="form-control data-inputdimensions"
-                                               aria-label="Text input with dropdown button" placeholder="Ширина">
+                                        {{form.square}}
                                         <button class="btn btn-outline-secondary dropdown-toggle border rounded-0"
                                                 type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">м<sup>2</sup>
@@ -78,8 +79,7 @@
                                         <div class="btn-group" role="group" aria-label="Basic example">
 
                                             <div class="input-group border mb-3 application--form__dimensions">
-                                                <input type="text" class="form-control"
-                                                       aria-label="Text input with dropdown button" placeholder="Длина">
+                                                {{form.length}}
                                                 <button class="btn btn-outline-secondary dropdown-toggle border rounded-0"
                                                         type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">м
@@ -89,9 +89,7 @@
                                                 </ul>
                                             </div>
                                             <div class="input-group border mb-3 application--form__dimensions">
-                                                <input type="text" class="form-control"
-                                                       aria-label="Text input with dropdown button"
-                                                       placeholder="Высота">
+                                                {{form.heigth}}
                                                 <button class="btn btn-outline-secondary dropdown-toggle border rounded-0"
                                                         type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">м
@@ -102,58 +100,53 @@
                                                 </ul>
                                             </div>
                                             <div class="input-group border mb-3 application--form__dimensions">
-                                                <input type="text" class="form-control"
-                                                       aria-label="Text input with dropdown button"
-                                                       placeholder="Ширина">
+                                                {{form.width}}
                                                 <button class="btn btn-outline-secondary dropdown-toggle border rounded-0"
                                                         type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">м
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
                                                     <li><a class="dropdown-item" href="#">км</a></li>
-                                                    <li><a class="dropdown-item" href="#"></a></li>
+                                                    <li><a class="dropdown-item" href="#">м</a></li>
                                                 </ul>
                                             </div>
                                         </div>
 
                                         <h3 class="application--form__h3">Виды работ</h3>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                   value="option1">
-                                            <label class="form-check-label" for="inlineCheckbox1">Виды работ</label>
+                                        
+                                        <div class='custom-check'>
+                                            {% for type_work in form.type_work.field.queryset %}
+                                            <div class="form-check form-check-inline" style='width:300px;'>
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox{{type_work.id}}"
+                                                    value="{{type_work.id}}" name='type_work'>
+                                                <label class="form-check-label" for="inlineCheckbox{{type_work.id}}">{{type_work}}</label>
+                                            </div>
+                                            {% endfor %}
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                                   value="option2">
-                                            <label class="form-check-label" for="inlineCheckbox2">Виды работ</label>
-                                        </div>
-                                        <br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                   value="option1">
-                                            <label class="form-check-label" for="inlineCheckbox1">Виды работ</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                                   value="option2">
-                                            <label class="form-check-label" for="inlineCheckbox2">Виды работ</label>
-                                        </div>
-                                        <br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                   value="option1">
-                                            <label class="form-check-label" for="inlineCheckbox1">Виды работ</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                                   value="option2">
-                                            <label class="form-check-label" for="inlineCheckbox2">Виды работ</label>
-                                        </div>
+                                        
+    
                                         <div class="application--form--textarea">
-                                <textarea class="application--form--textarea__text border"
-                                          placeholder="Опишите задачу или оставьте комментарий"></textarea>
+                                            {{form.title}}
                                         </div>
-                                        <div class="common-row border">
+                                        <div class='user-data'>
+                                            <div class='user-name'>
+                                                <label for="{{form.name.id_for_label}}">Имя</label>
+                                                {{form.name}}
+
+                                                <label for="{{form.surname.id_for_label}}">Фамилия</label>
+                                                {{form.surname}}
+
+                                                <label for="{{form.father_name.id_for_label}}">Отчество</label>
+                                                {{form.father_name}}
+                                            </div>
+                                            <div class='user-contacts'>
+                                                <label for="{{form.phone_number.id_for_label}}">Номер телефона</label>
+                                                {{form.phone_number}}
+                                                <label for="{{form.email.id_for_label}}">Email</label>
+                                                {{form.email}}
+                                            </div>
+                                        </div>
+                                        {% comment %} <div class="common-row border">
                                             <input type="file" id="file">
                                             <label class="common-label" for="file">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -165,16 +158,11 @@
                                                 </svg>
                                                 Прикрепить файлы
                                             </label>
-                                        </div>
+                                        </div> {% endcomment %}
                                     </div>
 
                                 </div>
                             </div>
-                        </div>
-
-
-                        <div>
-                            <button type="submit" class="application--btn">ОТПРАВИТЬ ЗАЯВКУ</button>
                         </div>
                     </div>
 

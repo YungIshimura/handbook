@@ -1,10 +1,12 @@
 import json
 from django.db import transaction
+
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from users.forms import EmployeeCreateForm, CityCreateForm, AddressCreateForm, \
     LicenseCreateForm, CompanyContactPhoneForm, CompanyContactEmailForm, CompanyContactUrlForm
+
 from geo_handbook.models import Company, Branches, Employee, License, TypeWork, CompanySpecialization, Director, \
     WorkRegion, CompanyWorkRegion
 
@@ -433,5 +435,6 @@ def update_data_company(request, pk):
         for region in region_works:
             work_region = get_object_or_404(WorkRegion, title=region)
             CompanyWorkRegion.objects.get_or_create(company=company, working_zone=work_region)
+=
 
     return JsonResponse({'success': True})
