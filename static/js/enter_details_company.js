@@ -428,445 +428,158 @@ editData('contact_url', 'contact_url-pk', '/users/get_contact_url_data', 'edit-c
     });
 
 
-/* Блок выбора типов работ, выполняемых организацией */
-function handleRemoveButtonClick(button, specializationsDiv) {
-    // Получаем родительский элемент кнопки - <span>
+/* Блок выбора типов работ, выполняемых организацией и региона выполняемых*/
+
+// функция обрабатывает удаление элемента span из его контейнера
+function handleRemoveButtonClick(button, container, updateList) {
+    // Получаем родительский элемент
     const span = button.parentNode;
-    // Удаляем элемент <span> из <div>
-    specializationsDiv.removeChild(span);
-    // Обновляем список работ в <div> с id="works"
-    updateWorksList();
+    // Удаляем элемент <span>
+    container.removeChild(span);
+    // обновляем список после удаления элементов
+    updateList();
 }
 
-function addNewSpecialization(selectedWork, specializationsDiv) {
+// функция создает новый элемент span с заданным значением и добавляет к нему кнопку удаления
+function createNewElement(value, container, listId, removeButtonClass, updateList) {
+    // создаем новый элемент span и устанавливаем ему значение
     const newSpan = document.createElement('span');
-    newSpan.textContent = selectedWork;
+    newSpan.textContent = value;
+    // создаем кнопку удаления и добавляем класс
     const removeButton = document.createElement('span');
-    removeButton.classList.add('remove-work');
+    removeButton.classList.add(removeButtonClass);
     removeButton.textContent = '✕';
+    // добавляем кнопку удаления внутрь элемента span, а сам span в контейнер
     newSpan.appendChild(removeButton);
-    specializationsDiv.appendChild(newSpan);
-
-    // Добавляем обработчик клика на кнопку удаления
+    container.appendChild(newSpan);
+    // добавляем обработчик событий на кнопку удаления
     removeButton.addEventListener('click', () => {
-        handleRemoveButtonClick(removeButton, specializationsDiv);
+        handleRemoveButtonClick(removeButton, container, updateList);
     });
-
-    // Обновляем список работ в <div> с id="works"
-    updateWorksList();
+    // обновляем список после удаления элементов
+    updateList();
 }
 
-function updateWorksList() {
-    const specializationsDiv = document.querySelector('#specializations');
-    const worksList = document.querySelector('#works');
-    // Проверяем, что списки элементов на странице найдены
-    if (!specializationsDiv || !worksList) {
+// функция обновляет список, заменяя старые элементы на новые
+function updateList(containerId, listId) {
+    // получаем контейнер и содержащийся в нем список
+    const container = document.querySelector(`#${containerId}`);
+    const list = document.querySelector(`#${listId}`);
+    if (!container || !list) {
         return;
     }
-    // Очищаем список работ компании
-    worksList.innerHTML = '';
-    // Получаем список всех работ в <div> с id="specializations"
-    const specializations = specializationsDiv.querySelectorAll('span');
-    // Проходимся по всем работам и добавляем их в список работ компании
-    specializations.forEach(span => {
-        const work = span.textContent;
+    // очищаем список
+    list.innerHTML = '';
+    // для каждого элемента span в контейнере
+    container.querySelectorAll('span').forEach(span => {
+        // получаем значение
+        const value = span.textContent;
+        // создаем новый элемент li
         const li = document.createElement('li');
-        li.textContent = work;
-        worksList.appendChild(li);
+        // устанавливаем значение для li
+        li.textContent = value;
+        // добавим в список
+        list.appendChild(li);
     });
 }
 
-// Получаем список элементов с классом 'remove-work'
-const removeButtons = document.querySelectorAll('.remove-work');
-
-// Добавляем обработчик клика на каждую кнопку
-removeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const specializationsDiv = document.querySelector('#specializations');
-        handleRemoveButtonClick(button, specializationsDiv);
+// функция инициализирует кнопки удаления элементов
+function initRemoveButtons(buttons, containerId, updateList) {
+    // для каждой кнопки Х добавляем обработчик событий
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const container = document.querySelector(`#${containerId}`);
+            handleRemoveButtonClick(button, container, updateList);
+        });
     });
-});
+}
 
-const select = document.querySelector('#type_works');
-const specializationsDiv = document.querySelector('#specializations');
+// функция инициализирует элемент select и обрабатывает его изменение
+function initSelect(selectId, containerId, listId, removeButtonClass, updateList) {
+    // получаем элемент select и контейнер
+    const select = document.querySelector(`#${selectId}`);
+    const container = document.querySelector(`#${containerId}`);
 
-
-select.addEventListener('change', () => {
-    // Получаем выбранную работу из <select>
-    const selectedWork = select.value;
-    // Получаем список всех работ в <div> с id="specializations"
-    const specializations = specializationsDiv.querySelectorAll('span');
-
-    // Проходимся по всем работам и проверяем, есть ли выбранная работа
-    let workExists = false;
-    specializations.forEach(span => {
-        if (span.textContent.includes(selectedWork)) {
-            workExists = true;
-            return;
-        }
-    });
-
-    // Если выбранной работы еще нет, добавляем ее в <div>
-    if (!workExists) {
-        addNewSpecialization(selectedWork, specializationsDiv);
-    }
-
-    select.selectedIndex = 0;
-});
-
-
-// Функция обновления типов работ компании
-function updateSpecializations() {
-    const button = document.querySelector('#update-specializations-btn');
-    const specializationsCompany = document.querySelector('#specializations');
-
-    button.addEventListener('click', () => {
-        const updateUrl = `/users/company/edit/${company_pk}/update_specializations/`;
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', updateUrl, true);
-
-        // Получаем CSRF-токен из cookies
-        const csrftoken = getCookie('csrftoken');
-
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        // Добавляем заголовок X-CSRFToken в запрос
-        xhr.setRequestHeader('X-CSRFToken', csrftoken);
-
-        const specializations = Array.from(specializationsCompany.querySelectorAll('span'))
-            .map(span => span.textContent.replace(/✕/g, ''))
-            .filter(specialization => specialization !== '');
-        const data = {type_works: specializations};
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log(xhr.responseText);
-                window.location.href = window.location.href;
+    // добавляем обработчик событий для изменения элемента select
+    select.addEventListener('change', () => {
+        // получаем выбранное значение
+        const selectedValue = select.value;
+        const elements = container.querySelectorAll('span');
+        // устанавливаем флаг
+        let valueExists = false;
+        elements.forEach(span => {
+            // если значение элемента повторяется
+            if (span.textContent.includes(selectedValue)) {
+                // устанавливаем флаг в true
+                valueExists = true;
+                return;
             }
-        };
-
-        xhr.send(JSON.stringify(data));
+        });
+        // если выбранного значения нет в списке, добавляем его
+        if (!valueExists) {
+            createNewElement(selectedValue, container, listId, removeButtonClass, updateList);
+        }
+        // сбрасываем select на дефолтное значение
+        select.selectedIndex = 0;
     });
 }
 
-updateSpecializations();
+// инициализуем секцию специализаций и регионов
+const specializationsContainer = document.querySelector('#specializations');
+initRemoveButtons(document.querySelectorAll('.remove-work'), 'specializations', updateWorksList);
+initSelect('type_works', 'specializations', 'works', 'remove-work', updateWorksList);
+
+const jobRegionsContainer = document.querySelector('#job_regions');
+initRemoveButtons(document.querySelectorAll('.remove-region'), 'job_regions', updateRegionsList);
+initSelect('work_regions', 'job_regions', 'regions', 'remove-region', updateRegionsList);
+
+// функции обновления типов работ и регионов
+function updateWorksList() {
+    updateList('specializations', 'works');
+}
+
+function updateRegionsList() {
+    updateList('job_regions', 'regions');
+}
 
 
-// function handleRemoveButtonClick(button, specializationsDiv) {
-//     // Получаем родительский элемент кнопки - <span>
-//     const span = button.parentNode;
-//     // Удаляем элемент <span> из <div>
-//     specializationsDiv.removeChild(span);
-//     // Обновляем список работ в <div> с id="works"
-//     updateWorksList();
-// }
-//
-// function addNewSpecialization(selectedWork, specializationsDiv) {
-//     const newSpan = document.createElement('span');
-//     newSpan.textContent = selectedWork;
-//     const removeButton = document.createElement('span');
-//     removeButton.classList.add('remove-work');
-//     removeButton.textContent = '✕';
-//     newSpan.appendChild(removeButton);
-//     specializationsDiv.appendChild(newSpan);
-//
-//     // Добавляем обработчик клика на кнопку удаления
-//     removeButton.addEventListener('click', () => {
-//         handleRemoveButtonClick(removeButton, specializationsDiv);
-//     });
-//
-//     // Обновляем список работ в <div> с id="works"
-//     updateWorksList();
-// }
-//
-// function updateWorksList() {
-//     const specializationsDiv = document.querySelector('#specializations');
-//     const worksList = document.querySelector('#works');
-//     // Очищаем список работ компании
-//     worksList.innerHTML = '';
-//     // Получаем список всех работ в <div> с id="works"
-//     const specializations = specializationsDiv.querySelectorAll('span');
-//     // Проходимся по всем работам и добавляем их в список работ компании
-//     specializations.forEach(span => {
-//         const work = span.textContent;
-//         const li = document.createElement('li');
-//         li.textContent = work;
-//         worksList.appendChild(li);
-//     });
-// }
-//
-// // Получаем список элементов с классом 'remove-work'
-// const removeButtons = document.querySelectorAll('.remove-work');
-//
-// // Добавляем обработчик клика на каждую кнопку
-// removeButtons.forEach(button => {
-//     button.addEventListener('click', () => {
-//         const specializationsDiv = document.querySelector('#specializations');
-//         handleRemoveButtonClick(button, specializationsDiv);
-//     });
-// });
-//
-// const select = document.querySelector('#type_works');
-// const specializationsDiv = document.querySelector('#specializations');
-//
-// select.addEventListener('change', () => {
-//     // Получаем выбранную работу из <select>
-//     const selectedWork = select.value;
-//     // Получаем список всех работ в <div> с id="specializations"
-//     const specializations = specializationsDiv.querySelectorAll('span');
-//
-//     // Проходимся по всем работам и проверяем, есть ли выбранная работа
-//     let workExists = false;
-//     specializations.forEach(span => {
-//         if (span.textContent.includes(selectedWork)) {
-//             workExists = true;
-//             return;
-//         }
-//     });
-//
-//     // Если выбранной работы еще нет, добавляем ее в <div>
-//     if (!workExists) {
-//         addNewSpecialization(selectedWork, specializationsDiv);
-//     }
-// });
-// редактировать сотрудника
-// $(document).on('click', '.edit-employee-btn', function () {
-//     let employee_pk = $(this).data('employee-pk');
-//     let update_url = $(this).data('update-url');
-//     let modal = $('#edit-employee-modal');
-//
-//     $.ajax({
-//         url: `/users/get_employee_data/${employee_pk}/`,
-//         type: 'GET',
-//         dataType: 'json',
-//         success: function (data) {
-//             modal.find('#position').val(data.position);
-//             modal.find('#surname').val(data.surname);
-//             modal.find('#name').val(data.name);
-//             modal.find('#father_name').val(data.father_name);
-//             modal.find('#phonenumber').val(data.phonenumber);
-//             modal.find('#email').val(data.email);
-//             modal.find('form').attr('action', update_url);
-//         }
-//     });
-//
-//     modal.find('form').off('submit').on('submit', function (e) {
-//         e.preventDefault();
-//         let form = $(this);
-//
-//         // Обработчик ошибок при отправке данных на сервер
-//         function handleErrors(xhr) {
-//             let errors = JSON.parse(xhr.responseText).errors;
-//             if (errors) {
-//                 // Выводим ошибки валидации, если они есть
-//                 $.each(errors, function (key, value) {
-//                     $("#" + "edit-employee-" + key + "-error").text(value).show();
-//                 });
-//             } else {
-//                 // Выводим общее сообщение об ошибке
-//                 alert('Произошла ошибка при обновлении данных сотрудника');
-//             }
-//         }
-//
-//         // Обработчик успешной отправки данных на сервер
-//         function handleSuccess(data) {
-//             modal.modal('hide');
-//             location.reload();
-//         }
-//
-//         // Функция, которая отправляет данные формы на сервер через AJAX-запрос
-//         function updateEmployee() {
-//             $.ajax({
-//                 url: update_url,
-//                 type: 'POST',
-//                 data: form.serialize(),
-//                 dataType: 'json',
-//                 success: handleSuccess,
-//                 error: handleErrors
-//             });
-//         }
-//
-//         // Очищаем сообщения об ошибках при каждом новом открытии формы
-//         modal.on('hidden.bs.modal', function () {
-//             $(".error-message").text("").hide();
-//         });
-//
-//         // Отправляем данные формы на сервер при отправке формы
-//         $(".error-message").hide();
-//         updateEmployee();
-//     });
-// });
-//
-//
-// // редактировать филиал
-// $(document).on('click', '.edit-branches-btn', function () {
-//     let branche_pk = $(this).data('branche-pk');
-//     let update_url = $(this).data('update-url');
-//     let modal = $('#edit-branches-modal');
-//
-//     $.ajax({
-//         url: `/users/get_branche_data/${branche_pk}/`,
-//         type: 'GET',
-//         dataType: 'json',
-//         success: function (data) {
-//             modal.find('#region').val(data.region);
-//             modal.find('#postcode').val(data.postcode);
-//             modal.find('#name').val(data.city);
-//             modal.find('#district').val(data.district);
-//             modal.find('#street').val(data.street);
-//             modal.find('#house_number').val(data.house_number);
-//             modal.find('form').attr('action', update_url);
-//         }
-//     });
-//
-//     modal.find('form').off('submit').on('submit', function (e) {
-//         e.preventDefault();
-//         let form = $(this);
-//
-//         // Обработчик ошибок при отправке данных на сервер
-//         function handleErrors(xhr) {
-//             let errors = JSON.parse(xhr.responseText).errors;
-//             if (errors) {
-//                 // Выводим ошибки валидации, если они есть
-//                 $.each(errors, function (key, value) {
-//                     $("#" + "edit-branches-" + key + "-error").text(value).show();
-//                 });
-//             } else {
-//                 // Выводим общее сообщение об ошибке
-//                 alert('Произошла ошибка при обновлении данных сотрудника');
-//             }
-//         }
-//
-//         // Обработчик успешной отправки данных на сервер
-//         function handleSuccess(data) {
-//             modal.modal('hide');
-//             location.reload();
-//         }
-//
-//         // Функция, которая отправляет данные формы на сервер через AJAX-запрос
-//         function updateBranche() {
-//             $.ajax({
-//                 url: update_url,
-//                 type: 'POST',
-//                 data: form.serialize(),
-//                 dataType: 'json',
-//                 success: handleSuccess,
-//                 error: handleErrors
-//             });
-//         }
-//
-//         // Очищаем сообщения об ошибках при каждом новом открытии формы
-//         modal.on('hidden.bs.modal', function () {
-//             $(".error-message").text("").hide();
-//         });
-//
-//         // Отправляем данные формы на сервер при отправке формы
-//         $(".error-message").hide();
-//         updateBranche();
-//     });
-// });
+// функция обновляет данные компании
+function updateData() {
+  const button = document.querySelector('#update-company-data-btn');
+  const specializationsCompany = document.querySelector('#specializations');
+  const regionworkCompany = document.querySelector('#job_regions');
 
+  button.addEventListener('click', () => {
+    const updateUrl = `/users/company/edit/${company_pk}/update_data_company/`;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', updateUrl, true);
 
-// добавить сотрудника
-// $(document).ready(function () {
-//     const addEmployeeForm = $('#add-employee-modal-form');
-//     const addEmployeeModal = $('#add-employee-modal');
-//
-//     // Обработчик ошибок при отправке данных на сервер
-//     function handleErrors(xhr) {
-//         let errors = JSON.parse(xhr.responseText).errors;
-//         if (errors) {
-//             console.log(errors)
-//             // Выводим ошибки валидации, если они есть
-//             $.each(errors, function (key, value) {
-//                 $("#" + "add-employee-" + key + "-error").text(value).show();
-//             });
-//         } else {
-//             // Выводим общее сообщение об ошибке
-//             alert('Произошла ошибка при добавлении сотрудника');
-//         }
-//     }
-//
-//     // Обработчик успешной отправки данных на сервер
-//     function handleSuccess(data) {
-//         // Закрываем модальное окно, очищаем форму и обновляем страницу
-//         addEmployeeModal.modal('hide');
-//         addEmployeeForm[0].reset();
-//         location.reload();
-//     }
-//
-//     // Функция, которая отправляет данные формы на сервер через AJAX-запрос
-//     function addEmployee() {
-//         $.ajax({
-//             url: `/users/company/edit/${company_pk}/add_employee/`,
-//             method: 'POST',
-//             data: addEmployeeForm.serialize(),
-//             success: handleSuccess,
-//             error: handleErrors
-//         });
-//     }
-//
-//     // Очищаем сообщения об ошибках при каждом новом открытии формы
-//     addEmployeeModal.on('hidden.bs.modal', function () {
-//         $(".error-message").text("").hide();
-//     });
-//
-//     // Отправляем данные формы на сервер при отправке формы
-//     addEmployeeForm.submit(function (event) {
-//         event.preventDefault();
-//         $(".error-message").hide();
-//         addEmployee();
-//     });
-// });
+    // Получаем CSRF-токен из cookies
+    const csrftoken = getCookie('csrftoken');
 
-// добавить филиал
-// $(document).ready(function () {
-//     const addBranchesForm = $('#add-branches-modal-form');
-//     const addBranchesModal = $('#add-branches-modal');
-//
-//     // Обработчик ошибок при отправке данных на сервер
-//     function handleErrors(xhr) {
-//         let errors = JSON.parse(xhr.responseText).errors;
-//         if (errors) {
-//             console.log(errors)
-//             // Выводим ошибки валидации, если они есть
-//             $.each(errors, function (key, value) {
-//                 console.log(key);
-//                 $("#" + "add-branches-" + key + "-error").text(value).show();
-//             });
-//         } else {
-//             // Выводим общее сообщение об ошибке
-//             alert('Произошла ошибка при добавлении филиала');
-//         }
-//     }
-//
-//     // Обработчик успешной отправки данных на сервер
-//     function handleSuccess(data) {
-//         // Закрываем модальное окно, очищаем форму и обновляем страницу
-//         addBranchesModal.modal('hide');
-//         addBranchesForm[0].reset();
-//         location.reload();
-//     }
-//
-//     // Функция, которая отправляет данные формы на сервер через AJAX-запрос
-//     function addBranches() {
-//         $.ajax({
-//             url: `/users/company/edit/${company_pk}/add_branch/`,
-//             method: 'POST',
-//             data: addBranchesForm.serialize(),
-//             success: handleSuccess,
-//             error: handleErrors
-//         });
-//     }
-//
-//     // Очищаем сообщения об ошибках при каждом новом открытии формы
-//     addBranchesModal.on('hidden.bs.modal', function () {
-//         $(".error-message").text("").hide();
-//     });
-//
-//     // Отправляем данные формы на сервер при отправке формы
-//     addBranchesForm.submit(function (event) {
-//         event.preventDefault();
-//         $(".error-message").hide();
-//         addBranches();
-//     });
-// })
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    // Добавляем заголовок X-CSRFToken в запрос
+    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+
+    const specializations = Array.from(specializationsCompany.querySelectorAll('span'))
+      .map(span => span.textContent.replace(/✕/g, ''))
+      .filter(specialization => specialization !== '');
+
+    const regions = Array.from(regionworkCompany.querySelectorAll('span'))
+      .map(span => span.textContent.replace(/✕/g, ''))
+      .filter(region => region !== '');
+
+    const data = { type_works: specializations, region_works: regions };
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+        window.location.href = window.location.href;
+      }
+    };
+
+    xhr.send(JSON.stringify(data));
+  });
+}
+
+updateData();

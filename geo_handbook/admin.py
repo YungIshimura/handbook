@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import TypeWork, SRO, CompanyAddress, Company, Branches, CompanySpecialization, Director, Employee, City, Region, License
+from .models import TypeWork, SRO, CompanyAddress, Company, Branches, CompanySpecialization, Director, Employee, City, \
+    Region, License, WorkRegion, CompanyWorkRegion
 
 
 @admin.register(License)
@@ -54,4 +55,14 @@ class DirectorAdmin(admin.ModelAdmin):
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(WorkRegion)
+class WorkRegionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CompanyWorkRegion)
+class CompanyWorkRegionAdmin(admin.ModelAdmin):
     pass
