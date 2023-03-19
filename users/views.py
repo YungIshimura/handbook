@@ -435,6 +435,6 @@ def update_data_company(request, pk):
         for region in region_works:
             work_region = get_object_or_404(WorkRegion, title=region)
             CompanyWorkRegion.objects.get_or_create(company=company, working_zone=work_region)
-=
+
 
     return JsonResponse({'success': True})
