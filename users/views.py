@@ -16,8 +16,8 @@ def view_profile(request):
 
 
 def get_company_data(company_id):
-    company = Company.objects.prefetch_related('director').select_related('legal_address__region',
-                                                                          'legal_address__city').get(pk=company_id)
+    company = Company.objects.select_related('legal_address__region', 'legal_address__city', 'sro').get(pk=company_id)
+    director = company.director.first()
     employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
     type_works = TypeWork.objects.all()
     work_regions = WorkRegion.objects.all()
@@ -28,6 +28,7 @@ def get_company_data(company_id):
 
     return {
         'company': company,
+        'director': director,
         'employees': employees,
         'type_works': type_works,
         'work_regions': work_regions,
@@ -76,8 +77,7 @@ def update_company(request, pk):
 
 
 # def update_company(request, pk):
-#     company = get_object_or_404(
-#         Company.objects.prefetch_related('director').select_related('legal_address__region', 'legal_address__city'),
+#     company = get_object_or_404(Company,
 #         pk=pk)
 #     employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
 #     type_works = TypeWork.objects.all()

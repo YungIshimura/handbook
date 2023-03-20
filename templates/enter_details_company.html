@@ -101,9 +101,9 @@
 
                             <div class="frame-text16">ФИО и должность руководителя</div>
                             <div class="frame-frame35">
-                                {% if company.director %}
-                                    {{ company.director.position }} {{ company.director.surname }}
-                                    {{ company.director.name }} {{ company.director.father_name }}
+                                {% if director %}
+                                    {{ director.position }} {{ director.surname }}
+                                    {{ director.name }} {{ director.father_name }}
                                 {% else %}
                                     Руководитель не назначен
                                 {% endif %}
@@ -160,7 +160,9 @@
                             <br/>
 
                             <div class="frame-text16">Название и номер СРО</div>
-                            <div class="frame-frame35">{{ company.sro.short_name }} {{ company.sro.number }}</div>
+                            <div class="frame-frame35">
+                                {{ company.sro.short_name }} {{ company.sro.number }}
+                            </div>
                             <br/>
 
                             <div class="frame-text16">Дата прекращения членства</div>
