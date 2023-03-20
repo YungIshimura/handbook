@@ -27,12 +27,12 @@
 
     <div class="btn-group" role="group">
         <div id="specializations" class="aa">
-            {% for specialization in company.specializations.all %}
+            {% for specialization in company_specializations %}
                 <span>{{ specialization.type_work.type }} <span class="remove-work">✕</span></span>
             {% endfor %}
         </div>
         <div id="job_regions" class="aa">
-            {% for region in company.work_regions_companies.all %}
+            {% for region in company_work_zone %}
                 <span>{{ region.working_zone.title }} <span class="remove-region">✕</span></span>
             {% endfor %}
         </div>
@@ -65,9 +65,9 @@
 
                             <div class="frame-text16">ФИО и должность руководителя</div>
                             <div class="frame-frame35">
-                                {% if company.director.first %}
-                                    {{ company.director.first.position }} {{ company.director.first.surname }}
-                                    {{ company.director.first.name }} {{ company.director.first.father_name }}
+                                {% if company.director %}
+                                    {{ company.director.position }} {{ company.director.surname }}
+                                    {{ company.director.name }} {{ company.director.father_name }}
                                 {% else %}
                                     Руководитель не назначен
                                 {% endif %}
