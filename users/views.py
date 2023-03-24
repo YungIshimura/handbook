@@ -8,25 +8,49 @@ from users.forms import EmployeeCreateForm, CityCreateForm, AddressCreateForm, \
     LicenseCreateForm, CompanyContactPhoneForm, CompanyContactEmailForm, CompanyContactUrlForm
 
 from geo_handbook.models import Company, Branches, Employee, License, TypeWork, CompanySpecialization, Director, \
-    WorkRegion, CompanyWorkRegion
+    WorkRegion, CompanyWorkRegion, Region
 
 
 def view_profile(request):
     return render(request, 'profile.html')
 
 
-def update_company(request, pk):
-    company = get_object_or_404(Company.objects.select_related('legal_address__region'), pk=pk)
+def get_company_data(company_id):
+    company = Company.objects.select_related('legal_address__region', 'legal_address__city', 'sro').get(pk=company_id)
+    director = company.director.first()
     employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
     type_works = TypeWork.objects.all()
     work_regions = WorkRegion.objects.all()
-    branches = company.branches.select_related('address').all()
-    # формы, которые передаем для модальных окон
-    forms = {
+    branches = company.branches.select_related('address__region', 'address__city').all()
+
+    company_specializations = company.specializations.all().select_related('type_work')
+    company_work_zone = company.work_regions_companies.all().select_related('working_zone')
+
+    return {
+        'company': company,
+        'director': director,
+        'employees': employees,
+        'type_works': type_works,
+        'work_regions': work_regions,
+        'branches': branches,
+        'company_specializations': company_specializations,
+        'company_work_zone': company_work_zone
+    }
+
+
+def get_address_form():
+    form = AddressCreateForm(prefix='add_branch')
+    regions = Region.objects.all()
+    form.fields['region'].choices = [(region.pk, region.name) for region in regions]
+    return form
+
+
+def get_forms():
+    return {
         'add_employee_form': EmployeeCreateForm(),
         'edit_employee_form': EmployeeCreateForm(),
         'add_branch_city_form': CityCreateForm(),
-        'add_branch_address_form': AddressCreateForm(),
+        'add_branch_address_form': get_address_form(),
         'edit_branch_city_form': CityCreateForm(),
         'edit_branch_address_form': AddressCreateForm(),
         'add_license_form': LicenseCreateForm(),
@@ -39,15 +63,62 @@ def update_company(request, pk):
         'edit_contact_url_form': CompanyContactUrlForm(),
     }
 
+
+def update_company(request, pk):
+    company_data = get_company_data(pk)
+    forms = get_forms()
+
     context = {
         **forms,
-        'company': company,
-        'branches': branches,
-        'employees': employees,
-        'type_works': type_works,
-        'work_regions': work_regions
+        **company_data
     }
+
     return render(request, 'enter_details_company.html', context)
+
+
+# def update_company(request, pk):
+#     company = get_object_or_404(Company,
+#         pk=pk)
+#     employees = Employee.objects.filter(company=company).exclude(branches__isnull=False)
+#     type_works = TypeWork.objects.all()
+#     work_regions = WorkRegion.objects.all()
+#     branches = company.branches.select_related('address__region', 'address__city').all()
+#
+#     company_specializations = company.specializations.all().select_related('type_work')
+#     company_work_zone = company.work_regions_companies.all().select_related('working_zone')
+#
+#     add_branch_address_form = AddressCreateForm(prefix='add_branch')
+#     regions = Region.objects.all()
+#     add_branch_address_form.fields['region'].choices = [(region.pk, region.name) for region in regions]
+#     # формы, которые передаем для модальных окон
+#     forms = {
+#         'add_employee_form': EmployeeCreateForm(),
+#         'edit_employee_form': EmployeeCreateForm(),
+#         'add_branch_city_form': CityCreateForm(),
+#         'add_branch_address_form': add_branch_address_form,
+#         'edit_branch_city_form': CityCreateForm(),
+#         'edit_branch_address_form': AddressCreateForm(),
+#         'add_license_form': LicenseCreateForm(),
+#         'edit_license_form': LicenseCreateForm(),
+#         'add_contact_phone_form': CompanyContactPhoneForm(),
+#         'edit_contact_phone_form': CompanyContactPhoneForm(),
+#         'add_contact_email_form': CompanyContactEmailForm(),
+#         'edit_contact_email_form': CompanyContactEmailForm(),
+#         'add_contact_url_form': CompanyContactUrlForm(),
+#         'edit_contact_url_form': CompanyContactUrlForm(),
+#     }
+#
+#     context = {
+#         **forms,
+#         'company': company,
+#         'branches': branches,
+#         'employees': employees,
+#         'type_works': type_works,
+#         'work_regions': work_regions,
+#         'company_specializations': company_specializations,
+#         'company_work_zone': company_work_zone
+#     }
+#     return render(request, 'enter_details_company.html', context)
 
 
 # Получить данные о сотруднике компании
@@ -412,7 +483,6 @@ def delete_contact_url_company(request, pk):
 # обновляем данные компании
 @require_POST
 def update_data_company(request, pk):
-
     # Получаем типы работ и регионы выполняемых работ, отправленные с клиента, очищаем данные
     type_works = [item.strip() for item in json.loads(request.body)['type_works']]
     region_works = [item.strip() for item in json.loads(request.body)['region_works']]
@@ -435,6 +505,5 @@ def update_data_company(request, pk):
         for region in region_works:
             work_region = get_object_or_404(WorkRegion, title=region)
             CompanyWorkRegion.objects.get_or_create(company=company, working_zone=work_region)
-
 
     return JsonResponse({'success': True})

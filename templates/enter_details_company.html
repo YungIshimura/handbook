@@ -10,33 +10,69 @@
                                 class="text-menu"><span>Основные данные</span></a></span>
     <span><span class="mr-3"><a href="{% url 'geo_handbook:settings_profile' %}" class="text-menu"><span>Редактировать данные организации</span></a></span>
     <span><span class="mr-3"><a href="{% url 'geo_handbook:settings_profile' %}" class="text-menu"><span>Настройки профиля</span></a></span>
-    <div class="btn-group mt-5 mb-4" role="group">
-        <select id="type_works" name="type_works" class="aa">
-            <option selected class="select-menu">Виды работ, выполняемые организацией</option>
-            {% for work in type_works %}
-                <option value="{{ work.type }}">{{ work.type }}</option>
-            {% endfor %}
-        </select>
-        <select id="work_regions" name="work_regions" class="aa">
-            <option selected class="select-menu">Регион выполняемых работ</option>
-            {% for region in work_regions %}
-                <option value="{{ region.title }}">{{ region.title }}</option>
-            {% endfor %}
-        </select>
+    <div class="row mt-5">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card border border-white">
+                    <div class="card-body">
+                        <select id="type_works" name="type_works" class="aa">
+                            <option selected class="select-menu">Виды работ, выполняемые организацией</option>
+                            {% for work in type_works %}
+                                <option value="{{ work.type }}">{{ work.type }}</option>
+                            {% endfor %}
+                        </select>
+                        <div id="specializations" class="aa">
+                            {% for specialization in company_specializations %}
+                                <span>{{ specialization.type_work.type }} <span class="remove-work">✕</span></span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 delimiter">
+                <div class="card border border-white">
+                    <div class="card-body">
+                        <select id="work_regions" name="work_regions" class="aa">
+                            <option selected class="select-menu">Регион выполняемых работ</option>
+                            {% for region in work_regions %}
+                                <option value="{{ region.title }}">{{ region.title }}</option>
+                            {% endfor %}
+                        </select>
+                        <div id="job_regions" class="aa">
+                            {% for region in company_work_zone %}
+                                <span>{{ region.working_zone.title }} <span class="remove-region">✕</span></span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
+{#    <div class="btn-group mt-5 mb-4" role="group">#}
+{#        <select id="type_works" name="type_works" class="aa">#}
+{#            <option selected class="select-menu">Виды работ, выполняемые организацией</option>#}
+{#            {% for work in type_works %}#}
+{#                <option value="{{ work.type }}">{{ work.type }}</option>#}
+{#            {% endfor %}#}
+{#        </select>#}
+{#        <select id="work_regions" name="work_regions" class="aa">#}
+{#            <option selected class="select-menu">Регион выполняемых работ</option>#}
+{#            {% for region in work_regions %}#}
+{#                <option value="{{ region.title }}">{{ region.title }}</option>#}
+{#            {% endfor %}#}
+{#        </select>#}
+{#    </div>#}
 
-    <div class="btn-group" role="group">
-        <div id="specializations" class="aa">
-            {% for specialization in company.specializations.all %}
-                <span>{{ specialization.type_work.type }} <span class="remove-work">✕</span></span>
-            {% endfor %}
-        </div>
-        <div id="job_regions" class="aa">
-            {% for region in company.work_regions_companies.all %}
-                <span>{{ region.working_zone.title }} <span class="remove-region">✕</span></span>
-            {% endfor %}
-        </div>
-    </div>
+{#    <div class="btn-group" role="group">#}
+{#        <div id="specializations" class="aa">#}
+{#            {% for specialization in company_specializations %}#}
+{#                <span>{{ specialization.type_work.type }} <span class="remove-work">✕</span></span>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div id="job_regions" class="aa">#}
+{#            {% for region in company_work_zone %}#}
+{#                <span>{{ region.working_zone.title }} <span class="remove-region">✕</span></span>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
 
     <form class="form-data">
         <div class="row mt-5">
@@ -65,9 +101,9 @@
 
                             <div class="frame-text16">ФИО и должность руководителя</div>
                             <div class="frame-frame35">
-                                {% if company.director.first %}
-                                    {{ company.director.first.position }} {{ company.director.first.surname }}
-                                    {{ company.director.first.name }} {{ company.director.first.father_name }}
+                                {% if director %}
+                                    {{ director.position }} {{ director.surname }}
+                                    {{ director.name }} {{ director.father_name }}
                                 {% else %}
                                     Руководитель не назначен
                                 {% endif %}
@@ -124,7 +160,9 @@
                             <br/>
 
                             <div class="frame-text16">Название и номер СРО</div>
-                            <div class="frame-frame35">{{ company.sro.short_name }} {{ company.sro.number }}</div>
+                            <div class="frame-frame35">
+                                {{ company.sro.short_name }} {{ company.sro.number }}
+                            </div>
                             <br/>
 
                             <div class="frame-text16">Дата прекращения членства</div>
@@ -441,9 +479,8 @@
                      </div>
                  </div>
             </div>
+    </form>
         </div>
-
-        </form>
     </section>
 
     {% include 'inc/_confirm_delete_employee_modal.html' %}
